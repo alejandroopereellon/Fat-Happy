@@ -1,0 +1,17 @@
+2000|null|1
+2001|null|1
+2002|null|2
+2003|null|3
+2004|null|3
+2020|null|0
+2021|null|0
+2040|null|0
+2060|Pequeño|0
+2061|Mediano|0
+2062|Grande|0
+2063|Mediano|1
+2064|Grande|1
+2065|Unico|0
+2066|null|0
+2067|Unico|0
+2068|null|0

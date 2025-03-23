@@ -1,0 +1,11 @@
+0500|Queso|0.30|4
+0501|Bacon|0.60|4
+0502|Pan sin gluten|0.00|1
+0600|Chocolate|0.30|3
+0601|Chocolate blanco|0.30|3
+0602|Caramelo|0.30|3
+0603|Oreo|0.40|3
+0604|KitKat|0.40|3
+0605|Lotus|0.40|3
+0606|Milkybar|0.40|3
+0607|Cacahuetes|0.30|3
