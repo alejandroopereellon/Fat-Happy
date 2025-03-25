@@ -24,7 +24,7 @@ public class Complemento extends Producto {
 	private static final long serialVersionUID = 3556051122005475200L;
 
 	@Column(name = "tamano", nullable = true)
-	private String tamano;
+	private int tamano;
 
 	@Column(name = "numeroSalsas", nullable = false)
 	private int numeroSalsas;
@@ -75,7 +75,7 @@ public class Complemento extends Producto {
 
 	public Complemento(int codigo, String nombreProducto, String categoria, String tipoProducto, BigDecimal precioVenta,
 			BigDecimal costeEmpresa, boolean productoActivo, boolean productoPromocionado, boolean opcionDescuento,
-			String imagenProducto64, String imagenProducto128, String imagenProductoOriginal, String tamano,
+			String imagenProducto64, String imagenProducto128, String imagenProductoOriginal, int tamano,
 			int numeroSalsas, List<Salsas> salsas) {
 		super(codigo, nombreProducto, categoria, tipoProducto, precioVenta, costeEmpresa, productoActivo,
 				productoPromocionado, opcionDescuento, imagenProducto64, imagenProducto128, imagenProductoOriginal);
@@ -94,7 +94,7 @@ public class Complemento extends Producto {
 		this.salsas = salsas;
 	}
 
-	public String getTamano() {
+	public int getTamano() {
 		return tamano;
 	}
 
