@@ -9,7 +9,16 @@
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.use_sql_comments">true</property>
-		<mapping class="edu.examen.marzo2025.modelo.Examen"/>
-		<mapping class="edu.examen.marzo2025.modelo.Pregunta"/>
+		
+		
+		<mapping class="models\Bebida"/>
+		<mapping class="models\Complemento"/>
+		<mapping class="models\Extra"/>
+		<mapping class="models\Hamburguesa"/>
+		<mapping class="models\Ingrendiente"/>
+		<mapping class="models\Postre"/>
+		<mapping class="models\Producto"/>
+		<mapping class="models\Salsa"/>
+
 	</session-factory>
 </hibernate-configuration>
