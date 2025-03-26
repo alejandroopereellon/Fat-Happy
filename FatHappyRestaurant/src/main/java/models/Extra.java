@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * asociada
  */
 @Entity
-@Table(name = "extras")
+
 public class Extra implements Serializable {
 
 	/**

@@ -10,7 +10,6 @@ import jakarta.persistence.*;
  * @autor Alejandro Perellón López
  */
 @Entity
-@Table(name = "postres")
 public class Postre extends Producto {
 
 	/**
@@ -19,32 +18,32 @@ public class Postre extends Producto {
 	private static final long serialVersionUID = 8161558963465451979L;
 
 	// Relación con los ingredientes (solo 2 ingredientes máximo)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente1", referencedColumnName = "codigo")
 	private Ingrediente ingrediente1;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente2", referencedColumnName = "codigo")
 	private Ingrediente ingrediente2;
 
 	// Relación con los extras (solo 5 extras máximo)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra1", referencedColumnName = "codigo")
 	private Extra extra1;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra2", referencedColumnName = "codigo")
 	private Extra extra2;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra3", referencedColumnName = "codigo")
 	private Extra extra3;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra4", referencedColumnName = "codigo")
 	private Extra extra4;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra5", referencedColumnName = "codigo")
 	private Extra extra5;
 

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 /**
  * Esta clase permite generar el objeto bebidas que hereda de {@link Producto}
@@ -12,7 +11,6 @@ import jakarta.persistence.Table;
  * @author Alejandro Perellón López
  */
 @Entity
-@Table(name = "bebidas")
 public class Bebida extends Producto {
 
 	/**

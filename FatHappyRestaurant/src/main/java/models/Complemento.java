@@ -13,7 +13,6 @@ import java.util.List;
  * @author Alejandro Perellón López
  */
 @Entity
-@Table(name = "complementos")
 public class Complemento extends Producto {
 
 	/**

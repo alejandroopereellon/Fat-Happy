@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @author Alejandro Perellón López
  */
 @Entity
-@Table(name = "ingredientes")
 public class Ingrediente implements Serializable {
 
 	/**

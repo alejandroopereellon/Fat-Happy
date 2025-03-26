@@ -11,6 +11,9 @@ import models.Postre;
 import models.Producto;
 import models.Salsa;
 
+/**
+ * Interfaz que reune todo los metodos necesarios
+ */
 public interface ProductosDAO {
 	/**
 	 * Metodo que retorna un listado completo de {@link Producto}

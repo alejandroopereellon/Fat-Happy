@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 /**
  * Esta clase permite generar el objeto hamburguesa que hereda de
@@ -16,7 +15,6 @@ import jakarta.persistence.Table;
  * @author Alejandro Perellón López
  */
 @Entity
-@Table(name = "hamburguesas")
 public class Hamburguesa extends Producto {
 
 	/**
@@ -28,44 +26,44 @@ public class Hamburguesa extends Producto {
 	private boolean opcionMenu;
 
 	// Relación con los ingredientes
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente1", referencedColumnName = "codigo")
 	private Ingrediente ingrediente1;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente2", referencedColumnName = "codigo")
 	private Ingrediente ingrediente2;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente3", referencedColumnName = "codigo")
 	private Ingrediente ingrediente3;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente4", referencedColumnName = "codigo")
 	private Ingrediente ingrediente4;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente5", referencedColumnName = "codigo")
 	private Ingrediente ingrediente5;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente6", referencedColumnName = "codigo")
 	private Ingrediente ingrediente6;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente7", referencedColumnName = "codigo")
 	private Ingrediente ingrediente7;
 
 	// Relación con los extras
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra1", referencedColumnName = "codigo")
 	private Extra extra1;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra2", referencedColumnName = "codigo")
 	private Extra extra2;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra3", referencedColumnName = "codigo")
 	private Extra extra3;
 
