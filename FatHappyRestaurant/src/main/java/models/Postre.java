@@ -10,6 +10,8 @@ import jakarta.persistence.*;
  * @autor Alejandro Perellón López
  */
 @Entity
+@Table(name = "postres")
+@PrimaryKeyJoinColumn(name = "codigo")
 public class Postre extends Producto {
 
 	/**
@@ -17,7 +19,6 @@ public class Postre extends Producto {
 	 */
 	private static final long serialVersionUID = 8161558963465451979L;
 
-	// Relación con los ingredientes (solo 2 ingredientes máximo)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente1", referencedColumnName = "codigo")
 	private Ingrediente ingrediente1;
@@ -26,7 +27,6 @@ public class Postre extends Producto {
 	@JoinColumn(name = "ingrediente2", referencedColumnName = "codigo")
 	private Ingrediente ingrediente2;
 
-	// Relación con los extras (solo 5 extras máximo)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra1", referencedColumnName = "codigo")
 	private Extra extra1;
@@ -90,8 +90,50 @@ public class Postre extends Producto {
 		this.extra5 = extra5;
 	}
 
+	// Constructor sin parametros
+	public Postre() {
+
+	}
+
 	// Getters y Setters
 
+	public boolean isRecogerDespues() {
+		return recogerDespues;
+	}
+
+	public void setRecogerDespues(boolean recogerDespues) {
+		this.recogerDespues = recogerDespues;
+	}
+
+	public Ingrediente getIngrediente1() {
+		return ingrediente1;
+	}
+
+	public Ingrediente getIngrediente2() {
+		return ingrediente2;
+	}
+
+	public Extra getExtra1() {
+		return extra1;
+	}
+
+	public Extra getExtra2() {
+		return extra2;
+	}
+
+	public Extra getExtra3() {
+		return extra3;
+	}
+
+	public Extra getExtra4() {
+		return extra4;
+	}
+
+	public Extra getExtra5() {
+		return extra5;
+	}
+
+	// toString
 	@Override
 	public String toString() {
 		StringBuilder datos = new StringBuilder(getNombreProducto());
@@ -128,42 +170,6 @@ public class Postre extends Producto {
 		}
 
 		return datos.toString();
-	}
-
-	public boolean isRecogerDespues() {
-		return recogerDespues;
-	}
-
-	public void setRecogerDespues(boolean recogerDespues) {
-		this.recogerDespues = recogerDespues;
-	}
-
-	public Ingrediente getIngrediente1() {
-		return ingrediente1;
-	}
-
-	public Ingrediente getIngrediente2() {
-		return ingrediente2;
-	}
-
-	public Extra getExtra1() {
-		return extra1;
-	}
-
-	public Extra getExtra2() {
-		return extra2;
-	}
-
-	public Extra getExtra3() {
-		return extra3;
-	}
-
-	public Extra getExtra4() {
-		return extra4;
-	}
-
-	public Extra getExtra5() {
-		return extra5;
 	}
 
 }

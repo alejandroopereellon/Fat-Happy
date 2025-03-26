@@ -3,6 +3,7 @@ package models;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,8 @@ import java.util.List;
  * @author Alejandro Perellón López
  */
 @Entity
+@Table(name = "complementos")
+@PrimaryKeyJoinColumn(name = "codigo")
 public class Complemento extends Producto {
 
 	/**
@@ -27,11 +30,10 @@ public class Complemento extends Producto {
 	private int numeroSalsas;
 
 	@Transient
-	private List<Salsa> salsas;
+	private List<Salsa> salsas = new ArrayList<>();
 
 	// Constructor vacío para Hibernate
 	public Complemento() {
-		super();
 	}
 
 	/**
@@ -104,8 +106,10 @@ public class Complemento extends Producto {
 	public String toString() {
 		String datos = getNombreProducto();
 
-		for (Salsa sal : salsas) {
-			datos = datos + "\n" + sal.toString();
+		if (!salsas.isEmpty()) {
+			for (Salsa sal : salsas) {
+				datos = datos + "\n" + sal.toString();
+			}
 		}
 		return datos;
 	}

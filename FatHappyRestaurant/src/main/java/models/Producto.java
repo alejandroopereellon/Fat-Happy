@@ -13,9 +13,8 @@ import jakarta.persistence.*;
  * @author Alejandro Perellón López
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Especificamos la estrategia de herencia
-@DiscriminatorColumn(name = "producto_type", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "producto")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "productos")
 public class Producto implements Serializable {
 
 	/**
@@ -45,7 +44,7 @@ public class Producto implements Serializable {
 	@Column(name = "productoActivo", nullable = false)
 	private boolean productoActivo;
 
-	@Column(name = "productoPromocionado", nullable = false)
+	@Transient
 	private boolean productoPromocionado;
 
 	@Column(name = "opcionDescuento", nullable = false)
@@ -100,7 +99,7 @@ public class Producto implements Serializable {
 
 	/**
 	 * Este constructor sin parametros se utiliza para la creacion del objeto
-	 * producto sin paramertros
+	 * producto sin paramertros, dedicado a hibernate y json
 	 */
 	public Producto() {
 	}

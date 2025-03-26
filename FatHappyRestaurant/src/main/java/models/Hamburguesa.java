@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 
 /**
  * Esta clase permite generar el objeto hamburguesa que hereda de
@@ -15,6 +17,8 @@ import jakarta.persistence.ManyToOne;
  * @author Alejandro Perellón López
  */
 @Entity
+@Table(name = "hamburguesas")
+@PrimaryKeyJoinColumn(name = "codigo")
 public class Hamburguesa extends Producto {
 
 	/**
@@ -25,7 +29,6 @@ public class Hamburguesa extends Producto {
 	@Column(name = "opcionMenu")
 	private boolean opcionMenu;
 
-	// Relación con los ingredientes
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ingrediente1", referencedColumnName = "codigo")
 	private Ingrediente ingrediente1;
@@ -54,7 +57,6 @@ public class Hamburguesa extends Producto {
 	@JoinColumn(name = "ingrediente7", referencedColumnName = "codigo")
 	private Ingrediente ingrediente7;
 
-	// Relación con los extras
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "extra1", referencedColumnName = "codigo")
 	private Extra extra1;
@@ -124,6 +126,12 @@ public class Hamburguesa extends Producto {
 		this.extra3 = extra3;
 	}
 
+	// Constructor sin argumentos para hibernate
+	public Hamburguesa() {
+
+	}
+
+	// Getters && setters
 	public boolean isOpcionMenu() {
 		return opcionMenu;
 	}
@@ -172,4 +180,74 @@ public class Hamburguesa extends Producto {
 		return extra3;
 	}
 
+	@Override
+	public String toString() {
+
+		StringBuilder datos = new StringBuilder(getNombreProducto());
+
+		// Añadimos la información de los ingredientes
+		if (ingrediente1 != null) {
+			datos.append("\n\tIngrediente 1: ").append(ingrediente1.toString());
+		}
+		if (ingrediente2 != null) {
+			datos.append("\n\tIngrediente 2: ").append(ingrediente2.toString());
+		}
+		if (ingrediente3 != null) {
+			datos.append("\n\tIngrediente 2: ").append(ingrediente3.toString());
+		}
+		if (ingrediente4 != null) {
+			datos.append("\n\tIngrediente 2: ").append(ingrediente4.toString());
+		}
+		if (ingrediente5 != null) {
+			datos.append("\n\tIngrediente 2: ").append(ingrediente5.toString());
+		}
+		if (ingrediente6 != null) {
+			datos.append("\n\tIngrediente 2: ").append(ingrediente6.toString());
+		}
+		if (ingrediente7 != null) {
+			datos.append("\n\tIngrediente 2: ").append(ingrediente7.toString());
+		}
+
+		if (extra1 != null) {
+			datos.append("\n\tExtra 5: ").append(extra1.toString());
+		}
+		if (extra2 != null) {
+			datos.append("\n\tExtra 5: ").append(extra2.toString());
+		}
+		if (extra3 != null) {
+			datos.append("\n\tExtra 5: ").append(extra3.toString());
+		}
+
+		// Añadimos la información de los extras
+		if (extra1 != null) {
+			datos.append("\n\tExtra 1: ").append(extra1.toString());
+		}
+		if (extra2 != null) {
+			datos.append("\n\tExtra 2: ").append(extra2.toString());
+		}
+		if (extra3 != null) {
+			datos.append("\n\tExtra 3: ").append(extra3.toString());
+		}
+
+		return datos.toString();
+	}
+
+	// toString
+//	@Override
+//	public String toString() {
+//		String datos = super.toString();
+//
+//		// Mostramos los ingredientes
+//		for (Ingrediente ing : ingrendientes) {
+//			if (!ing.isActivo()) {
+//				datos = datos + ing.toString();
+//			}
+//		}
+//		// Mostramos los extras
+//		for (Extra ext : extras) {
+//			if (ext.getCantidadExtra() > 0) {
+//				datos = datos + ext.toString();
+//			}
+//		}
+//		return datos;
 }

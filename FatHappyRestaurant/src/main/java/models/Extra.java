@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * asociada
  */
 @Entity
-
+@Table(name = "extras")
 public class Extra implements Serializable {
 
 	/**
@@ -19,31 +19,25 @@ public class Extra implements Serializable {
 	 */
 	private static final long serialVersionUID = 6990084695199830136L;
 
-	// Atributo que representa el id del extra
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo")
 	private int codigo;
 
-	// Atributo que representa el nombre del extra
 	@Column(name = "nombre", length = 45, nullable = false)
 	private String nombreExtra;
 
-	// Atributo que representa la cantidad del extra
-	@Column(name = "cantidadExtra", nullable = false)
-	private int cantidadExtra;
-
-	// Atributo que representa el coste del extra
-	@Column(name = "costeExtra", nullable = false)
+	@Column(name = "coste_extra", nullable = false)
 	private BigDecimal costeExtra;
 
-	// Atributo que representa el maximo de extras permitidos
-	@Column(name = "maximoExtras", nullable = false)
+	@Column(name = "cantidad_maxima", nullable = false)
 	private int maximoExtras;
 
-	// Atributo que representa la ruta de la imagen asociada al extra
-	@Column(name = "rutaImagen", length = 120, nullable = false)
-	private final String rutaImagen;
+	@Column(name = "ruta_imagen", length = 120, nullable = false)
+	private String rutaImagen;
+
+	@Transient
+	private int cantidadExtra;
 
 	// Constructor con parámetros
 	public Extra(int codigo, String nombreExtra, int cantidadExtra, BigDecimal costeExtra, int maximoExtras,
@@ -54,6 +48,10 @@ public class Extra implements Serializable {
 		this.costeExtra = costeExtra;
 		this.maximoExtras = maximoExtras;
 		this.rutaImagen = rutaImagen;
+	}
+
+	// Constructor sin parametros para hibernate
+	public Extra() {
 	}
 
 	// Getters y setters
