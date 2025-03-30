@@ -1,5 +1,6 @@
 package restaurante.modelo;
 
+import empleados.modelo.Empleado;
 import jakarta.persistence.*;
 
 /**

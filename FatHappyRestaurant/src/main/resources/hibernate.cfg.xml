@@ -2,7 +2,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mariadb://79.116.186.62:3306/restaurante</property>
+		<property name="hibernate.connection.url">jdbc:mariadb://79.116.186.62:3306/restaurante2</property>
 		<property name="hibernate.connection.username">restaurante_user</property>
 		<property name="hibernate.connection.password">7PeuAQgx</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
@@ -10,13 +10,18 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.use_sql_comments">true</property>
 		
-		<mapping class="models.Bebida" />
-		<mapping class="models.Complemento" />
-		<mapping class="models.Extra" />
-		<mapping class="models.Hamburguesa" />
-		<mapping class="models.Ingrediente" />
-		<mapping class="models.Postre" />
-		<mapping class="models.Producto" />
-		<mapping class="models.Salsa" />
+		<mapping class="productos.modelo.Bebida" />
+		<mapping class="productos.modelo.Complemento" />
+		<mapping class="productos.modelo.Extra" />
+		<mapping class="productos.modelo.Hamburguesa" />
+		<mapping class="productos.modelo.Ingrediente" />
+		<mapping class="productos.modelo.Postre" />
+		<mapping class="productos.modelo.Producto" />
+		<mapping class="productos.modelo.Salsa" />
+		
+		<mapping class="restaurante.modelo.Restaurante" />
+		
+		<mapping class="empleados.modelo.Empleado" />
+		<mapping class="empleados.modelo.MovimientosEmpleado" />
 	</session-factory>
 </hibernate-configuration>
