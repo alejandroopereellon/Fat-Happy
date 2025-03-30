@@ -104,11 +104,26 @@ public class Complemento extends Producto {
 	// toString
 	@Override
 	public String toString() {
+		boolean noMasSalsas = false;
 		String datos = getNombreProducto();
+		// Mientras salsas no sea empty
 
-		if (!salsas.isEmpty()) {
-			for (Salsa sal : salsas) {
-				datos = datos + "\n" + sal.toString();
+		// Recorremos todas las salsas que existan
+		for (Salsa sal : salsas) {
+			if (sal.getCodigo() == 20050509) {
+				noMasSalsas = true;
+				break;
+			}
+			datos = datos + System.lineSeparator() + sal.toString();
+		}
+		/**
+		 * Si la cantidad de salsas seleccionadas es menor que el numero de salsas
+		 * disponibles y quiere mas salsas se mostrará la opcion de seleccionar salsa el
+		 * numero de veces que no se hayan seleccionado salsas
+		 */
+		if ((salsas.size() < numeroSalsas) && !noMasSalsas) {
+			for (int i = 0; i < (numeroSalsas - salsas.size()); i++) {
+				datos = datos + System.lineSeparator() + "Escoger salsa";
 			}
 		}
 		return datos;
