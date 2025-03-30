@@ -70,10 +70,12 @@ public class Bebida extends Producto {
 		if (tamano != 0) {
 			datos = datos + " " + tamano;
 		}
-		if (!extraActivo && nombreExtra.equalsIgnoreCase("hielo")) {
-			datos = datos + "\n\tSin hielo";
-		} else if (extraActivo && nombreExtra.equalsIgnoreCase("del tiempo")) {
-			datos = datos + "\n\textra del tiempo";
+		if (nombreExtra != null) {
+			if (!extraActivo && nombreExtra.equalsIgnoreCase("hielo")) {
+				datos = datos + "\n\tSin hielo";
+			} else if (extraActivo && nombreExtra.equalsIgnoreCase("del tiempo")) {
+				datos = datos + "\n\textra del tiempo";
+			}
 		}
 		return datos;
 	}
