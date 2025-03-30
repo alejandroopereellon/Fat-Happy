@@ -86,4 +86,15 @@ public interface ProductosDAO {
 	 */
 	public Ingrediente obtenerIngrediente(int id);
 
+	/**
+	 * Este metodo se encarga de obtener la informacion de si un producto tiene
+	 * stock en el {@link restaurante} señalado o no.
+	 * 
+	 * En caso de que se retorne correctamente el stock se va a modificar el valor
+	 * en la clase de {@link producto}
+	 * 
+	 * @return true en caso de que se haya modificado
+	 */
+	public boolean consultarStockProducto(Producto pro);
+
 }
