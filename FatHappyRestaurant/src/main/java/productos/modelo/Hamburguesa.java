@@ -1,4 +1,4 @@
-package productos.modelos;
+package productos.modelo;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoHibernateImpl;
-import productos.modelos.Bebida;
-import productos.modelos.Producto;
+import productos.modelo.Bebida;
+import productos.modelo.Producto;
 
 public class ProductosDAOTest {
 

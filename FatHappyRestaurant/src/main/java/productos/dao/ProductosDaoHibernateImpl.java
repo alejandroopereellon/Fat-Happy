@@ -8,14 +8,14 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
 import pool.HibernateUtil;
-import productos.modelos.Bebida;
-import productos.modelos.Complemento;
-import productos.modelos.Extra;
-import productos.modelos.Hamburguesa;
-import productos.modelos.Ingrediente;
-import productos.modelos.Postre;
-import productos.modelos.Producto;
-import productos.modelos.Salsa;
+import productos.modelo.Bebida;
+import productos.modelo.Complemento;
+import productos.modelo.Extra;
+import productos.modelo.Hamburguesa;
+import productos.modelo.Ingrediente;
+import productos.modelo.Postre;
+import productos.modelo.Producto;
+import productos.modelo.Salsa;
 
 /**
  * Esta modelo utilizará Hibernate para acceder a los datos de todos los

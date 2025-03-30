@@ -2,14 +2,14 @@ package productos.dao;
 
 import java.util.List;
 
-import productos.modelos.Bebida;
-import productos.modelos.Complemento;
-import productos.modelos.Extra;
-import productos.modelos.Hamburguesa;
-import productos.modelos.Ingrediente;
-import productos.modelos.Postre;
-import productos.modelos.Producto;
-import productos.modelos.Salsa;
+import productos.modelo.Bebida;
+import productos.modelo.Complemento;
+import productos.modelo.Extra;
+import productos.modelo.Hamburguesa;
+import productos.modelo.Ingrediente;
+import productos.modelo.Postre;
+import productos.modelo.Producto;
+import productos.modelo.Salsa;
 
 /**
  * Interfaz que reune todo los metodos necesarios
