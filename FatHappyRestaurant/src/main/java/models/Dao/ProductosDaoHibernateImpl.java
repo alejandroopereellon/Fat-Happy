@@ -17,10 +17,12 @@ import org.hibernate.Session;
  * @author Alejandro Perellón López
  *
  */
-public class ProductosHibernate implements ProductosDAO {
+public class ProductosDaoHibernateImpl implements ProductosDAO {
+
+	private int idRestaurante;
 
 	// Crear el logger
-	static Logger logger = LogManager.getLogger(ProductosHibernate.class);
+	static Logger logger = LogManager.getLogger(ProductosDaoHibernateImpl.class);
 
 	@Override
 	public List<Producto> listarProductos() {
@@ -272,6 +274,46 @@ public class ProductosHibernate implements ProductosDAO {
 			logger.error("Ha ocurrido un error al obtener el objeto ingrediente con ID " + id, e);
 		}
 		return null;
+	}
+
+	@Override
+	public boolean consultarStockProducto(Producto pro) {
+		// Iniciamos una sesion
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			logger.debug(
+					"Se ha iniciado una sesion de hibernate para obtener el objeto stock_restaurante con numero de restaurante {} y numero producto {}",
+					idRestaurante, pro.getCodigo());
+
+			// Obtenemos el objeto stock
+			Boolean esActivo = session.createNativeQuery(
+					"Select activo FROM stock_restaurante WHERE id_restaurante = :idRest and id_producto = :idProd",
+					Boolean.class).setParameter("idRest", idRestaurante).setParameter("idProd", pro.getCodigo()).uniqueResult();
+			logger.debug(
+					"Se han cargado los datos en el objetostock_restaurante con numero de restaurante {} y numero producto {}",
+					idRestaurante, pro.getCodigo());
+
+			// Comprobacion de si el objeto existe, y en caso de existir si esta activo o no
+			if (esActivo == null) {
+				logger.error(
+						"El objeto stock_restaurante con numero de restaurante {} y numero producto {} NO existe en la base de datos",
+						idRestaurante, pro.getCodigo());
+				pro.setStockDisponible(false);
+				return false;
+			}
+
+			logger.debug(
+					"Se ha encontrado el objeto stock_restaurante con numero de restaurante {} y numero producto {}",
+					idRestaurante, pro.getCodigo());
+			pro.setStockDisponible(esActivo);
+			return esActivo;
+
+		} catch (Exception e) {
+			logger.error(
+					"Ha ocurrido un error al obtener el objeto stock_restaurante con numero de restaurante {} y numero producto {}",
+					idRestaurante, pro.getCodigo());
+		}
+		return false;
+
 	}
 
 }
