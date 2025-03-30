@@ -1,7 +1,7 @@
 package prueba;
 
-import models.Dao.ProductosDAO;
-import models.Dao.ProductosDaoHibernateImpl;
+import productos.dao.ProductosDAO;
+import productos.dao.ProductosDaoHibernateImpl;
 
 public class Main {
 

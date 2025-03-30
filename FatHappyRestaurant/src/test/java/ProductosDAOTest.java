@@ -8,10 +8,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import models.Bebida;
-import models.Producto;
-import models.Dao.ProductosDAO;
-import models.Dao.ProductosDaoHibernateImpl;
+import productos.dao.ProductosDAO;
+import productos.dao.ProductosDaoHibernateImpl;
+import productos.modelos.Bebida;
+import productos.modelos.Producto;
 
 public class ProductosDAOTest {
 
