@@ -14,6 +14,9 @@ public class Salsa extends Producto {
 	 */
 	private static final long serialVersionUID = -3467903908490343597L;
 
+	@Column(name = "nivel_picante")
+	private int nivelPicante;
+
 	@Transient
 	private transient boolean esGratis;
 
