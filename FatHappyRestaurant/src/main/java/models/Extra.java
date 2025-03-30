@@ -84,10 +84,10 @@ public class Extra implements Serializable {
 		return rutaImagen;
 	}
 
-	// ToString
+	// toString
 	@Override
 	public String toString() {
-		if (cantidadExtra > 0) {
+		if (nombreExtra != null &&cantidadExtra > 0) {
 			return "\n\tExtra " + cantidadExtra + " " + nombreExtra;
 		}
 		return "";
