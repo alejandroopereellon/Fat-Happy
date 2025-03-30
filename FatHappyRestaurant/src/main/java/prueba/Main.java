@@ -1,29 +1,30 @@
 package prueba;
 
 import models.Dao.ProductosDAO;
-import models.Dao.ProductosHibernate;
+import models.Dao.ProductosDaoHibernateImpl;
 
 public class Main {
 
 	public static void main(String[] args) {
-		ProductosDAO dao = new ProductosHibernate();
+		ProductosDAO dao = new ProductosDaoHibernateImpl();
 
-		System.out.println(dao.obtenerBebida(3011));
-
-		System.out.println(dao.obtenerComplemento(2061));
-
-		System.out.println(dao.obtenerExtra(500));
-
-		System.out.println(dao.obtenerHamburguesa(1001));
-
-		System.out.println(dao.obtenerIngrediente(400));
-
-		System.out.println(dao.obtenerPostre(4101));
-
-		System.out.println(dao.obtenerProducto(2105));
-
-		System.out.println(dao.obtenerSalsa(2102));
-
+	//	System.out.println(dao.obtenerBebida(30010101));
+//
+//		System.out.println(dao.obtenerComplemento(20010104));
+//
+//		Extra extra=  dao.obtenerExtra(500);
+//		System.out.println(extra.toString());
+//
+//		System.out.println(dao.obtenerHamburguesa(10010101));
+//
+//		System.out.println(dao.obtenerIngrediente(400));
+//
+//		System.out.println(dao.obtenerPostre(40030501));
+//
+		//System.out.println(dao.obtenerProducto(10010503));
+//
+//	System.out.println(dao.obtenerSalsa(20050501));
+//
 		System.out.println(dao.listarProductos());
 
 	}
