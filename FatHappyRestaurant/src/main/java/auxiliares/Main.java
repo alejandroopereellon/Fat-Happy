@@ -18,7 +18,7 @@ public class Main {
 		int codigoRestaurante = ConfiguracionRestaurante.get().getCodigoRestaurante();
 		System.out.println("Código de restaurante: {}" + codigoRestaurante);
 
-		System.out.println(new RestauranteDaoHibernateImpl().obtenerRestaurante(codigoRestaurante));
+		System.out.println(new RestauranteDaoHibernateImpl().obtenerRestaurante(codigoRestaurante).toString());
 
 	}
 

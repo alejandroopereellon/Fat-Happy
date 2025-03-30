@@ -37,7 +37,7 @@ public class ConfiguracionRestaurante {
 
     private static void crearConfiguracionPorDefecto(ObjectMapper mapper, File archivo) throws IOException {
         Configuracion porDefecto = new Configuracion();
-        porDefecto.setCodigoRestaurante(99999);
+        porDefecto.setCodigoRestaurante(0);
         porDefecto.setDirectorioLocal(System.getProperty("user.home") + File.separator + "fathappyrestaurant");
         porDefecto.setFtpHost("79.116.186.62");
         porDefecto.setFtpPuerto(1020);

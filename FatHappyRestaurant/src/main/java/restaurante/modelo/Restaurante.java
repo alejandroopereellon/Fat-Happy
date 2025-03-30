@@ -95,4 +95,14 @@ public class Restaurante {
 		return email_contacto;
 	}
 
+	// toString
+
+	@Override
+	public String toString() {
+		return "Restaurante [idRestaurante=" + idRestaurante + ", razon_social=" + razon_social + ", direccion="
+				+ direccion + ", provincia=" + provincia + ", ciudad=" + ciudad + ", codigoPostal=" + codigoPostal
+				+ ", nif=" + nif + ", gerente=" + gerente + ", telefonoContacto=" + telefonoContacto
+				+ ", email_contacto=" + email_contacto + "]";
+	}
+
 }
