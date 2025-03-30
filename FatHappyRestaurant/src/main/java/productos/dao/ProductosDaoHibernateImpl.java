@@ -3,8 +3,11 @@ package productos.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
+
 import pool.HibernateUtil;
-import productos.*;
 import productos.modelos.Bebida;
 import productos.modelos.Complemento;
 import productos.modelos.Extra;
@@ -13,10 +16,6 @@ import productos.modelos.Ingrediente;
 import productos.modelos.Postre;
 import productos.modelos.Producto;
 import productos.modelos.Salsa;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.Session;
 
 /**
  * Esta modelo utilizará Hibernate para acceder a los datos de todos los
