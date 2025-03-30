@@ -16,7 +16,6 @@ import jakarta.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "productos")
 public class Producto implements Serializable {
-
 	/**
 	 * 
 	 */
@@ -38,26 +37,29 @@ public class Producto implements Serializable {
 	@Column(name = "precio", nullable = false)
 	private BigDecimal precioVenta;
 
-	@Column(name = "costeEmpresa", nullable = false)
+	@Column(name = "coste_empresa", nullable = false)
 	private BigDecimal costeEmpresa;
 
-	@Column(name = "productoActivo", nullable = false)
+	@Column(name = "producto_activo", nullable = false)
 	private boolean productoActivo;
 
 	@Transient
 	private boolean productoPromocionado;
 
-	@Column(name = "opcionDescuento", nullable = false)
+	@Column(name = "opcion_descuento", nullable = false)
 	private boolean opcionDescuento;
 
-	@Column(name = "imagenProducto64", length = 150)
+	@Column(name = "imagen_producto_64", length = 150)
 	private String imagenProducto64;
 
-	@Column(name = "imagenProducto128", length = 150)
+	@Column(name = "imagen_producto_128", length = 150)
 	private String imagenProducto128;
 
-	@Column(name = "imagenProductoOriginal", length = 150)
+	@Column(name = "imagen_producto_original", length = 150)
 	private String imagenProductoOriginal;
+
+	@Transient
+	private boolean stockDisponible;
 
 	/**
 	 * Constructor dedicado a la creacion del objeto producto
@@ -103,6 +105,8 @@ public class Producto implements Serializable {
 	 */
 	public Producto() {
 	}
+
+	// Getters && Setters
 
 	public boolean isProductoActivo() {
 		return productoActivo;
@@ -164,4 +168,17 @@ public class Producto implements Serializable {
 		return imagenProductoOriginal;
 	}
 
+	public boolean isStockDisponible() {
+		return stockDisponible;
+	}
+
+	public void setStockDisponible(boolean stockDisponible) {
+		this.stockDisponible = stockDisponible;
+	}
+
+	// toString
+	@Override
+	public String toString() {
+		return nombreProducto + "\t" + precioVenta;
+	}
 }
