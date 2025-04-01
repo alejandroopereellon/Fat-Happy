@@ -16,6 +16,7 @@ import productos.modelo.Ingrediente;
 import productos.modelo.Postre;
 import productos.modelo.Producto;
 import productos.modelo.Salsa;
+import restaurante.modelo.RestauranteDatos;
 
 /**
  * Esta modelo utilizará Hibernate para acceder a los datos de todos los
@@ -213,14 +214,24 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 				logger.error("El objeto producto con id {} no existe en la base de datos", id);
 				return null;
 			} else
-			// Si la producto no esta activa retornamos nulo
+			// Si el producto no esta activo retornamos nulo
 			if (!producto.isProductoActivo()) {
-				logger.warn("El objeto producto {} esta inactivo, se va a retornar nulo", id);
+				logger.info("El objeto producto {} esta inactivo, se va a retornar nulo", id);
 				return null;
 			}
 
-			logger.debug("Se ha encontrado el objeto producto con ID {}, retornando el objeto", id);
-			return producto;
+			// Comprobamos que el producto este en stock en el restaurante
+			logger.debug("Se ha encontrado el objeto producto con ID {}, comprobando si esta en stock", id);
+			boolean enStock = session.createNativeQuery(
+					"SELECT activo FROM stock_restaurante WHERE id_restaurante = :idRest and id_producto = :idProd",
+					boolean.class).setParameter("idRest", RestauranteDatos.get().getIdRestaurante())
+					.setParameter("idProd", producto.getCodigo()).uniqueResult();
+			if (enStock) {
+				logger.info("El objeto producto con ID {} se ha encontrado y esta en stock", id);
+				return producto;
+			}
+
+			return null;
 
 		} catch (Exception e) {
 			logger.error("Ha ocurrido un error al obtener el objeto producto con ID " + id, e);
@@ -294,7 +305,8 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 			// Obtenemos el objeto stock
 			Boolean esActivo = session.createNativeQuery(
 					"Select activo FROM stock_restaurante WHERE id_restaurante = :idRest and id_producto = :idProd",
-					Boolean.class).setParameter("idRest", idRestaurante).setParameter("idProd", pro.getCodigo()).uniqueResult();
+					Boolean.class).setParameter("idRest", idRestaurante).setParameter("idProd", pro.getCodigo())
+					.uniqueResult();
 			logger.debug(
 					"Se han cargado los datos en el objetostock_restaurante con numero de restaurante {} y numero producto {}",
 					idRestaurante, pro.getCodigo());

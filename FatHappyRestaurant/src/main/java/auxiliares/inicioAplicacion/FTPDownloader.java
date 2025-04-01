@@ -16,7 +16,7 @@ public class FTPDownloader {
     private static final Logger logger = LogManager.getLogger(FTPDownloader.class);
 
     public void iniciarConexionYDescargar() {
-        Configuracion config = ConfiguracionRestaurante.get();
+        Configuracion config = ConfiguracionInicial.get();
 
         String servidor = config.getFtpHost();
         int puerto = config.getFtpPuerto();

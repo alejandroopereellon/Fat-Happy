@@ -3,6 +3,8 @@ package productos.modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import productos.util.CalcularImporteMenu;
+
 /**
  * Esta clase permite la generacion de un menu, esta clase contiene de
  * constructor principal una hamburguesa y el tamano del menu (1 pequeno, 2
@@ -48,6 +50,8 @@ public class MenuPedido implements Serializable {
 	 */
 	private boolean menuPromocionado = false;
 
+	private boolean menuSeleccionado = false;
+
 	/**
 	 * @param hamburguesa es la hamburguesa del menu principal
 	 * @param tamano      es el tamano del menu: 1 pequeno, 2 mediano, 3 grande
@@ -56,8 +60,7 @@ public class MenuPedido implements Serializable {
 	public MenuPedido(Hamburguesa hamburguesa, int tamano) {
 		this.hamburguesa = hamburguesa;
 		this.tamano = tamano;
-		// Calculamos el importe del menu
-		calcularImporte();
+		new CalcularImporteMenu(this).calcularImporte();
 	}
 
 	// Getters && Setters
@@ -66,66 +69,24 @@ public class MenuPedido implements Serializable {
 		return complemento;
 	}
 
-	/**
-	 * Este metodo añade un complemento al menu, este complemento debe ser
-	 * obligatoriamente patatas y debe de cumplir obligatoriamente los requisitos de
-	 * tamano del menu
-	 * 
-	 * @param complemento patatas que se van a añadir al producto que cumplan el
-	 *                    tamano del menu
-	 * @return TRUE en caso de que complan los requisitos || FALSE en caso de no
-	 *         cumplir los requisitos
-	 */
-	public boolean setComplemento(Complemento complemento) {
-		if (complemento.getTipoProducto().equalsIgnoreCase("patatas") && complemento.getTamano() == tamano) {
-			this.complemento = complemento;
-			return true;
-		}
-		return false;
+	public void setComplemento(Complemento complemento) {
+		this.complemento = complemento;
 	}
 
 	public Bebida getBebida() {
 		return bebida;
 	}
 
-	/**
-	 * Metodo para la insercion de una nueva bebida, esta debe comprobar que el
-	 * producto sea de tamano unico o que sea del mismo tamano que el asigando en el
-	 * menu, en caso contrario no se puede anadir al menu
-	 * 
-	 * @param bebida bebida que se va a añadir al menu
-	 * @return TRUE en caso de que la bebida se haya incorporado correctamente
-	 *         cumpliendo los requisitos de tamano || FALSE en caso de que la bebida
-	 *         no se haya podido añadir
-	 */
-	public boolean setBebida(Bebida bebida) {
-		if (bebida.getTamano() == 0 || bebida.getTamano() == tamano) {
-			this.bebida = bebida;
-			return true;
-		}
-		return false;
+	public void setBebida(Bebida bebida) {
+		this.bebida = bebida;
 	}
 
 	public Postre getPostre() {
 		return postre;
 	}
 
-	/**
-	 * Metodo para la insercion de un nuevo postre, este solo comprueba que el
-	 * producto sea un postre.
-	 * 
-	 * Adicionalmente, en caso de insertarse el postre, se va a volver a calcular el
-	 * nuevo importe del menu debido a que el postre incrementa el valor del menu
-	 * sin tener opcion a descuento
-	 * 
-	 * @param postre postre que se va a añadir al producto
-	 * @return TRUE en caso de que el postre se haya incorporado correctamente ||
-	 *         FALSE en caso de que el postre no se haya podido añadir
-	 */
-	public boolean setPostre(Postre postre) {
+	public void setPostre(Postre postre) {
 		this.postre = postre;
-		calcularImporte();
-		return true;
 	}
 
 	public BigDecimal getPrecioMenu() {
@@ -152,18 +113,15 @@ public class MenuPedido implements Serializable {
 		return tamano;
 	}
 
-	// Metodos adicionales
-
-	private void calcularImporte() {
-		// Calculamos el precio de la hamburguesa mas el coste de intereses
-		precioMenu = hamburguesa.getPrecioVenta().multiply(new BigDecimal("1.65"));
-		// En caso de existir un postre en el menu se va a actualizar el precio
-		if (postre != null) {
-			precioMenu.add(postre.getPrecioVenta());
-		}
+	public boolean isMenuSeleccionado() {
+		return menuSeleccionado;
 	}
 
+	public void setMenuSeleccionado(boolean menuSeleccionado) {
+		this.menuSeleccionado = menuSeleccionado;
+	}
 	// toString
+
 	@Override
 	public String toString() {
 		String datos = "Menu " + tamano + " (" + precioMenu + " Eur)";

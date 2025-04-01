@@ -9,6 +9,7 @@ public class Configuracion {
 	private String ftpUsuario;
 	private String ftpContrasena;
 	private String ftpDirectorioRemoto;
+	private int numeroCaja;
 
 	// Getters y setters
 	public int getCodigoRestaurante() {
@@ -65,5 +66,13 @@ public class Configuracion {
 
 	public void setFtpDirectorioRemoto(String ftpDirectorioRemoto) {
 		this.ftpDirectorioRemoto = ftpDirectorioRemoto;
+	}
+
+	public int getNumeroCaja() {
+		return numeroCaja;
+	}
+
+	public void setNumeroCaja(int numeroCaja) {
+		this.numeroCaja = numeroCaja;
 	}
 }

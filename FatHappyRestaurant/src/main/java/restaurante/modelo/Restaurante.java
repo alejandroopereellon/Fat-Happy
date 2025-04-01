@@ -95,6 +95,8 @@ public class Restaurante {
 		return email_contacto;
 	}
 
+	
+	
 	// toString
 
 	@Override

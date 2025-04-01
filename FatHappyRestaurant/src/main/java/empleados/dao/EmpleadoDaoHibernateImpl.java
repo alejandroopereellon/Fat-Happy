@@ -18,7 +18,6 @@ import restaurante.dao.RestauranteDaoHibernateImpl;
  */
 public class EmpleadoDaoHibernateImpl implements EmpleadosDao {
 
-	@SuppressWarnings("unused")
 	private int idRestaurante;
 
 	/**
