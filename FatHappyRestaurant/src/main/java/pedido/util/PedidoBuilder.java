@@ -1,6 +1,7 @@
 package pedido.util;
 
 import pedido.modelo.Pedido;
+import restaurante.modelo.RestauranteDatos;
 import pedido.modelo.OrdenPedido;
 import caja.modelo.Caja;
 
@@ -12,52 +13,53 @@ import java.time.LocalDateTime;
  */
 public class PedidoBuilder {
 
-    // Datos obligatorios o configurables
-    private int numeroPedido;
-    private OrdenPedido orden;
-    private int estadoPedido;
-    private Caja caja;
+	// Datos obligatorios o configurables
+	private int numeroPedido;
+	private OrdenPedido orden;
+	private int estadoPedido;
+	private Caja caja;
 
-    public PedidoBuilder withNumeroPedido(int numeroPedido) {
-        this.numeroPedido = numeroPedido;
-        return this;
-    }
+	public PedidoBuilder withNumeroPedido(int numeroPedido) {
+		this.numeroPedido = numeroPedido;
+		return this;
+	}
 
-    public PedidoBuilder withOrden(OrdenPedido orden) {
-        this.orden = orden;
-        return this;
-    }
+	public PedidoBuilder withOrden(OrdenPedido orden) {
+		this.orden = orden;
+		return this;
+	}
 
-    public PedidoBuilder withEstado(int estadoPedido) {
-        this.estadoPedido = estadoPedido;
-        return this;
-    }
+	public PedidoBuilder withEstado(int estadoPedido) {
+		this.estadoPedido = estadoPedido;
+		return this;
+	}
 
-    public PedidoBuilder withCaja(Caja caja) {
-        this.caja = caja;
-        return this;
-    }
+	public PedidoBuilder withCaja(Caja caja) {
+		this.caja = caja;
+		return this;
+	}
 
-    public Pedido build() {
-        Pedido pedido = new Pedido();
+	public Pedido build() {
+		Pedido pedido = new Pedido();
 
-        pedido.setNumeroPedido(numeroPedido);
-        pedido.setOrden(orden);
-        pedido.setEstadoPedido(estadoPedido);
-        pedido.setCaja(caja);
-        pedido.setFechaHora(LocalDateTime.now());
+		pedido.setNumeroPedido(
+				new ObtenerNumeroPedido().obtenerYReservarNumeroPedido(RestauranteDatos.get().getIdRestaurante()));
+		pedido.setOrden(orden);
+		pedido.setEstadoPedido(estadoPedido);
+		pedido.setCaja(caja);
+		pedido.setFechaHora(LocalDateTime.now());
 
-        String ruta = "/R" + caja.getRestaurante().getIdRestaurante() + "/" +
-                LocalDate.now().toString() + "/" + numeroPedido;
-        pedido.setRutaPedido(ruta);
+		String ruta = "/R" + caja.getRestaurante().getIdRestaurante() + "/" + LocalDate.now().toString() + "/"
+				+ numeroPedido;
+		pedido.setRutaPedido(ruta);
 
-        pedido.setDescuento(0);
+		pedido.setDescuento(0);
 
-        // Acciones adicionales tras creación
-        new IniciarContadorPedido(pedido).start();
-        new CalcularImporte(pedido).restaurarImporte();
-        new AlmacenarOrdenPedidoJson(pedido).almacenarOrdenPedido();
+		// Acciones adicionales tras creación
+		new IniciarContadorPedido(pedido).start();
+		new CalcularImporte(pedido).restaurarImporte();
+		new AlmacenarOrdenPedidoJson(pedido).almacenarOrdenPedido();
 
-        return pedido;
-    }
+		return pedido;
+	}
 }

@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "empleados")
+@Table(name = "pedidos")
 public class Pedido {
 
 	@Id
