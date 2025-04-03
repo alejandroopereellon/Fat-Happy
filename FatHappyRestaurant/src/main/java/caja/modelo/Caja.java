@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import caja.dao.CajasDaoHibernateImpl;
 import empleados.modelo.Empleado;
-import empleados.modelo.EmpleadoDatos;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -80,20 +81,19 @@ public class Caja implements Serializable {
 	 * @param importeInicial Importe inicial depositado al abrir la caja.
 	 * @param numeroSesion   Número de sesión asociado a la apertura de la caja.
 	 */
-	public Caja(int numeroCaja, int numeroSesion, LocalDateTime momentoApertura, LocalDateTime momentoCierre,
-			BigDecimal importeInicial, BigDecimal importeFinal) {
-		this.restaurante = RestauranteDatos.get();
-		this.empleado = EmpleadoDatos.get();
-		this.numeroCaja = numeroCaja;
-		this.numeroSesion = numeroSesion;
-		this.momentoApertura = momentoApertura;
-		this.momentoCierre = momentoCierre;
-		this.importeInicial = importeInicial;
-		this.importeFinal = importeFinal;
-	}
+//	public Caja(Empleado empleado, BigDecimal importeInicial) {
+//		this.restaurante = RestauranteDatos.get();
+//		this.empleado = empleado;
+//		this.numeroCaja = ConfiguracionInicial.get().getNumeroCaja();
+//		this.numeroSesion = new CajasDaoHibernateImpl().obtenerSiguienteNumeroSesion();
+//		this.momentoApertura = LocalDateTime.now();
+//		this.momentoCierre = null;
+//		this.importeInicial = importeInicial;
+//		this.importeFinal = null;
+//	}
 
 	/**
-	 * Constructor vacio para servicios como hibernate
+	 * Constructor vacio para servicios como hibernate y el builder
 	 */
 	public Caja() {
 	}
@@ -106,6 +106,70 @@ public class Caja implements Serializable {
 
 	public Restaurante getRestaurante() {
 		return restaurante;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setRestaurante(Restaurante restaurante) {
+		this.restaurante = restaurante;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+	public void setNumeroCaja(int numeroCaja) {
+		this.numeroCaja = numeroCaja;
+	}
+
+	public void setNumeroSesion(int numeroSesion) {
+		this.numeroSesion = numeroSesion;
+	}
+
+	public void setMomentoApertura(LocalDateTime momentoApertura) {
+		this.momentoApertura = momentoApertura;
+	}
+
+	public void setMomentoCierre(LocalDateTime momentoCierre) {
+		this.momentoCierre = momentoCierre;
+	}
+
+	public void setImporteInicial(BigDecimal importeInicial) {
+		this.importeInicial = importeInicial;
+	}
+
+	public void setImporteFinal(BigDecimal importeFinal) {
+		this.importeFinal = importeFinal;
+	}
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public int getNumeroCaja() {
+		return numeroCaja;
+	}
+
+	public int getNumeroSesion() {
+		return numeroSesion;
+	}
+
+	public LocalDateTime getMomentoApertura() {
+		return momentoApertura;
+	}
+
+	public LocalDateTime getMomentoCierre() {
+		return momentoCierre;
+	}
+
+	public BigDecimal getImporteInicial() {
+		return importeInicial;
+	}
+
+	public BigDecimal getImporteFinal() {
+		return importeFinal;
 	}
 
 	// toString

@@ -95,8 +95,10 @@ public class Restaurante {
 		return email_contacto;
 	}
 
-	
-	
+	public void setIdRestaurante(int idRestaurante) {
+		this.idRestaurante = idRestaurante;
+	}
+
 	// toString
 
 	@Override

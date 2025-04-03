@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import empleados.modelo.Empleado;
 import empleados.modelo.MovimientosEmpleado;
 import pool.HibernateUtil;
@@ -17,18 +18,6 @@ import restaurante.dao.RestauranteDaoHibernateImpl;
  * 
  */
 public class EmpleadoDaoHibernateImpl implements EmpleadosDao {
-
-	private int idRestaurante;
-
-	/**
-	 * Este constructor solicita el id del restaurante con el que se va a trabajar
-	 * para obtener la informacion de los empleados que pertenecen a esa plantilla
-	 * 
-	 * @param idRestaurante
-	 */
-	public EmpleadoDaoHibernateImpl(int idRestaurante) {
-		this.idRestaurante = idRestaurante;
-	}
 
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(RestauranteDaoHibernateImpl.class);
@@ -43,7 +32,8 @@ public class EmpleadoDaoHibernateImpl implements EmpleadosDao {
 			Empleado empleado = session
 					.createQuery("FROM Empleado WHERE idRestaurante = :idRest and idRestauranteEmpleado = :idEmp",
 							Empleado.class)
-					.setParameter("idRest", idRestaurante).setParameter("idEmp", id).uniqueResult();
+					.setParameter("idRest", ConfiguracionInicial.get().getCodigoRestaurante()).setParameter("idEmp", id)
+					.uniqueResult();
 			logger.debug("Se han cargado los datos en el objeto empleado con id {}", id);
 
 			// Comprobacion de si el objeto existe, y en caso de existir si esta activo o no
@@ -71,7 +61,8 @@ public class EmpleadoDaoHibernateImpl implements EmpleadosDao {
 			Empleado empleado = session
 					.createQuery("FROM Empleado WHERE idRestaurante = :idRest and idRestauranteEmpleado = :idEmp",
 							Empleado.class)
-					.setParameter("idRest", idRestaurante).setParameter("idEmp", id).uniqueResult();
+					.setParameter("idRest", ConfiguracionInicial.get().getCodigoRestaurante()).setParameter("idEmp", id)
+					.uniqueResult();
 			logger.debug("Se han cargado los datos en el objeto empleado con id {}", id);
 
 			// Comprobacion de si el objeto existe
@@ -101,7 +92,8 @@ public class EmpleadoDaoHibernateImpl implements EmpleadosDao {
 			Empleado empleado = session
 					.createQuery("FROM Empleado WHERE idRestaurante = :idRest and idRestauranteEmpleado = :idEmp",
 							Empleado.class)
-					.setParameter("idRest", idRestaurante).setParameter("idEmp", id).uniqueResult();
+					.setParameter("idRest", ConfiguracionInicial.get().getCodigoRestaurante()).setParameter("idEmp", id)
+					.uniqueResult();
 			logger.debug("Se han cargado los datos en el objeto empleado con id {}", id);
 
 			transaction = session.beginTransaction();
