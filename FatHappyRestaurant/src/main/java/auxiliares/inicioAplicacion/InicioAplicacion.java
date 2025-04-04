@@ -1,10 +1,8 @@
-package auxiliares;
+package auxiliares.inicioAplicacion;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.inicioAplicacion.FTPDownloader;
 import caja.util.IniciarCaja;
 import empleados.modelo.EmpleadoDatos;
 import productos.dao.ProductosDaoGlobal;

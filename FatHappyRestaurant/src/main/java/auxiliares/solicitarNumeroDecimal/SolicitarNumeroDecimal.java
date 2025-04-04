@@ -39,6 +39,12 @@ public class SolicitarNumeroDecimal {
 				e.printStackTrace();
 			}
 		}
-		return new BigDecimal(isn.getCifra().replace(",", "."));
+
+		try {
+			return new BigDecimal(isn.getCifra().replace(",", "."));
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 }

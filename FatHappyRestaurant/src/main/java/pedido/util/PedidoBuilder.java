@@ -1,12 +1,12 @@
 package pedido.util;
 
-import pedido.modelo.Pedido;
-import restaurante.modelo.RestauranteDatos;
-import pedido.modelo.OrdenPedido;
-import caja.modelo.Caja;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import caja.modelo.CajaDatos;
+import pedido.modelo.OrdenPedido;
+import pedido.modelo.Pedido;
+import restaurante.modelo.RestauranteDatos;
 
 /**
  * Builder para crear pedidos de forma controlada y escalable.
@@ -17,7 +17,6 @@ public class PedidoBuilder {
 	private int numeroPedido;
 	private OrdenPedido orden;
 	private int estadoPedido;
-	private Caja caja;
 
 	public PedidoBuilder withNumeroPedido(int numeroPedido) {
 		this.numeroPedido = numeroPedido;
@@ -34,11 +33,6 @@ public class PedidoBuilder {
 		return this;
 	}
 
-	public PedidoBuilder withCaja(Caja caja) {
-		this.caja = caja;
-		return this;
-	}
-
 	public Pedido build() {
 		Pedido pedido = new Pedido();
 
@@ -46,11 +40,11 @@ public class PedidoBuilder {
 				new ObtenerNumeroPedido().obtenerYReservarNumeroPedido(RestauranteDatos.get().getIdRestaurante()));
 		pedido.setOrden(orden);
 		pedido.setEstadoPedido(estadoPedido);
-		pedido.setCaja(caja);
 		pedido.setFechaHora(LocalDateTime.now());
 
-		String ruta = "/R" + caja.getRestaurante().getIdRestaurante() + "/" + LocalDate.now().toString() + "/"
-				+ numeroPedido;
+		//Establecemos la ruta donde se almacenan los pedidos
+		String ruta = "/R" + CajaDatos.get().getRestaurante().getIdRestaurante() + "/" + LocalDate.now().toString()
+				+ "/" + numeroPedido;
 		pedido.setRutaPedido(ruta);
 
 		pedido.setDescuento(0);

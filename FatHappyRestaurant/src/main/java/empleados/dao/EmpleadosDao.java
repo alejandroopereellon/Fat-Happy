@@ -1,6 +1,7 @@
 package empleados.dao;
 
 import empleados.modelo.Empleado;
+import empleados.modelo.MovimientosEmpleado;
 
 /**
  * Metodo que realiza el data acces objet de la clase empleados
@@ -23,14 +24,12 @@ public interface EmpleadosDao {
 	public boolean comprobarEmpleadoExiste(int id);
 
 	/**
-	 * Este metodo solicita la autorizacion para realizar los procesos que requieran
-	 * de un empleado un rango superior
+	 * Metodo que se encarga de persistir el movimiento de un empleado
 	 * 
-	 * @param id            Codigo de empleado
-	 * @param nivelPermisos es el numero de nivel de permisos minimo
-	 * @return TRUE si el empleado es de rango superior || FALSE si el empleado es
-	 *         de rango inferior o no existe
+	 * @param movimiento es el movmiento que ha realizado el empleado
+	 * @return TRUE si se ha persistido correctamente || FALSE si no se ha
+	 *         persistido
 	 */
-	public boolean pedirAutorizacionEmpleado(int id, int nivelPermisoMinimo, String descripcionAutorizacion);
+	public boolean AlmacenarMovimientoEmpleado(MovimientosEmpleado movimiento);
 
 }

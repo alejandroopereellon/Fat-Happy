@@ -7,25 +7,26 @@ import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
 import caja.modelo.Caja;
 import caja.modelo.CajaDatos;
-import empleados.dao.EmpleadoDaoHibernateImpl;
-import empleados.dao.EmpleadosDao;
+import empleados.modelo.Empleado;
 import empleados.modelo.EmpleadoDatos;
-import restaurante.modelo.RestauranteDatos;
 
 /**
  * Clase encarga de la recuperacion de la ultima caja disponible en el
  * restaurante y en el numero de caja fisica
+ * 
+ * @author Alejandro Perellón López
  */
 public class IniciarCaja {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(IniciarCaja.class);
 
-	
-	
+	private CajasDao dao = new CajasDaoHibernateImpl();
+
 	/**
-	 * Metodo encargado de recuperar la caja, este metodo se inicia automaticamente
-	 * al inicio del programa y recupera la caja, en caso de que la caja exista se
-	 * va a cargar en memoria tambien el empleado que era responsable de esa caja
+	 * Metodo encargado de recuperar la {@link Caja}, se inicia automaticamente al
+	 * inicio del programa , en caso de que la {@link Caja} exista en el medio de
+	 * persistencia se va a cargar en memoria tambien el {@link Empleado}
+	 * responsable de esa {@link Caja}
 	 */
 	public boolean recuperarCajaInicio() {
 		Caja cajaRecuperada = null;
@@ -52,7 +53,7 @@ public class IniciarCaja {
 	 */
 	public Caja recuperarCajaDAO() {
 		// Intentamos recuperar la ultima caja de la base de datos
-		Caja caja = new CajasDaoHibernateImpl().recuperarCaja();
+		Caja caja = dao.recuperarCaja();
 		// Si la caja recuperada es nula se va a crear una nueva caja
 		if (caja != null) {
 			logger.info("Se ha recuperado la caja correctamente");
@@ -63,10 +64,10 @@ public class IniciarCaja {
 	}
 
 	/**
-	 * Metodo que establece en el singleton la caja que se va a utilizar en el
-	 * sistema
+	 * Metodo que establece en el singleton la {@link Caja} que se va a utilizar en
+	 * el sistema
 	 * 
-	 * @param caja es la caja que se va a meter en global
+	 * @param caja es la {@link Caja} que se va a meter en global {@link CajaDatos}
 	 */
 	public void establecerCaja(Caja caja) {
 		CajaDatos.set(caja);

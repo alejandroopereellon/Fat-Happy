@@ -3,9 +3,8 @@ package caja.modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
-import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import caja.dao.CajasDaoHibernateImpl;
 import empleados.modelo.Empleado;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,8 +13,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import pedido.modelo.Pedido;
 import restaurante.modelo.Restaurante;
-import restaurante.modelo.RestauranteDatos;
 
 /**
  * Clase que representa una caja en un sistema de gestión de cajas. Una caja
@@ -72,25 +72,11 @@ public class Caja implements Serializable {
 	@Column(name = "importe_final")
 	private BigDecimal importeFinal;
 
-	/**
-	 * Constructor que inicializa una nueva instancia de la clase Cajas. Crea la
-	 * estructura de directorios correspondiente a la caja y sesión si no existe.
-	 * 
-	 * @param numeroCaja     Número identificador de la caja.
-	 * @param empleado       Empleado responsable de la caja.
-	 * @param importeInicial Importe inicial depositado al abrir la caja.
-	 * @param numeroSesion   Número de sesión asociado a la apertura de la caja.
-	 */
-//	public Caja(Empleado empleado, BigDecimal importeInicial) {
-//		this.restaurante = RestauranteDatos.get();
-//		this.empleado = empleado;
-//		this.numeroCaja = ConfiguracionInicial.get().getNumeroCaja();
-//		this.numeroSesion = new CajasDaoHibernateImpl().obtenerSiguienteNumeroSesion();
-//		this.momentoApertura = LocalDateTime.now();
-//		this.momentoCierre = null;
-//		this.importeInicial = importeInicial;
-//		this.importeFinal = null;
-//	}
+	@Transient
+	private List<Operacion> listaOperaciones;
+
+	@Transient
+	private Pedido pedidoActual;
 
 	/**
 	 * Constructor vacio para servicios como hibernate y el builder
@@ -170,6 +156,22 @@ public class Caja implements Serializable {
 
 	public BigDecimal getImporteFinal() {
 		return importeFinal;
+	}
+
+	public List<Operacion> getListaOperaciones() {
+		return listaOperaciones;
+	}
+
+	public void setListaOperaciones(List<Operacion> listaOperaciones) {
+		this.listaOperaciones = listaOperaciones;
+	}
+
+	public Pedido getPedidoActual() {
+		return pedidoActual;
+	}
+
+	public void setPedidoActual(Pedido pedidoActual) {
+		this.pedidoActual = pedidoActual;
 	}
 
 	// toString

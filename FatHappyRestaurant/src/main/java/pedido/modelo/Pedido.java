@@ -3,13 +3,11 @@ package pedido.modelo;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import caja.modelo.Caja;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -21,10 +19,6 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido")
 	private int id;
-
-	@ManyToOne
-	@Column(name = "id_caja")
-	private Caja caja;
 
 	@Column(name = "numero_pedido")
 	private int numeroPedido;
@@ -101,10 +95,6 @@ public class Pedido {
 
 	public void setOrden(OrdenPedido orden) {
 		this.orden = orden;
-	}
-
-	public void setCaja(Caja caja) {
-		this.caja = caja;
 	}
 
 	public void setFechaHora(LocalDateTime fechaHora) {

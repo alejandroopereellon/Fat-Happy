@@ -4,11 +4,17 @@
  */
 package auxiliares.solicitarNumero;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  *
  * @author aleja
  */
 public class SolicitarNumero {
+
+	// Crear el logger
+	static Logger logger = LogManager.getLogger(SolicitarNumero.class);
 
 	/**
 	 * Este metodo solicita un numero a traves de la interfaz grafica, para ello
@@ -37,6 +43,14 @@ public class SolicitarNumero {
 				e.printStackTrace();
 			}
 		}
-		return Integer.parseInt(isn.getCifra());
+		logger.debug("Se ha retornado el numero {}", isn.getCifra());
+
+		try {
+			logger.info("Se va a retornar el numero introducido");
+			return Integer.parseInt(isn.getCifra());
+		} catch (NumberFormatException e) {
+			logger.error("El numero introducido en la solicitud esta vacio");
+			return 0;
+		}
 	}
 }

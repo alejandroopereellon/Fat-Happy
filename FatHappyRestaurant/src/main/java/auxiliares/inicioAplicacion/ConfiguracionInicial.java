@@ -2,6 +2,9 @@ package auxiliares.inicioAplicacion;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import auxiliares.solicitarNumero.SolicitarNumero;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,14 +41,16 @@ public class ConfiguracionInicial {
 
 	private static void crearConfiguracionPorDefecto(ObjectMapper mapper, File archivo) throws IOException {
 		Configuracion porDefecto = new Configuracion();
-		porDefecto.setCodigoRestaurante(0);
+		// Soliciamos el numero de restaurante
+		porDefecto.setCodigoRestaurante(new SolicitarNumero().solicitarNumero("Introduce el número de restaurante"));
 		porDefecto.setDirectorioLocal(System.getProperty("user.home") + File.separator + "fathappyrestaurant");
 		porDefecto.setFtpHost("79.116.186.62");
 		porDefecto.setFtpPuerto(1020);
 		porDefecto.setFtpUsuario("restaurante");
 		porDefecto.setFtpContrasena("restaurante123");
 		porDefecto.setFtpDirectorioRemoto("/Imagenes");
-		porDefecto.setNumeroCaja(1);
+		// Vamos a solicitar el numero de caja
+		porDefecto.setNumeroCaja(new SolicitarNumero().solicitarNumero("Introduce el numero de caja"));
 
 		archivo.getParentFile().mkdirs();
 		mapper.writeValue(archivo, porDefecto);

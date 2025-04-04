@@ -1,13 +1,6 @@
 package auxiliares;
 
-import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.inicioAplicacion.FTPDownloader;
-import auxiliares.solicitarNumeroDecimal.SolicitarNumeroDecimal;
-import caja.util.IniciarCaja;
-import productos.dao.ProductosDaoGlobal;
-import productos.dao.ProductosDaoHibernateImpl;
-import restaurante.dao.RestauranteDaoHibernateImpl;
-import restaurante.modelo.RestauranteDatos;
+import auxiliares.inicioAplicacion.InicioAplicacion;
 
 public class Main {
 
