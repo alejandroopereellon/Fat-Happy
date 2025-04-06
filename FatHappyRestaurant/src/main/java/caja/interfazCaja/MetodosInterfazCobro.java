@@ -2,6 +2,9 @@ package caja.interfazCaja;
 
 import java.math.BigDecimal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import auxiliares.solicitarNumeroDecimal.GestionDecimales;
 import caja.util.OperacionBuilder;
 import empleados.modelo.Empleado;
@@ -14,6 +17,10 @@ import pedido.util.CalcularImporte;
  * @author Alejandro Perellón Lopez
  */
 public class MetodosInterfazCobro {
+
+	// Crear el logger
+	static Logger logger = LogManager.getLogger(MetodosInterfazCobro.class);
+
 	private InterfazCobro interfaz;
 
 	protected MetodosInterfazCobro(InterfazCobro interfaz) {
@@ -27,6 +34,7 @@ public class MetodosInterfazCobro {
 	protected void actualizarPantalla() {
 		interfaz.getTextoCantidadPagado().setText(interfaz.getCantidadPropuesta().toString() + " €");
 		interfaz.getTextoCantidadTotalPagar().setText(interfaz.getPedido().getImporteTotal().toString() + " €");
+		logger.debug("Se ha actualizado la pantalla");
 	}
 
 	/**
@@ -45,6 +53,7 @@ public class MetodosInterfazCobro {
 		interfaz.getTextoCantidadPagado().setText(cantidad);
 		// Actualizamos la pantalla
 		actualizarPantalla();
+		logger.debug("Se ha introducido el numero {}, dando un total de {}", numero, interfaz.getTextoCantidadPagado());
 	}
 
 	/**
@@ -56,6 +65,7 @@ public class MetodosInterfazCobro {
 		interfaz.getTextoCantidadPagado().setText("0.00");
 		// Actualizamos la pantalla
 		actualizarPantalla();
+		logger.info("Se ha borrado la cantidad");
 	}
 
 	/**
@@ -72,6 +82,7 @@ public class MetodosInterfazCobro {
 		// Comprobamos si se puede cobrar la operacion automaticamente si la cantidad
 		// pendiente es menor o 0 que la total
 		cobrarOperacion();
+		logger.info("Se ha introducido un billete de {} euros", billete);
 	}
 
 	/**
@@ -85,10 +96,17 @@ public class MetodosInterfazCobro {
 		// Si el pendiente es negativo o 0 se va a generar la operacion de pago
 		if (obtenerCantidadTotal().compareTo(BigDecimal.ZERO) <= 0) {
 			// Generamos una nueva operacion
-			new OperacionBuilder().GenerarOperacion(interfaz.getPedido(), "cobro", "efectivo");
-			//Desactivamos los botones y mostramos el boton de continuar
-			cambiarEstadoElementos(false);
-			interfaz.getBotonContinuar().setVisible(true);
+			if (new OperacionBuilder().GenerarOperacion(interfaz.getPedido(), "cobro", "efectivo")) {
+				// Desactivamos los botones y mostramos el boton de continuar
+				cambiarEstadoElementos(false);
+				interfaz.getBotonContinuar().setVisible(true);
+				logger.info("Se creado la operacion de pedido correctamente");
+			} else {
+				logger.warn("No se ha podido almacenar la operacion del pedido ID {} correctamente",
+						interfaz.getPedido().getId());
+			}
+		} else {
+			logger.info("El importe pagado es inferior al importe total, no se ha realizado ninguna operacion");
 		}
 	}
 
@@ -114,6 +132,8 @@ public class MetodosInterfazCobro {
 		interfaz.getPedido().setDescuento(cantidadDescuento);
 		// Actualizamos el importe del pedido
 		new CalcularImporte(interfaz.getPedido()).obtenerImporteDescuento();
+
+		logger.info("Se ha aplicado un descuento del {} al pedido", interfaz.getPedido().getDescuento());
 	}
 
 	/**
@@ -123,6 +143,7 @@ public class MetodosInterfazCobro {
 	 * @return {@link BigDecimal} del total a pagar
 	 */
 	private BigDecimal obtenerCantidadPagadoCliente() {
+		logger.debug("Se ha consultado la cantidad de dinero pagada por el cliente");
 		return new BigDecimal(interfaz.getTextoCantidadTotalPagar().getText());
 	}
 
@@ -132,6 +153,7 @@ public class MetodosInterfazCobro {
 	 * @return {@link BigDecimal} del total a pagar
 	 */
 	private BigDecimal obtenerCantidadTotal() {
+		logger.debug("Se ha consultado la cantidad de dinero pendiente de pagar");
 		return new BigDecimal(interfaz.getTextoCantidadTotalPagar().getText());
 	}
 
@@ -143,6 +165,7 @@ public class MetodosInterfazCobro {
 	 * @return {@link BigDecimal} con el resultado de la operacion
 	 */
 	private BigDecimal restarCantidades(BigDecimal cantidad1, BigDecimal cantidad2) {
+		logger.debug("Se ha restado la cantidad de {} a {}", cantidad2, cantidad1);
 		return cantidad1.subtract(cantidad2);
 	}
 
@@ -153,7 +176,7 @@ public class MetodosInterfazCobro {
 	protected void importeExacto() {
 		// Establecemos el importe pagado como el importe a pagar
 		interfaz.getTextoCantidadPagado().setText(interfaz.getTextoCantidadTotalPagar().getText());
-
+		logger.info("Se ha establecido un pago del importe total del pedido");
 		// Cobramos la operacion
 		cobrarOperacion();
 	}
@@ -187,6 +210,8 @@ public class MetodosInterfazCobro {
 		interfaz.getBotonDesc().setEnabled(estado);
 		interfaz.getBotonPromo().setEnabled(estado);
 		interfaz.getImporteExacto().setEnabled(estado);
+
+		logger.info("Se ha establecido el estado de los botones de la interfaz a {}", estado);
 	}
 
 	void continuar() {

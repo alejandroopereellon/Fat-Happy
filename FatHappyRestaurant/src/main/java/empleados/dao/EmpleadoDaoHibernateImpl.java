@@ -12,7 +12,6 @@ import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import empleados.modelo.Empleado;
 import empleados.modelo.MovimientosEmpleado;
 import pool.HibernateUtil;
-import restaurante.dao.RestauranteDaoHibernateImpl;
 
 /**
  * 
@@ -20,7 +19,7 @@ import restaurante.dao.RestauranteDaoHibernateImpl;
 public class EmpleadoDaoHibernateImpl implements EmpleadosDao {
 
 	// Crear el logger
-	static Logger logger = LogManager.getLogger(RestauranteDaoHibernateImpl.class);
+	static Logger logger = LogManager.getLogger(EmpleadoDaoHibernateImpl.class);
 
 	@Override
 	public Empleado obtenerEmpleado(int id) {
