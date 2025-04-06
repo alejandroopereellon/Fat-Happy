@@ -27,19 +27,9 @@ public class CalcularImporte {
 	}
 
 	/**
-	 * Metodo que restaura el importe original del pedido incluidos los descuentos
-	 * aplicados en el pedido
-	 */
-	public void restaurarImporte() {
-		aplicarDescuentoPedido(pedido.getDescuento());
-		logger.info("Se ha restablecido el importe original del pedido con el descuento del {} aplicado",
-				pedido.getDescuento());
-	}
-
-	/**
 	 * Metodo que calcula el importe original del pedido, para ello realiza un
 	 * recorrido de todos los productos sumando el precio total de todos los
-	 * prodcutos
+	 * componentes del pedido
 	 * 
 	 * @return {@link BigDecimal} con el importe original del pedido
 	 */
@@ -66,6 +56,52 @@ public class CalcularImporte {
 	}
 
 	/**
+	 * Método que realiza un descuento sobre el precio original del pedido. El
+	 * descuento se calcula y se aplica directamente al pedido.
+	 * 
+	 * @return {@link BigDecimal} con el importe actualizado con el descuento
+	 *         aplicado
+	 */
+	public BigDecimal obtenerImporteDescuento() {
+		BigDecimal importe = new BigDecimal("0.00");
+		logger.debug("Establecemos el importe en 0");
+
+		// Calculamos el importe de todos los productos
+		for (Producto pro : pedido.getOrden().getListaProductos()) {
+			importe = sumarCantidades(importe, calcularDescuentoProducto(pro, pedido.getDescuento()));
+		}
+
+		// Calculamos el importe de todos los menus
+		for (MenuPedido menu : pedido.getOrden().getListaMenus()) {
+			importe = sumarCantidades(importe, menu.getPrecioMenu());
+		}
+		pedido.setImporteTotal(importe);
+
+		logger.info("Se aplicó un descuento de {}% al pedido. Importe con descuento: {}", pedido.getDescuento(),
+				importe);
+		return importe;
+	}
+
+	/**
+	 * Metodo que en caso de tener descuento aplicable, se va a restar el importe
+	 * 
+	 * @param pro        es el {@link Producto} que se va a retornar
+	 * @param porcentaje porcentaje que se va reducir el precio
+	 * @return {@link BigDecimal} con el coste del producto con descuento
+	 */
+	private BigDecimal calcularDescuentoProducto(Producto pro, int porcentaje) {
+		if (!pro.isOpcionDescuento()) {
+			logger.info("El producto con ID {} no tiene opcion de descuento", pro.getCodigo());
+			return pro.getPrecioVenta();
+		} else {
+			BigDecimal factor = BigDecimal.ONE
+					.subtract(new BigDecimal(porcentaje).divide(new BigDecimal("100"), 4, RoundingMode.HALF_UP));
+			return pro.getPrecioVenta().multiply(factor).setScale(2, RoundingMode.HALF_UP);
+		}
+
+	}
+
+	/**
 	 * Metodo que suma dos cantidades
 	 * 
 	 * @param cantidadUno cantidad 1 a la que se le va a añadir la cantidad2
@@ -77,26 +113,6 @@ public class CalcularImporte {
 		BigDecimal resultado = cantidadUno.add(cantidadDos);
 		logger.debug("Se ha sumado {} al importe actual: {}", cantidadDos, resultado);
 		return resultado;
-	}
-
-	/**
-	 * Método que realiza un descuento sobre el precio original del pedido. El
-	 * descuento se calcula y se aplica directamente al pedido.
-	 *
-	 * @param porcentaje Porcentaje de descuento a aplicar (ej. 10 = 10%)
-	 */
-	public void aplicarDescuentoPedido(int porcentaje) {
-		BigDecimal porcentajeBD = new BigDecimal(porcentaje);
-		BigDecimal factor = BigDecimal.ONE
-				.subtract(porcentajeBD.divide(new BigDecimal("100"), 4, RoundingMode.HALF_UP));
-		BigDecimal importeOriginal = obtenerImporteOriginal();
-		BigDecimal importeDescontado = importeOriginal.multiply(factor).setScale(2, RoundingMode.HALF_UP);
-
-		pedido.setDescuento(porcentaje);
-		pedido.setImporteTotal(importeDescontado);
-
-		logger.info("Se aplicó un descuento de {}% al pedido. Importe con descuento: {}", porcentaje,
-				importeDescontado);
 	}
 
 }

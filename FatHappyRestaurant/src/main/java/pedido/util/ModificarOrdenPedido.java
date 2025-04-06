@@ -32,7 +32,7 @@ public class ModificarOrdenPedido {
 
 		if (objetoProducto != null) {
 			pedido.getOrden().getListaProductos().add(objetoProducto);
-			new CalcularImporte(pedido).aplicarDescuentoPedido(pedido.getDescuento());
+			pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
 			logger.info("Se ha añadido el producto con id {} en la lista", objetoProducto.getCodigo());
 		}
 
@@ -44,9 +44,9 @@ public class ModificarOrdenPedido {
 	 * 
 	 * @param menu producto que se va a añadir a pedido
 	 */
-	public void anadirProducto(MenuPedido menu) {
+	public void anadirMenu(MenuPedido menu) {
 		pedido.getOrden().getListaMenus().add(menu);
-		new CalcularImporte(pedido).aplicarDescuentoPedido(pedido.getDescuento());
+		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
 		logger.info("Se ha añadido el menu en la lista");
 	}
 
@@ -66,7 +66,7 @@ public class ModificarOrdenPedido {
 		} else {
 			logger.error("La posicion es mayor que el numero de elementos en la lista", lista);
 		}
-		actualizarImporte();
+		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
 	}
 
 	/**
@@ -85,15 +85,8 @@ public class ModificarOrdenPedido {
 		} else {
 			logger.error("La posicion es mayor que el numero de elementos en la lista", lista);
 		}
-		actualizarImporte();
+		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
 	}
 
-	/**
-	 * Metodo que llamar al metodo principal de actualizar el importe de la clase
-	 * {@link CalcularImporte}
-	 */
-	public void actualizarImporte() {
-		new CalcularImporte(pedido).aplicarDescuentoPedido(pedido.getDescuento());
-	}
 
 }

@@ -1,45 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package caja.interfazCaja;
 
 import caja.modelo.Caja;
-import usuarios.Empleados;
-import usuarios.GestionEmpleados;
 
 /**
+ * Interfaz grafica que representa la informacion basica de la caja
  *
- * @author aleja
+ * @author Alejandro Perellón López
  */
 public class PanelCaja extends javax.swing.JPanel {
+
+    private Caja caja;
 
     /**
      * Creates new form PanelCaja
      */
     public PanelCaja(Caja caja) {
         initComponents();
-        ejecutarHora();
-        
-        DatosEmpleado.setText(caja.getEmpleado().getNombre() + "(" + caja.getEmpleado().getId() + ")");
-        establecerIconoActividadCaja(caja);
-        establecerPuestoSesionCaja(caja);
+        this.caja = caja;
     }
 
-    private void establecerPuestoSesionCaja(Caja caja) {
+    public void iniciarPanelCaja() {
+        ejecutarHora();
+
+        DatosEmpleado.setText(caja.getEmpleado().getNombre() + "(" + caja.getEmpleado().getIdRestauranteEmpleado() + ")");
+        establecerEstadoActividadCaja();
+        establecerPuestoSesionCaja();
+    }
+
+    /**
+     * Metodo que establece el numero de caja y la sesion de la caja que esta
+     * siendo actualmente ocupada
+     */
+    private void establecerPuestoSesionCaja() {
         PuestoSesion.setText("Puesto " + caja.getNumeroCaja() + " | Sesion " + caja.getNumeroSesion());
     }
 
-    private void establecerIconoActividadCaja(Caja caja) {
-        if (caja.getEstadoCaja().equalsIgnoreCase("Cerrada")) {
+    /**
+     * Metodo que establece el estado de la caja, si la caja no contiene una
+     * fecha de cierre se considera como desactivada, en caso de contenerla se
+     * considera activa
+     */
+    private void establecerEstadoActividadCaja() {
+        if (caja.getMomentoCierre() != null) {
             estadoCaja.setText("Desactivada");
             estadoCaja.setBackground(new java.awt.Color(245, 183, 177));
-        } else if (caja.getEstadoCaja().equalsIgnoreCase("operativa")) {
+        } else {
             estadoCaja.setText("Activa");
             estadoCaja.setBackground(new java.awt.Color(218, 247, 166));
         }
     }
 
+    /**
+     * Metodo que ejecuta el hilo del reloj con la hora actual
+     */
     public void ejecutarHora() {
         new Reloj(fechaHora).start();
     }

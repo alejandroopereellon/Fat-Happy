@@ -42,7 +42,7 @@ public class PedidoBuilder {
 		pedido.setEstadoPedido(estadoPedido);
 		pedido.setFechaHora(LocalDateTime.now());
 
-		//Establecemos la ruta donde se almacenan los pedidos
+		// Establecemos la ruta donde se almacenan los pedidos
 		String ruta = "/R" + CajaDatos.get().getRestaurante().getIdRestaurante() + "/" + LocalDate.now().toString()
 				+ "/" + numeroPedido;
 		pedido.setRutaPedido(ruta);
@@ -51,7 +51,7 @@ public class PedidoBuilder {
 
 		// Acciones adicionales tras creación
 		new IniciarContadorPedido(pedido).start();
-		new CalcularImporte(pedido).restaurarImporte();
+		new CalcularImporte(pedido).obtenerImporteDescuento();
 		new AlmacenarOrdenPedidoJson(pedido).almacenarOrdenPedido();
 
 		return pedido;

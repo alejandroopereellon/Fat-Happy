@@ -1,91 +1,31 @@
 package caja.interfazCaja;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import pedido.modelo.OrdenPedido;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import pedido.modelo.Pedido;
 
 /**
- * Clase de interfaz grafica
- * 
+ * Clase que muestra el panel de la interfaz grafica del sistema de cobro
+ *
  * @author Alejandro Perellón López
  */
-public class InterfazCajas extends javax.swing.JFrame {
-    private OrdenPedido orden;
+public class InterfazCobro extends javax.swing.JPanel {
+
     private Pedido pedido;
-    
-    private String cantidadPropuesta = "0.00";
-    private boolean billetesIntroducidos = false;
-    private static BigDecimal importeTotalPagar;
+    private BigDecimal cantidadPropuesta = new BigDecimal("0.00");
+    private MetodosInterfazCobro metodo = new MetodosInterfazCobro(this);
 
     /**
-     * Creates new form InterfazCajas
-     *
-     * @param importeTotal es el importe total que hay que igualar o superar
-     * para pagar
+     * Creates new form InterfazCobro
      */
-    public InterfazCajas(BigDecimal importeTotal) {
+    public InterfazCobro(Pedido pedido) {
+        this.pedido = pedido;
         initComponents();
-        actualizarPantalla();
-
-        importeTotalPagar = importeTotal;
-        textoCantidadTotalPagar.setText(String.valueOf(importeTotal));
-
-        // Hacemos desaparecer la devolucion
-        textoDevolucion.setText("");
-        textoDevolucionCantidad.setText("");
-    }
-
-    /**
-     * Este metodo actualiza la pantalla con los datos introducidos
-     */
-    private void actualizarPantalla() {
-        textoCantidadPagado.setText(cantidadPropuesta);
-        textoCantidadTotalPagar.setText(String.valueOf(importeTotalPagar));
-    }
-
-    /**
-     * Este metodo permite anadir un numero, para ello se introduce el numero y
-     * lo devuelve
-     *
-     * @param numero es el numero que se va a anadir a la cadena
-     */
-    private void anadirNumero(int numero) {
-
-        //En caso de se hayan introducidos previamente billetes se reinicia la cantidad
-        if (billetesIntroducidos) {
-            cantidadPropuesta = "0.00";
-            billetesIntroducidos = false;
-        }
-
-        // Eliminar la coma y formar el número completo como una cadena
-        String sinComa = cantidadPropuesta.replace(".", "");
-        // Desplazar los caracteres hacia la izquierda y agregar el nuevo dígito
-        sinComa = sinComa.substring(1) + numero;
-
-        // Insertar nuevamente la coma para que sea un número con dos decimales
-        StringBuilder sb = new StringBuilder(sinComa);
-        sb.insert(sb.length() - 2, '.');
-
-        // Actualizamos la cantidad propuesta y actualizamos la pantalla
-        cantidadPropuesta = sb.toString();
-        actualizarPantalla();
-    }
-
-    private void billetes(int billete) {
-        if (!billetesIntroducidos) {
-            cantidadPropuesta = "0.00";
-        }
-        BigDecimal can = BigDecimal.ZERO;
-        if (cantidadPropuesta.equalsIgnoreCase("")) {
-            cantidadPropuesta = "0.00";
-        } else {
-            can = new BigDecimal(cantidadPropuesta);
-        }
-        can = can.add(new BigDecimal(billete));
-        cantidadPropuesta = can.toString();
-        actualizarPantalla();
-        billetesIntroducidos = true;
+        //Actualizamos la pantalla para mostrar los valores iniciales
+        metodo.actualizarPantalla();
+        // Hacemos desaparecer el boton de continuar
+        botonContinuar.setVisible(false);
     }
 
     /**
@@ -97,17 +37,6 @@ public class InterfazCajas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        boton1 = new javax.swing.JButton();
-        boton2 = new javax.swing.JButton();
-        boton3 = new javax.swing.JButton();
-        boton5 = new javax.swing.JButton();
-        boton6 = new javax.swing.JButton();
-        boton4 = new javax.swing.JButton();
-        boton8 = new javax.swing.JButton();
-        boton9 = new javax.swing.JButton();
-        boton7 = new javax.swing.JButton();
-        boton0 = new javax.swing.JButton();
-        botonCobrar = new javax.swing.JButton();
         botonBorrar = new javax.swing.JButton();
         botonPromo = new javax.swing.JButton();
         botonBillete10 = new javax.swing.JButton();
@@ -119,14 +48,86 @@ public class InterfazCajas extends javax.swing.JFrame {
         textoCantidadTotalPagar = new javax.swing.JLabel();
         textoPagado = new javax.swing.JLabel();
         textoCantidadPagado = new javax.swing.JLabel();
+        boton1 = new javax.swing.JButton();
         textoBilletes = new javax.swing.JLabel();
+        boton2 = new javax.swing.JButton();
         importeExacto = new javax.swing.JButton();
-        textoDevolucion = new javax.swing.JLabel();
-        textoDevolucionCantidad = new javax.swing.JLabel();
+        boton3 = new javax.swing.JButton();
+        boton5 = new javax.swing.JButton();
+        boton6 = new javax.swing.JButton();
+        boton4 = new javax.swing.JButton();
+        boton8 = new javax.swing.JButton();
+        boton9 = new javax.swing.JButton();
+        boton7 = new javax.swing.JButton();
+        boton0 = new javax.swing.JButton();
+        botonCobrar = new javax.swing.JButton();
+        botonContinuar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menu cobrar");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        botonBorrar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        botonBorrar.setText("Borrar");
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarActionPerformed(evt);
+            }
+        });
+
+        botonPromo.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        botonPromo.setText("PROMO");
+
+        botonBillete10.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        botonBillete10.setText("10");
+        botonBillete10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBillete10ActionPerformed(evt);
+            }
+        });
+
+        botonBillete5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        botonBillete5.setText("5");
+        botonBillete5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBillete5ActionPerformed(evt);
+            }
+        });
+
+        botonBillete50.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        botonBillete50.setText("50");
+        botonBillete50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBillete50ActionPerformed(evt);
+            }
+        });
+
+        botonBillete20.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        botonBillete20.setText("20");
+        botonBillete20.setToolTipText("");
+        botonBillete20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBillete20ActionPerformed(evt);
+            }
+        });
+
+        botonDesc.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        botonDesc.setText("DESC");
+        botonDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonDescActionPerformed(evt);
+            }
+        });
+
+        textoTotalPagar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        textoTotalPagar.setText("TOTAL PAGAR:");
+
+        textoCantidadTotalPagar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        textoCantidadTotalPagar.setText("Cantidad1");
+
+        textoPagado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        textoPagado.setText("PAGADO:");
+
+        textoCantidadPagado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        textoCantidadPagado.setText("Cantidad2");
 
         boton1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         boton1.setText("1");
@@ -136,11 +137,24 @@ public class InterfazCajas extends javax.swing.JFrame {
             }
         });
 
+        textoBilletes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        textoBilletes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textoBilletes.setText("SELECCIONA EL BILLETE");
+
         boton2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         boton2.setText("2");
         boton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton2ActionPerformed(evt);
+            }
+        });
+
+        importeExacto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        importeExacto.setText("<html>Importe<br>Exacto</html> ");
+        importeExacto.setToolTipText("");
+        importeExacto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importeExactoActionPerformed(evt);
             }
         });
 
@@ -217,92 +231,17 @@ public class InterfazCajas extends javax.swing.JFrame {
             }
         });
 
-        botonBorrar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        botonBorrar.setText("Borrar");
-        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+        botonContinuar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        botonContinuar.setText("Continuar");
+        botonContinuar.setToolTipText("");
+        botonContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBorrarActionPerformed(evt);
+                botonContinuarActionPerformed(evt);
             }
         });
 
-        botonPromo.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        botonPromo.setText("PROMO");
-
-        botonBillete10.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        botonBillete10.setText("10");
-        botonBillete10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBillete10ActionPerformed(evt);
-            }
-        });
-
-        botonBillete5.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        botonBillete5.setText("5");
-        botonBillete5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBillete5ActionPerformed(evt);
-            }
-        });
-
-        botonBillete50.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        botonBillete50.setText("50");
-        botonBillete50.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBillete50ActionPerformed(evt);
-            }
-        });
-
-        botonBillete20.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        botonBillete20.setText("20");
-        botonBillete20.setToolTipText("");
-        botonBillete20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBillete20ActionPerformed(evt);
-            }
-        });
-
-        botonDesc.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        botonDesc.setText("DESC");
-        botonDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonDescActionPerformed(evt);
-            }
-        });
-
-        textoTotalPagar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoTotalPagar.setText("TOTAL PAGAR:");
-
-        textoCantidadTotalPagar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoCantidadTotalPagar.setText("Cantidad1");
-
-        textoPagado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoPagado.setText("CANTIDAD:");
-
-        textoCantidadPagado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoCantidadPagado.setText("Cantidad2");
-
-        textoBilletes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoBilletes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoBilletes.setText("SELECCIONA EL BILLETE");
-
-        importeExacto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        importeExacto.setText("<html>Importe<br>Exacto</html> ");
-        importeExacto.setToolTipText("");
-        importeExacto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importeExactoActionPerformed(evt);
-            }
-        });
-
-        textoDevolucion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoDevolucion.setText("DEVOLUCION: ");
-
-        textoDevolucionCantidad.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoDevolucionCantidad.setForeground(new java.awt.Color(255, 0, 0));
-        textoDevolucionCantidad.setText("Cantidad1");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -334,15 +273,9 @@ public class InterfazCajas extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(boton6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(textoTotalPagar)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(textoCantidadTotalPagar))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(textoDevolucion)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(textoDevolucionCantidad)))
+                                    .addComponent(textoTotalPagar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(textoCantidadTotalPagar)
                                     .addGap(46, 46, 46)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,8 +299,11 @@ public class InterfazCajas extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(botonBillete10, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(textoBilletes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(importeExacto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(importeExacto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,19 +316,15 @@ public class InterfazCajas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textoCantidadPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textoDevolucionCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(boton4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(boton5, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(boton6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(botonDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -424,108 +356,203 @@ public class InterfazCajas extends javax.swing.JFrame {
                             .addComponent(botonBillete20, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonBillete50, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(importeExacto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(importeExacto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
+        metodo.borrarCantidad();
+    }//GEN-LAST:event_botonBorrarActionPerformed
+
+    private void botonBillete10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBillete10ActionPerformed
+        metodo.billetes(10);
+    }//GEN-LAST:event_botonBillete10ActionPerformed
+
+    private void botonBillete5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBillete5ActionPerformed
+        metodo.billetes(5);
+    }//GEN-LAST:event_botonBillete5ActionPerformed
+
+    private void botonBillete50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBillete50ActionPerformed
+        metodo.billetes(50);
+    }//GEN-LAST:event_botonBillete50ActionPerformed
+
+    private void botonBillete20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBillete20ActionPerformed
+        metodo.billetes(20);
+    }//GEN-LAST:event_botonBillete20ActionPerformed
+
     private void botonDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDescActionPerformed
-        DescuentoInterfaz des = new DescuentoInterfaz(pedido.);
-        des.setVisible(true);
+        metodo.establecerDescuento();
     }//GEN-LAST:event_botonDescActionPerformed
 
     private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
-        anadirNumero(1);
+        metodo.introducirNumero(1);
     }//GEN-LAST:event_boton1ActionPerformed
 
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
-        anadirNumero(2);
+        metodo.introducirNumero(2);
     }//GEN-LAST:event_boton2ActionPerformed
 
+    private void importeExactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importeExactoActionPerformed
+        metodo.importeExacto();
+    }//GEN-LAST:event_importeExactoActionPerformed
+
     private void boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton3ActionPerformed
-        anadirNumero(3);
+        metodo.introducirNumero(3);
     }//GEN-LAST:event_boton3ActionPerformed
 
-    private void boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton4ActionPerformed
-        anadirNumero(4);
-    }//GEN-LAST:event_boton4ActionPerformed
-
     private void boton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton5ActionPerformed
-        anadirNumero(5);
+        metodo.introducirNumero(5);
     }//GEN-LAST:event_boton5ActionPerformed
 
     private void boton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton6ActionPerformed
-        anadirNumero(6);
+        metodo.introducirNumero(6);
     }//GEN-LAST:event_boton6ActionPerformed
 
-    private void boton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton7ActionPerformed
-        anadirNumero(7);
-    }//GEN-LAST:event_boton7ActionPerformed
+    private void boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton4ActionPerformed
+        metodo.introducirNumero(4);
+    }//GEN-LAST:event_boton4ActionPerformed
 
     private void boton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton8ActionPerformed
-        anadirNumero(8);
+        metodo.introducirNumero(8);
     }//GEN-LAST:event_boton8ActionPerformed
 
     private void boton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton9ActionPerformed
-        anadirNumero(9);
+        metodo.introducirNumero(9);
     }//GEN-LAST:event_boton9ActionPerformed
 
+    private void boton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton7ActionPerformed
+        metodo.introducirNumero(7);
+    }//GEN-LAST:event_boton7ActionPerformed
+
     private void boton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton0ActionPerformed
-        if (!cantidadPropuesta.equalsIgnoreCase("0.00")) {
-            anadirNumero(0);
+        if (cantidadPropuesta.compareTo(BigDecimal.ZERO) == 0) {
+            metodo.introducirNumero(0);
         }
     }//GEN-LAST:event_boton0ActionPerformed
 
-    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
-        cantidadPropuesta = "0.00";
-        actualizarPantalla();
-    }//GEN-LAST:event_botonBorrarActionPerformed
-
-    private void botonBillete5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBillete5ActionPerformed
-        billetes(5);
-    }//GEN-LAST:event_botonBillete5ActionPerformed
-
-    private void botonBillete10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBillete10ActionPerformed
-        billetes(10);
-    }//GEN-LAST:event_botonBillete10ActionPerformed
-
-    private void botonBillete20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBillete20ActionPerformed
-        billetes(20);
-    }//GEN-LAST:event_botonBillete20ActionPerformed
-
-    private void botonBillete50ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBillete50ActionPerformed
-        billetes(50);
-    }//GEN-LAST:event_botonBillete50ActionPerformed
-
-    private void importeExactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importeExactoActionPerformed
-        cantidadPropuesta = String.valueOf(importeTotalPagar);
-        actualizarPantalla();
-        botonCobrarActionPerformed(null);
-    }//GEN-LAST:event_importeExactoActionPerformed
-
     private void botonCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCobrarActionPerformed
-        // Calculamos el importe de devolucion
-        BigDecimal cantidadPropuestaBD = new BigDecimal(cantidadPropuesta); // Convertir cantidadPropuesta a BigDecimal
-
-        // Compara cantidadPropuesta con importeTotalPagar
-        if (cantidadPropuestaBD.compareTo(importeTotalPagar) < 0) {
-            // Si cantidadPropuesta es menor que importeTotalPagar
-            importeTotalPagar = importeTotalPagar.subtract(cantidadPropuestaBD); // Resta la cantidad propuesta
-            cantidadPropuesta = "0.00"; // Reinicia cantidadPropuesta
-        } else {
-            // Hacemos aparecer la devolución
-            BigDecimal devolucion = cantidadPropuestaBD.subtract(importeTotalPagar); // Calcula la devolución
-            importeTotalPagar = new BigDecimal(0);
-            textoDevolucion.setText("DEVOLVER:");
-            textoDevolucionCantidad.setText(devolucion.setScale(2, RoundingMode.HALF_UP).toString()); // Muestra la devolución con 2 decimales
-        }
-        //Actualizamos la pantalla y ponemos el precio a 0
-        actualizarPantalla();
-
-
+        metodo.cobrarOperacion();
     }//GEN-LAST:event_botonCobrarActionPerformed
+
+    private void botonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonContinuarActionPerformed
+        metodo.continuar();
+    }//GEN-LAST:event_botonContinuarActionPerformed
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public BigDecimal getCantidadPropuesta() {
+        return cantidadPropuesta;
+    }
+
+    public MetodosInterfazCobro getMetodo() {
+        return metodo;
+    }
+
+    public JButton getBoton0() {
+        return boton0;
+    }
+
+    public JButton getBoton1() {
+        return boton1;
+    }
+
+    public JButton getBoton2() {
+        return boton2;
+    }
+
+    public JButton getBoton3() {
+        return boton3;
+    }
+
+    public JButton getBoton4() {
+        return boton4;
+    }
+
+    public JButton getBoton5() {
+        return boton5;
+    }
+
+    public JButton getBoton6() {
+        return boton6;
+    }
+
+    public JButton getBoton7() {
+        return boton7;
+    }
+
+    public JButton getBoton8() {
+        return boton8;
+    }
+
+    public JButton getBoton9() {
+        return boton9;
+    }
+
+    public JButton getBotonBillete10() {
+        return botonBillete10;
+    }
+
+    public JButton getBotonBillete20() {
+        return botonBillete20;
+    }
+
+    public JButton getBotonBillete5() {
+        return botonBillete5;
+    }
+
+    public JButton getBotonBillete50() {
+        return botonBillete50;
+    }
+
+    public JButton getBotonBorrar() {
+        return botonBorrar;
+    }
+
+    public JButton getBotonCobrar() {
+        return botonCobrar;
+    }
+
+    public JButton getBotonDesc() {
+        return botonDesc;
+    }
+
+    public JButton getBotonPromo() {
+        return botonPromo;
+    }
+
+    public JButton getImporteExacto() {
+        return importeExacto;
+    }
+
+    public JLabel getTextoBilletes() {
+        return textoBilletes;
+    }
+
+    public JLabel getTextoCantidadPagado() {
+        return textoCantidadPagado;
+    }
+
+    public JLabel getTextoCantidadTotalPagar() {
+        return textoCantidadTotalPagar;
+    }
+
+    public JLabel getTextoPagado() {
+        return textoPagado;
+    }
+
+    public JLabel getTextoTotalPagar() {
+        return textoTotalPagar;
+    }
+
+    public JButton getBotonContinuar() {
+        return botonContinuar;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton0;
     private javax.swing.JButton boton1;
@@ -543,14 +570,13 @@ public class InterfazCajas extends javax.swing.JFrame {
     private javax.swing.JButton botonBillete50;
     private javax.swing.JButton botonBorrar;
     private javax.swing.JButton botonCobrar;
+    private javax.swing.JButton botonContinuar;
     private javax.swing.JButton botonDesc;
     private javax.swing.JButton botonPromo;
     private javax.swing.JButton importeExacto;
     private javax.swing.JLabel textoBilletes;
     private javax.swing.JLabel textoCantidadPagado;
     private javax.swing.JLabel textoCantidadTotalPagar;
-    private javax.swing.JLabel textoDevolucion;
-    private javax.swing.JLabel textoDevolucionCantidad;
     private javax.swing.JLabel textoPagado;
     private javax.swing.JLabel textoTotalPagar;
     // End of variables declaration//GEN-END:variables

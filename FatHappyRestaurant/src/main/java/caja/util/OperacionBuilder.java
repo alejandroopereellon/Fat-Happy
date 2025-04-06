@@ -40,8 +40,7 @@ public class OperacionBuilder {
 		operacion.setTipoOperacion(tipoOperacion);
 
 		// Establecemos el importe total
-		new CalcularImporte(pedido).restaurarImporte();
-		operacion.setImporte(operacion.getPedido().getImporteTotal());
+		operacion.setImporte(new CalcularImporte(pedido).obtenerImporteDescuento());
 
 		// Establecemos el metodo de cobro
 		operacion.setMetodoCobro(metodoCobro);
