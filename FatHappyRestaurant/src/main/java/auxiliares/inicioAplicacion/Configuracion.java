@@ -1,5 +1,7 @@
 package auxiliares.inicioAplicacion;
 
+import ventanaPrincipal.InterfazVentanaPrincipal;
+
 public class Configuracion {
 
 	private int codigoRestaurante;
@@ -10,6 +12,7 @@ public class Configuracion {
 	private String ftpContrasena;
 	private String ftpDirectorioRemoto;
 	private int numeroCaja;
+	private InterfazVentanaPrincipal ventanaPrincipal;
 
 	// Getters y setters
 	public int getCodigoRestaurante() {
@@ -75,4 +78,13 @@ public class Configuracion {
 	public void setNumeroCaja(int numeroCaja) {
 		this.numeroCaja = numeroCaja;
 	}
+
+	public InterfazVentanaPrincipal getVentanaPrincipal() {
+		return ventanaPrincipal;
+	}
+
+	public void setVentanaPrincipal(InterfazVentanaPrincipal ventanaPrincipal) {
+		this.ventanaPrincipal = ventanaPrincipal;
+	}
+
 }

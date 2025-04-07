@@ -11,6 +11,7 @@ import productos.dao.ProductosDaoHibernateImpl;
 import productos.util.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
 import restaurante.modelo.RestauranteDatos;
+import ventanaPrincipal.InterfazVentanaPrincipal;
 
 /**
  * Metodo encargado de iniciar todos los ajustes de la pagina
@@ -81,6 +82,10 @@ public class InicioAplicacion {
 		grafica.getBarraProgreso().setValue(100);
 
 		new ActualizarListaProductos().start();
+
+		// TODO ESTABLECER EL INICIO DEL PROGRAMA Y ESTABLECER LA INFORMACION DE LA CAJA
+		// Iniciamos la ventana principal del programa
+		ConfiguracionInicial.get().setVentanaPrincipal(new InterfazVentanaPrincipal());
 
 		// Si todo ha funcionado correctamente
 		grafica.dispose();

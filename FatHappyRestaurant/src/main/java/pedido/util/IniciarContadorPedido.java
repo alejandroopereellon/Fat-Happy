@@ -1,5 +1,6 @@
 package pedido.util;
 
+import caja.interfazCaja.PanelCaja;
 import pedido.modelo.Pedido;
 
 /**
@@ -9,6 +10,12 @@ import pedido.modelo.Pedido;
  */
 public class IniciarContadorPedido extends Thread {
 	private Pedido pedidoOrigen;
+	private PanelCaja panel;
+
+	public IniciarContadorPedido(Pedido pedidoOrigen, PanelCaja panel) {
+		this.pedidoOrigen = pedidoOrigen;
+		this.panel = panel;
+	}
 
 	public void run() {
 		int tiempoConsumido = 0;
@@ -19,8 +26,21 @@ public class IniciarContadorPedido extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+
+			actualizarContador(tiempoConsumido);
 		}
+		// Establecemos el tiempo del pedido al objeto pedido
 		pedidoOrigen.setTiempoPedido(tiempoConsumido);
+		// Establecemos el contador en 0
+		panel.getTiempoPedido().setText("00:00");
+
+	}
+
+	private void actualizarContador(int tiempoConsumido) {
+		int segundos = tiempoConsumido;
+		int minutos = segundos / 60;
+		int segundosRestantes = segundos % 60;
+		panel.getTiempoPedido().setText(minutos + ":" + segundosRestantes);
 	}
 
 	public IniciarContadorPedido(Pedido pedidoOrigen) {

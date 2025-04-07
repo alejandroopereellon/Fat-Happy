@@ -82,6 +82,10 @@ public class Empleado {
 		return idEmpleado;
 	}
 
+	public String getApellido() {
+		return apellido;
+	}
+
 	// toString
 	@Override
 	public String toString() {
