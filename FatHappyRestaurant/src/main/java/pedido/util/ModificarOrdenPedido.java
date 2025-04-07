@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import pedido.modelo.Pedido;
+import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoGlobal;
 import productos.modelo.MenuPedido;
 import productos.modelo.Producto;
@@ -15,6 +16,8 @@ public class ModificarOrdenPedido {
 
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(ModificarOrdenPedido.class);
+	//Establecemos el dao
+	private ProductosDAO dao = ProductosDaoGlobal.get();
 
 	public ModificarOrdenPedido(Pedido pedido) {
 		this.pedido = pedido;
@@ -28,7 +31,7 @@ public class ModificarOrdenPedido {
 	 */
 	public void anadirProducto(Producto pro) {
 		// Obtenemos el producto del dao y generamos un nuevo objeto
-		Producto objetoProducto = ProductosDaoGlobal.get().obtenerProducto(pro.getCodigo());
+		Producto objetoProducto = dao.obtenerProducto(pro.getCodigo());
 
 		if (objetoProducto != null) {
 			pedido.getOrden().getListaProductos().add(objetoProducto);

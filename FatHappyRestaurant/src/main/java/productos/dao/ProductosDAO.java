@@ -1,5 +1,6 @@
 package productos.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import productos.modelo.Bebida;
@@ -97,4 +98,20 @@ public interface ProductosDAO {
 	 */
 	public boolean consultarStockProducto(Producto pro);
 
+	/**
+	 * Metodo que obtiene una lista de productos que pertenecen a la categoria
+	 * indicada en parametro, ordenada por tipo y alfabeticamente
+	 * 
+	 * @param categoria es la categoria que se quiere obtener
+	 * @return {@link List} de {@link Producto}
+	 */
+	public List<Producto> obtenerListaProductosCategoria(String categoria);
+
+	/**
+	 * Metodo que retorna la fecha y hora de la ultima vez que se actualizo la base
+	 * de datos y que restaurante la modificó
+	 * 
+	 * @return {@link LocalDateTime} con la fecha y hora de modificacion
+	 */
+	public LocalDateTime obtenerUltimaActualizacionProductos();
 }

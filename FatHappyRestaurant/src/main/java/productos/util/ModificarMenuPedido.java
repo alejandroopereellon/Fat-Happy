@@ -14,6 +14,8 @@ import productos.modelo.Producto;
 
 /**
  * Clase dedicada a realizar modificaciones en {@link MenuPedido}
+ * 
+ * @author Alejandro Perellón López
  */
 public class ModificarMenuPedido {
 

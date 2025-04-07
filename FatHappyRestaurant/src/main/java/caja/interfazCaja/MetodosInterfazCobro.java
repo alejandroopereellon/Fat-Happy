@@ -108,6 +108,8 @@ public class MetodosInterfazCobro {
 		} else {
 			logger.info("El importe pagado es inferior al importe total, no se ha realizado ninguna operacion");
 		}
+		// Reiniciamos el importe total a 0
+		borrarCantidad();
 	}
 
 	protected void establecerDescuento() {

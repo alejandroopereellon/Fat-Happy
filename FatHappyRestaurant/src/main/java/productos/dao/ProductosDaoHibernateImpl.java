@@ -1,5 +1,6 @@
 package productos.dao;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -308,7 +309,7 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 					Boolean.class).setParameter("idRest", idRestaurante).setParameter("idProd", pro.getCodigo())
 					.uniqueResult();
 			logger.debug(
-					"Se han cargado los datos en el objetostock_restaurante con numero de restaurante {} y numero producto {}",
+					"Se han cargado los datos en el objeto stock_restaurante con numero de restaurante {} y numero producto {}",
 					idRestaurante, pro.getCodigo());
 
 			// Comprobacion de si el objeto existe, y en caso de existir si esta activo o no
@@ -333,6 +334,63 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 		}
 		return false;
 
+	}
+
+	@Override
+	public List<Producto> obtenerListaProductosCategoria(String categoria) {
+		List<Producto> lista = new ArrayList<>();
+		// Iniciamos una sesion
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			logger.debug("Se ha iniciado una sesion de hibernate para obtener la lista de productos con categoria {}",
+					categoria);
+
+			// Obtenemos el objeto
+			lista = session
+					.createQuery("FROM Producto WHERE tipo like :categoria ORDER BY tipo, nombre ASC", Producto.class)
+					.setParameter("categoria", categoria).getResultList();
+
+			logger.info("Se ha cargado la lista de productos de la categoria {}, con un total de {} productos",
+					categoria, lista.size());
+
+			// Comprobacion de si el objeto existe, y en caso de existir si esta activo o no
+			if (lista.size() == 0) {
+				logger.error("La lista de productos de la categoria {}, ha retornado 0 objetos", categoria);
+			}
+
+		} catch (Exception e) {
+			logger.error(
+					"Ha ocurrido un error al obtener el listado de productos pertenecientes a la categoria {} del metodo dao",
+					categoria);
+		}
+		return lista;
+	}
+
+	@Override
+	public LocalDateTime obtenerUltimaActualizacionProductos() {
+		LocalDateTime tiempo = null;
+		// Iniciamos una sesion
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			logger.debug("Se ha iniciado una sesion de hibernate para obtener la fecha de actualizacion del stock");
+
+			// Ejecutamos la consulta y verificamos el resultado
+			Object resultado = session.createNativeQuery(
+					"SELECT MAX(fecha_actualizacion) FROM actualizaciones_stock WHERE id_restaurante = :idRestaurante",Object.class)
+					.setParameter("idRestaurante", RestauranteDatos.get().getIdRestaurante()).getSingleResult();
+
+			//Si el resultado no es nulo
+			if (resultado != null) {
+				//Convertimos la fecha y hora en localdatetime
+				tiempo = ((java.sql.Timestamp) resultado).toLocalDateTime();
+				logger.info("Se ha cargado la ultima fecha de actualizacion: {}", tiempo);
+			} else {
+				logger.warn("No existe ninguna fecha de actualizacion registrada para el restaurante");
+			}
+
+		} catch (Exception e) {
+			logger.error("Error al obtener la fecha de la ultima actualizacion del stock", e);
+		}
+
+		return tiempo;
 	}
 
 }
