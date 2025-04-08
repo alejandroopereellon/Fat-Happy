@@ -62,7 +62,7 @@ public class CajasDaoHibernateImpl implements CajasDao {
 			logger.debug("Se ha iniciado una sesion de hibernate para recuperar el objeto caja");
 			// Obtenemos la caja
 			nuevaCaja = session.createQuery(
-					"FROM Caja WHERE idRestaurante = :idRest and numeroCaja = :numCaja and fecha_hora_final IS NULL",
+					"FROM Caja WHERE restaurante.id = :idRest and numeroCaja = :numCaja and momentoCierre IS NULL",
 					Caja.class).setParameter("idRest", ConfiguracionInicial.get().getCodigoRestaurante())
 					.setParameter("numCaja", ConfiguracionInicial.get().getNumeroCaja()).uniqueResult();
 

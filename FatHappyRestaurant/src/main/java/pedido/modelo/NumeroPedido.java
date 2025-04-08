@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import restaurante.modelo.Restaurante;
@@ -20,7 +21,7 @@ public class NumeroPedido {
 	private int id;
 
 	@ManyToOne
-	@Column(name = "id_restaurante")
+	@JoinColumn(name = "id_restaurante")
 	private Restaurante restaurante;
 
 	@Column(name = "numero_pedido")

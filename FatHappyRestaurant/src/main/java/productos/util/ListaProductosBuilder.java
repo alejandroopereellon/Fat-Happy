@@ -33,7 +33,7 @@ public class ListaProductosBuilder {
 		lista.setListaComplementos(obtenerComprobarStockProducto("complemento"));
 		logger.info("Se ha cargado la lista de complementos");
 		// Establecemos la lista de bebidas
-		lista.setListaBebidas(obtenerComprobarStockProducto("bebidas"));
+		lista.setListaBebidas(obtenerComprobarStockProducto("bebida"));
 		logger.info("Se ha cargado la lista de bebidas");
 		// Establecemos la lista de postres
 		lista.setListaPostres(obtenerComprobarStockProducto("postre"));

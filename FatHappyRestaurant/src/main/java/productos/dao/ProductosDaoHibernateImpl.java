@@ -346,7 +346,8 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 
 			// Obtenemos el objeto
 			lista = session
-					.createQuery("FROM Producto WHERE tipo like :categoria ORDER BY tipo, nombre ASC", Producto.class)
+					.createQuery("FROM Producto WHERE categoria = :categoria ORDER BY tipoProducto, nombreProducto ASC",
+							Producto.class)
 					.setParameter("categoria", categoria).getResultList();
 
 			logger.info("Se ha cargado la lista de productos de la categoria {}, con un total de {} productos",
@@ -355,8 +356,10 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 			// Comprobacion de si el objeto existe, y en caso de existir si esta activo o no
 			if (lista.size() == 0) {
 				logger.error("La lista de productos de la categoria {}, ha retornado 0 objetos", categoria);
+			} else {
+				logger.info("La lista de productos de la categoria {}, ha retornado {} objetos", categoria,
+						lista.size());
 			}
-
 		} catch (Exception e) {
 			logger.error(
 					"Ha ocurrido un error al obtener el listado de productos pertenecientes a la categoria {} del metodo dao",
@@ -374,12 +377,13 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 
 			// Ejecutamos la consulta y verificamos el resultado
 			Object resultado = session.createNativeQuery(
-					"SELECT MAX(fecha_actualizacion) FROM actualizaciones_stock WHERE id_restaurante = :idRestaurante",Object.class)
-					.setParameter("idRestaurante", RestauranteDatos.get().getIdRestaurante()).getSingleResult();
+					"SELECT MAX(fecha_actualizacion) FROM actualizaciones_stock WHERE id_restaurante = :idRestaurante",
+					Object.class).setParameter("idRestaurante", RestauranteDatos.get().getIdRestaurante())
+					.getSingleResult();
 
-			//Si el resultado no es nulo
+			// Si el resultado no es nulo
 			if (resultado != null) {
-				//Convertimos la fecha y hora en localdatetime
+				// Convertimos la fecha y hora en localdatetime
 				tiempo = ((java.sql.Timestamp) resultado).toLocalDateTime();
 				logger.info("Se ha cargado la ultima fecha de actualizacion: {}", tiempo);
 			} else {

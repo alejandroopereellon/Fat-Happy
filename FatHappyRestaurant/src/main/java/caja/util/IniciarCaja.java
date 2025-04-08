@@ -29,10 +29,9 @@ public class IniciarCaja {
 	 * responsable de esa {@link Caja}
 	 */
 	public boolean recuperarCajaInicio() {
-		Caja cajaRecuperada = null;
-		cajaRecuperada = recuperarCajaDAO();
+		Caja cajaRecuperada = recuperarCajaDAO();
 		// Si la caja recuperada no es nula se va a
-		if (cajaRecuperada != null) {
+		if (cajaRecuperada != null && cajaRecuperada.getImporteFinal() != null) {
 			// Establecemos el empleado de la caja en singleton
 			EmpleadoDatos.set(cajaRecuperada.getEmpleado());
 			logger.info("Se ha establecido el empleado con ID {}", cajaRecuperada.getEmpleado().getIdEmpleado());
@@ -41,7 +40,7 @@ public class IniciarCaja {
 			logger.info("Se ha establecido la caja con ID {}", cajaRecuperada.getId());
 			return true;
 		}
-		logger.error("No se ha podido obtener la informacion de la caja");
+		logger.error("La caja recuperada del metodo DAO es nula, no se inicia ninuna caja");
 		return false;
 	}
 
@@ -56,7 +55,7 @@ public class IniciarCaja {
 		Caja caja = dao.recuperarCaja();
 		// Si la caja recuperada es nula se va a crear una nueva caja
 		if (caja != null) {
-			logger.info("Se ha recuperado la caja correctamente");
+			logger.info("Se ha recuperado la caja correctamente del DAO");
 			return caja;
 		}
 		logger.info("No se ha obtenido la caja desde el metodo DAO");

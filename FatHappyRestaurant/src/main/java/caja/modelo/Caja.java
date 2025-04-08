@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -40,12 +41,12 @@ public class Caja implements Serializable {
 
 	/** Restaurante al que pertenece la caja */
 	@ManyToOne
-	@Column(name = "id_restaurante")
+	@JoinColumn(name = "id_restaurante")
 	private Restaurante restaurante;
 
 	/** Empleado responsable de la caja. */
 	@ManyToOne
-	@Column(name = "id_empleado")
+	@JoinColumn(name = "id_empleado")
 	private Empleado empleado;
 
 	/** Número identificador de la caja. */
@@ -65,7 +66,7 @@ public class Caja implements Serializable {
 	private LocalDateTime momentoCierre;
 
 	/** Importe inicial depositado al abrir la caja. */
-	@Column(name = "importe_inicial")
+	@Column(name = "importe_inicio")
 	private BigDecimal importeInicial;
 
 	/** Importe final registrado al cerrar la caja. */

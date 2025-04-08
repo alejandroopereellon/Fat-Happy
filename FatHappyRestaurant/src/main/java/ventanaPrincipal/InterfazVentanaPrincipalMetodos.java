@@ -1,5 +1,6 @@
 package ventanaPrincipal;
 
+import java.awt.BorderLayout;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
@@ -11,7 +12,10 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.utilidadesGraficas.PanelUtil;
 import caja.interfazCaja.PanelCaja;
+import caja.interfazCaja.PanelCajaMetodos;
 import caja.modelo.CajaDatos;
+import pedido.interfazPedido.PanelPedido;
+import pedido.interfazPedido.PanelPedidoMetodos;
 
 public class InterfazVentanaPrincipalMetodos {
 	// Crear el logger
@@ -34,10 +38,40 @@ public class InterfazVentanaPrincipalMetodos {
 		aplicarLookAndFeel();
 		// Hacemos la interfaz visible
 		interfaz.setVisible(true);
+		// Configuramos el panel de caja
+		configurarPanelCaja();
+		//Configuramos el panel principal
+		configurarPanelPrincipal();
+	}
+
+	/**
+	 * Metodo que establece el panel de la caja para que soporte la informacion del
+	 * {@link PanelCaja}
+	 */
+	private void configurarPanelCaja() {
+		// Establecemos el layout del panelCaja
+		interfaz.getPanelCaja().setLayout(new BorderLayout());
 		// Generamos el objeto de panelCaja
 		PanelCaja panelCaja = new PanelCaja(CajaDatos.get());
+		// Configuramos el panel de caja
+		new PanelCajaMetodos(panelCaja).iniciarPanelCaja();
 		// Añadimos la caja al panel principal
-		new PanelUtil().insertarEnPanel(interfaz.getPanelPrincipal(), panelCaja);
+		new PanelUtil().insertarEnPanel(interfaz.getPanelCaja(), panelCaja);
+	}
+
+	/**
+	 * Metodo que establece el panel de pedidos en el panel prinicpal
+	 */
+
+	private void configurarPanelPrincipal() {
+		// Establecemos el layout del panel principal
+		interfaz.getPanelSecundario().setLayout(new BorderLayout());
+		// Generamos el objeto de panelPedido
+		PanelPedido panelPedido = new PanelPedido();
+		// Configuramos el panel de pedido
+		new PanelPedidoMetodos(panelPedido).iniciarPanelPedido();
+		// Añadimos la el panel pedido al panel principal
+		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panelPedido);
 	}
 
 	/**
@@ -60,7 +94,7 @@ public class InterfazVentanaPrincipalMetodos {
 	/**
 	 * Metodo encargado de aplicar el look and feel en la ventana
 	 */
-	private static void aplicarLookAndFeel() {
+	public static void aplicarLookAndFeel() {
 		try {
 			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Windows".equals(info.getName())) {

@@ -58,7 +58,7 @@ public class PanelUtil {
 			logger.warn("El contenedor o el componente son nulos");
 			return;
 		}
-
+		contenedor.removeAll();
 		contenedor.add(componente);
 		contenedor.revalidate();
 		contenedor.repaint();

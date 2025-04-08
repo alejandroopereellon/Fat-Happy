@@ -21,7 +21,21 @@
 		
 		<mapping class="restaurante.modelo.Restaurante" />
 		
+		<mapping class="caja.modelo.Caja"/>
+		<mapping class="caja.modelo.Operacion"/>
+		
+		<mapping class="empleados.modelo.Empleado"/>
+		<mapping class="empleados.modelo.MovimientosEmpleado"/>
+		
 		<mapping class="empleados.modelo.Empleado" />
 		<mapping class="empleados.modelo.MovimientosEmpleado" />
+		
+		<mapping class="pedido.modelo.NumeroPedido"/>
+		<mapping class="pedido.modelo.Pedido"/>
+		
+		
+		
+		
+		
 	</session-factory>
 </hibernate-configuration>

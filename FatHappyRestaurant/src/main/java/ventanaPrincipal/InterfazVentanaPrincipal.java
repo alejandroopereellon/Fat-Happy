@@ -1,5 +1,8 @@
 package ventanaPrincipal;
 
+import auxiliares.utilidadesGraficas.PanelUtil;
+import caja.interfazCaja.AccionesSobreCaja;
+import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -36,8 +39,13 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
         panelSecundario = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("OkKioskFH");
+        setTitle("OkPos Fat&Happy");
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -52,11 +60,17 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
         );
         panelCajaLayout.setVerticalGroup(
             panelCajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 36, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        botonAdministrador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         botonAdministrador.setText("MenuAdministrador");
         botonAdministrador.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(93, 64, 55), 2, true));
+        botonAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAdministradorActionPerformed(evt);
+            }
+        });
 
         panelSecundario.setBackground(new java.awt.Color(244, 241, 226));
 
@@ -68,7 +82,7 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
         );
         panelSecundarioLayout.setVerticalGroup(
             panelSecundarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 854, Short.MAX_VALUE)
+            .addGap(0, 836, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
@@ -76,7 +90,7 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(641, Short.MAX_VALUE)
+                .addContainerGap(541, Short.MAX_VALUE)
                 .addComponent(panelCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -87,11 +101,11 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonAdministrador, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelSecundario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelSecundario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -108,6 +122,18 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosed
+
+    private void botonAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdministradorActionPerformed
+       panelSecundario.setLayout(new BorderLayout());
+       
+        AccionesSobreCaja accion= new AccionesSobreCaja();
+       accion.setVisible(true);
+        new PanelUtil().insertarEnPanel(panelSecundario,accion);
+    }//GEN-LAST:event_botonAdministradorActionPerformed
 
     public InterfazVentanaPrincipalMetodos getMetodos() {
         return metodos;

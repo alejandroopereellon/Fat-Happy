@@ -1,15 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package auxiliares.inicioAplicacion.grafica;
 
+import java.time.LocalDate;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
 /**
- *
- * @author aleja
+ * Clase de interfaz que muestra la ventana de inicio que informa de los datos
+ * recopilados al inicio del programa, muestra el logo, barra de progreso con 
+ * la informacion del avance
+ * 
+ * @author Alejandro Perellón López
  */
 public class InicioApp extends javax.swing.JFrame {
 
@@ -17,8 +18,9 @@ public class InicioApp extends javax.swing.JFrame {
      * Creates new form InicioApp
      */
     public InicioApp() {
+        InterfazVentanaPrincipalMetodos.aplicarLookAndFeel();
         initComponents();
-
+        derechosAutor.setText("©" + LocalDate.now().getYear() +" - Alejandro Perellón López");
     }
 
     /**
@@ -36,6 +38,8 @@ public class InicioApp extends javax.swing.JFrame {
         textoInicio = new javax.swing.JLabel();
         barraProgreso = new javax.swing.JProgressBar();
         EstadoInicio = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        derechosAutor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -64,24 +68,37 @@ public class InicioApp extends javax.swing.JFrame {
         textoInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         textoInicio.setText("Iniciando la aplicacion POS Fat & Happy...");
 
+        EstadoInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         EstadoInicio.setText("jLabel1");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("OkPos Fat & Happy");
+
+        derechosAutor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        derechosAutor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        derechosAutor.setText("© 2025 - Alejandro Perellón López");
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EstadoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(barraProgreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
+                    .addComponent(textoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                    .addComponent(derechosAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPrincipalLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textoInicio)
@@ -89,7 +106,8 @@ public class InicioApp extends javax.swing.JFrame {
                 .addComponent(barraProgreso, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EstadoInicio)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addComponent(derechosAutor))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,7 +136,9 @@ public class InicioApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel EstadoInicio;
     private javax.swing.JProgressBar barraProgreso;
+    private javax.swing.JLabel derechosAutor;
     private javax.swing.JLabel imagen;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelImagen;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JLabel textoInicio;

@@ -12,6 +12,7 @@ import productos.util.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
 import restaurante.modelo.RestauranteDatos;
 import ventanaPrincipal.InterfazVentanaPrincipal;
+import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
 /**
  * Metodo encargado de iniciar todos los ajustes de la pagina
@@ -25,67 +26,74 @@ public class InicioAplicacion {
 	 * 
 	 */
 	public boolean cargarDatosAplicacion() {
-		logger.info("Iniciando aplicación...");
-
 		// Establecemos el escalado de las imagenes al 100%
 		System.setProperty("sun.java2d.uiScale", "1.0");
-
 		// Iniciamos la ventana de notificacion
 		InicioApp grafica = new InicioApp();
 		grafica.setVisible(true);
 
+		grafica.getEstadoInicio().setText("Iniciando aplicacion...");
+		logger.info("Iniciando aplicación...");
+		grafica.getBarraProgreso().setValue(5);
+
 		// Iniciar descarga de imágenes del servidor ftp
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
-		grafica.getBarraProgreso().setValue(20);
-
+		grafica.getBarraProgreso().setValue(15);
 		if (new FTPDownloader().iniciarConexionYDescargar()) {
 			logger.info("Se han cargado los ficheros en local");
 		} else {
 			logger.error("No se han podido cargar los ficheros en local");
 			return false;
 		}
+		grafica.getBarraProgreso().setValue(20);
 
 		// Cargar datos del restaurante
 		grafica.getEstadoInicio().setText("Cargando datos del restaurante");
-		grafica.getBarraProgreso().setValue(40);
-
 		RestauranteDatos.set(new RestauranteDaoHibernateImpl()
 				.obtenerRestaurante(ConfiguracionInicial.get().getCodigoRestaurante()));
+		grafica.getBarraProgreso().setValue(25);
 		// Realizamos comprobacion de si el restaurante se ha podido volcar
 		// correctamente
 		if (RestauranteDatos.get() != null) {
 			logger.info("Se ha cargado el restaurante con ID {}", RestauranteDatos.get().getIdRestaurante());
+			grafica.getBarraProgreso().setValue(30);
 		} else {
 			logger.error("No se ha podido cargar los datos del restaurante con ID {}",
 					ConfiguracionInicial.get().getCodigoRestaurante());
 			return false;
 		}
+		grafica.getBarraProgreso().setValue(40);
 
 		// Establecemos el dao
 		grafica.getEstadoInicio().setText("Estableciendo la obtencion de datos");
-		grafica.getBarraProgreso().setValue(60);
-
 		ProductosDaoGlobal.set(new ProductosDaoHibernateImpl());
+		grafica.getBarraProgreso().setValue(60);
 
 		// Cargamos la caja, en caso de estar activa se añade la caja y el empleado
 		// asignado
 		grafica.getEstadoInicio().setText("Recuperando la ultima caja del sistema");
-		grafica.getBarraProgreso().setValue(80);
 		if (new IniciarCaja().recuperarCajaInicio()) {
 			logger.info("Se ha cargado la caja {}", ConfiguracionInicial.get().getNumeroCaja());
 			logger.info("Se ha cargado el empleado con ID {} en la caja {}", EmpleadoDatos.get().getIdEmpleado(),
 					ConfiguracionInicial.get().getNumeroCaja());
 		}
+		grafica.getBarraProgreso().setValue(70);
 
 		// Cargamos todos los productos en memoria haciendo uso del hilo
 		grafica.getEstadoInicio().setText("Cargando los productos del sistema");
-		grafica.getBarraProgreso().setValue(100);
+		//new ActualizarListaProductos().start();
+		grafica.getBarraProgreso().setValue(80);
 
-		new ActualizarListaProductos().start();
 
-		// TODO ESTABLECER EL INICIO DEL PROGRAMA Y ESTABLECER LA INFORMACION DE LA CAJA
 		// Iniciamos la ventana principal del programa
+		grafica.getEstadoInicio().setText("Iniciando la ventana principal...");
+		// Establecemos la ventana principal en el global
 		ConfiguracionInicial.get().setVentanaPrincipal(new InterfazVentanaPrincipal());
+		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
+				.iniciarConfiguracionInicial();
+		// Hacemos visible la ventana
+		ConfiguracionInicial.get().getVentanaPrincipal().setVisible(true);
+		grafica.getBarraProgreso().setValue(100);
 
 		// Si todo ha funcionado correctamente
 		grafica.dispose();

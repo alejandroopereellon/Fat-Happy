@@ -1,5 +1,7 @@
 package auxiliares.inicioAplicacion;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import ventanaPrincipal.InterfazVentanaPrincipal;
 
 public class Configuracion {
@@ -12,6 +14,7 @@ public class Configuracion {
 	private String ftpContrasena;
 	private String ftpDirectorioRemoto;
 	private int numeroCaja;
+	@JsonIgnore
 	private InterfazVentanaPrincipal ventanaPrincipal;
 
 	// Getters y setters

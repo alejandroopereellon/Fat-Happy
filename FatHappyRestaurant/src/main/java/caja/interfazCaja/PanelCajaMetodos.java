@@ -29,10 +29,11 @@ public class PanelCajaMetodos {
 	 */
 	public void iniciarPanelCaja() {
 		// Iniciamos el reloj
-		new Reloj(interfaz.getFechaHora());
+		new Reloj(interfaz.getFechaHora()).start();
 		logger.info("Se ha configurado el reloj");
 
 		rellenarDatosCaja();
+		interfaz.setVisible(true);
 	}
 
 	/**
@@ -63,7 +64,7 @@ public class PanelCajaMetodos {
 			}
 		} else {
 			establecerInterfazNula();
-			logger.info("Se ha establecido la interfaz como nula");
+			logger.info("Se ha establecido la interfaz panelCaja como nula");
 		}
 	}
 
