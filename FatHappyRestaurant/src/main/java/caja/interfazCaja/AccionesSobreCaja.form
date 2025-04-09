@@ -16,24 +16,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1500" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="panelPrincipal" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panelPrincipal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="panelPrincipal" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="157" max="32767" attributes="0"/>
-              </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="panelPrincipal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,7 +55,7 @@
                                   <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="cerrarCaja" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
-                                      <Component id="iniciarCaja1" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
+                                      <Component id="iniciarCaja" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
                                       <Component id="estadisticasVentas" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -82,6 +76,8 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="CerrarAplicacion" min="-2" pref="286" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="pantallaPrincipla" min="-2" pref="286" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -106,15 +102,18 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" pref="47" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="iniciarCaja1" min="-2" pref="65" max="-2" attributes="0"/>
+                          <Component id="iniciarCaja" min="-2" pref="65" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="cerrarCaja" min="-2" pref="65" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="estadisticasVentas" min="-2" pref="65" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="379" max="32767" attributes="0"/>
-                  <Component id="pantallaPrincipla" min="-2" pref="65" max="-2" attributes="0"/>
+                  <EmptySpace pref="364" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="pantallaPrincipla" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="CerrarAplicacion" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -130,7 +129,7 @@
             <Property name="text" type="java.lang.String" value="Selecciona una accion de caja"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="iniciarCaja1">
+        <Component class="javax.swing.JButton" name="iniciarCaja">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>
@@ -138,7 +137,7 @@
             <Property name="text" type="java.lang.String" value="Iniciar caja"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarCaja1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarCajaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="cerrarCaja">
@@ -214,6 +213,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pantallaPrinciplaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="CerrarAplicacion">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Cerrar la aplicacion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CerrarAplicacionActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

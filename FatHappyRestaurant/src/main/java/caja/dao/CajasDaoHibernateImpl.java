@@ -89,8 +89,8 @@ public class CajasDaoHibernateImpl implements CajasDao {
 
 			Long count = session
 					.createQuery("SELECT COUNT(c) FROM Caja c "
-							+ "WHERE c.idRestaurante = :idRest AND c.numeroCaja = :numCaja "
-							+ "AND DATE(c.fechaHoraInicio) = CURRENT_DATE", Long.class)
+							+ "WHERE c.restaurante = :idRest AND c.numeroCaja = :numCaja "
+							+ "AND DATE(c.momentoApertura) = CURRENT_DATE", Long.class)
 					.setParameter("idRest", ConfiguracionInicial.get().getCodigoRestaurante())
 					.setParameter("numCaja", ConfiguracionInicial.get().getNumeroCaja()).uniqueResult();
 

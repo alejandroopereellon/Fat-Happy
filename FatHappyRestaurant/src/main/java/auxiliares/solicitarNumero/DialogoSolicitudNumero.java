@@ -19,7 +19,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         super(parent, modal);
         this.metodos = metodos;
         initComponents();
-        tituloVentana.setText(titulo);
+        cuadroTexto.setText(titulo);
     }
 
     /**
@@ -54,7 +54,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        tituloVentana.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        tituloVentana.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tituloVentana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloVentana.setText("Introducir numero");
 
@@ -313,10 +313,6 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
 
     public JTextField getCuadroTexto() {
         return cuadroTexto;
-    }
-
-    public JLabel getTituloVentana() {
-        return tituloVentana;
     }
 
 
