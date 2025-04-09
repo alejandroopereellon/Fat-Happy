@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.mostrarMensaje.MostrarMensaje;
+import auxiliares.mostrarMensaje.DialogoMostrarMensaje;
 import caja.modelo.CajaDatos;
 import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
@@ -65,7 +65,7 @@ public class AccionesSobreCajaMetodos {
 			}
 		} else {
 			logger.error("Ya existe una caja iniciada");
-			new MostrarMensaje("Ya existe una caja iniciada");
+			new DialogoMostrarMensaje("Ya existe una caja iniciada");
 		}
 	}
 
@@ -81,7 +81,7 @@ public class AccionesSobreCajaMetodos {
 			}
 		} else {
 			logger.error("No existe una caja iniciada");
-			new MostrarMensaje("No existe una caja iniciada");
+			new DialogoMostrarMensaje("No existe una caja iniciada");
 		}
 	}
 
@@ -90,7 +90,7 @@ public class AccionesSobreCajaMetodos {
 	 */
 	protected void consultarEstadisticasVentas() {
 		// Obtenemos el total de ventas
-		new MostrarMensaje("Total ganado : " + new CalcularOperaciones().calcularTotalOperaciones() + " Eur");
+		new DialogoMostrarMensaje("Total ganado : " + new CalcularOperaciones().calcularTotalOperaciones() + " Eur");
 	}
 
 	protected void consultarProductos() {

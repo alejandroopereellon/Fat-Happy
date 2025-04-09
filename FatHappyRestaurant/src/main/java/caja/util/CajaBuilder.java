@@ -51,7 +51,7 @@ public class CajaBuilder {
 	 */
 	public boolean crearNuevaCaja() {
 		// Solicitamos permisos de administrador
-		if (new ActividadEmpleados().solicitarPermisos("Iniciar una nueva caja", 3)) {
+		if (!new ActividadEmpleados().solicitarPermisos("Iniciar una nueva caja", 3)) {
 			logger.error("No existen permisos suficientes para iniciar una nueva caja");
 			return false;
 		}
@@ -89,24 +89,35 @@ public class CajaBuilder {
 		// Si toda la configuracion ha funcionado correctamente se añade la caja al
 		// singleton
 		if (bandera) {
-			logger.info("La caja ha sido iniciada correctamente");
-			// Establecemos la caja en el singleton
-			CajaDatos.set(caja);
-			logger.info("Se ha establecido la caja en el singleton");
-			// Anadimos la caja en el DAO
-			dao.insertarCaja(caja);
-			logger.info("Se se ha añadido la caja en la base de datos");
-
-			// Establecemos los datos de la caja
-			new PanelCajaMetodos(panel).rellenarDatosCaja();
-
-			return true;
+			return anadirCajaSingleton();
 		}
 
 		logger.error("Ha ocurrido un error durante el proceso de inicio de la caja");
-		JOptionPane.showConfirmDialog(null, "La caja no ha podido iniciarse correctamente, vuelve a intentarlo",
+		JOptionPane.showMessageDialog(null, "La caja no ha podido iniciarse correctamente, vuelve a intentarlo",
 				"Error inicio de caja", JOptionPane.ERROR_MESSAGE);
 		return false;
+	}
+
+	/**
+	 * Metodo que anade al singleton la caja introducida siempre que se cumplan
+	 * todos los requisitos
+	 * 
+	 * @return TRUE si se ha anadido la caja || FALSE si la caja no se ha podido
+	 *         anadir
+	 */
+	private boolean anadirCajaSingleton() {
+		logger.info("La caja ha sido iniciada correctamente");
+		// Establecemos la caja en el singleton
+		CajaDatos.set(caja);
+		logger.info("Se ha establecido la caja en el singleton");
+		// Anadimos la caja en el DAO
+		dao.insertarCaja(caja);
+		logger.info("Se se ha añadido la caja en la base de datos");
+
+		// Establecemos los datos de la caja
+		new PanelCajaMetodos(panel).rellenarDatosCaja();
+
+		return true;
 	}
 
 	/**
@@ -117,13 +128,18 @@ public class CajaBuilder {
 	 *         añadido el importe en la caja
 	 */
 	private boolean anadirImporte() {
+		if (caja.getEmpleado() == null) {
+			logger.warn("No se ha registrado un usuario, no se pedira el importe");
+			return false;
+		}
+
 		BigDecimal numeroDecimal = new SolicitarNumeroDecimalMetodos().solicitarNumero();
 		if (numeroDecimal != null) {
 			caja.setImporteInicial(numeroDecimal);
 			logger.info("Se ha establecido el importe inicial de la caja en {}", numeroDecimal);
 			return true;
 		}
-		logger.error("Se ha establecido un importe incorrecto o se ha cancelado la operacion");
+		logger.warn("Se ha establecido un importe incorrecto o se ha cancelado la operacion");
 		return false;
 	}
 
