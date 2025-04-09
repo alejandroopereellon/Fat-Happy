@@ -1,4 +1,4 @@
-package productos.interfazPedido.InterfazProducto;
+package productos.interfazPedido.casillaProducto;
 
 import java.awt.Color;
 import java.io.File;

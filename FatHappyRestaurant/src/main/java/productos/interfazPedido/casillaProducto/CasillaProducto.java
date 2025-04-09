@@ -1,4 +1,4 @@
-package productos.interfazPedido.InterfazProducto;
+package productos.interfazPedido.casillaProducto;
 
 import javax.swing.JLabel;
 import pedido.modelo.Pedido;
