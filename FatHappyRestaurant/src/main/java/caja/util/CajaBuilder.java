@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.solicitarNumeroDecimal.SolicitarNumeroDecimal;
+import auxiliares.solicitarNumeroDecimal.SolicitarNumeroDecimalMetodos;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
 import caja.interfazCaja.PanelCaja;
@@ -111,13 +111,13 @@ public class CajaBuilder {
 
 	/**
 	 * Metodo que establece el importe inicial de la caja, para ello hace un
-	 * {@link SolicitarNumeroDecimal} y lo añade a la caja
+	 * {@link SolicitarNumeroDecimalMetodos} y lo añade a la caja
 	 * 
 	 * @return TRUE si se ha añadido el importe en la caja || FALSE si no se ha
 	 *         añadido el importe en la caja
 	 */
 	private boolean anadirImporte() {
-		BigDecimal numeroDecimal = new SolicitarNumeroDecimal().solicitarNumero("Introduce el importe inicial");
+		BigDecimal numeroDecimal = new SolicitarNumeroDecimalMetodos().solicitarNumero();
 		if (numeroDecimal != null) {
 			caja.setImporteInicial(numeroDecimal);
 			logger.info("Se ha establecido el importe inicial de la caja en {}", numeroDecimal);

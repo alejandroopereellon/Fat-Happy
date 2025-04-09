@@ -3,8 +3,10 @@ package caja.interfazCaja;
 import javax.swing.JButton;
 
 /**
+ * Clase de interfaz grafica que muestra diferentes acciones a realizar en la
+ * caja
  *
- * @author aleja
+ * @author Alejandro Perellón López
  */
 public class AccionesSobreCaja extends javax.swing.JPanel {
 
@@ -207,7 +209,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
     }//GEN-LAST:event_desactivarProductosActionPerformed
 
     private void pantallaPrinciplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pantallaPrinciplaActionPerformed
-      metodos.volverPantallaPrincipal();
+        metodos.volverPantallaPrincipal();
     }//GEN-LAST:event_pantallaPrinciplaActionPerformed
 
     public JButton getActivarProductos() {

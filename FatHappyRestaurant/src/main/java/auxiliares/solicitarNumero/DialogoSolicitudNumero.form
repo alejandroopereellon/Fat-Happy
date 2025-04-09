@@ -51,7 +51,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="tituloVentana" alignment="0" min="-2" pref="303" max="-2" attributes="0"/>
                       <Component id="cuadroTexto" min="-2" pref="303" max="-2" attributes="0"/>
@@ -93,14 +93,14 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="tituloVentana" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="cuadroTexto" min="-2" pref="72" max="-2" attributes="0"/>
@@ -122,17 +122,17 @@
                       <Component id="boton8" alignment="3" min="-2" pref="61" max="-2" attributes="0"/>
                       <Component id="boton9" alignment="3" min="-2" pref="61" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="botonC" alignment="3" min="-2" pref="61" max="-2" attributes="0"/>
                       <Component id="boton0" alignment="3" min="-2" pref="61" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="botonAceptar" max="32767" attributes="0"/>
                       <Component id="botonCancelar" min="-2" pref="61" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

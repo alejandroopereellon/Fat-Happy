@@ -10,7 +10,7 @@ import javax.swing.JTextField;
  */
 public class DialogoSolicitudNumero extends javax.swing.JDialog {
 
-    private SolicitarNumeroMetodos metodos ;
+    private SolicitarNumeroMetodos metodos;
 
     /**
      * Creates new form DialogoSolicitudNumero
@@ -19,7 +19,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         super(parent, modal);
         this.metodos = metodos;
         initComponents();
-        tituloVentana.setText(titulo);        
+        tituloVentana.setText(titulo);
     }
 
     /**
@@ -173,7 +173,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tituloVentana, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cuadroTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,12 +206,12 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
                                 .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(20, 20, 20))
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tituloVentana)
                 .addGap(10, 10, 10)
                 .addComponent(cuadroTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,15 +230,15 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
                     .addComponent(boton7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boton8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boton9, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonC, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boton0, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(botonAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -279,11 +279,11 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
     }//GEN-LAST:event_boton6ActionPerformed
 
     private void botonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCActionPerformed
-      metodos.borrarTexto();
+        metodos.borrarTexto();
     }//GEN-LAST:event_botonCActionPerformed
 
     private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
-       metodos.anadirNumero(1);
+        metodos.anadirNumero(1);
     }//GEN-LAST:event_boton1ActionPerformed
 
     private void boton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton9ActionPerformed
@@ -291,19 +291,19 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
     }//GEN-LAST:event_boton9ActionPerformed
 
     private void boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton4ActionPerformed
-       metodos.anadirNumero(4);
+        metodos.anadirNumero(4);
     }//GEN-LAST:event_boton4ActionPerformed
 
     private void boton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton0ActionPerformed
-       metodos.anadirNumero(0);
+        metodos.anadirNumero(0);
     }//GEN-LAST:event_boton0ActionPerformed
 
     private void boton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton8ActionPerformed
-       metodos.anadirNumero(8);
+        metodos.anadirNumero(8);
     }//GEN-LAST:event_boton8ActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-         this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
