@@ -87,12 +87,11 @@ public class AccionesSobreCajaMetodos {
 		if (CajaDatos.get() != null && new CerrarCaja().cerrarCaja()) {
 			// Modificamos el estado de los botones
 			habilitarDeshabilitarBotonesCaja();
-
 			logger.info("Se ha cerrado la caja desde la interfaz correctamente");
 		} else {
 			logger.error("No existe una caja iniciada");
 			new DialogoMostrarMensajeMetodos().mostrarMensaje("No existe una caja iniciada");
-		}
+		}		
 	}
 
 	/**

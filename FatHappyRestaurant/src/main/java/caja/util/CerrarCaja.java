@@ -14,11 +14,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import auxiliares.crearTicket.TicketBuilder;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.mostrarMensaje.DialogoMostrarMensaje;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
 import caja.modelo.Caja;
 import caja.modelo.CajaDatos;
 import empleados.util.ActividadEmpleados;
+import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
 /**
  * Clase que realiza las operaciones necesarias para el cierre correcto de la
@@ -61,6 +63,8 @@ public class CerrarCaja {
 			// Cerramos la caja en el metodo DAO
 			if (dao.cerrarCaja()) {
 				logger.info("Se ha cerrado la caja correctamente");
+				// Notificamos que se ha cerrado la caja
+				new DialogoMostrarMensaje("Se ha cerrado la caja correctamente");
 				// Crear las carpetas si no existen
 				fichero.getParentFile().mkdirs();
 				// Creamos los documentos de cierre de caja
@@ -69,12 +73,18 @@ public class CerrarCaja {
 
 				// Volvemos el objeto caja de singleton en null
 				CajaDatos.set(null);
+				// Establecemos los datos de la caja cerrada en la ventana principal
+				new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
+						.configurarPanelCaja();
+
 				return true;
 			}
 			logger.error("No se ha podido cerrar la caja en el DAO");
 		} else {
 			logger.error("La caja esta cerrada");
 		}
+		// Notificamos que se ha cerrado la caja
+		new DialogoMostrarMensaje("Ha ocurrido un error al cerrar la caja");
 		return false;
 	}
 
