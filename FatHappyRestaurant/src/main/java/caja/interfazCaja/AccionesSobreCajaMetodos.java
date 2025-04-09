@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.mostrarMensaje.DialogoMostrarMensaje;
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import caja.modelo.CajaDatos;
 import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
@@ -31,7 +31,7 @@ public class AccionesSobreCajaMetodos {
 		// Hacemos visible la ventana
 		interfaz.setVisible(true);
 		// Configuramos los botones segun la caja
-		//configurarOpcionesCaja();
+		// configurarOpcionesCaja();
 
 	}
 
@@ -65,7 +65,7 @@ public class AccionesSobreCajaMetodos {
 			}
 		} else {
 			logger.error("Ya existe una caja iniciada");
-			new DialogoMostrarMensaje("Ya existe una caja iniciada");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("Ya existe una caja iniciada");
 		}
 	}
 
@@ -81,7 +81,7 @@ public class AccionesSobreCajaMetodos {
 			}
 		} else {
 			logger.error("No existe una caja iniciada");
-			new DialogoMostrarMensaje("No existe una caja iniciada");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("No existe una caja iniciada");
 		}
 	}
 
@@ -90,7 +90,8 @@ public class AccionesSobreCajaMetodos {
 	 */
 	protected void consultarEstadisticasVentas() {
 		// Obtenemos el total de ventas
-		new DialogoMostrarMensaje("Total ganado : " + new CalcularOperaciones().calcularTotalOperaciones() + " Eur");
+		new DialogoMostrarMensajeMetodos()
+				.mostrarMensaje("Total ganado : " + new CalcularOperaciones().calcularTotalOperaciones() + " Eur");
 	}
 
 	protected void consultarProductos() {

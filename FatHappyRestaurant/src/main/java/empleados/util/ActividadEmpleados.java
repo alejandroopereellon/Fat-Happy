@@ -3,7 +3,7 @@ package empleados.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.mostrarMensaje.DialogoMostrarMensaje;
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.solicitarNumero.SolicitarNumeroMetodos;
 import empleados.dao.EmpleadoDaoHibernateImpl;
 import empleados.dao.EmpleadosDao;
@@ -43,14 +43,13 @@ public class ActividadEmpleados {
 				bandera = true;
 			} else {
 				logger.debug("El objeto empleado con ID {} no tiene permisos de acceso", emp.getIdEmpleado());
-				new DialogoMostrarMensaje(
-						"El objeto empleado con ID " + emp.getIdEmpleado() + " no tiene permisos de acceso");
+				new DialogoMostrarMensajeMetodos().mostrarMensaje("El objeto empleado con ID " + emp.getIdEmpleado() + " no tiene permisos de acceso");
 				movimiento = new MovimientosEmpleado(emp, motivo, "Empleado no tiene permisos", false);
 			}
 		} else {
 			movimiento = new MovimientosEmpleado(emp, motivo, "Empleado no existente", false);
 			logger.error("El objeto empleado no existe en la base de datos");
-			new DialogoMostrarMensaje("El objeto empleado no existe");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("El objeto empleado no existe");
 		}
 
 		// Almacenamos el movimiento
@@ -73,7 +72,7 @@ public class ActividadEmpleados {
 			return dao.obtenerEmpleado(idEmpleado);
 		}
 		logger.warn("No se ha podido obtener el empleado del restaurante a traves del DAO");
-		new DialogoMostrarMensaje("El objeto empleado con ID " + idEmpleado + " no tiene permisos de acceso");
+		new DialogoMostrarMensajeMetodos().mostrarMensaje("El objeto empleado con ID " + idEmpleado + " no tiene permisos de acceso");
 
 		return null;
 	}

@@ -13,7 +13,11 @@ import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import caja.modelo.Caja;
 import caja.modelo.CajaDatos;
 import caja.modelo.Operacion;
+import empleados.modelo.Empleado;
+import empleados.modelo.EmpleadoDatos;
 import pool.HibernateUtil;
+import restaurante.modelo.Restaurante;
+import restaurante.modelo.RestauranteDatos;
 
 public class CajasDaoHibernateImpl implements CajasDao {
 
@@ -37,9 +41,15 @@ public class CajasDaoHibernateImpl implements CajasDao {
 
 			// Iniciamos la transaccion
 			transaction = session.beginTransaction();
-			logger.debug("Se ha asignado la sesion a la transaccion");
+			logger.debug("Se ha asignado la sesion a la transaccion para insertar el objeto caja");
+
+			// Establecemos el restaurante en caja
+			caja.setRestaurante(obtenerRestaurante(session));
+			// Establecemos el empleado en caja
+			caja.setEmpleado(obtenerEmpleado(session));
 			// Persistimos la caja
 			session.persist(caja);
+
 			// Confirmamos la persistencia
 			transaction.commit();
 			logger.debug("Se persistido el objeto caja id {}", caja.getId());
@@ -61,9 +71,11 @@ public class CajasDaoHibernateImpl implements CajasDao {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			logger.debug("Se ha iniciado una sesion de hibernate para recuperar el objeto caja");
 			// Obtenemos la caja
-			nuevaCaja = session.createQuery(
-					"FROM Caja WHERE restaurante.id = :idRest and numeroCaja = :numCaja and momentoCierre IS NULL",
-					Caja.class).setParameter("idRest", ConfiguracionInicial.get().getCodigoRestaurante())
+			nuevaCaja = session
+					.createQuery(
+							"FROM Caja WHERE restaurante = :rest and numeroCaja = :numCaja and momentoCierre IS NULL",
+							Caja.class)
+					.setParameter("rest", obtenerRestaurante(session))
 					.setParameter("numCaja", ConfiguracionInicial.get().getNumeroCaja()).uniqueResult();
 
 			// Si la caja es correcta se retorna
@@ -88,10 +100,11 @@ public class CajasDaoHibernateImpl implements CajasDao {
 			logger.debug("Se inicia sesion de hibernate para contar sesiones de caja activas hoy");
 
 			Long count = session
-					.createQuery("SELECT COUNT(c) FROM Caja c "
-							+ "WHERE c.restaurante = :idRest AND c.numeroCaja = :numCaja "
-							+ "AND DATE(c.momentoApertura) = CURRENT_DATE", Long.class)
-					.setParameter("idRest", ConfiguracionInicial.get().getCodigoRestaurante())
+					.createQuery(
+							"SELECT COUNT(c) FROM Caja c " + "WHERE c.restaurante = :rest AND c.numeroCaja = :numCaja "
+									+ "AND DATE(c.momentoApertura) = CURRENT_DATE",
+							Long.class)
+					.setParameter("rest", obtenerRestaurante(session))
 					.setParameter("numCaja", ConfiguracionInicial.get().getNumeroCaja()).uniqueResult();
 
 			if (count != null) {
@@ -210,4 +223,27 @@ public class CajasDaoHibernateImpl implements CajasDao {
 		return false;
 	}
 
+	/**
+	 * Metodo que recupera de la sesion de hibernate el restaurante
+	 * 
+	 * @param sesion es la sesion de hibernate
+	 * @return {@link Restaurante} obtenido de hibernate
+	 */
+	private Restaurante obtenerRestaurante(Session sesion) {
+		Restaurante res = RestauranteDatos.get();
+		logger.info("Se esta recuperando el restaurante con ID {}", res.getIdRestaurante());
+		return sesion.find(Restaurante.class, res.getIdRestaurante());
+	}
+
+	/**
+	 * Metodo que recupera de la sesion de hibernate el empleado
+	 * 
+	 * @param sesion es la sesion de hibernate
+	 * @return {@link Empleado} obtenido de hibernate
+	 */
+	private Empleado obtenerEmpleado(Session sesion) {
+		Empleado emp = EmpleadoDatos.get();
+		logger.info("Se esta recuperando el empleado con ID {}", emp.getIdEmpleado());
+		return sesion.find(Empleado.class, emp.getIdEmpleado());
+	}
 }

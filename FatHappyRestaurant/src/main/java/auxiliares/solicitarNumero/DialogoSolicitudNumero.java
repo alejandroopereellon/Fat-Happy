@@ -1,6 +1,5 @@
 package auxiliares.solicitarNumero;
 
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -19,7 +18,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         super(parent, modal);
         this.metodos = metodos;
         initComponents();
-        cuadroTexto.setText(titulo);
+        tituloVentana.setText(titulo);
     }
 
     /**
