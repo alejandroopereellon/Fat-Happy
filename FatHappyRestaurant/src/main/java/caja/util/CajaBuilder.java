@@ -51,11 +51,10 @@ public class CajaBuilder {
 	 */
 	public boolean crearNuevaCaja() {
 		// Solicitamos permisos de administrador
-		if (!new ActividadEmpleados().solicitarPermisos("Iniciar una nueva caja", 3)) {
+		if (new ActividadEmpleados().solicitarPermisos("Iniciar una nueva caja", 3)) {
 			logger.error("No existen permisos suficientes para iniciar una nueva caja");
 			return false;
 		}
-
 		Boolean bandera = true;
 		logger.debug("Se ha generado el objeto caja vacio");
 

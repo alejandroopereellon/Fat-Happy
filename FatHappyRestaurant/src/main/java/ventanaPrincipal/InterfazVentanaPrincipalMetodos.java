@@ -11,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.utilidadesGraficas.PanelUtil;
+import caja.interfazCaja.AccionesSobreCaja;
+import caja.interfazCaja.AccionesSobreCajaMetodos;
 import caja.interfazCaja.PanelCaja;
 import caja.interfazCaja.PanelCajaMetodos;
 import caja.modelo.CajaDatos;
@@ -33,14 +35,14 @@ public class InterfazVentanaPrincipalMetodos {
 	 */
 	public void iniciarConfiguracionInicial() {
 		// Establecemos resolucion a pantalla completa
-		configuracionPantalla();
+		//configuracionPantalla();
 		// Establecemos el look and feel
 		aplicarLookAndFeel();
 		// Hacemos la interfaz visible
 		interfaz.setVisible(true);
 		// Configuramos el panel de caja
 		configurarPanelCaja();
-		//Configuramos el panel principal
+		// Configuramos el panel principal
 		configurarPanelPrincipal();
 	}
 
@@ -62,8 +64,7 @@ public class InterfazVentanaPrincipalMetodos {
 	/**
 	 * Metodo que establece el panel de pedidos en el panel prinicpal
 	 */
-
-	private void configurarPanelPrincipal() {
+	public void configurarPanelPrincipal() {
 		// Establecemos el layout del panel principal
 		interfaz.getPanelSecundario().setLayout(new BorderLayout());
 		// Generamos el objeto de panelPedido
@@ -72,6 +73,20 @@ public class InterfazVentanaPrincipalMetodos {
 		new PanelPedidoMetodos(panelPedido).iniciarPanelPedido();
 		// Añadimos la el panel pedido al panel principal
 		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panelPedido);
+	}
+
+	/**
+	 * Metodo que muestra el panel de administrador
+	 */
+	protected void mostrarPanelAdministrador() {
+		// Establecemos el layout del panel de administrador
+		interfaz.getPanelSecundario().setLayout(new BorderLayout());
+		// Generamos el objeto de accionCaja
+		AccionesSobreCaja panelAdministrador = new AccionesSobreCaja();
+		// Configuramos el panel de pedido
+		new AccionesSobreCajaMetodos(panelAdministrador).iniciarConfiguracion();
+		// Añadimos la el panel pedido al panel principal
+		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panelAdministrador);
 	}
 
 	/**

@@ -8,7 +8,6 @@ import caja.util.IniciarCaja;
 import empleados.modelo.EmpleadoDatos;
 import productos.dao.ProductosDaoGlobal;
 import productos.dao.ProductosDaoHibernateImpl;
-import productos.util.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
 import restaurante.modelo.RestauranteDatos;
 import ventanaPrincipal.InterfazVentanaPrincipal;
@@ -81,9 +80,8 @@ public class InicioAplicacion {
 
 		// Cargamos todos los productos en memoria haciendo uso del hilo
 		grafica.getEstadoInicio().setText("Cargando los productos del sistema");
-		//new ActualizarListaProductos().start();
+		// new ActualizarListaProductos().start();
 		grafica.getBarraProgreso().setValue(80);
-
 
 		// Iniciamos la ventana principal del programa
 		grafica.getEstadoInicio().setText("Iniciando la ventana principal...");
@@ -97,6 +95,7 @@ public class InicioAplicacion {
 
 		// Si todo ha funcionado correctamente
 		grafica.dispose();
+
 		return true;
 	}
 

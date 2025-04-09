@@ -1,4 +1,3 @@
-
 package caja.interfazCaja;
 
 import javax.swing.JButton;
@@ -8,6 +7,8 @@ import javax.swing.JButton;
  * @author aleja
  */
 public class AccionesSobreCaja extends javax.swing.JPanel {
+
+    private AccionesSobreCajaMetodos metodos = new AccionesSobreCajaMetodos(this);
 
     /**
      * Creates new form AccionesSobreCaja
@@ -34,6 +35,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         activarProductos = new javax.swing.JButton();
         desactivarProductos = new javax.swing.JButton();
         consultarProductos = new javax.swing.JButton();
+        pantallaPrincipla = new javax.swing.JButton();
 
         panelPrincipal.setBackground(new java.awt.Color(244, 241, 226));
 
@@ -93,6 +95,14 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
             }
         });
 
+        pantallaPrincipla.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pantallaPrincipla.setText("Volver pantalla principal");
+        pantallaPrincipla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pantallaPrinciplaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
@@ -100,24 +110,30 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(110, 110, 110)
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(iniciarCaja1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(33, 33, 33)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iniciarCaja1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(33, 33, 33)
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(desactivarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(activarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(consultarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(639, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(desactivarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(activarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(consultarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 633, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +156,9 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
                         .addComponent(cerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
+                .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -165,28 +183,32 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarCaja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarCaja1ActionPerformed
-        // TODO add your handling code here:
+        metodos.iniciarCaja();
     }//GEN-LAST:event_iniciarCaja1ActionPerformed
 
     private void cerrarCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarCajaActionPerformed
-        // TODO add your handling code here:
+        metodos.cerrarCaja();
     }//GEN-LAST:event_cerrarCajaActionPerformed
 
     private void estadisticasVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadisticasVentasActionPerformed
-        // TODO add your handling code here:
+        metodos.consultarEstadisticasVentas();
     }//GEN-LAST:event_estadisticasVentasActionPerformed
 
     private void consultarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarProductosActionPerformed
-        // TODO add your handling code here:
+        metodos.consultarProductos();
     }//GEN-LAST:event_consultarProductosActionPerformed
 
     private void activarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activarProductosActionPerformed
-        // TODO add your handling code here:
+        metodos.activarProductos();
     }//GEN-LAST:event_activarProductosActionPerformed
 
     private void desactivarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarProductosActionPerformed
-        // TODO add your handling code here:
+        metodos.desactivarProductos();
     }//GEN-LAST:event_desactivarProductosActionPerformed
+
+    private void pantallaPrinciplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pantallaPrinciplaActionPerformed
+      metodos.volverPantallaPrincipal();
+    }//GEN-LAST:event_pantallaPrinciplaActionPerformed
 
     public JButton getActivarProductos() {
         return activarProductos;
@@ -230,5 +252,6 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel panelSecundario;
+    private javax.swing.JButton pantallaPrincipla;
     // End of variables declaration//GEN-END:variables
 }

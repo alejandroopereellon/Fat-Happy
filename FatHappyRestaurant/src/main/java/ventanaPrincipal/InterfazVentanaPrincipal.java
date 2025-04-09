@@ -7,16 +7,15 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * Interfaz principa sobre la que se van a trabajar el resto de los paneles e 
+ * Interfaz principa sobre la que se van a trabajar el resto de los paneles e
  * interfaces
+ *
  * @author Alejandro Perellón López
  */
 public class InterfazVentanaPrincipal extends javax.swing.JFrame {
+
     private InterfazVentanaPrincipalMetodos metodos = new InterfazVentanaPrincipalMetodos(this);
-    
-    
-    
-    
+
     /**
      * Creates new form InterfazVentanaPrincipal
      */
@@ -128,11 +127,7 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void botonAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAdministradorActionPerformed
-       panelSecundario.setLayout(new BorderLayout());
-       
-        AccionesSobreCaja accion= new AccionesSobreCaja();
-       accion.setVisible(true);
-        new PanelUtil().insertarEnPanel(panelSecundario,accion);
+        metodos.mostrarPanelAdministrador();
     }//GEN-LAST:event_botonAdministradorActionPerformed
 
     public InterfazVentanaPrincipalMetodos getMetodos() {
@@ -154,8 +149,8 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
     public JPanel getPanelSecundario() {
         return panelSecundario;
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAdministrador;
     private javax.swing.JPanel panelCaja;

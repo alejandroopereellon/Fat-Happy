@@ -3,8 +3,7 @@ package empleados.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.solicitarNumero.SolicitarNumero;
-import caja.util.IniciarCaja;
+import auxiliares.solicitarNumero.SolicitarNumeroMetodos;
 import empleados.dao.EmpleadoDaoHibernateImpl;
 import empleados.dao.EmpleadosDao;
 import empleados.modelo.Empleado;
@@ -15,7 +14,7 @@ import empleados.modelo.MovimientosEmpleado;
  */
 public class ActividadEmpleados {
 	// Crear el logger
-	static Logger logger = LogManager.getLogger(IniciarCaja.class);
+	static Logger logger = LogManager.getLogger(ActividadEmpleados.class);
 
 	// Establecemos el dao del empleado
 	EmpleadosDao dao = new EmpleadoDaoHibernateImpl();
@@ -74,15 +73,15 @@ public class ActividadEmpleados {
 	}
 
 	/**
-	 * Metodo que inicia la clase {@link SolicitarNumero} para obtener el numero de
-	 * empleado, comprueba que tenga 3 cifras y lo devuelve
+	 * Metodo que inicia la clase {@link SolicitarNumeroMetodos} para obtener el
+	 * numero de empleado, comprueba que tenga 3 cifras y lo devuelve
 	 * 
 	 * @return numero de empleado
 	 */
 	private int solicitarNumeroEmpleado() {
 		// Solicitamos el numero de empleado
 		logger.debug("Se va a solicitar el numero de empleado");
-		int numeroEmpleado = new SolicitarNumero().solicitarNumero("Introduce el ID de empleado");
+		int numeroEmpleado = new SolicitarNumeroMetodos("Introduce el ID de empleado").solicitarNumero();
 
 		// Comprobamos el posible numero de empleado
 		if (numeroEmpleado >= 100 && numeroEmpleado < 999) {
