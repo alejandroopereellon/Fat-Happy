@@ -15,6 +15,7 @@ import caja.modelo.CajaDatos;
 import caja.modelo.Operacion;
 import empleados.modelo.Empleado;
 import empleados.modelo.EmpleadoDatos;
+import pedido.modelo.Pedido;
 import pool.HibernateUtil;
 import restaurante.modelo.Restaurante;
 import restaurante.modelo.RestauranteDatos;
@@ -43,6 +44,7 @@ public class CajasDaoHibernateImpl implements CajasDao {
 			transaction = session.beginTransaction();
 			logger.debug("Se ha asignado la sesion a la transaccion para insertar el objeto caja");
 
+			
 			// Establecemos el restaurante en caja
 			caja.setRestaurante(obtenerRestaurante(session));
 			// Establecemos el empleado en caja
@@ -142,8 +144,16 @@ public class CajasDaoHibernateImpl implements CajasDao {
 			// Iniciamos la transaccion
 			transaction = session.beginTransaction();
 			logger.debug("Se ha asignado la sesion a la transaccion");
-			// Persistimos la caja
+
+			// recuperamos la caja y la establecemos
+			operacion.setCaja(obtenerCaja(session));
+
+			// Recuperamos el pedido
+			operacion.setPedido(obtenerPedido(session, operacion));
+
+			// Persistimos la operacion
 			session.persist(operacion);
+
 			// Confirmamos la persistencia
 			transaction.commit();
 			logger.debug("Se persistido el objeto operacion id {}", operacion.getId());
@@ -166,8 +176,8 @@ public class CajasDaoHibernateImpl implements CajasDao {
 			logger.debug("Se inicia sesion de hibernate obtener la lista de operaciones");
 
 			// Obtenemos la lista de operaciones a la que pertenece la caja
-			listaOperaciones = session.createQuery("FROM Operacion WHERE caja.id = :idCaja", Operacion.class)
-					.setParameter("idCaja", CajaDatos.get().getId()).getResultList();
+			listaOperaciones = session.createQuery("FROM Operacion WHERE caja = :caja", Operacion.class)
+					.setParameter("caja", obtenerCaja(session)).getResultList();
 
 			logger.info("Se ha obtenido la lista de operaciones");
 		} catch (Exception e) {
@@ -185,7 +195,7 @@ public class CajasDaoHibernateImpl implements CajasDao {
 		logger.debug("Se ha iniciado la transaccion");
 		// Iniciamos una sesion
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			logger.debug("Se ha iniciado una sesion de hibernate para actualizar el objeto caja con ID {}",
+			logger.debug("Se ha iniciado una sesion de hibernate para cerrar el objeto caja con ID {}",
 					caja.getId());
 
 			// Iniciamos la transaccion de actualizacion
@@ -193,7 +203,7 @@ public class CajasDaoHibernateImpl implements CajasDao {
 			logger.debug("Se ha asignado la sesion a la transaccion");
 
 			// Obtenemos el objeto Caja de la base de datos
-			cajaActualizada = session.get(caja.getClass(), caja.getId());
+			cajaActualizada = session.find(Caja.class, caja.getId());
 
 			// Comprobamos si la caja existe
 			if (cajaActualizada != null) {
@@ -246,4 +256,30 @@ public class CajasDaoHibernateImpl implements CajasDao {
 		logger.info("Se esta recuperando el empleado con ID {}", emp.getIdEmpleado());
 		return sesion.find(Empleado.class, emp.getIdEmpleado());
 	}
+
+	/**
+	 * Metodo que recupera de la sesion de hibernate la {@link Caja}
+	 * 
+	 * @param sesion es la sesion de hibernate
+	 * @return {@link Caja} obtenida de hibernate
+	 */
+	private Caja obtenerCaja(Session sesion) {
+		Caja caja = CajaDatos.get();
+		logger.info("Se esta recuperando la caja con ID {}", caja.getId());
+		return sesion.find(Caja.class, caja.getId());
+	}
+
+	/**
+	 * 
+	 * Metodo que recupera de la sesion de hibernate el empleado
+	 * 
+	 * @param session es la sesion de hibernate
+	 * @return {@link Pedido} obtenido de hibernate
+	 */
+	private Pedido obtenerPedido(Session session, Operacion operacion) {
+		Pedido pedido = operacion.getPedido();
+		logger.info("Se esta recuperando la caja con ID {}", pedido.getId());
+		return session.find(Pedido.class, pedido.getId());
+	}
+
 }

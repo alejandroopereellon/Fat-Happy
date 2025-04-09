@@ -1,9 +1,10 @@
-package caja.interfazCaja;
+package caja.interfazCaja.panelPrincipalCaja;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import caja.interfazCaja.Reloj;
 import caja.modelo.Caja;
 import caja.modelo.CajaDatos;
 
@@ -54,17 +55,28 @@ public class PanelCajaMetodos {
 					.setText("Puesto " + caja.getNumeroCaja() + " | Sesion " + caja.getNumeroSesion());
 			logger.debug("Se ha establecido el numero de sesion y el puesto");
 
-			// Establecemos la caja en abierta o cerrada
-			if (caja.getMomentoCierre() != null) {
-				interfaz.getEstadoCaja().setText("Activa");
-				logger.info("Se ha establecido el estado de la caja en abierta");
-			} else {
-				interfaz.getEstadoCaja().setText("Cerrada");
-				logger.info("Se ha establecido el estado de la caja en cerrada");
-			}
+			actualizarEstadoCaja(caja);
 		} else {
 			establecerInterfazNula();
 			logger.info("Se ha establecido la interfaz panelCaja como nula");
+		}
+	}
+
+	/**
+	 * Metodo que establece el estado de la {@link Caja} en activa o cerrada
+	 * dependiendo de si la caja es nula, o existe y no tiene fecha de momento
+	 * cierre
+	 * 
+	 * @param caja es la caja de la que se extraen los datos
+	 */
+	private void actualizarEstadoCaja(Caja caja) {
+		// Establecemos la caja en abierta o cerrada
+		if (caja != null && caja.getMomentoCierre() == null) {
+			interfaz.getEstadoCaja().setText("Activa");
+			logger.info("Se ha establecido el estado de la caja en abierta");
+		} else {
+			interfaz.getEstadoCaja().setText("Cerrada");
+			logger.info("Se ha establecido el estado de la caja en cerrada");
 		}
 	}
 
@@ -78,7 +90,7 @@ public class PanelCajaMetodos {
 		// Establecemos el puesto y sesion
 		interfaz.getPuestoSesion().setText("Puesto " + ConfiguracionInicial.get().getNumeroCaja() + " | Sesion 0");
 		logger.debug("Se ha establecido el numero de sesion y el puesto en nula");
-		interfaz.getEstadoCaja().setText("Cerrada");
+		actualizarEstadoCaja(null);
 		logger.info("Se ha establecido el estado de la caja en cerrada");
 	}
 

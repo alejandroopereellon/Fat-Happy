@@ -1,4 +1,4 @@
-package caja.interfazCaja;
+package caja.interfazCaja.panelPrincipalCaja;
 
 import caja.modelo.Caja;
 import javax.swing.JLabel;

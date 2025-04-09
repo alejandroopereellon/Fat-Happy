@@ -11,10 +11,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.utilidadesGraficas.PanelUtil;
-import caja.interfazCaja.AccionesSobreCaja;
-import caja.interfazCaja.AccionesSobreCajaMetodos;
-import caja.interfazCaja.PanelCaja;
-import caja.interfazCaja.PanelCajaMetodos;
+import caja.interfazCaja.panelAccionesCaja.AccionesSobreCaja;
+import caja.interfazCaja.panelAccionesCaja.AccionesSobreCajaMetodos;
+import caja.interfazCaja.panelPrincipalCaja.PanelCaja;
+import caja.interfazCaja.panelPrincipalCaja.PanelCajaMetodos;
 import caja.modelo.CajaDatos;
 import pedido.interfazPedido.PanelPedido;
 import pedido.interfazPedido.PanelPedidoMetodos;
@@ -50,7 +50,7 @@ public class InterfazVentanaPrincipalMetodos {
 	 * Metodo que establece el panel de la caja para que soporte la informacion del
 	 * {@link PanelCaja}
 	 */
-	private void configurarPanelCaja() {
+	public void configurarPanelCaja() {
 		// Establecemos el layout del panelCaja
 		interfaz.getPanelCaja().setLayout(new BorderLayout());
 		// Generamos el objeto de panelCaja

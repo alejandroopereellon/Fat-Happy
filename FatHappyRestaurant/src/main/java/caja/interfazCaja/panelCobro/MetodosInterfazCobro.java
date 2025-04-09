@@ -1,4 +1,4 @@
-package caja.interfazCaja;
+package caja.interfazCaja.panelCobro;
 
 import java.math.BigDecimal;
 
@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.solicitarNumeroDecimal.GestionDecimales;
+import caja.interfazCaja.descuentos.DescuentoInterfaz;
 import caja.util.OperacionBuilder;
 import empleados.modelo.Empleado;
 import pedido.util.CalcularImporte;

@@ -1,4 +1,4 @@
-package caja.interfazCaja;
+package caja.interfazCaja.panelAccionesCaja;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +31,7 @@ public class AccionesSobreCajaMetodos {
 		// Hacemos visible la ventana
 		interfaz.setVisible(true);
 		// Configuramos los botones segun la caja
-		// configurarOpcionesCaja();
+		habilitarDeshabilitarBotonesCaja();
 
 	}
 
@@ -41,14 +41,20 @@ public class AccionesSobreCajaMetodos {
 	 * 
 	 * Si la caja esta cerrada damos la opcion de iniciar la caja nueva
 	 */
-	public void configurarOpcionesCaja() {
+	public void habilitarDeshabilitarBotonesCaja() {
 		if (CajaDatos.get() == null) {
+			// El boton iniciar casa se activa
 			interfaz.getIniciarCaja().setEnabled(true);
+			// El boton cerrar caja se desactiva
 			interfaz.getCerrarCaja().setEnabled(false);
+			// El boton ver estadisticas se desactiva
 			interfaz.getEstadisticasVentas().setEnabled(false);
 		} else {
+			// El boton inidica caja se desactiva
 			interfaz.getIniciarCaja().setEnabled(false);
+			// El boton cerrar caja se activa
 			interfaz.getCerrarCaja().setEnabled(true);
+			// El boton ver estadisticas se desactiva
 			interfaz.getEstadisticasVentas().setEnabled(true);
 		}
 	}
@@ -58,11 +64,12 @@ public class AccionesSobreCajaMetodos {
 	 */
 	public void iniciarCaja() {
 		logger.info("Se va a iniciar una nueva caja");
-		if (CajaDatos.get() == null) {
-			if (new CajaBuilder().crearNuevaCaja()) {
-				logger.info("Se ha iniciado la caja desde la interfaz correctamente");
-				configurarOpcionesCaja();
-			}
+		// Si la caja es nula y se ha podido crear una nueva caja
+		if (CajaDatos.get() == null && new CajaBuilder().crearNuevaCaja()) {
+			// Modificamos el estado de los botones
+			habilitarDeshabilitarBotonesCaja();
+
+			logger.info("Se ha iniciado la caja desde la interfaz correctamente");
 		} else {
 			logger.error("Ya existe una caja iniciada");
 			new DialogoMostrarMensajeMetodos().mostrarMensaje("Ya existe una caja iniciada");
@@ -74,11 +81,14 @@ public class AccionesSobreCajaMetodos {
 	 */
 	protected void cerrarCaja() {
 		logger.info("Se va a cerrar la caja");
-		if (CajaDatos.get() != null) {
-			if (new CerrarCaja().cerrarCaja()) {
-				logger.info("Se ha cerrado la caja desde la interfaz correctamente");
-				configurarOpcionesCaja();
-			}
+		// Mostramos las estadisticas de venta
+		consultarEstadisticasVentas();
+		// Si la caja existe y se ha cerrado correctamente
+		if (CajaDatos.get() != null && new CerrarCaja().cerrarCaja()) {
+			// Modificamos el estado de los botones
+			habilitarDeshabilitarBotonesCaja();
+
+			logger.info("Se ha cerrado la caja desde la interfaz correctamente");
 		} else {
 			logger.error("No existe una caja iniciada");
 			new DialogoMostrarMensajeMetodos().mostrarMensaje("No existe una caja iniciada");
@@ -106,6 +116,9 @@ public class AccionesSobreCajaMetodos {
 		// TODO
 	}
 
+	/**
+	 * Metodo que cambia el panel actual por el principal del sistema
+	 */
 	protected void volverPantallaPrincipal() {
 		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
 				.configurarPanelPrincipal();

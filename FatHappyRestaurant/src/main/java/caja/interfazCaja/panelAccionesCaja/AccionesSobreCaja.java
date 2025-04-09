@@ -1,4 +1,4 @@
-package caja.interfazCaja;
+package caja.interfazCaja.panelAccionesCaja;
 
 import empleados.util.ActividadEmpleados;
 import javax.swing.JButton;

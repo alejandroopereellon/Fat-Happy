@@ -1,6 +1,6 @@
 package pedido.util;
 
-import caja.interfazCaja.PanelCaja;
+import caja.interfazCaja.panelPrincipalCaja.PanelCaja;
 import pedido.modelo.Pedido;
 
 /**

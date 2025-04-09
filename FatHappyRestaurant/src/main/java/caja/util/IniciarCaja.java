@@ -30,8 +30,9 @@ public class IniciarCaja {
 	 */
 	public boolean recuperarCajaInicio() {
 		Caja cajaRecuperada = recuperarCajaDAO();
+		
 		// Si la caja recuperada no es nula se va a
-		if (cajaRecuperada != null && cajaRecuperada.getImporteFinal() != null) {
+		if (cajaRecuperada != null && cajaRecuperada.getImporteFinal() == null) {
 			// Establecemos el empleado de la caja en singleton
 			EmpleadoDatos.set(cajaRecuperada.getEmpleado());
 			logger.info("Se ha establecido el empleado con ID {}", cajaRecuperada.getEmpleado().getIdEmpleado());

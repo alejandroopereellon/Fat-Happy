@@ -1,4 +1,4 @@
-package caja.interfazCaja;
+package caja.interfazCaja.panelCobro;
 
 import java.math.BigDecimal;
 import javax.swing.JButton;

@@ -12,10 +12,11 @@ import pedido.modelo.Pedido;
  * @author Alejandro Perellón López
  */
 @Entity
+@Table(name = "operaciones")
 public class Operacion {
 
 	@Id
-	@Column(columnDefinition = "BINARY(16)")
+	@Column(columnDefinition = "BINARY(16)", name = "id_operacion")
 	private UUID id = UUID.randomUUID();
 
 	@ManyToOne

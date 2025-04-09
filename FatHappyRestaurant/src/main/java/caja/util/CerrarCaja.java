@@ -52,14 +52,11 @@ public class CerrarCaja {
 			// Iniciamos el proceso de cierre
 
 			// Establecemos el importe final de la caja
-			caja.setImporteFinal(new CalcularOperaciones().calcularTotalOperaciones());
+			caja.setImporteFinal(new CalcularOperaciones().calcularTotalOperaciones().add(caja.getImporteInicial()));
 			// Establecemos el momento de cierre
 			caja.setMomentoCierre(LocalDateTime.now());
 			// Establecemos la lista de operaciones
 			caja.setListaOperaciones(dao.listarOperaciones());
-
-			// Almacenamos en el DAO
-			dao.insertarCaja(caja);
 
 			// Cerramos la caja en el metodo DAO
 			if (dao.cerrarCaja()) {

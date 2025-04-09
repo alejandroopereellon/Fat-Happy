@@ -12,14 +12,13 @@ import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.solicitarNumeroDecimal.SolicitarNumeroDecimalMetodos;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
-import caja.interfazCaja.PanelCaja;
-import caja.interfazCaja.PanelCajaMetodos;
 import caja.modelo.Caja;
 import caja.modelo.CajaDatos;
 import empleados.modelo.Empleado;
 import empleados.modelo.EmpleadoDatos;
 import empleados.util.ActividadEmpleados;
 import restaurante.modelo.RestauranteDatos;
+import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
 /**
  * Clase que crea un nuevo objeto caja
@@ -35,8 +34,6 @@ public class CajaBuilder {
 	private CajasDao dao = new CajasDaoHibernateImpl();
 	// Establecemos el objeto caja de la clase
 	private Caja caja = new Caja();
-	// Establecemos el panel de caja
-	private PanelCaja panel;
 
 	/**
 	 * Metodo que crea el nuevo objeto caja y lo establece en la clase singleton de
@@ -114,8 +111,8 @@ public class CajaBuilder {
 		dao.insertarCaja(caja);
 		logger.info("Se se ha añadido la caja en la base de datos");
 
-		// Establecemos los datos de la caja
-		new PanelCajaMetodos(panel).rellenarDatosCaja();
+		// Establecemos los datos de la caja en la ventana principal
+		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal()).configurarPanelCaja();
 
 		return true;
 	}

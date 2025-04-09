@@ -1,4 +1,4 @@
-package caja.interfazCaja;
+package caja.interfazCaja.descuentos;
 
 /**
  * Interfaz grafica que permite seleccionar un porcentaje de descuento,
