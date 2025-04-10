@@ -1,8 +1,8 @@
-package productos.InterfazGrafica.EdicionProductos;
+package productos.interfazPedido.personalizarPedido.ingredientes;
 
-import java.awt.Color;
-import javax.swing.ImageIcon;
-import productos.ingredientes.Ingrediente;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import productos.modelo.Ingrediente;
 
 /**
  * Esta clase muestra un panel con la informacion sobre el ingrediente junto con
@@ -12,54 +12,18 @@ import productos.ingredientes.Ingrediente;
  */
 public final class PanelIngrediente extends javax.swing.JPanel {
 
-    private final Ingrediente ingrediente;
+    private Ingrediente ingrediente;
+
+    private PanelIngredienteMetodos metodos = new PanelIngredienteMetodos(this, ingrediente);
 
     /**
      * Creates new form panelIngrediente
      */
-    public PanelIngrediente(Ingrediente ing, int posicionElemento) {
+    public PanelIngrediente(Ingrediente ing, boolean posicion) {
         initComponents();
         this.ingrediente = ing;
-        establecerDatosIngrediente();
-        establecerColorCasilla(posicionElemento);
-    }
+       metodos.iniciarPanelIngrediente(posicion);
 
-    /**
-     * Para que el producto sea visiblemente mas bonito segun si la posicion del
-     * producto es par o impar se va a modificar el color de fondo del producto
-     */
-    private void establecerColorCasilla(int posicion) {
-        //Si es numero impar se cambia de color
-        if (posicion % 2 != 0) {
-            this.setBackground(Color.decode("#a9dfbf"));
-        }
-    }
-
-    /**
-     * Este metodo establece los datos del ingrediente en el panel, entre ellos
-     * el estado del ingrediente (activo o no), imagen y nomnbre
-     */
-    public void establecerDatosIngrediente() {
-        //Establecemos la imagen del producto
-        ImageIcon icon = new ImageIcon(ingrediente.getRutaIngredientes());
-        imagenIngrediente.setIcon(icon);
-        //Establecemos el nombre del ingrediente
-        nombreIngrediente.setText(ingrediente.getNombreIngrediente());
-        //Establecemos si esta activo o no
-        actualizarEstadoProducto();
-
-    }
-
-    /**
-     * Este metodo establece el icono que indica si esta activo o inactivo
-     */
-    private void actualizarEstadoProducto() {
-        ImageIcon icon = new ImageIcon("\\productos\\InterfazGrafica\\EdicionProductos\\inactivo2.png");
-        if (ingrediente.isActivo()) {
-            icon = new ImageIcon("\\productos\\InterfazGrafica\\EdicionProductos\\activo2.png");
-        }
-        //Establecemos el estado del ingrediente
-        cuadroEstadoIngrediente.setIcon(icon);
     }
 
     /**
@@ -73,7 +37,7 @@ public final class PanelIngrediente extends javax.swing.JPanel {
 
         imagenIngrediente = new javax.swing.JLabel();
         nombreIngrediente = new javax.swing.JLabel();
-        cuadroEstadoIngrediente = new javax.swing.JLabel();
+        cuadroEstadoIngrediente = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(88, 214, 141));
 
@@ -87,8 +51,15 @@ public final class PanelIngrediente extends javax.swing.JPanel {
         nombreIngrediente.setForeground(new java.awt.Color(255, 255, 255));
         nombreIngrediente.setText("Sample text");
 
-        cuadroEstadoIngrediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cuadroEstadoIngrediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/activo.png"))); // NOI18N
+        cuadroEstadoIngrediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/inactivo.png"))); // NOI18N
+        cuadroEstadoIngrediente.setBorder(null);
+        cuadroEstadoIngrediente.setBorderPainted(false);
+        cuadroEstadoIngrediente.setContentAreaFilled(false);
+        cuadroEstadoIngrediente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cuadroEstadoIngredienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,8 +70,8 @@ public final class PanelIngrediente extends javax.swing.JPanel {
                 .addComponent(imagenIngrediente, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombreIngrediente, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cuadroEstadoIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cuadroEstadoIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -111,15 +82,39 @@ public final class PanelIngrediente extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imagenIngrediente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                            .addComponent(imagenIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                             .addComponent(cuadroEstadoIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cuadroEstadoIngredienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuadroEstadoIngredienteActionPerformed
+        metodos.cambiarEstadoIngrediente();
+    }//GEN-LAST:event_cuadroEstadoIngredienteActionPerformed
 
+    public Ingrediente getIngrediente() {
+        return ingrediente;
+    }
+
+    public PanelIngredienteMetodos getMetodos() {
+        return metodos;
+    }
+
+    public JLabel getImagenIngrediente() {
+        return imagenIngrediente;
+    }
+
+    public JLabel getNombreIngrediente() {
+        return nombreIngrediente;
+    }
+
+    public JButton getCuadroEstadoIngrediente() {
+        return cuadroEstadoIngrediente;
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cuadroEstadoIngrediente;
+    private javax.swing.JButton cuadroEstadoIngrediente;
     private javax.swing.JLabel imagenIngrediente;
     private javax.swing.JLabel nombreIngrediente;
     // End of variables declaration//GEN-END:variables

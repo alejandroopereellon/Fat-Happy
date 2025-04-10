@@ -1,56 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-package productos.InterfazGrafica.EdicionProductos;
+package productos.interfazPedido.personalizarPedido.edicionProducto;
 
-import java.util.List;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import productos.extras.Extra;
-import productos.hamburguesas.Hamburguesa;
-import productos.ingredientes.Ingrediente;
-import productos.interfazPedido.personalizarPedido.extras.PanelExtra;
-import productos.productos.Producto;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import productos.modelo.Producto;
 
 /**
+ * Clase de interfaz grafica que contiene el panel principal que muestra todos
+ * los ingredientes y extras del producto
  *
- * @author aleja
+ * @author Alejandro Perellón López
  */
 public class PanelEdicionProductos extends javax.swing.JPanel {
 
     private Producto producto;
 
+    private PanelEdicionProductosMetodos metodos = new PanelEdicionProductosMetodos(this);
+
     /**
      * Creates new form PanelEdicionProductos
      */
     public PanelEdicionProductos(Producto producto) {
+        this.producto = producto;
         initComponents();
-        mostrarDatosProducto();
-        ImageIcon icon = new ImageIcon(producto.getImagenProducto().getPath());
-        imagenProducto.setIcon(icon);
-    }
-
-    private void mostrarDatosProducto() {
-        if (producto instanceof Hamburguesa ham) {
-            mostrarIngredientesExtrasProducto(ham.getIngredientes(), ham.getExtras());
-        }
-        //Actualizamos el panel
-        panelIngredientesExtras.revalidate();
-        panelIngredientesExtras.repaint();
-    }
-
-    private void mostrarIngredientesExtrasProducto(List<Ingrediente> ingredientes, List<Extra> extras) {
-        panelIngredientesExtras.setLayout(new BoxLayout(panelIngredientesExtras, BoxLayout.Y_AXIS));
-        // Mostramos todos los ingredientes
-        for (int i = 0; i < ingredientes.size(); i++) {
-            panelIngredientesExtras.add(new PanelIngrediente(ingredientes.get(i), i));
-        }
-        //Mostramos todos los extras
-        for (int i = 0; i < extras.size(); i++) {
-            panelIngredientesExtras.add(new PanelExtra(extras.get(i), (ingredientes.size() + i)));
-        }
-
+        metodos.iniciarPanelEdicion();
     }
 
     /**
@@ -64,6 +36,7 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
 
         panelImagenProducto = new javax.swing.JPanel();
         imagenProducto = new javax.swing.JLabel();
+        nombreProducto = new javax.swing.JLabel();
         scrollPanelIngredientesExtras = new javax.swing.JScrollPane();
         panelIngredientesExtras = new javax.swing.JPanel();
 
@@ -71,36 +44,45 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
 
         panelImagenProducto.setBackground(new java.awt.Color(255, 255, 255));
 
-        imagenProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/productos/InterfazGrafica/imagenesProductos/Imagenes/imageNotFound256.png"))); // NOI18N
+        imagenProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaErrorProducto/imageNotFound256.png"))); // NOI18N
+
+        nombreProducto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        nombreProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nombreProducto.setText("Nombre del producto");
 
         javax.swing.GroupLayout panelImagenProductoLayout = new javax.swing.GroupLayout(panelImagenProducto);
         panelImagenProducto.setLayout(panelImagenProductoLayout);
         panelImagenProductoLayout.setHorizontalGroup(
             panelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelImagenProductoLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(imagenProducto)
-                .addContainerGap(177, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImagenProductoLayout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(panelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(nombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(imagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
         panelImagenProductoLayout.setVerticalGroup(
             panelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImagenProductoLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap()
+                .addComponent(nombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(imagenProducto)
-                .addGap(60, 60, 60))
+                .addGap(103, 103, 103))
         );
 
         scrollPanelIngredientesExtras.setBorder(null);
+        scrollPanelIngredientesExtras.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         javax.swing.GroupLayout panelIngredientesExtrasLayout = new javax.swing.GroupLayout(panelIngredientesExtras);
         panelIngredientesExtras.setLayout(panelIngredientesExtrasLayout);
         panelIngredientesExtrasLayout.setHorizontalGroup(
             panelIngredientesExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         panelIngredientesExtrasLayout.setVerticalGroup(
             panelIngredientesExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 376, Short.MAX_VALUE)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
         scrollPanelIngredientesExtras.setViewportView(panelIngredientesExtras);
@@ -121,9 +103,30 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public JLabel getImagenProducto() {
+        return imagenProducto;
+    }
+
+    public JLabel getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public JPanel getPanelImagenProducto() {
+        return panelImagenProducto;
+    }
+
+    public JPanel getPanelIngredientesExtras() {
+        return panelIngredientesExtras;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imagenProducto;
+    private javax.swing.JLabel nombreProducto;
     private javax.swing.JPanel panelImagenProducto;
     private javax.swing.JPanel panelIngredientesExtras;
     private javax.swing.JScrollPane scrollPanelIngredientesExtras;

@@ -21,9 +21,12 @@ public class PanelExtraMetodos {
 	static Logger logger = LogManager.getLogger(PanelExtraMetodos.class);
 	// Establecemos la interfaz
 	private PanelExtra interfaz;
+	// Extablecemos el extra
+	private Extra extra;
 
 	public PanelExtraMetodos(PanelExtra interfaz) {
 		this.interfaz = interfaz;
+		this.extra = interfaz.getExtra();
 	}
 
 	/**
@@ -33,7 +36,7 @@ public class PanelExtraMetodos {
 	 */
 	protected void iniciarPanelExtras(boolean esPar) {
 		// Establecemos los datos del extra
-		establecerDatosExtra(interfaz.getExtra());
+		establecerDatosExtra(extra);
 
 		// Establecer datos del extra
 		establecerColorCasilla(esPar);
@@ -53,6 +56,7 @@ public class PanelExtraMetodos {
 		// Si es numero impar se cambia de color
 		if (esPar) {
 			interfaz.setBackground(Color.decode("#a9dfbf"));
+			logger.debug("Se ha modificado el estado de la casilla del extra {}", extra);
 		}
 	}
 
@@ -65,10 +69,12 @@ public class PanelExtraMetodos {
 		// Establecemos la imagen del producto
 		ImageIcon icon = new ImageIcon(extra.getRutaImagen());
 		interfaz.getImagenExtra().setIcon(icon);
+		logger.debug("Se ha establecido la imagen del extra {}", extra);
 		// Establecemos el nombre del ingrediente
 		interfaz.getNombreExtra().setText(extra.getRutaImagen());
+		logger.debug("Se ha establecido el nombre del extra {}", extra);
 		// Establecemos la cantidad de producto
-		interfaz.getCantidadProducto().setText(String.valueOf(extra.getCantidadExtra()));
+		actualizarCantidadExtras();
 	}
 
 	/**
@@ -78,20 +84,34 @@ public class PanelExtraMetodos {
 	 * desactiva el boton de disminuir
 	 */
 	private void controlarBotonesCantidad() {
-		Extra extra = interfaz.getExtra();
-
 		// Activamos los botones de aumentar y disminuir
 		interfaz.getAumentarCantidad().setEnabled(true);
 		interfaz.getDisminuirCantidad().setEnabled(true);
+		logger.debug("Se han habilitado las dos casillas del extra {}", extra);
 
 		// Comprobamos si se iguala la cantidad maxima y se desHabilita el boton
 		if (extra.getCantidadExtra() >= extra.getMaximoExtras()) {
 			interfaz.getAumentarCantidad().setEnabled(false);
+			logger.debug("Se ha deshabilitado la casilla de aumentar cantidad del extra {}", extra);
 		}
 		// Comprobamos si la cantidad de extra son
 		if (extra.getCantidadExtra() <= 0) {
 			interfaz.getDisminuirCantidad().setEnabled(false);
+			logger.debug("Se ha deshabilitado la casilla de disminuir cantidad del extra {}", extra);
 		}
+
+		// Actualizamos el numero de extras
+		actualizarCantidadExtras();
+	}
+
+	/**
+	 * Metodo que actualiza en el panel la cantidad de extras
+	 */
+	private void actualizarCantidadExtras() {
+		String cantidad = String.valueOf(extra.getCantidadExtra());
+		// Establecemos la cantidad de extra
+		interfaz.getCantidadProducto().setText(cantidad);
+		logger.debug("Se ha actualizado la cantidad de extra {}", extra);
 	}
 
 	/**
@@ -99,9 +119,10 @@ public class PanelExtraMetodos {
 	 */
 	protected void aumentarCantidad() {
 		// Aumentamos la cantidad
-		new ModificarExtras(interfaz.getExtra()).aumentarCantidad();
+		new ModificarExtras(extra).aumentarCantidad();
 		// Actualizamos los botones
 		controlarBotonesCantidad();
+		logger.debug("Se ha aumentado la cantidad de extra {}", extra);
 	}
 
 	/**
@@ -109,8 +130,9 @@ public class PanelExtraMetodos {
 	 */
 	protected void disminuirCantidad() {
 		// Aumentamos la cantidad
-		new ModificarExtras(interfaz.getExtra()).disminuirCantidad();
+		new ModificarExtras(extra).disminuirCantidad();
 		// Actualizamos los botones
 		controlarBotonesCantidad();
+		logger.debug("Se ha disminuido la cantidad de extra {}", extra);
 	}
 }

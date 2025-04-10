@@ -55,6 +55,9 @@ public class Producto implements Serializable {
 	@Column(name = "imagen_producto_128", length = 150)
 	private String imagenProducto128;
 
+	@Column(name = "imagen_producto_256", length = 150)
+	private String imagenProducto256;
+
 	@Column(name = "imagen_producto_original", length = 150)
 	private String imagenProductoOriginal;
 
@@ -174,6 +177,10 @@ public class Producto implements Serializable {
 
 	public void setStockDisponible(boolean stockDisponible) {
 		this.stockDisponible = stockDisponible;
+	}
+
+	public String getImagenProducto256() {
+		return imagenProducto256;
 	}
 
 	// toString

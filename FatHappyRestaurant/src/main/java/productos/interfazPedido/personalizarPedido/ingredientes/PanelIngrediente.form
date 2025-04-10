@@ -26,8 +26,8 @@
               <Component id="imagenIngrediente" min="-2" pref="80" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="nombreIngrediente" min="-2" pref="265" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="cuadroEstadoIngrediente" pref="95" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="cuadroEstadoIngrediente" pref="100" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -40,7 +40,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="imagenIngrediente" alignment="1" pref="97" max="32767" attributes="0"/>
+                          <Component id="imagenIngrediente" pref="103" max="32767" attributes="0"/>
                           <Component id="cuadroEstadoIngrediente" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -81,13 +81,20 @@
         <Property name="text" type="java.lang.String" value="Sample text"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="cuadroEstadoIngrediente">
+    <Component class="javax.swing.JButton" name="cuadroEstadoIngrediente">
       <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/graficaPersonalizarProducto/activo.png"/>
+          <Image iconType="3" name="/graficaPersonalizarProducto/inactivo.png"/>
         </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cuadroEstadoIngredienteActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -119,7 +119,7 @@ public final class PanelExtra extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nombreIExtra, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(costeAdicional, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addComponent(costeAdicional, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -140,11 +140,11 @@ public final class PanelExtra extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aumentarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarCantidadActionPerformed
-        cambiarCantidadProducto(true);
+        metodos.aumentarCantidad();
     }//GEN-LAST:event_aumentarCantidadActionPerformed
 
     private void disminuirCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disminuirCantidadActionPerformed
-        cambiarCantidadProducto(false);
+        metodos.disminuirCantidad();
     }//GEN-LAST:event_disminuirCantidadActionPerformed
 
     public Extra getExtra() {
