@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 

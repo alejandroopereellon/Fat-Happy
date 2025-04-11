@@ -8,6 +8,7 @@ import caja.util.IniciarCaja;
 import empleados.modelo.EmpleadoDatos;
 import productos.dao.ProductosDaoGlobal;
 import productos.dao.ProductosDaoHibernateImpl;
+import productos.util.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
 import restaurante.modelo.RestauranteDatos;
 import ventanaPrincipal.InterfazVentanaPrincipal;
@@ -22,7 +23,9 @@ public class InicioAplicacion {
 	static Logger logger = LogManager.getLogger(InicioAplicacion.class);
 
 	/**
-	 * 
+	 * Metodo que se ejecuta en el inicio de la aplicacion y realiza todos los
+	 * procesos de configuracion, y almacenamiento en memoria necesarios para el
+	 * correcto funcionamiento del programa
 	 */
 	public boolean cargarDatosAplicacion() {
 		// Establecemos el escalado de las imagenes al 100%
@@ -38,12 +41,12 @@ public class InicioAplicacion {
 		// Iniciar descarga de imágenes del servidor ftp
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
 		grafica.getBarraProgreso().setValue(15);
-		if (new FTPDownloader().iniciarConexionYDescargar()) {
-			logger.info("Se han cargado los ficheros en local");
-		} else {
-			logger.error("No se han podido cargar los ficheros en local");
-			return false;
-		}
+//		if (new FTPDownloader().iniciarConexionYDescargar()) {
+//			logger.info("Se han cargado los ficheros en local");
+//		} else {
+//			logger.error("No se han podido cargar los ficheros en local");
+//			return false;
+//		}
 		grafica.getBarraProgreso().setValue(20);
 
 		// Cargar datos del restaurante
@@ -80,8 +83,14 @@ public class InicioAplicacion {
 
 		// Cargamos todos los productos en memoria haciendo uso del hilo
 		grafica.getEstadoInicio().setText("Cargando los productos del sistema");
-		// new ActualizarListaProductos().start();
+		//Creamos el objeto de actualizacion de productos
+		ActualizarListaProductos actualizarProductos = new ActualizarListaProductos();
+		// Actualizamos todos los productos
+		actualizarProductos.actualizarDatos();
 		grafica.getBarraProgreso().setValue(80);
+		// Iniciamos el hilo de actualizacion automatica del stock
+		actualizarProductos.start();
+		grafica.getBarraProgreso().setValue(85);
 
 		// Iniciamos la ventana principal del programa
 		grafica.getEstadoInicio().setText("Iniciando la ventana principal...");

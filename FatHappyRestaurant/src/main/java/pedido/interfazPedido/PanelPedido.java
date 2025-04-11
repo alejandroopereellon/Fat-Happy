@@ -1,10 +1,22 @@
 package pedido.interfazPedido;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import pedido.modelo.Pedido;
+
 /**
+ * Clase que maneja de manera grafica la creacion de un pedido
  *
- * @author aleja
+ * @author Alejandro Perellón López
  */
 public class PanelPedido extends javax.swing.JPanel {
+
+    private PanelPedidoMetodos metodos = new PanelPedidoMetodos(this);
+
+    private DefaultListModel<Object> modeloLista = new DefaultListModel<>();
+
+    private Pedido pedido;
 
     /**
      * Creates new form PanelPedido
@@ -22,21 +34,223 @@ public class PanelPedido extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelProductosPedidos = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaPedido = new javax.swing.JList<>();
+        panelSeleccionTipoProducto = new javax.swing.JPanel();
+        Hamburguesas = new javax.swing.JButton();
+        bebidas = new javax.swing.JButton();
+        Complementos = new javax.swing.JButton();
+        Postres = new javax.swing.JButton();
+        categoria5 = new javax.swing.JButton();
+        panelAjustesPedido = new javax.swing.JPanel();
+        cobrar = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
+        panelProductos = new javax.swing.JPanel();
+
         setBackground(new java.awt.Color(204, 255, 51));
+
+        listaPedido.setModel(modeloLista);
+        listaPedido.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaPedido.setToolTipText("");
+        jScrollPane1.setViewportView(listaPedido);
+
+        javax.swing.GroupLayout panelProductosPedidosLayout = new javax.swing.GroupLayout(panelProductosPedidos);
+        panelProductosPedidos.setLayout(panelProductosPedidosLayout);
+        panelProductosPedidosLayout.setHorizontalGroup(
+            panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+        );
+        panelProductosPedidosLayout.setVerticalGroup(
+            panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+        );
+
+        Hamburguesas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Hamburguesas.setText("Hamburguesas");
+        Hamburguesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HamburguesasActionPerformed(evt);
+            }
+        });
+
+        bebidas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bebidas.setText("Bebidas");
+        bebidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bebidasActionPerformed(evt);
+            }
+        });
+
+        Complementos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Complementos.setText("Complementos");
+        Complementos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComplementosActionPerformed(evt);
+            }
+        });
+
+        Postres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Postres.setText("Postres");
+        Postres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PostresActionPerformed(evt);
+            }
+        });
+
+        categoria5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        categoria5.setText("Categoria 5");
+        categoria5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoria5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelSeleccionTipoProductoLayout = new javax.swing.GroupLayout(panelSeleccionTipoProducto);
+        panelSeleccionTipoProducto.setLayout(panelSeleccionTipoProductoLayout);
+        panelSeleccionTipoProductoLayout.setHorizontalGroup(
+            panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSeleccionTipoProductoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Hamburguesas, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Complementos, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Postres, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(categoria5, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelSeleccionTipoProductoLayout.setVerticalGroup(
+            panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSeleccionTipoProductoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Hamburguesas, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(Complementos, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(bebidas, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addGroup(panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Postres, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(categoria5, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        cobrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cobrar.setText("Cobrar");
+
+        Editar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Editar.setText("Editar");
+
+        javax.swing.GroupLayout panelAjustesPedidoLayout = new javax.swing.GroupLayout(panelAjustesPedido);
+        panelAjustesPedido.setLayout(panelAjustesPedidoLayout);
+        panelAjustesPedidoLayout.setHorizontalGroup(
+            panelAjustesPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAjustesPedidoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelAjustesPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Editar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cobrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        panelAjustesPedidoLayout.setVerticalGroup(
+            panelAjustesPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAjustesPedidoLayout.createSequentialGroup()
+                .addGap(656, 656, 656)
+                .addComponent(Editar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cobrar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout panelProductosLayout = new javax.swing.GroupLayout(panelProductos);
+        panelProductos.setLayout(panelProductosLayout);
+        panelProductosLayout.setHorizontalGroup(
+            panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelProductosLayout.setVerticalGroup(
+            panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1500, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelProductosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelSeleccionTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 1194, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelAjustesPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(panelProductosPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelSeleccionTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelAjustesPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void HamburguesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HamburguesasActionPerformed
+        metodos.mostrarHamburguesas();
+    }//GEN-LAST:event_HamburguesasActionPerformed
+
+    private void ComplementosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComplementosActionPerformed
+        metodos.mostrarComplementos();
+    }//GEN-LAST:event_ComplementosActionPerformed
+
+    private void bebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bebidasActionPerformed
+        metodos.mostrarBebidas();
+    }//GEN-LAST:event_bebidasActionPerformed
+
+    private void PostresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PostresActionPerformed
+       metodos.mostrarPostres();
+    }//GEN-LAST:event_PostresActionPerformed
+
+    private void categoria5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoria5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoria5ActionPerformed
+
+    public DefaultListModel<Object> getModeloLista() {
+        return modeloLista;
+    }
+
+    public JList<Object> getjList1() {
+        return listaPedido;
+    }
+
+    public JPanel getPanelProductos() {
+        return panelProductos;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Complementos;
+    private javax.swing.JButton Editar;
+    private javax.swing.JButton Hamburguesas;
+    private javax.swing.JButton Postres;
+    private javax.swing.JButton bebidas;
+    private javax.swing.JButton categoria5;
+    private javax.swing.JButton cobrar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<Object> listaPedido;
+    private javax.swing.JPanel panelAjustesPedido;
+    private javax.swing.JPanel panelProductos;
+    private javax.swing.JPanel panelProductosPedidos;
+    private javax.swing.JPanel panelSeleccionTipoProducto;
     // End of variables declaration//GEN-END:variables
 }

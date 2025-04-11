@@ -19,9 +19,6 @@ import caja.interfazCaja.panelPrincipalCaja.PanelCajaMetodos;
 import caja.modelo.CajaDatos;
 import pedido.interfazPedido.PanelPedido;
 import pedido.interfazPedido.PanelPedidoMetodos;
-import productos.interfazPedido.personalizarPedido.edicionProducto.PanelEdicionProductos;
-import productos.interfazPedido.personalizarPedido.edicionProducto.PanelEdicionProductosMetodos;
-import productos.modelo.Producto;
 
 public class InterfazVentanaPrincipalMetodos {
 	// Crear el logger
@@ -78,14 +75,6 @@ public class InterfazVentanaPrincipalMetodos {
 		new PanelPedidoMetodos(panelPedido).iniciarPanelPedido();
 		// Añadimos la el panel pedido al panel principal
 		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panelPedido);
-
-		Producto pro = new productos.dao.ProductosDaoHibernateImpl().obtenerHamburguesa(10010101);
-
-		PanelEdicionProductos panel = new PanelEdicionProductos(pro);
-
-		new PanelEdicionProductosMetodos(panel).iniciarPanelEdicion();
-		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panel);
-
 	}
 
 	/**

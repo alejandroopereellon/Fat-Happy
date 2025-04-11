@@ -1,5 +1,6 @@
 package pedido.util;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -43,8 +44,8 @@ public class PedidoBuilder {
 		pedido.setFechaHora(LocalDateTime.now());
 
 		// Establecemos la ruta donde se almacenan los pedidos
-		String ruta = "/R" + CajaDatos.get().getRestaurante().getIdRestaurante() + "/" + LocalDate.now().toString()
-				+ "/" + numeroPedido;
+		String ruta = File.separator + "R" + CajaDatos.get().getRestaurante().getIdRestaurante() + File.separator
+				+ LocalDate.now().toString() + File.separator + numeroPedido;
 		pedido.setRutaPedido(ruta);
 
 		pedido.setDescuento(0);

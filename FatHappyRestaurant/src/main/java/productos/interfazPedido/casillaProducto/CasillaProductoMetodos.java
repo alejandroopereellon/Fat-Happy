@@ -30,10 +30,11 @@ public class CasillaProductoMetodos {
 	 * Este metodo establece toda la informacion del producto en la casilla, a
 	 * traves del objeto {@link Producto} obtiene el nombre, imagen y precio del
 	 * producto
-	 *
-	 * @param pro es el producto del que se va a extraer la informacion
 	 */
-	protected void establecerDatosProducto(Producto pro) {
+	public void establecerDatosProducto() {
+		// Establecemos el producto
+		Producto pro = interfaz.getProducto();
+
 		// Establecemos la imagen del producto
 		interfaz.getCuadroImagen().setIcon(new ImageIcon(obtenerRutaImagen(pro.getImagenProducto64())));
 

@@ -28,7 +28,7 @@ public class CasillaProducto extends javax.swing.JPanel {
         this.pedido = pedido;
         
         initComponents(); 
-        metodo.establecerDatosProducto(producto);
+        metodo.establecerDatosProducto();
     }
 
     /**

@@ -1,5 +1,6 @@
 package pedido.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import productos.modelo.MenuPedido;
@@ -12,9 +13,9 @@ import productos.modelo.Producto;
  */
 public class OrdenPedido {
 
-	private List<Producto> listaProductos;
+	private List<Producto> listaProductos = new ArrayList<Producto>();
 
-	private List<MenuPedido> listaMenus;
+	private List<MenuPedido> listaMenus = new ArrayList<MenuPedido>();
 
 	private boolean llevar;
 
@@ -25,6 +26,9 @@ public class OrdenPedido {
 		this.listaMenus = listaMenus;
 		this.llevar = llevar;
 		this.numeroMesa = numeroMesa;
+	}
+
+	public OrdenPedido() {
 	}
 
 	public List<Producto> getListaProductos() {
