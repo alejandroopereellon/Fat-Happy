@@ -14,16 +14,14 @@ public final class PanelIngrediente extends javax.swing.JPanel {
 
     private Ingrediente ingrediente;
 
-    private PanelIngredienteMetodos metodos = new PanelIngredienteMetodos(this, ingrediente);
+    private PanelIngredienteMetodos metodos = new PanelIngredienteMetodos(this);
 
     /**
      * Creates new form panelIngrediente
      */
-    public PanelIngrediente(Ingrediente ing, boolean posicion) {
+    public PanelIngrediente(Ingrediente ing) {
         initComponents();
         this.ingrediente = ing;
-       metodos.iniciarPanelIngrediente(posicion);
-
     }
 
     /**
@@ -39,7 +37,8 @@ public final class PanelIngrediente extends javax.swing.JPanel {
         nombreIngrediente = new javax.swing.JLabel();
         cuadroEstadoIngrediente = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(88, 214, 141));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         imagenIngrediente.setBackground(new java.awt.Color(255, 255, 255));
         imagenIngrediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -47,8 +46,8 @@ public final class PanelIngrediente extends javax.swing.JPanel {
         imagenIngrediente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         imagenIngrediente.setOpaque(true);
 
-        nombreIngrediente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        nombreIngrediente.setForeground(new java.awt.Color(255, 255, 255));
+        nombreIngrediente.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        nombreIngrediente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombreIngrediente.setText("Sample text");
 
         cuadroEstadoIngrediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/inactivo.png"))); // NOI18N
@@ -67,24 +66,26 @@ public final class PanelIngrediente extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imagenIngrediente, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imagenIngrediente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombreIngrediente, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cuadroEstadoIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(nombreIngrediente, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cuadroEstadoIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombreIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nombreIngrediente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imagenIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(cuadroEstadoIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(cuadroEstadoIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(imagenIngrediente)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -112,7 +113,7 @@ public final class PanelIngrediente extends javax.swing.JPanel {
         return cuadroEstadoIngrediente;
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cuadroEstadoIngrediente;
     private javax.swing.JLabel imagenIngrediente;

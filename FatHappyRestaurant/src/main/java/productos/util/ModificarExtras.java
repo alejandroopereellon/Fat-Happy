@@ -1,5 +1,7 @@
 package productos.util;
 
+import java.math.BigDecimal;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,5 +38,14 @@ public class ModificarExtras {
 			extra.setCantidadExtra(extra.getCantidadExtra() - 1);
 			logger.debug("Se ha disminuido la cantidad de extra");
 		}
+	}
+
+	/**
+	 * Metodo que muestra el coste total de los extras
+	 */
+	public BigDecimal costeExtras() {
+		BigDecimal cantidad = new BigDecimal(extra.getCantidadExtra());
+
+		return cantidad.multiply(extra.getCosteExtra().setScale(2));
 	}
 }

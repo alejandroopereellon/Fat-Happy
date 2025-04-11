@@ -58,6 +58,25 @@ public class PanelUtil {
 			logger.warn("El contenedor o el componente son nulos");
 			return;
 		}
+		contenedor.removeAll();
+		contenedor.add(componente);
+		contenedor.revalidate();
+		contenedor.repaint();
+		logger.info("Se ha insertado un componente en el panel correctamente");
+	}
+
+	/**
+	 * Borrar todo el contenido del panel, Añade un componente dentro del panel y
+	 * fuerza la actualización visual.
+	 *
+	 * @param contenedor Panel contenedor donde se añadirá el nuevo componente
+	 * @param componente Componente que se va a insertar (puede ser otro JPanel)
+	 */
+	public void insertarEnPanelSinBorrar(JPanel contenedor, java.awt.Component componente) {
+		if (contenedor == null || componente == null) {
+			logger.warn("El contenedor o el componente son nulos");
+			return;
+		}
 		contenedor.add(componente);
 		contenedor.revalidate();
 		contenedor.repaint();

@@ -1,8 +1,14 @@
 package productos.modelo;
 
-import jakarta.persistence.*;
-
 import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * clase que representa los ingredientes disponibles para los productos cada
@@ -29,7 +35,7 @@ public class Ingrediente implements Serializable {
 	private String nombreIngrediente;
 
 	@Transient
-	private boolean activo;
+	private boolean activo=true;
 
 	@Column(name = "imagen_ingrediente", length = 120, nullable = false)
 	private String rutaImagenIngrediente;

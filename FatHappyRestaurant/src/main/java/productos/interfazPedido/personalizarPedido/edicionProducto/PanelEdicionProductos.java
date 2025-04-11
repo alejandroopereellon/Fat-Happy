@@ -22,7 +22,6 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
     public PanelEdicionProductos(Producto producto) {
         this.producto = producto;
         initComponents();
-        metodos.iniciarPanelEdicion();
     }
 
     /**
@@ -41,6 +40,8 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
         panelIngredientesExtras = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(88, 214, 141));
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        setMaximumSize(new java.awt.Dimension(724, 461));
 
         panelImagenProducto.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -65,10 +66,10 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
             panelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImagenProductoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagenProducto)
-                .addGap(103, 103, 103))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         scrollPanelIngredientesExtras.setBorder(null);
@@ -78,11 +79,11 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
         panelIngredientesExtras.setLayout(panelIngredientesExtrasLayout);
         panelIngredientesExtrasLayout.setHorizontalGroup(
             panelIngredientesExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 997, Short.MAX_VALUE)
         );
         panelIngredientesExtrasLayout.setVerticalGroup(
             panelIngredientesExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 611, Short.MAX_VALUE)
         );
 
         scrollPanelIngredientesExtras.setViewportView(panelIngredientesExtras);
@@ -92,14 +93,14 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelImagenProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrollPanelIngredientesExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPanelIngredientesExtras, javax.swing.GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(scrollPanelIngredientesExtras)
+            .addComponent(scrollPanelIngredientesExtras, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

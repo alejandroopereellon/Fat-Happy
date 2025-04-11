@@ -1,5 +1,6 @@
 package productos.interfazPedido.personalizarPedido.edicionProducto;
 
+import java.awt.GridLayout;
 import java.io.File;
 import java.util.List;
 
@@ -10,9 +11,12 @@ import javax.swing.JPanel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.utilidadesGraficas.PanelUtil;
 import productos.interfazPedido.personalizarPedido.extras.PanelExtra;
+import productos.interfazPedido.personalizarPedido.extras.PanelExtraMetodos;
 import productos.interfazPedido.personalizarPedido.ingredientes.PanelIngrediente;
+import productos.interfazPedido.personalizarPedido.ingredientes.PanelIngredienteMetodos;
 import productos.modelo.Extra;
 import productos.modelo.Hamburguesa;
 import productos.modelo.Ingrediente;
@@ -29,12 +33,12 @@ public class PanelEdicionProductosMetodos {
 	private Producto producto;
 
 	// Constuctor de la clase
-	protected PanelEdicionProductosMetodos(PanelEdicionProductos interfaz) {
+	public PanelEdicionProductosMetodos(PanelEdicionProductos interfaz) {
 		this.interfaz = interfaz;
 		this.producto = interfaz.getProducto();
 	}
 
-	protected void iniciarPanelEdicion() {
+	public void iniciarPanelEdicion() {
 		// Establecemos los datos del producto
 		establecerDatosProducto();
 
@@ -46,7 +50,7 @@ public class PanelEdicionProductosMetodos {
 		// Obtenemos el panel
 		JPanel panel = interfaz.getPanelIngredientesExtras();
 		// Establecemos el layout del panel en boxlayout y lo ponemos eje Y
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setLayout(new GridLayout(0, 2));
 		logger.debug("Se ha establecido el layout del panel");
 
 		// Creamos una lista de ingredientes y de extras
@@ -63,13 +67,16 @@ public class PanelEdicionProductosMetodos {
 			logger.debug("El producto es un postre");
 		}
 
-		boolean posicion = false;
-
 		if (listaIngredientes != null) {
+			System.out.println("Se estan creando paneles de ingredientes");
 			// Insertamos el panel de ingrediente en el panel principal
 			for (Ingrediente ing : listaIngredientes) {
-				new PanelUtil().insertarEnPanel(panel, new PanelIngrediente(ing, posicion));
-				cambiarEstadoPosicion(posicion);
+				// Iniciamos el panel de ingredientes
+				PanelIngrediente panIng = new PanelIngrediente(ing);
+				// Establecemos los datos del panel de ingredientes
+				new PanelIngredienteMetodos(panIng).iniciarPanelIngrediente();
+				// Anadimos el panel al panel principal
+				new PanelUtil().insertarEnPanelSinBorrar(panel, panIng);
 
 				logger.debug("Se ha insertado el ingrediente {} en el panel", ing);
 			}
@@ -78,23 +85,17 @@ public class PanelEdicionProductosMetodos {
 		if (listaExtras != null) {
 			// Insetamos el panel de extra en el panel principal
 			for (Extra ext : listaExtras) {
-				new PanelUtil().insertarEnPanel(panel, new PanelExtra(ext, posicion));
-				cambiarEstadoPosicion(posicion);
+				// Iniciamos el panel de ingredientes
+				PanelExtra panExt = new PanelExtra(ext);
+				// Establecemos los datos del panel de ingredientes
+				new PanelExtraMetodos(panExt).iniciarPanelExtras();
+				// Anadimos el panel al panel principal
+				new PanelUtil().insertarEnPanelSinBorrar(panel, panExt);
 
 				logger.debug("Se ha insertado el extra {} en el panel", ext);
 			}
 		}
 
-	}
-
-	/**
-	 * Metodo que establece si una posicion es par o impar
-	 * 
-	 * @param posicion es la posicion, si es true es que es par
-	 * @return posicion inversa
-	 */
-	private boolean cambiarEstadoPosicion(boolean posicion) {
-		return !posicion;
 	}
 
 	/**
@@ -105,8 +106,11 @@ public class PanelEdicionProductosMetodos {
 		interfaz.getNombreProducto().setText(producto.getNombreProducto());
 		logger.debug("Se ha establecido el nombre en el panel de edicion");
 		// Establecemos la imagen del producto
-		if (new File(producto.getImagenProducto256()).exists()) {
-			ImageIcon imagen = new ImageIcon(producto.getImagenProducto256());
+		File rutaImagen = new File(ConfiguracionInicial.get().getDirectorioLocal() + File.separator + "imagenes"
+				+ File.separator + producto.getImagenProducto256());
+		System.out.println(rutaImagen);
+		if (rutaImagen.exists()) {
+			ImageIcon imagen = new ImageIcon(rutaImagen.getAbsolutePath());
 			interfaz.getImagenProducto().setIcon(imagen);
 			logger.debug("Se ha establecido la imagen del producto");
 		} else {

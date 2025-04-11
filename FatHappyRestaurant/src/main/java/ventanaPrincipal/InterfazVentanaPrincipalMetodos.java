@@ -1,6 +1,7 @@
 package ventanaPrincipal;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
@@ -18,6 +19,9 @@ import caja.interfazCaja.panelPrincipalCaja.PanelCajaMetodos;
 import caja.modelo.CajaDatos;
 import pedido.interfazPedido.PanelPedido;
 import pedido.interfazPedido.PanelPedidoMetodos;
+import productos.interfazPedido.personalizarPedido.edicionProducto.PanelEdicionProductos;
+import productos.interfazPedido.personalizarPedido.edicionProducto.PanelEdicionProductosMetodos;
+import productos.modelo.Producto;
 
 public class InterfazVentanaPrincipalMetodos {
 	// Crear el logger
@@ -35,7 +39,7 @@ public class InterfazVentanaPrincipalMetodos {
 	 */
 	public void iniciarConfiguracionInicial() {
 		// Establecemos resolucion a pantalla completa
-		//configuracionPantalla();
+		configuracionPantalla();
 		// Establecemos el look and feel
 		aplicarLookAndFeel();
 		// Hacemos la interfaz visible
@@ -65,14 +69,23 @@ public class InterfazVentanaPrincipalMetodos {
 	 * Metodo que establece el panel de pedidos en el panel prinicpal
 	 */
 	public void configurarPanelPrincipal() {
-		// Establecemos el layout del panel principal
-		interfaz.getPanelSecundario().setLayout(new BorderLayout());
+		// Establecemos el layout del panel secundario
+//		interfaz.getPanelSecundario().setLayout(new BorderLayout());
+		interfaz.getPanelSecundario().setLayout(new FlowLayout());
 		// Generamos el objeto de panelPedido
 		PanelPedido panelPedido = new PanelPedido();
 		// Configuramos el panel de pedido
 		new PanelPedidoMetodos(panelPedido).iniciarPanelPedido();
 		// Añadimos la el panel pedido al panel principal
 		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panelPedido);
+
+		Producto pro = new productos.dao.ProductosDaoHibernateImpl().obtenerHamburguesa(10010101);
+
+		PanelEdicionProductos panel = new PanelEdicionProductos(pro);
+
+		new PanelEdicionProductosMetodos(panel).iniciarPanelEdicion();
+		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panel);
+
 	}
 
 	/**

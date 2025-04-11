@@ -1,6 +1,6 @@
 package productos.interfazPedido.personalizarPedido.ingredientes;
 
-import java.awt.Color;
+import java.io.File;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import productos.modelo.Ingrediente;
 
 public class PanelIngredienteMetodos {
@@ -15,21 +16,23 @@ public class PanelIngredienteMetodos {
 	static Logger logger = LogManager.getLogger(PanelIngredienteMetodos.class);
 	// Establecemos la interfaz
 	private PanelIngrediente interfaz;
-	// Extablecemos el ingrediente
-	private Ingrediente ingrediente;
 
-	protected PanelIngredienteMetodos(PanelIngrediente interfaz, Ingrediente ingrediente) {
+	public PanelIngredienteMetodos(PanelIngrediente interfaz) {
 		this.interfaz = interfaz;
-		this.ingrediente = interfaz.getIngrediente();
 	}
 
 	/**
 	 * Este metodo establece los datos del ingrediente en el panel, entre ellos el
 	 * estado del ingrediente (activo o no), imagen y nombre
 	 */
-	protected void iniciarPanelIngrediente(Boolean posicion) {
+	public void iniciarPanelIngrediente() {
+		// Establecemos el ingrediente de la interfaz
+		Ingrediente ingrediente = interfaz.getIngrediente();
+
 		// Establecemos la imagen del producto
-		ImageIcon icon = new ImageIcon(ingrediente.getRutaIngredientes());
+		ImageIcon icon = new ImageIcon(ConfiguracionInicial.get().getDirectorioLocal() + File.separator + "imagenes"
+				+ File.separator + "ImagenIngredientes" + File.separator + "Ingredientes64" + File.separator
+				+ ingrediente.getRutaIngredientes());
 		interfaz.getImagenIngrediente().setIcon(icon);
 		logger.debug("Se ha establecido la imagen del ingrediente {}", ingrediente);
 		// Establecemos el nombre del ingrediente
@@ -37,9 +40,6 @@ public class PanelIngredienteMetodos {
 		logger.debug("Se ha establecido el nombre del ingrediente {}", ingrediente);
 		// Establecemos si esta activo o no
 		actualizarEstadoProducto();
-		// Establecemos el color de la casilla
-		establecerColorCasilla(posicion);
-
 	}
 
 	/**
@@ -49,32 +49,18 @@ public class PanelIngredienteMetodos {
 	protected void cambiarEstadoIngrediente() {
 		// Cambiamos el estado del ingrediente
 		cambiarEstadoActivo();
-		// Cambiamos la imagen del ingrediente
-		establecerImagenIngrediente(null);
-	}
-
-	/**
-	 * Para que el producto sea visiblemente mas bonito segun si la posicion del
-	 * producto es par o impar se va a modificar el color de fondo del producto
-	 */
-	private void establecerColorCasilla(boolean esPar) {
-		// Si es numero impar se cambia de color
-		if (esPar) {
-			interfaz.setBackground(Color.decode("#a9dfbf"));
-			logger.debug("Se ha modificado el estado de la casilla del ingrediente {}", ingrediente);
-		}
 	}
 
 	/**
 	 * Este metodo establece el icono que indica si esta activo o inactivo
 	 */
 	private void actualizarEstadoProducto() {
-		if (ingrediente.isActivo()) {
+		if (interfaz.getIngrediente().isActivo()) {
 			establecerImagenIngrediente(productoActivo());
-			logger.debug("Se ha establecido la imagen de activo en el ingrediente {}", ingrediente);
+			logger.debug("Se ha establecido la imagen de activo en el ingrediente {}", interfaz.getIngrediente());
 		} else {
 			establecerImagenIngrediente(productoInactivo());
-			logger.debug("Se ha establecido la imagen de inactivo en el ingrediente {}", ingrediente);
+			logger.debug("Se ha establecido la imagen de inactivo en el ingrediente {}", interfaz.getIngrediente());
 		}
 	}
 
@@ -83,6 +69,9 @@ public class PanelIngredienteMetodos {
 	 * activo se desactiva y si esta desactivado se activa
 	 */
 	private void cambiarEstadoActivo() {
+		// Establecemos el ingrediente de la interfaz
+		Ingrediente ingrediente = interfaz.getIngrediente();
+
 		// Cambiamos el estado del ingrediente
 		if (ingrediente.isActivo()) {
 			// Desactivamos el ingrediente
@@ -109,9 +98,6 @@ public class PanelIngredienteMetodos {
 	 * @param icon es el {@link Icon}o que se va a añadir
 	 */
 	private void establecerImagenIngrediente(Icon icon) {
-		if (ingrediente.isActivo()) {
-
-		}
 		interfaz.getCuadroEstadoIngrediente().setIcon(icon);
 	}
 
@@ -121,7 +107,7 @@ public class PanelIngredienteMetodos {
 	 * @return {@link Icon}o del producto activo
 	 */
 	private Icon productoInactivo() {
-		return new ImageIcon(getClass().getClassLoader().getResource("graficaPersonalizarProducto/activo.png"));
+		return new ImageIcon(getClass().getClassLoader().getResource("graficaPersonalizarProducto/inactivo.png"));
 
 	}
 
@@ -131,6 +117,6 @@ public class PanelIngredienteMetodos {
 	 * @return {@link Icon}o del producto inactivo
 	 */
 	private Icon productoActivo() {
-		return new ImageIcon(getClass().getClassLoader().getResource("graficaPersonalizarProducto/inactivo.png"));
+		return new ImageIcon(getClass().getClassLoader().getResource("graficaPersonalizarProducto/activo.png"));
 	}
 }

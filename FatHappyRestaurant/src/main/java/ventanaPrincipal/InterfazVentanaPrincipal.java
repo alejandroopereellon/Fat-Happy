@@ -1,9 +1,5 @@
 package ventanaPrincipal;
 
-import auxiliares.utilidadesGraficas.PanelUtil;
-import caja.interfazCaja.panelAccionesCaja.AccionesSobreCaja;
-
-import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
