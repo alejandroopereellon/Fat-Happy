@@ -10,10 +10,13 @@ import javax.swing.ImageIcon;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.coloresInterfaz.ColoresInterfaz;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.utilidadesGraficas.PanelUtil;
 import pedido.modelo.OrdenPedido;
+import pedido.modelo.PedidoDatos;
 import pedido.util.ModificarOrdenPedido;
+import productos.interfazPedido.SeleccionProductos.ActualizarPanelProductosPedidos;
 import productos.modelo.Producto;
 
 public class CasillaProductoMetodos {
@@ -59,7 +62,7 @@ public class CasillaProductoMetodos {
 	 */
 	protected void anadirProductoPedido() {
 		// Cambiar color momentáneamente
-		interfaz.setBackground(Color.decode("#D4AF37"));
+		interfaz.setBackground(ColoresInterfaz.PRIMARIO_DORADO);
 		new PanelUtil().actualizarPanel(interfaz);
 
 		// Volver al color original después de 50ms
@@ -69,11 +72,17 @@ public class CasillaProductoMetodos {
 		}).start();
 
 		// Anadimos el producto al pedido
-		new ModificarOrdenPedido(interfaz.getPedido()).anadirProducto(interfaz.getProducto());
-		logger.info("Se ha añadido el producto en la lista de productos");
+		// 1. Comprobamos si el pedido se ha iniciado, en caso contrario se inicia
+		if (PedidoDatos.getPedido() == null) {
+			// Iniciamos el pedido
+			PedidoDatos.iniciarPedido();
+		}
 
-		// TODO Deberia de hacer una actualizacion de la lista de productos del panel
-		// visual para que se muestre actualizado
+		// 2. Anadimos el producto al pedido
+		new ModificarOrdenPedido(PedidoDatos.getPedido()).anadirProducto(interfaz.getProducto());
+
+		// 3. Actualizamos la lista de productos pedidos
+		new ActualizarPanelProductosPedidos().actualizarPanel();
 	}
 
 	/**

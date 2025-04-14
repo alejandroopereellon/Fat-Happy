@@ -1,7 +1,6 @@
 package productos.interfazPedido.casillaProducto;
 
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import pedido.modelo.Pedido;
 import productos.modelo.Producto;
 

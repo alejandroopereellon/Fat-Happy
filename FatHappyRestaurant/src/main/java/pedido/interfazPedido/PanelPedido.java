@@ -33,9 +33,6 @@ public class PanelPedido extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelProductosPedidos = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaProductos = new javax.swing.JPanel();
         panelSeleccionTipoProducto = new javax.swing.JPanel();
         Hamburguesas = new javax.swing.JButton();
         bebidas = new javax.swing.JButton();
@@ -47,35 +44,10 @@ public class PanelPedido extends javax.swing.JPanel {
         Editar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelProductos = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        panelProductosPedidos = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(204, 255, 51));
-
-        listaProductos.setBackground(new java.awt.Color(255, 255, 255));
-        listaProductos.setPreferredSize(new java.awt.Dimension(300, 798));
-
-        javax.swing.GroupLayout listaProductosLayout = new javax.swing.GroupLayout(listaProductos);
-        listaProductos.setLayout(listaProductosLayout);
-        listaProductosLayout.setHorizontalGroup(
-            listaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        listaProductosLayout.setVerticalGroup(
-            listaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 818, Short.MAX_VALUE)
-        );
-
-        jScrollPane2.setViewportView(listaProductos);
-
-        javax.swing.GroupLayout panelProductosPedidosLayout = new javax.swing.GroupLayout(panelProductosPedidos);
-        panelProductosPedidos.setLayout(panelProductosPedidosLayout);
-        panelProductosPedidosLayout.setHorizontalGroup(
-            panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-        );
-        panelProductosPedidosLayout.setVerticalGroup(
-            panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-        );
 
         Hamburguesas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Hamburguesas.setText("Hamburguesas");
@@ -143,7 +115,7 @@ public class PanelPedido extends javax.swing.JPanel {
                     .addComponent(Complementos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bebidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Postres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(categoria5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(categoria5))
                 .addContainerGap())
         );
 
@@ -189,30 +161,42 @@ public class PanelPedido extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(panelProductos);
 
+        javax.swing.GroupLayout panelProductosPedidosLayout = new javax.swing.GroupLayout(panelProductosPedidos);
+        panelProductosPedidos.setLayout(panelProductosPedidosLayout);
+        panelProductosPedidosLayout.setHorizontalGroup(
+            panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        panelProductosPedidosLayout.setVerticalGroup(
+            panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 810, Short.MAX_VALUE)
+        );
+
+        jScrollPane3.setViewportView(panelProductosPedidos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelProductosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelSeleccionTipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelAjustesPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(panelProductosPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelSeleccionTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
                     .addComponent(panelAjustesPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -240,8 +224,8 @@ public class PanelPedido extends javax.swing.JPanel {
         return modeloLista;
     }
 
-    public JPanel getListaProductos() {
-        return listaProductos;
+    public JPanel getPanelProductosPedidos() {
+        return panelProductosPedidos;
     }
 
     public JPanel getPanelProductos() {
@@ -262,8 +246,7 @@ public class PanelPedido extends javax.swing.JPanel {
     private javax.swing.JButton categoria5;
     private javax.swing.JButton cobrar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel listaProductos;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel panelAjustesPedido;
     private javax.swing.JPanel panelProductos;
     private javax.swing.JPanel panelProductosPedidos;
