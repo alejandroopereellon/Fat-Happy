@@ -18,7 +18,12 @@ public class SolicitarNumeroMetodos {
 	private DialogoSolicitudNumero interfaz;
 
 	public SolicitarNumeroMetodos(String titulo) {
-		this.interfaz = new DialogoSolicitudNumero(ConfiguracionInicial.get().getVentanaPrincipal(), true, titulo,this);
+		if (ConfiguracionInicial.get()==null) {
+			this.interfaz = new DialogoSolicitudNumero(null, true, titulo,this);
+		}else {
+			this.interfaz = new DialogoSolicitudNumero(ConfiguracionInicial.get().getVentanaPrincipal(), true, titulo,this);
+		}
+		
 	}
 
 	/**

@@ -41,12 +41,12 @@ public class InicioAplicacion {
 		// Iniciar descarga de imágenes del servidor ftp
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
 		grafica.getBarraProgreso().setValue(15);
-//		if (new FTPDownloader().iniciarConexionYDescargar()) {
-//			logger.info("Se han cargado los ficheros en local");
-//		} else {
-//			logger.error("No se han podido cargar los ficheros en local");
-//			return false;
-//		}
+		if (new FTPDownloader().iniciarConexionYDescargar()) {
+			logger.info("Se han cargado los ficheros en local");
+		} else {
+			logger.error("No se han podido cargar los ficheros en local");
+			return false;
+		}
 		grafica.getBarraProgreso().setValue(20);
 
 		// Cargar datos del restaurante

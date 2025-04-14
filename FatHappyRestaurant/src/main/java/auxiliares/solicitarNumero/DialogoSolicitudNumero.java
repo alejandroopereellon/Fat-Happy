@@ -14,7 +14,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
     /**
      * Creates new form DialogoSolicitudNumero
      */
-    public DialogoSolicitudNumero(java.awt.Frame parent, boolean modal, String titulo, SolicitarNumeroMetodos metodos) {
+    public DialogoSolicitudNumero(java.awt.Frame parent, boolean modal, String titulo, SolicitarNumeroMetodos metodos) {     
         super(parent, modal);
         this.metodos = metodos;
         initComponents();
