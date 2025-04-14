@@ -27,7 +27,7 @@ public class PanelPedidoMetodos {
 		// Cargamos inicialmente las hamburguesas
 		mostrarHamburguesas();
 		// Establecemos el tamano del panel de productos
-		interfaz.getPanelProductos().setLayout(new GridLayout(0, 4));
+		interfaz.getPanelProductos().setLayout(new GridLayout(0, 3));
 		logger.debug("Se ha estableciod el layout en gridLayout");
 		// Establecemos la visibilidad del panel
 		// interfaz.setVisible(true);

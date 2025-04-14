@@ -1,6 +1,7 @@
 package productos.interfazPedido.casillaProducto;
 
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import pedido.modelo.Pedido;
 import productos.modelo.Producto;
 
@@ -57,11 +58,11 @@ public class CasillaProducto extends javax.swing.JPanel {
         textoPrecio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         textoPrecio.setText("€ 0,00");
 
+        cuadroImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cuadroImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaErrorProducto/imageNotFound64.png"))); // NOI18N
 
-        textoNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textoNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoNombre.setText("Sample text");
+        textoNombre.setText("SAMPLE TEXT");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -73,11 +74,10 @@ public class CasillaProducto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 129, Short.MAX_VALUE)
+                        .addGap(0, 137, Short.MAX_VALUE)
                         .addComponent(textoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(textoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(textoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,11 +85,11 @@ public class CasillaProducto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textoNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
                         .addComponent(textoPrecio))
-                    .addComponent(cuadroImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(cuadroImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

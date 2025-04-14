@@ -1,7 +1,6 @@
 package pedido.interfazPedido;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import pedido.modelo.Pedido;
 
@@ -35,8 +34,8 @@ public class PanelPedido extends javax.swing.JPanel {
     private void initComponents() {
 
         panelProductosPedidos = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaPedido = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaProductos = new javax.swing.JPanel();
         panelSeleccionTipoProducto = new javax.swing.JPanel();
         Hamburguesas = new javax.swing.JButton();
         bebidas = new javax.swing.JButton();
@@ -46,24 +45,36 @@ public class PanelPedido extends javax.swing.JPanel {
         panelAjustesPedido = new javax.swing.JPanel();
         cobrar = new javax.swing.JButton();
         Editar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         panelProductos = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(204, 255, 51));
 
-        listaPedido.setModel(modeloLista);
-        listaPedido.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listaPedido.setToolTipText("");
-        jScrollPane1.setViewportView(listaPedido);
+        listaProductos.setBackground(new java.awt.Color(255, 255, 255));
+        listaProductos.setPreferredSize(new java.awt.Dimension(300, 798));
+
+        javax.swing.GroupLayout listaProductosLayout = new javax.swing.GroupLayout(listaProductos);
+        listaProductos.setLayout(listaProductosLayout);
+        listaProductosLayout.setHorizontalGroup(
+            listaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        listaProductosLayout.setVerticalGroup(
+            listaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 818, Short.MAX_VALUE)
+        );
+
+        jScrollPane2.setViewportView(listaProductos);
 
         javax.swing.GroupLayout panelProductosPedidosLayout = new javax.swing.GroupLayout(panelProductosPedidos);
         panelProductosPedidos.setLayout(panelProductosPedidosLayout);
         panelProductosPedidosLayout.setHorizontalGroup(
             panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
         panelProductosPedidosLayout.setVerticalGroup(
             panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane2)
         );
 
         Hamburguesas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -112,15 +123,15 @@ public class PanelPedido extends javax.swing.JPanel {
             panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeleccionTipoProductoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Hamburguesas, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Complementos, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Postres, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(categoria5, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Hamburguesas, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Complementos, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Postres, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(categoria5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelSeleccionTipoProductoLayout.setVerticalGroup(
@@ -128,12 +139,11 @@ public class PanelPedido extends javax.swing.JPanel {
             .addGroup(panelSeleccionTipoProductoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Hamburguesas, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(Complementos, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(bebidas, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addGroup(panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Postres, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                        .addComponent(categoria5, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
+                    .addComponent(Hamburguesas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Complementos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bebidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Postres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(categoria5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -158,22 +168,26 @@ public class PanelPedido extends javax.swing.JPanel {
             panelAjustesPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAjustesPedidoLayout.createSequentialGroup()
                 .addGap(656, 656, 656)
-                .addComponent(Editar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(Editar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cobrar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addComponent(cobrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        panelProductos.setPreferredSize(new java.awt.Dimension(816, 742));
 
         javax.swing.GroupLayout panelProductosLayout = new javax.swing.GroupLayout(panelProductos);
         panelProductos.setLayout(panelProductosLayout);
         panelProductosLayout.setHorizontalGroup(
             panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 824, Short.MAX_VALUE)
         );
         panelProductosLayout.setVerticalGroup(
             panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 760, Short.MAX_VALUE)
         );
+
+        jScrollPane1.setViewportView(panelProductos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -183,9 +197,10 @@ public class PanelPedido extends javax.swing.JPanel {
                 .addComponent(panelProductosPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelSeleccionTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 1194, Short.MAX_VALUE)
+                    .addComponent(panelSeleccionTipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelAjustesPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
@@ -195,9 +210,9 @@ public class PanelPedido extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelSeleccionTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelAjustesPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
+                    .addComponent(panelAjustesPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,7 +229,7 @@ public class PanelPedido extends javax.swing.JPanel {
     }//GEN-LAST:event_bebidasActionPerformed
 
     private void PostresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PostresActionPerformed
-       metodos.mostrarPostres();
+        metodos.mostrarPostres();
     }//GEN-LAST:event_PostresActionPerformed
 
     private void categoria5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoria5ActionPerformed
@@ -225,8 +240,8 @@ public class PanelPedido extends javax.swing.JPanel {
         return modeloLista;
     }
 
-    public JList<Object> getjList1() {
-        return listaPedido;
+    public JPanel getListaProductos() {
+        return listaProductos;
     }
 
     public JPanel getPanelProductos() {
@@ -247,7 +262,8 @@ public class PanelPedido extends javax.swing.JPanel {
     private javax.swing.JButton categoria5;
     private javax.swing.JButton cobrar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<Object> listaPedido;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel listaProductos;
     private javax.swing.JPanel panelAjustesPedido;
     private javax.swing.JPanel panelProductos;
     private javax.swing.JPanel panelProductosPedidos;

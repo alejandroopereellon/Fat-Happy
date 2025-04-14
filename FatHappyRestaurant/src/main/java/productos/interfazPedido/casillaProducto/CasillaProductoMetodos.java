@@ -39,7 +39,7 @@ public class CasillaProductoMetodos {
 		interfaz.getCuadroImagen().setIcon(new ImageIcon(obtenerRutaImagen(pro.getImagenProducto64())));
 
 		// Establecemos el precio del producto
-		interfaz.getTextoPrecio().setText(pro.getPrecioVenta() + " €");
+		interfaz.getTextoPrecio().setText(pro.getPrecioVenta().setScale(2) + " €");
 
 		// Establecemos el nombre del producto
 		interfaz.getTextoNombre().setText(pro.getNombreProducto());
