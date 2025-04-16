@@ -45,7 +45,7 @@ public class PanelPedido extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         panelProductos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        panelProductosPedidos = new javax.swing.JPanel();
+        listaProductosPedidos = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 51, 102));
         setPreferredSize(new java.awt.Dimension(1366, 716));
@@ -169,22 +169,15 @@ public class PanelPedido extends javax.swing.JPanel {
         jScrollPane1.setViewportView(panelProductos);
 
         jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 700));
 
-        panelProductosPedidos.setPreferredSize(new java.awt.Dimension(10, 10));
-
-        javax.swing.GroupLayout panelProductosPedidosLayout = new javax.swing.GroupLayout(panelProductosPedidos);
-        panelProductosPedidos.setLayout(panelProductosPedidosLayout);
-        panelProductosPedidosLayout.setHorizontalGroup(
-            panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
-        );
-        panelProductosPedidosLayout.setVerticalGroup(
-            panelProductosPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 690, Short.MAX_VALUE)
-        );
-
-        jScrollPane3.setViewportView(panelProductosPedidos);
+        listaProductosPedidos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(listaProductosPedidos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -240,9 +233,7 @@ public class PanelPedido extends javax.swing.JPanel {
         return modeloLista;
     }
 
-    public JPanel getPanelProductosPedidos() {
-        return panelProductosPedidos;
-    }
+    
 
     public JPanel getPanelProductos() {
         return panelProductos;
@@ -263,9 +254,9 @@ public class PanelPedido extends javax.swing.JPanel {
     private javax.swing.JButton cobrar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JList<String> listaProductosPedidos;
     private javax.swing.JPanel panelAjustesPedido;
     private javax.swing.JPanel panelProductos;
-    private javax.swing.JPanel panelProductosPedidos;
     private javax.swing.JPanel panelSeleccionTipoProducto;
     // End of variables declaration//GEN-END:variables
 }

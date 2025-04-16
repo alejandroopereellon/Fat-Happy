@@ -3,6 +3,8 @@ package pedido.interfazPedido;
 import java.awt.GridLayout;
 import java.util.List;
 
+import javax.swing.BoxLayout;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

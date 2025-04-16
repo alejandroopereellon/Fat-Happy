@@ -6,7 +6,7 @@
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[0, 0]"/>
+      <Dimension value="[200, 0]"/>
     </Property>
   </Properties>
   <Events>
@@ -28,28 +28,24 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="nombreProducto" max="32767" attributes="0"/>
+          <Component id="informacionAdicional" alignment="1" min="-2" pref="204" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="nombreProducto" min="-2" pref="157" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="precioProducto" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="informacionAdicional" min="-2" pref="250" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="nombreProducto" min="-2" max="-2" attributes="0"/>
-                  <Component id="precioProducto" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nombreProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="precioProducto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="informacionAdicional" max="32767" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="informacionAdicional" min="-2" pref="13" max="-2" attributes="0"/>
+              <EmptySpace pref="122" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,7 +76,7 @@
         <Property name="columns" type="int" value="20"/>
         <Property name="lineWrap" type="boolean" value="true"/>
         <Property name="rows" type="int" value="5"/>
-        <Property name="text" type="java.lang.String" value="holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola"/>
+        <Property name="text" type="java.lang.String" value=" freestar  freestar Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac tortor imperdiet est rutrum bibendum et sed odio. Donec blandit enim arcu, accumsan fringilla orci aliquet sit amet. Aenean in dapibus turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie ultrices porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi eleifend vehicula est, a cursus augue iaculis eu. Quisque vulputate ante at ante ultrices maximus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris elit est, ullamcorper hendrerit iaculis id, facilisis interdum augue. Suspendisse ut odio tempor, elementum libero facilisis, hendrerit risus. Suspendisse eu scelerisque velit. Nullam sit amet tristique nulla. Fusce suscipit diam sit amet vehicula mollis."/>
         <Property name="wrapStyleWord" type="boolean" value="true"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>

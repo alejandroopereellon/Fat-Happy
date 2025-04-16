@@ -40,7 +40,7 @@ public class PanelProductoSeleccionado extends javax.swing.JPanel {
         informacionAdicional = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(new java.awt.Dimension(200, 0));
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
@@ -61,7 +61,7 @@ public class PanelProductoSeleccionado extends javax.swing.JPanel {
         informacionAdicional.setColumns(20);
         informacionAdicional.setLineWrap(true);
         informacionAdicional.setRows(5);
-        informacionAdicional.setText("holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola");
+        informacionAdicional.setText(" freestar  freestar Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac tortor imperdiet est rutrum bibendum et sed odio. Donec blandit enim arcu, accumsan fringilla orci aliquet sit amet. Aenean in dapibus turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi molestie ultrices porta. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi eleifend vehicula est, a cursus augue iaculis eu. Quisque vulputate ante at ante ultrices maximus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris elit est, ullamcorper hendrerit iaculis id, facilisis interdum augue. Suspendisse ut odio tempor, elementum libero facilisis, hendrerit risus. Suspendisse eu scelerisque velit. Nullam sit amet tristique nulla. Fusce suscipit diam sit amet vehicula mollis.");
         informacionAdicional.setWrapStyleWord(true);
         informacionAdicional.setBorder(null);
         informacionAdicional.setRequestFocusEnabled(false);
@@ -70,24 +70,21 @@ public class PanelProductoSeleccionado extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(informacionAdicional, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(nombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(precioProducto))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(informacionAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreProducto)
                     .addComponent(precioProducto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(informacionAdicional)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(informacionAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

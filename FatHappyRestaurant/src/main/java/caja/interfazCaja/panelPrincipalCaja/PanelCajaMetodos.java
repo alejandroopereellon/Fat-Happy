@@ -56,6 +56,9 @@ public class PanelCajaMetodos {
 			logger.debug("Se ha establecido el numero de sesion y el puesto");
 
 			actualizarEstadoCaja(caja);
+
+			// Almacenamos la caja en el singleton
+			CajaDatos.setPanelCaja(interfaz);
 		} else {
 			establecerInterfazNula();
 			logger.info("Se ha establecido la interfaz panelCaja como nula");

@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import pedido.modelo.Pedido;
 import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoGlobal;
+import productos.interfazPedido.SeleccionProductos.ProductoSeleccionado.PanelProductoSeleccionado;
+import productos.interfazPedido.SeleccionProductos.ProductoSeleccionado.PanelProductoSeleccionadoMetodos;
 import productos.modelo.MenuPedido;
 import productos.modelo.Producto;
 
@@ -16,7 +18,7 @@ public class ModificarOrdenPedido {
 
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(ModificarOrdenPedido.class);
-	//Establecemos el dao
+	// Establecemos el dao
 	private ProductosDAO dao = ProductosDaoGlobal.get();
 
 	public ModificarOrdenPedido(Pedido pedido) {
@@ -34,9 +36,15 @@ public class ModificarOrdenPedido {
 		Producto objetoProducto = dao.obtenerProducto(pro.getCodigo());
 
 		if (objetoProducto != null) {
+			// Anadimos el producto en la orden de pedido
 			pedido.getOrden().getListaProductos().add(objetoProducto);
+			// Actualizamos el importe del pedido
 			pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
 			logger.info("Se ha añadido el producto con id {} en la lista", objetoProducto.getCodigo());
+
+			// Anadimos el producto pedido en la casilla del producto
+			PanelProductoSeleccionado panel =  new PanelProductoSeleccionado(objetoProducto);
+			new PanelProductoSeleccionadoMetodos(panel).iniciarPanel();
 		}
 
 	}
@@ -90,6 +98,5 @@ public class ModificarOrdenPedido {
 		}
 		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
 	}
-
 
 }

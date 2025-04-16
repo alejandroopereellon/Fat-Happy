@@ -1,6 +1,10 @@
 package pedido.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import caja.interfazCaja.panelPrincipalCaja.PanelCaja;
+import caja.modelo.CajaDatos;
 import pedido.modelo.Pedido;
 
 /**
@@ -9,18 +13,27 @@ import pedido.modelo.Pedido;
  * finalizado se va a finalizar el contador y se establece el valor en el pedido
  */
 public class IniciarContadorPedido extends Thread {
+
+	// Crear el logger
+	static Logger logger = LogManager.getLogger(PedidoBuilder.class);
+
 	private Pedido pedidoOrigen;
 	private PanelCaja panel;
 
-	public IniciarContadorPedido(Pedido pedidoOrigen, PanelCaja panel) {
+	public IniciarContadorPedido(Pedido pedidoOrigen) {
 		this.pedidoOrigen = pedidoOrigen;
-		this.panel = panel;
 	}
 
 	public void run() {
+		logger.info("Se ha iniciado el hilo del contador de tiempo del pedido");
+
+		// Establecemos el panel de la caja
+		panel = CajaDatos.getPanelCaja();
+
 		int tiempoConsumido = 0;
-		while (pedidoOrigen.getEstadoPedido() == 0) {
+		while (pedidoOrigen.getEstadoPedido() == 1) {
 			tiempoConsumido++;
+
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -29,9 +42,9 @@ public class IniciarContadorPedido extends Thread {
 
 			actualizarContador(tiempoConsumido);
 		}
-		// Establecemos el tiempo del pedido al objeto pedido
+		// Establecemos el tiempo del pedido en segundos al pedido
 		pedidoOrigen.setTiempoPedido(tiempoConsumido);
-		// Establecemos el contador en 0
+		// Establecemos el contador del panel en 0
 		panel.getTiempoPedido().setText("00:00");
 
 	}
@@ -40,11 +53,21 @@ public class IniciarContadorPedido extends Thread {
 		int segundos = tiempoConsumido;
 		int minutos = segundos / 60;
 		int segundosRestantes = segundos % 60;
-		panel.getTiempoPedido().setText(minutos + ":" + segundosRestantes);
-	}
 
-	public IniciarContadorPedido(Pedido pedidoOrigen) {
-		this.pedidoOrigen = pedidoOrigen;
+		String minutosCadena = "0", segundosCadena = "0";
+		if (minutos < 10) {
+			minutosCadena = "0" + minutos;
+		} else {
+			minutosCadena = String.valueOf(minutos);
+		}
+
+		if (segundosRestantes < 10) {
+			segundosCadena = "0" + segundosRestantes;
+		} else {
+			segundosCadena = String.valueOf(segundosRestantes);
+		}
+
+		panel.getTiempoPedido().setText(minutosCadena + ":" + segundosCadena);
 	}
 
 }

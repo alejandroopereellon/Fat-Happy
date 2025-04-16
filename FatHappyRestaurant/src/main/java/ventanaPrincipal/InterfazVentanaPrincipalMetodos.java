@@ -19,6 +19,7 @@ import caja.interfazCaja.panelPrincipalCaja.PanelCajaMetodos;
 import caja.modelo.CajaDatos;
 import pedido.interfazPedido.PanelPedido;
 import pedido.interfazPedido.PanelPedidoMetodos;
+import pedido.modelo.PedidoDatos;
 
 public class InterfazVentanaPrincipalMetodos {
 	// Crear el logger
@@ -75,6 +76,9 @@ public class InterfazVentanaPrincipalMetodos {
 		new PanelPedidoMetodos(panelPedido).iniciarPanelPedido();
 		// Añadimos la el panel pedido al panel principal
 		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panelPedido);
+		
+		//Anadimos el panel de pedido al singleton
+		PedidoDatos.setPanel(panelPedido);
 	}
 
 	/**

@@ -9,6 +9,9 @@ import javax.swing.JTextArea;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.utilidadesGraficas.PanelUtil;
+import pedido.interfazPedido.PanelPedido;
+import pedido.modelo.PedidoDatos;
 import productos.modelo.Bebida;
 import productos.modelo.Complemento;
 import productos.modelo.Extra;
@@ -49,6 +52,12 @@ public class PanelProductoSeleccionadoMetodos {
 		obtenerInformacionAdicional(pro);
 		// Actualizamos la altura del texto
 		ajustarAlturaTexto(interfaz.getInformacionAdicional());
+		// Anadimos el panel en el listado de paneles
+		PanelPedido panelPedido = PedidoDatos.getPanel();
+		if (panelPedido != null) {
+			new PanelUtil().insertarEnPanelSinBorrar(panelPedido.getPanelProductosPedidos(), interfaz);
+		}
+
 	}
 
 	/**
@@ -58,6 +67,10 @@ public class PanelProductoSeleccionadoMetodos {
 	 * @param pro es el {@link Producto} que se va a añadir
 	 */
 	private void obtenerInformacionAdicional(Producto pro) {
+		// 1. Vaciamos la informacion previa
+		interfaz.getInformacionAdicional().setText("");
+
+		// 2. Obtenemos la informacion necesaria dependiendo del tipo de producto
 		if (pro instanceof Hamburguesa) {
 			informacionHamburguesa(pro);
 		} else if (pro instanceof Postre) {
