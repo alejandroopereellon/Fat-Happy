@@ -13,7 +13,7 @@
       </Border>
     </Property>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[256, 105]"/>
+      <Dimension value="[258, 78]"/>
     </Property>
   </Properties>
   <Events>
@@ -39,11 +39,11 @@
               <Component id="cuadroImagen" min="-2" pref="64" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="137" max="32767" attributes="0"/>
+                  <Component id="textoNombre" min="-2" pref="174" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="textoPrecio" min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="textoNombre" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -56,12 +56,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="textoNombre" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="textoPrecio" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="cuadroImagen" min="-2" pref="64" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

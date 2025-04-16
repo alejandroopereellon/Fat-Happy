@@ -1,6 +1,6 @@
 package productos.interfazPedido.SeleccionProductos.ProductoSeleccionado;
 
-import auxiliares.coloresInterfaz.ColoresInterfaz;
+import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;

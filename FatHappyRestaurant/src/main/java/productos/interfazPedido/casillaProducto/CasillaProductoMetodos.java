@@ -10,9 +10,8 @@ import javax.swing.ImageIcon;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.coloresInterfaz.ColoresInterfaz;
+import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.utilidadesGraficas.PanelUtil;
 import pedido.modelo.OrdenPedido;
 import pedido.modelo.PedidoDatos;
 import pedido.util.ModificarOrdenPedido;
@@ -51,9 +50,6 @@ public class CasillaProductoMetodos {
 		if (pro.isStockDisponible()) {
 			interfaz.setEnabled(false);
 		}
-
-		// Actualizamos el panel
-		new PanelUtil().actualizarPanel(interfaz);
 	}
 
 	/**
@@ -61,14 +57,10 @@ public class CasillaProductoMetodos {
 	 * al usuario de que se ha seleccionado el producto
 	 */
 	protected void anadirProductoPedido() {
-		// Cambiar color momentáneamente
 		interfaz.setBackground(ColoresInterfaz.PRIMARIO_DORADO);
-		new PanelUtil().actualizarPanel(interfaz);
 
-		// Volver al color original después de 50ms
-		new javax.swing.Timer(50, _ -> {
+		new javax.swing.Timer(150, _ -> {
 			interfaz.setBackground(Color.white);
-			new PanelUtil().actualizarPanel(interfaz);
 		}).start();
 
 		// Anadimos el producto al pedido
@@ -78,8 +70,10 @@ public class CasillaProductoMetodos {
 			PedidoDatos.iniciarPedido();
 		}
 
-		// 2. Anadimos el producto al pedido
-		new ModificarOrdenPedido(PedidoDatos.getPedido()).anadirProducto(interfaz.getProducto());
+		// 2. Anadimos el producto al pedido si el pedido esta iniciado
+		if (PedidoDatos.getPedido() != null) {
+			new ModificarOrdenPedido(PedidoDatos.getPedido()).anadirProducto(interfaz.getProducto());
+		}
 
 		// 3. Actualizamos la lista de productos pedidos
 		new ActualizarPanelProductosPedidos().actualizarPanel();

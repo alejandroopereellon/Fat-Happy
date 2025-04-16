@@ -8,7 +8,7 @@ import pedido.util.PedidoBuilder;
  * Clase singleton estática que centraliza el acceso al pedido actual y al panel
  * activo del proceso de pedido.
  * 
- * @author Alejandro
+ * @author Alejandro Perellón López
  */
 public class PedidoDatos {
 
@@ -87,12 +87,12 @@ public class PedidoDatos {
 	}
 
 	public static boolean iniciarPedido() {
-		//Iniciamos el pedido y lo añadimos al pedidoActual
+		// Iniciamos el pedido y lo añadimos al pedidoActual
 		pedidoActual = new PedidoBuilder().build();
-		//Establecemos la ventana 
+		// Establecemos la ventana
 		panel = getPanel();
-		
-		if (pedidoActual!=null && panel!=null) {
+
+		if (pedidoActual != null && panel != null) {
 			return true;
 		}
 		return false;

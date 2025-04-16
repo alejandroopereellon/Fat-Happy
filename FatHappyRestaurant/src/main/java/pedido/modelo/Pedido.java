@@ -38,6 +38,13 @@ public class Pedido {
 	@Column(name = "descuento")
 	private int descuento;
 
+	/**
+	 * Este metodo cambia el estado del pedido:
+	 * 
+	 * 1. Preparacion 2. Edicion 3. Pendiente de pago 4. Proceso de pago 5. Pagado
+	 * 
+	 * @param estadoPedido es el indice numerico que indica el estado del pedido
+	 */
 	@Transient
 	private int estadoPedido;
 
@@ -111,6 +118,18 @@ public class Pedido {
 
 	public int getDescuento() {
 		return descuento;
+	}
+
+	public int getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public LocalDateTime getFechaHora() {
+		return fechaHora;
+	}
+
+	public int getTiempoPedido() {
+		return tiempoPedido;
 	}
 
 }

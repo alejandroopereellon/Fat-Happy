@@ -36,7 +36,7 @@ public class ActualizarListaProductos extends Thread {
 			 * la base de datos se realiza una actualizacion de la base de datos
 			 */
 			LocalDateTime nueva = dao.obtenerUltimaActualizacionProductos();
-			if (nueva.isAfter(tiempo)) {
+			if (nueva != null && nueva.isAfter(tiempo)) {
 				actualizarDatos();
 			}
 

@@ -40,6 +40,7 @@ public class DialogoMostrarMensaje extends javax.swing.JDialog {
         setSize(new java.awt.Dimension(300, 240));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         botonAceptar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         botonAceptar.setText("Aceptar");
@@ -49,15 +50,17 @@ public class DialogoMostrarMensaje extends javax.swing.JDialog {
             }
         });
 
+        jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
         jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("ME CAGO EN DIOOOOOOOOOOOOOOOOOOOOOOOOOOS");
+        jTextArea1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in posuere nulla. Pellentesque ornare dignissim justo, sed lacinia nulla consequat vitae. Nulla suscipit finibus lacus. Suspendisse blandit massa turpis, in semper lectus molestie facilisis. Sed luctus neque ac magna aliquam sollicitudin. Nulla ultricies feugiat elit ut posuere. Aliquam volutpat sed ipsum at semper. Etiam velit mauris, lacinia quis libero at, pharetra faucibus justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere ante risus, et congue dolor laoreet blandit. Aenean id condimentum nibh. Donec tellus sem, iaculis quis nisi eget, sollicitudin consectetur tortor. Duis suscipit arcu in ex molestie ultricies. Nunc interdum fermentum dui eu euismod.  Sed varius ut neque in ultricies. Morbi lobortis lorem non arcu commodo aliquam. Nulla et tellus bibendum, ullamcorper magna at, commodo dui. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec euismod consequat arcu non imperdiet. Morbi vestibulum sodales nisi id pellentesque. Donec auctor commodo urna ac laoreet. Praesent fringilla sed libero eu posuere.");
+        jTextArea1.setWrapStyleWord(true);
         jTextArea1.setBorder(null);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -66,12 +69,12 @@ public class DialogoMostrarMensaje extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addGap(105, 105, 105)
                 .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -88,7 +91,7 @@ public class DialogoMostrarMensaje extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

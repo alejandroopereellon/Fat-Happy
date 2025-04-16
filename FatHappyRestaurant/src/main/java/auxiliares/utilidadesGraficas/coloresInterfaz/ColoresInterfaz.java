@@ -1,4 +1,4 @@
-package auxiliares.coloresInterfaz;
+package auxiliares.utilidadesGraficas.coloresInterfaz;
 
 import java.awt.Color;
 

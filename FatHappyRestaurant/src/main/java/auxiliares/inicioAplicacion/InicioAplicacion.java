@@ -83,11 +83,14 @@ public class InicioAplicacion {
 
 		// Cargamos todos los productos en memoria haciendo uso del hilo
 		grafica.getEstadoInicio().setText("Cargando los productos del sistema");
-		//Creamos el objeto de actualizacion de productos
+		
+		// Creamos el objeto de actualizacion de productos
 		ActualizarListaProductos actualizarProductos = new ActualizarListaProductos();
+		
 		// Actualizamos todos los productos
 		actualizarProductos.actualizarDatos();
 		grafica.getBarraProgreso().setValue(80);
+		
 		// Iniciamos el hilo de actualizacion automatica del stock
 		actualizarProductos.start();
 		grafica.getBarraProgreso().setValue(85);
@@ -98,6 +101,7 @@ public class InicioAplicacion {
 		ConfiguracionInicial.get().setVentanaPrincipal(new InterfazVentanaPrincipal());
 		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
 				.iniciarConfiguracionInicial();
+		
 		// Hacemos visible la ventana
 		ConfiguracionInicial.get().getVentanaPrincipal().setVisible(true);
 		grafica.getBarraProgreso().setValue(100);

@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 import restaurante.modelo.Restaurante;
 
 @Entity
-@Table(name = "empleados")
+@Table(name = "numero_pedido")
 public class NumeroPedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
