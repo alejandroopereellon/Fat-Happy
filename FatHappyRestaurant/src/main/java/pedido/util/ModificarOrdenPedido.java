@@ -6,14 +6,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import pedido.interfazPedido.PanelPedido;
 import pedido.modelo.OrdenPedido;
 import pedido.modelo.Pedido;
 import pedido.modelo.PedidoDatos;
 import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoGlobal;
-import productos.interfazProducto.SolicitarTamanoMenu.SolicitarTamanoMenu;
 import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
+import productos.interfazProducto.solicitarTamanoMenu.SolicitarTamanoMenu;
 import productos.modelo.Hamburguesa;
 import productos.modelo.MenuPedido;
 import productos.modelo.Producto;
@@ -71,7 +72,9 @@ public class ModificarOrdenPedido {
 					// Anadimos el menu a la orden de pedido
 					PedidoDatos.getPedido().getOrden().getListaMenus().add(menu);
 				}
-
+			} else {
+				logger.debug("El producto no tiene opcion de menu");
+				new DialogoMostrarMensajeMetodos().mostrarMensaje("Este producto no tiene opción de menú");
 			}
 		}
 

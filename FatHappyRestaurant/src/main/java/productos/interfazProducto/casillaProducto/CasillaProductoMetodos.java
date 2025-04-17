@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
+import pedido.interfazPedido.PanelPedidoMetodos;
 import pedido.modelo.OrdenPedido;
 import pedido.modelo.PedidoDatos;
 import pedido.util.ModificarOrdenPedido;
@@ -46,8 +47,10 @@ public class CasillaProductoMetodos {
 		interfaz.getTextoNombre().setText(pro.getNombreProducto());
 
 		// Comprobamos si producto esta sin stock, deshabilitamos el panel
-		if (pro.isStockDisponible()) {
-			interfaz.setEnabled(false);
+		if (!pro.isStockDisponible()) {
+			interfaz.getTextoPrecio().setText("No disponible");
+			interfaz.setBackground(new Color(209, 209, 209));
+			interfaz.getTextoNombre().setEnabled(true);
 		}
 	}
 
@@ -56,6 +59,12 @@ public class CasillaProductoMetodos {
 	 * al usuario de que se ha seleccionado el producto
 	 */
 	protected void anadirProductoPedido() {
+		// Primero comprobamos que hay stock del producto
+		if (!interfaz.getProducto().isStockDisponible()) {
+			logger.debug("El producto seleccionado no tiene stock");
+			return;
+		}
+
 		interfaz.setBackground(ColoresInterfaz.PRIMARIO_DORADO);
 
 		new javax.swing.Timer(150, _ -> {
@@ -73,6 +82,9 @@ public class CasillaProductoMetodos {
 		if (PedidoDatos.getPedido() != null) {
 			new ModificarOrdenPedido(PedidoDatos.getPedido()).insertarProductoEnPedido(interfaz.getProducto());
 		}
+		
+		// 3. Actualizamos la lista
+		new PanelPedidoMetodos(PedidoDatos.getPanel()).actualizarLista();
 	}
 
 	/**

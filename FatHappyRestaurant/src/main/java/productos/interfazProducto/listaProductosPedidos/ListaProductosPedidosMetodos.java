@@ -3,7 +3,10 @@ package productos.interfazProducto.listaProductosPedidos;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import pedido.interfazPedido.PanelPedido;
+import productos.interfazProducto.editarMenu.editarMenu;
+import productos.interfazProducto.editarMenu.editarMenuMetodos;
 import productos.interfazProducto.personalizarPedido.edicionProducto.PanelEdicionProductos;
 import productos.interfazProducto.personalizarPedido.edicionProducto.PanelEdicionProductosMetodos;
 import productos.modelo.Hamburguesa;
@@ -42,7 +45,7 @@ public class ListaProductosPedidosMetodos {
 	 * @param obj {@link Object}o que se va a eliminar del modelo
 	 */
 	public void eliminarElemento(Object obj) {
-		//Eliminamos el objeto seleccionado del modelo
+		// Eliminamos el objeto seleccionado del modelo
 		interfaz.getModeloLista().removeElement(obj);
 		logger.debug("Se ha eliminado de la lista el objeto {}", obj);
 	}
@@ -59,6 +62,11 @@ public class ListaProductosPedidosMetodos {
 		} else if (obj instanceof Postre) {
 			new PanelEdicionProductosMetodos(new PanelEdicionProductos((Postre) obj)).iniciarPanelEdicion();
 			logger.debug("Se esta editando el pedido");
+		} else if (obj instanceof MenuPedido) {
+			new editarMenuMetodos(
+					new editarMenu(ConfiguracionInicial.get().getVentanaPrincipal(), true, (MenuPedido) obj))
+					.iniciarInterfaz();
+			logger.debug("Se esta editando el menu");
 		}
 	}
 }

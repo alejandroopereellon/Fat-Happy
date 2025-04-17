@@ -127,7 +127,10 @@ public class PanelEdicionProductosMetodos {
 	 * Metodo que vuelve a la ventana principal de seleccion de productos
 	 */
 	protected void volverPantallaPrincipal() {
+		// 1. Mostramos la pantalla principal con toda la informacion
 		new PanelPedidoMetodos(PedidoDatos.getPanel()).iniciarPanelPedido();
+		// 2. Actualizamos la lista
+		new PanelPedidoMetodos(PedidoDatos.getPanel()).actualizarLista();
 	}
 
 }

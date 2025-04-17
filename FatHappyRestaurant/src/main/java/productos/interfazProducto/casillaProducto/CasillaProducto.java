@@ -54,11 +54,12 @@ public class CasillaProducto extends javax.swing.JPanel {
         });
 
         textoPrecio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        textoPrecio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textoPrecio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         textoPrecio.setText("€ 0,00");
 
         cuadroImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cuadroImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaErrorProducto/imageNotFound64.png"))); // NOI18N
+        cuadroImagen.setDisabledIcon(null);
 
         textoNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         textoNombre.setText("SAMPLE TEXT");
@@ -71,11 +72,9 @@ public class CasillaProducto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(cuadroImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(textoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(textoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(textoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

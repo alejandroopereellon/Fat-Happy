@@ -143,11 +143,18 @@ public class PanelPedidoMetodos {
 	 * Metodo que crea el menu a traves del producto selecionado
 	 */
 	protected void crearMenu() {
-		new ModificarOrdenPedido(PedidoDatos.getPedido()).crearMenuPedido();;
+		new ModificarOrdenPedido(PedidoDatos.getPedido()).crearMenuPedido();
 	}
 
-    void eliminarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+	void eliminarProducto() {
+		// TODO
+	}
+
+	/**
+	 * Metodo que actualiza la lista para que cuadre con el modelo
+	 */
+	public void actualizarLista() {
+		interfaz.getListaProductosPedidos().updateUI();
+	}
 
 }

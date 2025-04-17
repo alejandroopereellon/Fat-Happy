@@ -94,21 +94,23 @@ public class Hamburguesa extends Producto {
 	// toString
 	@Override
 	public String toString() {
-		String datos = super.toString() + System.lineSeparator();
+		StringBuilder texto = new StringBuilder();
+
+		texto.append(super.getNombreProducto());
 
 		// Mostramos los ingredientes
 		for (Ingrediente ing : listaIngredientes) {
 			if (!ing.isActivo()) {
-				datos = datos + ing.toString() + System.lineSeparator();
+				texto.append(System.lineSeparator() + ing.toString());
 			}
 		}
 		// Mostramos los extras
 		for (Extra ext : listaExtras) {
 			if (ext.getCantidadExtra() > 0) {
-				datos = datos + ext.toString() + System.lineSeparator();
+				texto.append(System.lineSeparator() + ext.toString());
 			}
 		}
-		return datos;
+		return texto.toString();
 	}
 
 }

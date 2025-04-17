@@ -1,4 +1,4 @@
-package productos.interfazProducto.SolicitarTamanoMenu;
+package productos.interfazProducto.solicitarTamanoMenu;
 
 /**
  * Clase de interfaz grafica basica que muesta un selector de menu

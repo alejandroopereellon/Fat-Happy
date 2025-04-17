@@ -1,11 +1,12 @@
 package pedido.interfazPedido;
 
+import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import pedido.modelo.Pedido;
-import pedido.util.ModificarOrdenPedido;
 import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
+import productos.interfazProducto.listaProductosPedidos.ToStringRenderer;
 
 /**
  * Clase que maneja de manera grafica la creacion de un pedido
@@ -27,6 +28,7 @@ public class PanelPedido extends javax.swing.JPanel {
      */
     public PanelPedido() {
         initComponents();
+        listaProductosPedidos.setFixedCellHeight(-1);
     }
 
     /**
@@ -54,8 +56,10 @@ public class PanelPedido extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         listaProductosPedidos = new javax.swing.JList<>();
 
-        setBackground(new java.awt.Color(255, 51, 102));
+        setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
         setPreferredSize(new java.awt.Dimension(1366, 716));
+
+        panelSeleccionTipoProducto.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
 
         Hamburguesas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Hamburguesas.setText("Hamburguesas");
@@ -127,6 +131,7 @@ public class PanelPedido extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        panelAjustesPedido.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
         panelAjustesPedido.setPreferredSize(new java.awt.Dimension(200, 666));
 
         cobrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -188,6 +193,9 @@ public class PanelPedido extends javax.swing.JPanel {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(898, 640));
 
+        panelProductos.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
+        panelProductos.setBorder(new javax.swing.border.LineBorder(ColoresInterfaz.CONFIRMACION_VERDE_TE, 1, true));
+
         javax.swing.GroupLayout panelProductosLayout = new javax.swing.GroupLayout(panelProductos);
         panelProductos.setLayout(panelProductosLayout);
         panelProductosLayout.setHorizontalGroup(
@@ -201,12 +209,16 @@ public class PanelPedido extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(panelProductos);
 
+        jScrollPane3.setBorder(null);
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 700));
 
+        listaProductosPedidos.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
+        listaProductosPedidos.setBorder(javax.swing.BorderFactory.createLineBorder(ColoresInterfaz.CONFIRMACION_VERDE_TE));
         listaProductosPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         listaProductosPedidos.setModel(modeloLista);
         listaProductosPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaProductosPedidos.setCellRenderer(new ToStringRenderer<>());
         jScrollPane3.setViewportView(listaProductosPedidos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -260,7 +272,7 @@ public class PanelPedido extends javax.swing.JPanel {
     }//GEN-LAST:event_categoria5ActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-       metodos.eliminarProducto();
+        metodos.eliminarProducto();
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed

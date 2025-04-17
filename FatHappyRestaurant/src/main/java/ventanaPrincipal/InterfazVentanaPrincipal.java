@@ -1,5 +1,6 @@
 package ventanaPrincipal;
 
+import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -42,7 +43,7 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        panelPrincipal.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
 
         panelCaja.setBackground(new java.awt.Color(255, 255, 255));
         panelCaja.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(93, 64, 55), 2, true));
@@ -67,7 +68,7 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        panelSecundario.setBackground(new java.awt.Color(244, 241, 226));
+        panelSecundario.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
         panelSecundario.setPreferredSize(new java.awt.Dimension(1366, 716));
 
         javax.swing.GroupLayout panelSecundarioLayout = new javax.swing.GroupLayout(panelSecundario);

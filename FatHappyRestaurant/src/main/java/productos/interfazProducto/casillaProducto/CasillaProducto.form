@@ -38,12 +38,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cuadroImagen" min="-2" pref="64" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="textoNombre" min="-2" pref="174" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="textoPrecio" min="-2" pref="49" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="textoPrecio" min="-2" pref="115" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -72,7 +69,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="1"/>
         </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="&#x20ac; 0,00"/>
       </Properties>
     </Component>
@@ -81,6 +78,9 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/graficaErrorProducto/imageNotFound64.png"/>
+        </Property>
+        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="0" name="null"/>
         </Property>
       </Properties>
     </Component>
