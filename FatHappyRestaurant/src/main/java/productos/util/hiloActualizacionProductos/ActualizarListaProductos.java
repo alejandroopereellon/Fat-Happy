@@ -1,4 +1,4 @@
-package productos.util;
+package productos.util.hiloActualizacionProductos;
 
 import java.time.LocalDateTime;
 
@@ -8,6 +8,13 @@ import org.apache.logging.log4j.Logger;
 import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoGlobal;
 
+/**
+ * Clase que mediente un hilo actualiza la lista de todos los productos,
+ * comprobando si se han realizado modificaciones en la base de datos activando
+ * o desactivando productos
+ * 
+ * @author Alejandro Perellón López
+ */
 public class ActualizarListaProductos extends Thread {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(ActualizarListaProductos.class);

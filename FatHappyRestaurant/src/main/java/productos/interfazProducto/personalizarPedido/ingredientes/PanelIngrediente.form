@@ -30,7 +30,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="imagenIngrediente" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="nombreIngrediente" pref="292" max="32767" attributes="0"/>
+              <Component id="nombreIngrediente" pref="277" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cuadroEstadoIngrediente" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -43,10 +43,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="cuadroEstadoIngrediente" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="imagenIngrediente" max="32767" attributes="0"/>
-                      <Component id="nombreIngrediente" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="imagenIngrediente" alignment="0" max="32767" attributes="0"/>
+                  <Component id="nombreIngrediente" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>

@@ -1,4 +1,4 @@
-package productos.interfazPedido.personalizarPedido.ingredientes;
+package productos.interfazProducto.personalizarPedido.ingredientes;
 
 import java.io.File;
 

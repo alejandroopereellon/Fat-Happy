@@ -30,7 +30,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="imagenExtra" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="nombreIExtra" pref="233" max="32767" attributes="0"/>
+              <Component id="nombreIExtra" pref="218" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="costeAdicional" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>

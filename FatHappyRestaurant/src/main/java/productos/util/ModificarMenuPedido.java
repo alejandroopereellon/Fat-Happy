@@ -3,9 +3,6 @@ package productos.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import pedido.modelo.Pedido;
-import pedido.util.ModificarOrdenPedido;
-import productos.dao.ProductosDaoGlobal;
 import productos.modelo.Bebida;
 import productos.modelo.Complemento;
 import productos.modelo.MenuPedido;
@@ -22,36 +19,10 @@ public class ModificarMenuPedido {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(ModificarMenuPedido.class);
 
-	private Pedido pedido;
 	private MenuPedido menu;
 
-	public ModificarMenuPedido(Pedido pedido) {
-		this.pedido = pedido;
-		// Obtenemos el menu seleccionado
-		obtenerMenuSeleccionado();
-	}
-
-	/**
-	 * Buscamos el menu seleccionado de toda la lista de menus para añadir el
-	 * producto seleccionado
-	 */
-	public void obtenerMenuSeleccionado() {
-		for (MenuPedido menu : pedido.getOrden().getListaMenus()) {
-			if (menu.isMenuSeleccionado()) {
-				this.menu = menu;
-				break;
-			}
-		}
-	}
-
-	public void comprobarDondeInsertar(Producto pro) {
-		// Si el producto seleccionado no puede se añadido por no cumplir con los
-		// requisitos se va a añadir a la lista de productos
-		if (!añadirProducto(pro)) {
-			new ModificarOrdenPedido(pedido).anadirProducto(pro);
-			logger.info(
-					"Se ha añadido el producto a la lista de productos debido a que no cumple los requisitos del menu");
-		}
+	public ModificarMenuPedido(MenuPedido menu) {
+		this.menu = menu;
 	}
 
 	/**
@@ -60,23 +31,14 @@ public class ModificarMenuPedido {
 	 * 
 	 * @param pro {@link Producto} que se va a anadir al menu
 	 */
-	protected boolean añadirProducto(Producto pro) {
-		/**
-		 * Recogemos el producto de la base de datos y generamos un nuevo objeto
-		 * producto
-		 */
-		Producto productoInsertar = ProductosDaoGlobal.get().obtenerProducto(pro.getCodigo());
-
+	public boolean añadirProducto(Producto pro) {
 		// Comprobamos si el producto es una bebida
-		if (productoInsertar instanceof Bebida) {
-			Bebida bebida = (Bebida) productoInsertar;
-			return anadirBebida(bebida);
-		} else if (productoInsertar instanceof Complemento) {
-			Complemento complemento = (Complemento) productoInsertar;
-			return anadirComplemento(complemento);
-		} else if (productoInsertar instanceof Postre) {
-			Postre postre = (Postre) productoInsertar;
-			return anadirPostre(postre);
+		if (pro instanceof Bebida) {
+			return anadirBebida((Bebida) pro);
+		} else if (pro instanceof Complemento) {
+			return anadirComplemento((Complemento) pro);
+		} else if (pro instanceof Postre) {
+			return anadirPostre((Postre) pro);
 		}
 		return false;
 	}

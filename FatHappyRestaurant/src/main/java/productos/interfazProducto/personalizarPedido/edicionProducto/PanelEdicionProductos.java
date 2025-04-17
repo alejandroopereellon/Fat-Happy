@@ -1,4 +1,4 @@
-package productos.interfazPedido.personalizarPedido.edicionProducto;
+package productos.interfazProducto.personalizarPedido.edicionProducto;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,6 +36,7 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
         panelImagenProducto = new javax.swing.JPanel();
         imagenProducto = new javax.swing.JLabel();
         nombreProducto = new javax.swing.JLabel();
+        botonVolver = new javax.swing.JButton();
         scrollPanelIngredientesExtras = new javax.swing.JScrollPane();
         panelIngredientesExtras = new javax.swing.JPanel();
 
@@ -51,16 +52,27 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
         nombreProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombreProducto.setText("Nombre del producto");
 
+        botonVolver.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        botonVolver.setText("Volver");
+        botonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelImagenProductoLayout = new javax.swing.GroupLayout(panelImagenProducto);
         panelImagenProducto.setLayout(panelImagenProductoLayout);
         panelImagenProductoLayout.setHorizontalGroup(
             panelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelImagenProductoLayout.createSequentialGroup()
+            .addGroup(panelImagenProductoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(nombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imagenProducto))
-                .addGap(0, 0, 0))
+                    .addComponent(imagenProducto)))
+            .addGroup(panelImagenProductoLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelImagenProductoLayout.setVerticalGroup(
             panelImagenProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +81,9 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
                 .addComponent(nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(imagenProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         scrollPanelIngredientesExtras.setBorder(null);
@@ -79,7 +93,7 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
         panelIngredientesExtras.setLayout(panelIngredientesExtrasLayout);
         panelIngredientesExtrasLayout.setHorizontalGroup(
             panelIngredientesExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 471, Short.MAX_VALUE)
+            .addGap(0, 498, Short.MAX_VALUE)
         );
         panelIngredientesExtrasLayout.setVerticalGroup(
             panelIngredientesExtrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +109,8 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelImagenProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPanelIngredientesExtras))
+                .addComponent(scrollPanelIngredientesExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,6 +118,10 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
             .addComponent(scrollPanelIngredientesExtras, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
+        metodos.volverPantallaPrincipal();
+    }//GEN-LAST:event_botonVolverActionPerformed
 
     public Producto getProducto() {
         return producto;
@@ -126,6 +145,7 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonVolver;
     private javax.swing.JLabel imagenProducto;
     private javax.swing.JLabel nombreProducto;
     private javax.swing.JPanel panelImagenProducto;

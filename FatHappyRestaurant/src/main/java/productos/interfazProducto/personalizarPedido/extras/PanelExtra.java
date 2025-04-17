@@ -1,4 +1,4 @@
-package productos.interfazPedido.personalizarPedido.extras;
+package productos.interfazProducto.personalizarPedido.extras;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -115,7 +115,7 @@ public final class PanelExtra extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(imagenExtra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombreIExtra, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addComponent(nombreIExtra, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(costeAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

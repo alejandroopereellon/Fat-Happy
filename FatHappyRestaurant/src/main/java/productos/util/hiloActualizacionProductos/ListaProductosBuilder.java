@@ -1,4 +1,4 @@
-package productos.util;
+package productos.util.hiloActualizacionProductos;
 
 import java.util.List;
 

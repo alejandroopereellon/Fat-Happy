@@ -1,4 +1,4 @@
-package productos.interfazPedido.personalizarPedido.extras;
+package productos.interfazProducto.personalizarPedido.extras;
 
 import javax.swing.ImageIcon;
 

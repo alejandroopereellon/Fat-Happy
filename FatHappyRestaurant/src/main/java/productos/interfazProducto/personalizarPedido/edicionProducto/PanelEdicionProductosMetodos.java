@@ -1,4 +1,4 @@
-package productos.interfazPedido.personalizarPedido.edicionProducto;
+package productos.interfazProducto.personalizarPedido.edicionProducto;
 
 import java.awt.GridLayout;
 import java.io.File;
@@ -12,10 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.utilidadesGraficas.PanelUtil;
-import productos.interfazPedido.personalizarPedido.extras.PanelExtra;
-import productos.interfazPedido.personalizarPedido.extras.PanelExtraMetodos;
-import productos.interfazPedido.personalizarPedido.ingredientes.PanelIngrediente;
-import productos.interfazPedido.personalizarPedido.ingredientes.PanelIngredienteMetodos;
+import pedido.interfazPedido.PanelPedidoMetodos;
+import pedido.modelo.PedidoDatos;
+import productos.interfazProducto.personalizarPedido.extras.PanelExtra;
+import productos.interfazProducto.personalizarPedido.extras.PanelExtraMetodos;
+import productos.interfazProducto.personalizarPedido.ingredientes.PanelIngrediente;
+import productos.interfazProducto.personalizarPedido.ingredientes.PanelIngredienteMetodos;
 import productos.modelo.Extra;
 import productos.modelo.Hamburguesa;
 import productos.modelo.Ingrediente;
@@ -43,13 +45,17 @@ public class PanelEdicionProductosMetodos {
 
 		// Establecemos los ingredientes y extras
 		establecerIngredientesExtras();
+
+		// Iniciamos el panel en el selector de productos
+		JPanel panel = PedidoDatos.getPanel().getPanelProductos();
+		new PanelUtil().insertarEnPanel(panel, interfaz);
 	}
 
 	private void establecerIngredientesExtras() {
 		// Obtenemos el panel
 		JPanel panel = interfaz.getPanelIngredientesExtras();
 		// Establecemos el layout del panel en boxlayout y lo ponemos eje Y
-		panel.setLayout(new GridLayout(0, 2));
+		panel.setLayout(new GridLayout(0, 1));
 		logger.debug("Se ha establecido el layout del panel");
 
 		// Creamos una lista de ingredientes y de extras
@@ -115,6 +121,13 @@ public class PanelEdicionProductosMetodos {
 		} else {
 			logger.debug("No existe la imagen del producto, se ha dejado la por defecto");
 		}
+	}
+
+	/**
+	 * Metodo que vuelve a la ventana principal de seleccion de productos
+	 */
+	protected void volverPantallaPrincipal() {
+		new PanelPedidoMetodos(PedidoDatos.getPanel()).iniciarPanelPedido();
 	}
 
 }

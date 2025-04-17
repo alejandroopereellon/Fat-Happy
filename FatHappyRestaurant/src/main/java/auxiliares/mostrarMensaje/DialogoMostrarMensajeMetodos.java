@@ -9,6 +9,6 @@ public class DialogoMostrarMensajeMetodos {
 	
 	
 	public void mostrarMensaje(String titulo) {
-		new DialogoMostrarMensaje(titulo).setVisible(true);;
+		new DialogoMostrarMensaje(titulo).setVisible(true);
 	}
 }

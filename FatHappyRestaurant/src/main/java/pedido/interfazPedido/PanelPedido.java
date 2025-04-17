@@ -1,8 +1,11 @@
 package pedido.interfazPedido;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import pedido.modelo.Pedido;
+import pedido.util.ModificarOrdenPedido;
+import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
 
 /**
  * Clase que maneja de manera grafica la creacion de un pedido
@@ -12,6 +15,8 @@ import pedido.modelo.Pedido;
 public class PanelPedido extends javax.swing.JPanel {
 
     private PanelPedidoMetodos metodos = new PanelPedidoMetodos(this);
+
+    private ListaProductosPedidosMetodos metodosLista = new ListaProductosPedidosMetodos(this);
 
     private DefaultListModel<Object> modeloLista = new DefaultListModel<>();
 
@@ -41,7 +46,9 @@ public class PanelPedido extends javax.swing.JPanel {
         categoria5 = new javax.swing.JButton();
         panelAjustesPedido = new javax.swing.JPanel();
         cobrar = new javax.swing.JButton();
-        Editar = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
+        crearMenu = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelProductos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -125,8 +132,29 @@ public class PanelPedido extends javax.swing.JPanel {
         cobrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cobrar.setText("Cobrar");
 
-        Editar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Editar.setText("Editar");
+        editar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editar.setText("Editar");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
+            }
+        });
+
+        eliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+
+        crearMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        crearMenu.setText("Crear menú");
+        crearMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearMenuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAjustesPedidoLayout = new javax.swing.GroupLayout(panelAjustesPedido);
         panelAjustesPedido.setLayout(panelAjustesPedidoLayout);
@@ -134,18 +162,23 @@ public class PanelPedido extends javax.swing.JPanel {
             panelAjustesPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAjustesPedidoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAjustesPedidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(panelAjustesPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAjustesPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(crearMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelAjustesPedidoLayout.setVerticalGroup(
             panelAjustesPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAjustesPedidoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Editar)
+                .addComponent(editar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eliminar)
+                .addGap(55, 55, 55)
+                .addComponent(crearMenu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cobrar)
                 .addContainerGap())
@@ -168,15 +201,12 @@ public class PanelPedido extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(panelProductos);
 
-        jScrollPane3.setBorder(null);
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 700));
 
-        listaProductosPedidos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listaProductosPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        listaProductosPedidos.setModel(modeloLista);
+        listaProductosPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(listaProductosPedidos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -229,11 +259,25 @@ public class PanelPedido extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_categoria5ActionPerformed
 
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+       metodos.eliminarProducto();
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+        metodosLista.editarElemento();
+    }//GEN-LAST:event_editarActionPerformed
+
+    private void crearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearMenuActionPerformed
+        metodos.crearMenu();
+    }//GEN-LAST:event_crearMenuActionPerformed
+
     public DefaultListModel<Object> getModeloLista() {
         return modeloLista;
     }
 
-    
+    public JList<Object> getListaProductosPedidos() {
+        return listaProductosPedidos;
+    }
 
     public JPanel getPanelProductos() {
         return panelProductos;
@@ -243,18 +287,19 @@ public class PanelPedido extends javax.swing.JPanel {
         return pedido;
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Complementos;
-    private javax.swing.JButton Editar;
     private javax.swing.JButton Hamburguesas;
     private javax.swing.JButton Postres;
     private javax.swing.JButton bebidas;
     private javax.swing.JButton categoria5;
     private javax.swing.JButton cobrar;
+    private javax.swing.JButton crearMenu;
+    private javax.swing.JButton editar;
+    private javax.swing.JButton eliminar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<String> listaProductosPedidos;
+    private javax.swing.JList<Object> listaProductosPedidos;
     private javax.swing.JPanel panelAjustesPedido;
     private javax.swing.JPanel panelProductos;
     private javax.swing.JPanel panelSeleccionTipoProducto;

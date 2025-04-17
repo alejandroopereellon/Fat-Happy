@@ -94,11 +94,11 @@ public class Hamburguesa extends Producto {
 	// toString
 	@Override
 	public String toString() {
-		String datos = super.toString();
+		String datos = super.toString() + System.lineSeparator();
 
 		// Mostramos los ingredientes
 		for (Ingrediente ing : listaIngredientes) {
-			if (ing.isActivo()) {
+			if (!ing.isActivo()) {
 				datos = datos + ing.toString() + System.lineSeparator();
 			}
 		}

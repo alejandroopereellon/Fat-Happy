@@ -2,6 +2,7 @@ package productos.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import productos.util.CalcularImporteMenu;
 
@@ -124,16 +125,46 @@ public class MenuPedido implements Serializable {
 
 	@Override
 	public String toString() {
-		String datos = "Menu " + tamano + " (" + precioMenu + " Eur)";
+		StringBuilder stb = new StringBuilder();
+		String tamanoString = "mediano";
+		if (tamano == 3) {
+			tamanoString = "grande";
+		}
+
+		// Anadimos el nombre y precio del producto
+		stb.append("Menu " + tamanoString + " (" + precioMenu.setScale(2, RoundingMode.HALF_UP) + " Eur)");
 		// Si el articulo esta promocionado se informara
 		if (menuPromocionado) {
-			datos = datos + "\tPRM";
+			stb.append("\tPRM");
 		}
-		datos = datos + System.lineSeparator() + "\t" + hamburguesa.toString() + System.lineSeparator() + "\t"
-				+ complemento.toString() + System.lineSeparator() + "\t" + bebida.toString();
-		if (postre != null) {
-			datos = datos + System.lineSeparator() + "\t" + postre.toString();
+
+		// Anadimos la informacion de la hamburguesa
+		stb.append(System.lineSeparator() + hamburguesa.toString());
+
+		// Trabajamos el complemento
+		stb.append(System.lineSeparator());
+		if (complemento == null) {
+			stb.append("Complemento pendiente");
+		} else {
+			stb.append(complemento.toString());
 		}
-		return datos;
+
+		// Trabajamos la bebida
+		stb.append(System.lineSeparator());
+		if (bebida == null) {
+			stb.append("Bebida pendiente");
+		} else {
+			stb.append(bebida.toString());
+		}
+
+		// Trabajamos la bebida
+		stb.append(System.lineSeparator());
+		if (postre == null) {
+			stb.append("Postre opcional");
+		} else {
+			stb.append(postre.toString());
+		}
+
+		return stb.toString();
 	}
 }

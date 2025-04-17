@@ -1,4 +1,4 @@
-package productos.interfazPedido.casillaProducto;
+package productos.interfazProducto.casillaProducto;
 
 import java.awt.Color;
 import java.io.File;
@@ -10,12 +10,11 @@ import javax.swing.ImageIcon;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import pedido.modelo.OrdenPedido;
 import pedido.modelo.PedidoDatos;
 import pedido.util.ModificarOrdenPedido;
-import productos.interfazPedido.SeleccionProductos.ActualizarPanelProductosPedidos;
 import productos.modelo.Producto;
 
 public class CasillaProductoMetodos {
@@ -72,11 +71,8 @@ public class CasillaProductoMetodos {
 
 		// 2. Anadimos el producto al pedido si el pedido esta iniciado
 		if (PedidoDatos.getPedido() != null) {
-			new ModificarOrdenPedido(PedidoDatos.getPedido()).anadirProducto(interfaz.getProducto());
+			new ModificarOrdenPedido(PedidoDatos.getPedido()).insertarProductoEnPedido(interfaz.getProducto());
 		}
-
-		// 3. Actualizamos la lista de productos pedidos
-		new ActualizarPanelProductosPedidos().actualizarPanel();
 	}
 
 	/**

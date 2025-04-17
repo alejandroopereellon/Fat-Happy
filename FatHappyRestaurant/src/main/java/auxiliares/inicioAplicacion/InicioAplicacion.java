@@ -8,7 +8,7 @@ import caja.util.IniciarCaja;
 import empleados.modelo.EmpleadoDatos;
 import productos.dao.ProductosDaoGlobal;
 import productos.dao.ProductosDaoHibernateImpl;
-import productos.util.ActualizarListaProductos;
+import productos.util.hiloActualizacionProductos.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
 import restaurante.modelo.RestauranteDatos;
 import ventanaPrincipal.InterfazVentanaPrincipal;

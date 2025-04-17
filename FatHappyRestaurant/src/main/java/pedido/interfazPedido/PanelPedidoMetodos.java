@@ -3,17 +3,24 @@ package pedido.interfazPedido;
 import java.awt.GridLayout;
 import java.util.List;
 
-import javax.swing.BoxLayout;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.utilidadesGraficas.PanelUtil;
-import productos.interfazPedido.casillaProducto.CasillaProducto;
-import productos.interfazPedido.casillaProducto.CasillaProductoMetodos;
+import pedido.modelo.PedidoDatos;
+import pedido.util.ModificarOrdenPedido;
+import productos.interfazProducto.casillaProducto.CasillaProducto;
+import productos.interfazProducto.casillaProducto.CasillaProductoMetodos;
+import productos.interfazProducto.listaProductosPedidos.ToStringRenderer;
 import productos.modelo.Producto;
 import productos.modelo.ProductoDatos;
 
+/**
+ * Clase que contiene todos los metodos necesarios para el funcionamiento del
+ * {@link PanelPedido}
+ * 
+ * @author Alejandro Perellón López
+ */
 public class PanelPedidoMetodos {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(PanelPedidoMetodos.class);
@@ -31,6 +38,10 @@ public class PanelPedidoMetodos {
 		// Establecemos el tamano del panel de productos
 		interfaz.getPanelProductos().setLayout(new GridLayout(0, 3));
 		logger.debug("Se ha estableciod el layout en gridLayout");
+
+		// Establecemos el cell renderer del lista
+		interfaz.getListaProductosPedidos().setCellRenderer(new ToStringRenderer());
+		interfaz.getListaProductosPedidos().setFixedCellHeight(-1);
 	}
 
 	protected void mostrarHamburguesas() {
@@ -127,5 +138,16 @@ public class PanelPedidoMetodos {
 		}
 		logger.info("Se han cargado todas las bebidas");
 	}
+
+	/**
+	 * Metodo que crea el menu a traves del producto selecionado
+	 */
+	protected void crearMenu() {
+		new ModificarOrdenPedido(PedidoDatos.getPedido()).crearMenuPedido();;
+	}
+
+    void eliminarProducto() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }
