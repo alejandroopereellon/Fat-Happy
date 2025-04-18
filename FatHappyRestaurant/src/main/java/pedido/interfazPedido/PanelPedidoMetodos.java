@@ -40,7 +40,7 @@ public class PanelPedidoMetodos {
 		logger.debug("Se ha estableciod el layout en gridLayout");
 
 		// Establecemos el cell renderer del lista
-		interfaz.getListaProductosPedidos().setCellRenderer(new ToStringRenderer());
+		interfaz.getListaProductosPedidos().setCellRenderer(new ToStringRenderer<Object>());
 		interfaz.getListaProductosPedidos().setFixedCellHeight(-1);
 	}
 
@@ -147,7 +147,7 @@ public class PanelPedidoMetodos {
 	}
 
 	void eliminarProducto() {
-		// TODO
+		new ModificarOrdenPedido(PedidoDatos.getPedido()).eliminarElemento();
 	}
 
 	/**

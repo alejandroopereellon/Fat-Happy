@@ -2,8 +2,15 @@ package productos.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * Este metodo es el metodo principal de producto que permite la creacion y
@@ -45,6 +52,9 @@ public class Producto implements Serializable {
 
 	@Transient
 	private boolean productoPromocionado;
+
+	@Transient
+	private final UUID numeroIdentificacion = UUID.randomUUID();
 
 	@Column(name = "opcion_descuento", nullable = false)
 	private boolean opcionDescuento;
@@ -188,4 +198,9 @@ public class Producto implements Serializable {
 	public String toString() {
 		return nombreProducto + "\t" + precioVenta;
 	}
+
+	public UUID getNumeroIdentificacion() {
+		return numeroIdentificacion;
+	}
+
 }

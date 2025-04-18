@@ -82,9 +82,13 @@ public class CasillaProductoMetodos {
 		if (PedidoDatos.getPedido() != null) {
 			new ModificarOrdenPedido(PedidoDatos.getPedido()).insertarProductoEnPedido(interfaz.getProducto());
 		}
-		
+
 		// 3. Actualizamos la lista
 		new PanelPedidoMetodos(PedidoDatos.getPanel()).actualizarLista();
+
+		// 4. Seleccionamos el ultimo elemento de la lista (el anadido)
+		PedidoDatos.getPanel().getListaProductosPedidos()
+				.setSelectedIndex(PedidoDatos.getPanel().getModeloLista().getSize()-1);
 	}
 
 	/**

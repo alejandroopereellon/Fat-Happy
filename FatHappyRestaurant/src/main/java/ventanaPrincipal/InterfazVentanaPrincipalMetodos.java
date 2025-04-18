@@ -37,7 +37,7 @@ public class InterfazVentanaPrincipalMetodos {
 	 */
 	public void iniciarConfiguracionInicial() {
 		// Establecemos resolucion a pantalla completa
-		//configuracionPantalla();
+		configuracionPantalla();
 		// Establecemos el look and feel
 		aplicarLookAndFeel();
 		// Hacemos la interfaz visible

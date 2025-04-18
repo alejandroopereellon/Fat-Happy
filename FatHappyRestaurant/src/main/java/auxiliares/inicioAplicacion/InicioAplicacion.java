@@ -92,7 +92,7 @@ public class InicioAplicacion {
 		grafica.getBarraProgreso().setValue(80);
 		
 		// Iniciamos el hilo de actualizacion automatica del stock
-		//actualizarProductos.start();
+		actualizarProductos.start();
 		grafica.getBarraProgreso().setValue(85);
 
 		// Iniciamos la ventana principal del programa

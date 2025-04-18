@@ -3,6 +3,7 @@ package productos.modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.UUID;
 
 import productos.util.CalcularImporteMenu;
 
@@ -64,6 +65,8 @@ public class MenuPedido implements Serializable {
 		new CalcularImporteMenu(this).calcularImporte();
 	}
 
+	private final UUID numeroIdentificacion = UUID.randomUUID();
+
 	// Getters && Setters
 
 	public Complemento getComplemento() {
@@ -121,6 +124,11 @@ public class MenuPedido implements Serializable {
 	public void setMenuSeleccionado(boolean menuSeleccionado) {
 		this.menuSeleccionado = menuSeleccionado;
 	}
+
+	public UUID getNumeroIdentificacion() {
+		return numeroIdentificacion;
+	}
+
 	// toString
 
 	@Override

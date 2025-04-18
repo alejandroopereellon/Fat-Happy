@@ -1,28 +1,29 @@
 package pedido.util;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import pedido.interfazPedido.PanelPedido;
-import pedido.modelo.OrdenPedido;
 import pedido.modelo.Pedido;
 import pedido.modelo.PedidoDatos;
 import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoGlobal;
 import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
 import productos.interfazProducto.solicitarTamanoMenu.SolicitarTamanoMenu;
+import productos.modelo.Complemento;
 import productos.modelo.Hamburguesa;
 import productos.modelo.MenuPedido;
 import productos.modelo.Producto;
+import productos.util.ModificarComplemento;
 import productos.util.ModificarMenuPedido;
 
 /**
  * Clase encargada de modificar la orden de pedido realizando las operaciones
  * necesarias para insertar o eliminar un producto o un menu
+ * 
+ * @author Alejandro Perellón López
  */
 public class ModificarOrdenPedido {
 	private Pedido pedido;
@@ -34,81 +35,6 @@ public class ModificarOrdenPedido {
 
 	public ModificarOrdenPedido(Pedido pedido) {
 		this.pedido = pedido;
-	}
-
-	public void crearMenuPedido() {
-		// 1. Obtenemos el panel del pedido
-		PanelPedido panel = PedidoDatos.getPanel();
-
-		// Si el panel es nulo no continuamos
-		if (panel == null) {
-			logger.warn("El panel de pedido es nulo");
-			return;
-		}
-
-		// 2. Obtenemos el producto seleccionado y comprobamos si es una hamburguesa
-		Object obj = obtenerElementoSeleccionadoLista(panel);
-		// Si el objeto es una hamburguesa
-		if (obj instanceof Hamburguesa) {
-			logger.debug("El objeto para crear un menu es una hamburguesa");
-			// Convertimos el objeto en una hamburguesa
-			Hamburguesa ham = (Hamburguesa) obj;
-			// Si tiene opcion de menu continuamos
-			if (ham.isOpcionMenu()) {
-				// Solicitamos el tamano del menu
-				int tamano = obtenerTamanoMenu();
-				logger.debug("El tamano de hamburguesa es {}", tamano);
-				// Comprobamos si el tamano del menu es diferente de 0 indicando 2 o 3
-				if (tamano != 0) {
-					MenuPedido menu = new MenuPedido(ham, tamano);
-					logger.info("Se ha creado un menu con la hamburguesa {}", ham);
-
-					// Eliminamos la hambruguesa
-					eliminarProducto((Hamburguesa) obj);
-
-					// Anadimos el menu a la lista de objetos
-					PedidoDatos.getPanel().getModeloLista().addElement(menu);
-
-					// Anadimos el menu a la orden de pedido
-					PedidoDatos.getPedido().getOrden().getListaMenus().add(menu);
-				}
-			} else {
-				logger.debug("El producto no tiene opcion de menu");
-				new DialogoMostrarMensajeMetodos().mostrarMensaje("Este producto no tiene opción de menú");
-			}
-		}
-
-	}
-
-	/**
-	 * Metodo que eliminar un {@link Producto} del modelo de la
-	 * {@link ListaProductosPedidosMetodos} y de la {@link OrdenPedido}
-	 * 
-	 * @param pro es el {@link Producto} que se va a eliminar
-	 */
-	private void eliminarProducto(Producto pro) {
-		// Eliminamos el producto de la lista de objetos
-		PedidoDatos.getPanel().getModeloLista().removeElement(pro);
-
-		// Eliminamos el producto de la orden de pedido
-		if (PedidoDatos.getPedido().getOrden().getListaProductos().remove(pro)) {
-			logger.debug("Se ha eliminado el producto {} de la lista de productos", pro);
-		} else {
-			logger.info("No se ha podido eliminar el producto {} de la lista de productos", pro);
-		}
-	}
-
-	/**
-	 * Metodo que llama al dialogo modal {@link SolicitarTamanoMenu} y obtiene el
-	 * menu solicitado por el empleado
-	 * 
-	 * @return {@link Integer} con el numero de menu solicitado
-	 */
-	private int obtenerTamanoMenu() {
-		SolicitarTamanoMenu stm = new SolicitarTamanoMenu(ConfiguracionInicial.get().getVentanaPrincipal(), true);
-		stm.setVisible(true);
-
-		return stm.getTamano();
 	}
 
 	/**
@@ -126,17 +52,8 @@ public class ModificarOrdenPedido {
 	 */
 	public void insertarProductoEnPedido(Producto pro) {
 
-		// 1. Obtenemos el panel del pedido
-		PanelPedido panel = PedidoDatos.getPanel();
-
-		// Si el panel es nulo no continuamos
-		if (panel == null) {
-			logger.warn("El panel de pedido es nulo");
-			return;
-		}
-
 		// 2. Obtenemos el elemento seleccionado de la lista para saber si es un menu
-		Object objeto = obtenerElementoSeleccionadoLista(panel);
+		Object objeto = obtenerElementoSeleccionadoLista();
 
 		// Obtenemos el producto del dao
 		Producto proNuevo = dao.obtenerProducto(pro.getCodigo());
@@ -151,6 +68,17 @@ public class ModificarOrdenPedido {
 					logger.debug("El producto no se ha podido anadir al menu");
 					anadirProducto(proNuevo);
 				}
+			}
+			// Comprobamos si el producto es un complemento y si el producto es una salsa se
+			// va a añadir la salsa al producto
+			else if (objeto != null && objeto instanceof Complemento
+					&& proNuevo.getTipoProducto().equalsIgnoreCase("salsa")) {
+				// Anadimos la salsa en el complemento
+				if (!new ModificarComplemento((Complemento) objeto).anadirSalsaComplemento(proNuevo)) {
+					logger.debug("La salsa no se ha podido anadir al menu");
+					anadirProducto(proNuevo);
+				}
+
 			}
 			// Si el objeto es un producto se va a insertar el producto directamente
 			else {
@@ -167,7 +95,82 @@ public class ModificarOrdenPedido {
 
 	}
 
-	private Object obtenerElementoSeleccionadoLista(PanelPedido panel) {
+	/**
+	 * Metodo que genera un {@link MenuPedido} nuevo, para ello comprueba si un
+	 * producto es una {@link Hamburguesa} y realiza las comprobaciones necesarias
+	 * para saber si es apta para ser un menu
+	 */
+	public void crearMenuPedido() {
+
+		// 1. Obtenemos el producto seleccionado y comprobamos si es una hamburguesa
+		Object obj = obtenerElementoSeleccionadoLista();
+		// Si el objeto es una hamburguesa
+		if (obj instanceof Hamburguesa && ((Hamburguesa) obj).isOpcionMenu()) {
+			convertirHamburguesaEnMenuPedido((Hamburguesa) obj);
+		} else {
+			logger.debug("El producto no tiene opcion de menu");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("Este producto no tiene opción de menú");
+		}
+	}
+
+	/**
+	 * Metodo que busca a traves del panel el objeto seleccionado y lo elimina de
+	 * una manera u otra dependiendo del tipo de producto
+	 */
+	public void eliminarElemento() {
+		// 1. Obtenemos el objeto seleccionado
+		Object obj = obtenerElementoSeleccionadoLista();
+
+		// Comprobamos si el objeto es un producto y lo eliminamos
+		if (obj instanceof Producto) {
+			buscarProductoYEliminar(obj);
+		} else if (obj instanceof MenuPedido) {
+			buscarMenuYEliminar(obj);
+		}
+	}
+
+	/**
+	 * Metodo que convierte una {@link Hamburguesa} en un {@link MenuPedido}
+	 * 
+	 * @param ham es la {@link Hamburguesa} que se va a convertir
+	 */
+	private void convertirHamburguesaEnMenuPedido(Hamburguesa ham) {
+		// Solicitamos el tamano del menu
+		int tamano = obtenerTamanoMenu();
+		logger.debug("El tamano de hamburguesa es {}", tamano);
+		// Comprobamos si el tamano del menu es diferente de 0 indicando 2 o 3
+		if (tamano != 0) {
+			MenuPedido menu = new MenuPedido(ham, tamano);
+			logger.info("Se ha creado un menu con la hamburguesa {}", ham);
+
+			// Eliminamos la hambruguesa
+			buscarProductoYEliminar(ham);
+
+			// Anadimos el menu a la lista de objetos
+			PedidoDatos.getPanel().getModeloLista().addElement(menu);
+
+			// Anadimos el menu a la orden de pedido
+			PedidoDatos.getPedido().getOrden().getListaMenus().add(menu);
+
+			logger.debug("Se ha anadido el menu a la orden de pedido");
+		}
+	}
+
+	/**
+	 * Metodo que llama al dialogo modal {@link SolicitarTamanoMenu} y obtiene el
+	 * menu solicitado por el empleado
+	 * 
+	 * @return {@link Integer} con el numero de menu solicitado
+	 */
+	private int obtenerTamanoMenu() {
+		SolicitarTamanoMenu stm = new SolicitarTamanoMenu(ConfiguracionInicial.get().getVentanaPrincipal(), true);
+		stm.setVisible(true);
+
+		return stm.getTamano();
+	}
+
+	private Object obtenerElementoSeleccionadoLista() {
+		PanelPedido panel = PedidoDatos.getPanel();
 		Object objeto = null;
 		// Obtenemos la posicion del elemento seleccionado
 		int posicion = panel.getListaProductosPedidos().getSelectedIndex();
@@ -176,12 +179,6 @@ public class ModificarOrdenPedido {
 		}
 		return objeto;
 	}
-
-	// TODO LA IDEA PRINCIPAL ES HACER QUE AL SELECCIONAR UN PRODUCTO SI HAY UN MENU
-	// SELECCIONADO SE AÑADA EL ELEMENTO A ESE MENU, EN CASO CONTRARIO SE AÑADE EL
-	// PRODUCTO FUERA, HAY QUE HACER UNA CLASE PRINCIPAL, QUE ANALICE ESO, Y TAMBIEN
-	// HAY QUE HACER QUE SI AL CONVERTIR UN PRODUCTO EN UN MENU SE ELIMINE DE UN
-	// SITIO Y SE RECUPERE EN OTRO. TAM
 
 	/**
 	 * Metodo que añade un producto a la orden de pedido y realiza todos los
@@ -203,53 +200,51 @@ public class ModificarOrdenPedido {
 	}
 
 	/**
-	 * Metodo que añade un menu a la orden de pedido y realiza todos los calculos
-	 * necesarios para actualizar el pedido
+	 * Metodo que busca el {@link MenuPedido} introducido por parametro y en caso de
+	 * encontrarse se elimina del modelo y de la orden de pedido
 	 * 
-	 * @param menu producto que se va a añadir a pedido
+	 * @param obj es el {@link MenuPedido} que se va a eliminar
 	 */
-	private void anadirMenu(MenuPedido menu) {
-		pedido.getOrden().getListaMenus().add(menu);
-		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
-		logger.info("Se ha añadido el menu en la lista");
+	private void buscarMenuYEliminar(Object obj) {
+		// Obtenemos el menu
+		MenuPedido menuObtenido = (MenuPedido) obj;
+
+		// Recorremos los menus de la lista de la orden de pedido
+		for (MenuPedido menuBucle : pedido.getOrden().getListaMenus()) {
+			// Si el numero de identificacion del menu coincide con el del objeto obtenido
+			if (menuBucle.getNumeroIdentificacion().equals(menuObtenido.getNumeroIdentificacion())) {
+				// Eliminamos el menu de la orden de pedido
+				pedido.getOrden().getListaMenus().remove(menuBucle);
+
+				// Eliminamos el producto de la orden de pedido
+				PedidoDatos.getPanel().getModeloLista().removeElement(menuObtenido);
+
+				logger.debug("Se ha eliminado el producto {} de la lista", menuObtenido);
+				break;
+			}
+		}
 	}
 
 	/**
-	 * Metodo que elimina de la orden de pedido el producto que se situa en la
-	 * posicion
+	 * Metodo que busca el {@link Producto} introducido por parametro y en caso de
+	 * encontrarse se elimina del modelo y de la orden de pedido
 	 * 
-	 * @param posicion es la posicion del producto que se va a eliminar
+	 * @param obj es le {@link Producto} que se va a eliminar
 	 */
-	private void retirarProducto(int posicion) {
-		List<Producto> lista = pedido.getOrden().getListaProductos();
-		// Si el numero de elementos es menor o igual que la posicion se elimina el
-		// objeto
-		if (posicion >= 0 && posicion < lista.size()) {
-			lista.remove(posicion);
-			logger.info("Se ha retirado el producto de la posicion {}", posicion);
-		} else {
-			logger.error("La posicion es mayor que el numero de elementos en la lista", lista);
-		}
-		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
-	}
+	private void buscarProductoYEliminar(Object obj) {
+		// Obtenemos el producto
+		Producto productoObtenido = (Producto) obj;
 
-	/**
-	 * Metodo que elimina de la orden de pedido el menu que se situa en la posicion
-	 * indicada
-	 * 
-	 * @param posicion
-	 */
-	private void retirarMenu(int posicion) {
-		List<MenuPedido> lista = pedido.getOrden().getListaMenus();
-		// Si el numero de elementos es menor o igual que la posicion se elimina el
-		// objeto
-		if (posicion >= 0 && posicion < lista.size()) {
-			lista.remove(posicion);
-			logger.info("Se ha retirado el Menu de la posicion {}", posicion);
-		} else {
-			logger.error("La posicion es mayor que el numero de elementos en la lista", lista);
-		}
-		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
-	}
+		// Recorremos la lista de productos de la orden de pedido
+		for (Producto productoBucle : pedido.getOrden().getListaProductos()) {
 
+			// Si el numero de identificacion cuadra con el numero del objeto lo eliminamos
+			if (productoBucle.getNumeroIdentificacion().equals(productoObtenido.getNumeroIdentificacion())) {
+				pedido.getOrden().getListaProductos().remove(productoObtenido);
+				PedidoDatos.getPanel().getModeloLista().removeElement(obj);
+				logger.debug("Se ha eliminado el producto {} de la lista", productoObtenido);
+				break;
+			}
+		}
+	}
 }
