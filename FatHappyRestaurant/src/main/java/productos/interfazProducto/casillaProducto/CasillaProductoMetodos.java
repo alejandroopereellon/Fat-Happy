@@ -11,13 +11,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
-import pedido.interfazPedido.PanelPedidoMetodos;
 import pedido.modelo.OrdenPedido;
-import pedido.modelo.PedidoDatos;
 import pedido.util.ModificarOrdenPedido;
+import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
 import productos.modelo.Producto;
 
+/**
+ * Clase que contiene los metodos de la {@link CasillaProducto}
+ * 
+ * @author Alejandro Perellón López
+ */
 public class CasillaProductoMetodos {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(CasillaProductoMetodos.class);
@@ -73,22 +78,23 @@ public class CasillaProductoMetodos {
 
 		// Anadimos el producto al pedido
 		// 1. Comprobamos si el pedido se ha iniciado, en caso contrario se inicia
-		if (PedidoDatos.getPedido() == null) {
+		if (ClasesEstaticas.getPedido() == null) {
 			// Iniciamos el pedido
-			PedidoDatos.iniciarPedido();
+			ClasesEstaticas.iniciarPedido();
 		}
 
 		// 2. Anadimos el producto al pedido si el pedido esta iniciado
-		if (PedidoDatos.getPedido() != null) {
-			new ModificarOrdenPedido(PedidoDatos.getPedido()).insertarProductoEnPedido(interfaz.getProducto());
+		if (ClasesEstaticas.getPedido() != null) {
+			new ModificarOrdenPedido(ClasesEstaticas.getPedido()).insertarProductoEnPedido(interfaz.getProducto());
 		}
 
 		// 3. Actualizamos la lista
-		new PanelPedidoMetodos(PedidoDatos.getPanel()).actualizarLista();
+		new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).actualizarLista();
+		;
 
 		// 4. Seleccionamos el ultimo elemento de la lista (el anadido)
-		PedidoDatos.getPanel().getListaProductosPedidos()
-				.setSelectedIndex(PedidoDatos.getPanel().getModeloLista().getSize()-1);
+		ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
+				.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize() - 1);
 	}
 
 	/**
@@ -110,7 +116,7 @@ public class CasillaProductoMetodos {
 		// Si el archivo existe en disco, devolver su URL
 		if (imagen.exists()) {
 			try {
-				logger.info("La ruta obtenida existe en los archivos: {}", imagen.getAbsolutePath());
+				logger.debug("La ruta obtenida existe en los archivos: {}", imagen.getAbsolutePath());
 				return imagen.toURI().toURL();
 			} catch (MalformedURLException e) {
 				logger.error("Error al convertir la ruta del archivo a URL", e);

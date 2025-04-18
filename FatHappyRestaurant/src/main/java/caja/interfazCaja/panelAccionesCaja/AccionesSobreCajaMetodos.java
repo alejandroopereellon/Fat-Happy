@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
-import caja.modelo.CajaDatos;
+import auxiliares.singleton.ClasesEstaticas;
 import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
 import caja.util.CerrarCaja;
@@ -42,7 +42,7 @@ public class AccionesSobreCajaMetodos {
 	 * Si la caja esta cerrada damos la opcion de iniciar la caja nueva
 	 */
 	public void habilitarDeshabilitarBotonesCaja() {
-		if (CajaDatos.get() == null) {
+		if (ClasesEstaticas.getCaja() == null) {
 			// El boton iniciar casa se activa
 			interfaz.getIniciarCaja().setEnabled(true);
 			// El boton cerrar caja se desactiva
@@ -65,7 +65,7 @@ public class AccionesSobreCajaMetodos {
 	public void iniciarCaja() {
 		logger.info("Se va a iniciar una nueva caja");
 		// Si la caja es nula y se ha podido crear una nueva caja
-		if (CajaDatos.get() == null && new CajaBuilder().crearNuevaCaja()) {
+		if (ClasesEstaticas.getCaja() == null && new CajaBuilder().crearNuevaCaja()) {
 			// Modificamos el estado de los botones
 			habilitarDeshabilitarBotonesCaja();
 
@@ -84,7 +84,7 @@ public class AccionesSobreCajaMetodos {
 		// Mostramos las estadisticas de venta
 		consultarEstadisticasVentas();
 		// Si la caja existe y se ha cerrado correctamente
-		if (CajaDatos.get() != null && new CerrarCaja().cerrarCaja()) {
+		if (ClasesEstaticas.getCaja() != null && new CerrarCaja().cerrarCaja()) {
 			// Modificamos el estado de los botones
 			habilitarDeshabilitarBotonesCaja();
 			logger.info("Se ha cerrado la caja desde la interfaz correctamente");

@@ -8,10 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
-import caja.modelo.CajaDatos;
+import auxiliares.singleton.ClasesEstaticas;
 import pedido.modelo.OrdenPedido;
 import pedido.modelo.Pedido;
-import restaurante.modelo.RestauranteDatos;
 
 /**
  * Builder para crear pedidos de forma controlada y escalable.
@@ -20,28 +19,8 @@ public class PedidoBuilder {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(PedidoBuilder.class);
 
-	// Datos obligatorios o configurables
-	// private int numeroPedido;
-	// private OrdenPedido orden;
-	// private int estadoPedido;
-
-//	public PedidoBuilder withNumeroPedido(int numeroPedido) {
-//		this.numeroPedido = numeroPedido;
-//		return this;
-//	}
-//
-//	public PedidoBuilder withOrden(OrdenPedido orden) {
-//		this.orden = orden;
-//		return this;
-//	}
-//
-//	public PedidoBuilder withEstado(int estadoPedido) {
-//		this.estadoPedido = estadoPedido;
-//		return this;
-//	}
-
 	public Pedido build() {
-		if (CajaDatos.get() == null) {
+		if (ClasesEstaticas.getCaja() == null) {
 			new DialogoMostrarMensajeMetodos().mostrarMensaje("La caja está cerrada");
 			logger.warn("La caja no está iniciada");
 			return null;
@@ -52,7 +31,7 @@ public class PedidoBuilder {
 
 		// Establecemos el numero de pedido
 		pedido.setNumeroPedido(
-				new ObtenerNumeroPedido().obtenerYReservarNumeroPedido(RestauranteDatos.get().getIdRestaurante()));
+				new ObtenerNumeroPedido().obtenerYReservarNumeroPedido(ClasesEstaticas.getRestaurante().getIdRestaurante()));
 		logger.debug("Se ha establecido el numero de pedido: ", pedido.getNumeroPedido());
 
 		// Establecemos el orden de pedido
@@ -67,7 +46,7 @@ public class PedidoBuilder {
 		pedido.setFechaHora(LocalDateTime.now());
 
 		// Establecemos la ruta donde se almacenan los pedidos
-		String ruta = File.separator + "R" + CajaDatos.get().getRestaurante().getIdRestaurante() + File.separator
+		String ruta = File.separator + "R" + ClasesEstaticas.getCaja().getRestaurante().getIdRestaurante() + File.separator
 				+ LocalDate.now().toString() + File.separator + pedido.getNumeroPedido();
 		pedido.setRutaPedido(ruta);
 		logger.debug("Se ha establecido la ruta de almacenamiento de pedidos en :", ruta);

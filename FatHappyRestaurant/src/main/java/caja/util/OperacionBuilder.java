@@ -3,9 +3,9 @@ package caja.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.singleton.ClasesEstaticas;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
-import caja.modelo.CajaDatos;
 import caja.modelo.Operacion;
 import pedido.modelo.Pedido;
 import pedido.util.CalcularImporte;
@@ -31,7 +31,7 @@ public class OperacionBuilder {
 	public boolean GenerarOperacion(Pedido pedido, String tipoOperacion, String metodoCobro) {
 
 		// Establecemos la caja para la operacion
-		operacion.setCaja(CajaDatos.get());
+		operacion.setCaja(ClasesEstaticas.getCaja());
 
 		// Establecemos el pedido
 		operacion.setPedido(pedido);

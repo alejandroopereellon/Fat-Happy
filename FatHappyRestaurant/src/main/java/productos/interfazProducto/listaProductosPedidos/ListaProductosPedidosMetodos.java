@@ -37,6 +37,7 @@ public class ListaProductosPedidosMetodos {
 	public void anadirElemento(Object obj) {
 		interfaz.getModeloLista().addElement(obj);
 		logger.info("Se ha añadido a la lista el objeto {}", obj);
+
 	}
 
 	/**
@@ -68,5 +69,12 @@ public class ListaProductosPedidosMetodos {
 					.iniciarInterfaz();
 			logger.debug("Se esta editando el menu");
 		}
+	}
+
+	/**
+	 * Metodo que actualiza la lista para que cuadre con el modelo
+	 */
+	public void actualizarLista() {
+		interfaz.getListaProductosPedidos().updateUI();
 	}
 }

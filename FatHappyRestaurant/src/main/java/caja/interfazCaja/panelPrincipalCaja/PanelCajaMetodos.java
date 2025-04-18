@@ -4,9 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 import caja.interfazCaja.Reloj;
 import caja.modelo.Caja;
-import caja.modelo.CajaDatos;
 
 /**
  * Clase que gestiona la interfaz del panel de caja
@@ -42,7 +42,7 @@ public class PanelCajaMetodos {
 	 */
 	public void rellenarDatosCaja() {
 		// Obtenemos la caja de singleton
-		Caja caja = CajaDatos.get();
+		Caja caja = ClasesEstaticas.getCaja();
 
 		if (caja != null && caja.getEmpleado() != null) {
 			// Establecemos el nombre y apellidos del empleado
@@ -58,7 +58,7 @@ public class PanelCajaMetodos {
 			actualizarEstadoCaja(caja);
 
 			// Almacenamos la caja en el singleton
-			CajaDatos.setPanelCaja(interfaz);
+			ClasesEstaticas.setPanelCaja(interfaz);
 		} else {
 			establecerInterfazNula();
 			logger.info("Se ha establecido la interfaz panelCaja como nula");

@@ -3,12 +3,11 @@ package caja.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.singleton.ClasesEstaticas;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
 import caja.modelo.Caja;
-import caja.modelo.CajaDatos;
 import empleados.modelo.Empleado;
-import empleados.modelo.EmpleadoDatos;
 
 /**
  * Clase encarga de la recuperacion de la ultima caja disponible en el
@@ -34,7 +33,7 @@ public class IniciarCaja {
 		// Si la caja recuperada no es nula se va a
 		if (cajaRecuperada != null && cajaRecuperada.getImporteFinal() == null) {
 			// Establecemos el empleado de la caja en singleton
-			EmpleadoDatos.set(cajaRecuperada.getEmpleado());
+			ClasesEstaticas.setEmpleado(cajaRecuperada.getEmpleado());
 			logger.info("Se ha establecido el empleado con ID {}", cajaRecuperada.getEmpleado().getIdEmpleado());
 			// Establecemos la caja recuperada del dao en singleton
 			establecerCaja(cajaRecuperada);
@@ -70,6 +69,6 @@ public class IniciarCaja {
 	 * @param caja es la {@link Caja} que se va a meter en global {@link CajaDatos}
 	 */
 	public void establecerCaja(Caja caja) {
-		CajaDatos.set(caja);
+		ClasesEstaticas.setCaja(caja);
 	}
 }

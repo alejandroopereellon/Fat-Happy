@@ -3,8 +3,8 @@ package pedido.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.singleton.ClasesEstaticas;
 import caja.interfazCaja.panelPrincipalCaja.PanelCaja;
-import caja.modelo.CajaDatos;
 import pedido.modelo.Pedido;
 
 /**
@@ -28,7 +28,7 @@ public class IniciarContadorPedido extends Thread {
 		logger.info("Se ha iniciado el hilo del contador de tiempo del pedido");
 
 		// Establecemos el panel de la caja
-		panel = CajaDatos.getPanelCaja();
+		panel = ClasesEstaticas.getPanelCaja();
 
 		int tiempoConsumido = 0;
 		while (pedidoOrigen.getEstadoPedido() == 1) {

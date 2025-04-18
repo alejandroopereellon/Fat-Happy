@@ -11,9 +11,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.PanelUtil;
 import pedido.interfazPedido.PanelPedidoMetodos;
-import pedido.modelo.PedidoDatos;
+import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
 import productos.interfazProducto.personalizarPedido.extras.PanelExtra;
 import productos.interfazProducto.personalizarPedido.extras.PanelExtraMetodos;
 import productos.interfazProducto.personalizarPedido.ingredientes.PanelIngrediente;
@@ -47,7 +48,7 @@ public class PanelEdicionProductosMetodos {
 		establecerIngredientesExtras();
 
 		// Iniciamos el panel en el selector de productos
-		JPanel panel = PedidoDatos.getPanel().getPanelProductos();
+		JPanel panel = ClasesEstaticas.getPanelPedido().getPanelProductos();
 		new PanelUtil().insertarEnPanel(panel, interfaz);
 	}
 
@@ -128,9 +129,9 @@ public class PanelEdicionProductosMetodos {
 	 */
 	protected void volverPantallaPrincipal() {
 		// 1. Mostramos la pantalla principal con toda la informacion
-		new PanelPedidoMetodos(PedidoDatos.getPanel()).iniciarPanelPedido();
+		new PanelPedidoMetodos(ClasesEstaticas.getPanelPedido()).iniciarPanelPedido();
 		// 2. Actualizamos la lista
-		new PanelPedidoMetodos(PedidoDatos.getPanel()).actualizarLista();
+		new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).actualizarLista();
 	}
 
 }

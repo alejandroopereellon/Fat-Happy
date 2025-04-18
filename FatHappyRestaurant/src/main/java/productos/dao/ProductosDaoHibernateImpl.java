@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
+import auxiliares.singleton.ClasesEstaticas;
 import pool.HibernateUtil;
 import productos.modelo.Bebida;
 import productos.modelo.Complemento;
@@ -17,7 +18,6 @@ import productos.modelo.Ingrediente;
 import productos.modelo.Postre;
 import productos.modelo.Producto;
 import productos.modelo.Salsa;
-import restaurante.modelo.RestauranteDatos;
 
 /**
  * Esta modelo utilizará Hibernate para acceder a los datos de todos los
@@ -225,7 +225,7 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 			logger.debug("Se ha encontrado el objeto producto con ID {}, comprobando si esta en stock", id);
 			boolean enStock = session.createNativeQuery(
 					"SELECT activo FROM stock_restaurante WHERE id_restaurante = :idRest and id_producto = :idProd",
-					boolean.class).setParameter("idRest", RestauranteDatos.get().getIdRestaurante())
+					boolean.class).setParameter("idRest", ClasesEstaticas.getRestaurante().getIdRestaurante())
 					.setParameter("idProd", producto.getCodigo()).uniqueResult();
 			if (enStock) {
 				logger.info("El objeto producto con ID {} se ha encontrado y esta en stock", id);
@@ -378,7 +378,7 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 			// Ejecutamos la consulta y verificamos el resultado
 			Object resultado = session.createNativeQuery(
 					"SELECT MAX(fecha_actualizacion) FROM actualizaciones_stock WHERE id_restaurante = :idRestaurante",
-					Object.class).setParameter("idRestaurante", RestauranteDatos.get().getIdRestaurante())
+					Object.class).setParameter("idRestaurante", ClasesEstaticas.getRestaurante().getIdRestaurante())
 					.getSingleResult();
 
 			// Si el resultado no es nulo

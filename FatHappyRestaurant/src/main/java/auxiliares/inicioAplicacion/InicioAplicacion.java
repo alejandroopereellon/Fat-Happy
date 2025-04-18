@@ -4,13 +4,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.grafica.InicioApp;
+import auxiliares.singleton.ClasesEstaticas;
 import caja.util.IniciarCaja;
-import empleados.modelo.EmpleadoDatos;
 import productos.dao.ProductosDaoGlobal;
 import productos.dao.ProductosDaoHibernateImpl;
 import productos.util.hiloActualizacionProductos.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
-import restaurante.modelo.RestauranteDatos;
 import ventanaPrincipal.InterfazVentanaPrincipal;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
@@ -41,23 +40,23 @@ public class InicioAplicacion {
 		// Iniciar descarga de imágenes del servidor ftp
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
 		grafica.getBarraProgreso().setValue(15);
-		if (new FTPDownloader().iniciarConexionYDescargar()) {
-			logger.info("Se han cargado los ficheros en local");
-		} else {
-			logger.error("No se han podido cargar los ficheros en local");
-			return false;
-		}
+//		if (new FTPDownloader().iniciarConexionYDescargar()) {
+//			logger.info("Se han cargado los ficheros en local");
+//		} else {
+//			logger.error("No se han podido cargar los ficheros en local");
+//			return false;
+//		}
 		grafica.getBarraProgreso().setValue(20);
 
 		// Cargar datos del restaurante
 		grafica.getEstadoInicio().setText("Cargando datos del restaurante");
-		RestauranteDatos.set(new RestauranteDaoHibernateImpl()
+		ClasesEstaticas.setRestaurante(new RestauranteDaoHibernateImpl()
 				.obtenerRestaurante(ConfiguracionInicial.get().getCodigoRestaurante()));
 		grafica.getBarraProgreso().setValue(25);
 		// Realizamos comprobacion de si el restaurante se ha podido volcar
 		// correctamente
-		if (RestauranteDatos.get() != null) {
-			logger.info("Se ha cargado el restaurante con ID {}", RestauranteDatos.get().getIdRestaurante());
+		if (ClasesEstaticas.getRestaurante() != null) {
+			logger.info("Se ha cargado el restaurante con ID {}", ClasesEstaticas.getRestaurante().getIdRestaurante());
 			grafica.getBarraProgreso().setValue(30);
 		} else {
 			logger.error("No se ha podido cargar los datos del restaurante con ID {}",
@@ -76,7 +75,7 @@ public class InicioAplicacion {
 		grafica.getEstadoInicio().setText("Recuperando la ultima caja del sistema");
 		if (new IniciarCaja().recuperarCajaInicio()) {
 			logger.info("Se ha cargado la caja {}", ConfiguracionInicial.get().getNumeroCaja());
-			logger.info("Se ha cargado el empleado con ID {} en la caja {}", EmpleadoDatos.get().getIdEmpleado(),
+			logger.info("Se ha cargado el empleado con ID {} en la caja {}", ClasesEstaticas.getEmpleado().getIdEmpleado(),
 					ConfiguracionInicial.get().getNumeroCaja());
 		}
 		grafica.getBarraProgreso().setValue(70);

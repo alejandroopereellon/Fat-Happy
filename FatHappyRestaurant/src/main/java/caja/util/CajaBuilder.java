@@ -9,15 +9,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.solicitarNumeroDecimal.SolicitarNumeroDecimalMetodos;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
 import caja.modelo.Caja;
-import caja.modelo.CajaDatos;
 import empleados.modelo.Empleado;
-import empleados.modelo.EmpleadoDatos;
 import empleados.util.ActividadEmpleados;
-import restaurante.modelo.RestauranteDatos;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
 /**
@@ -72,7 +70,7 @@ public class CajaBuilder {
 			bandera = false;
 		}
 		// 3. Establecemos el importe inicial de la caja
-		if (!anadirImporte()) {
+		if (!anadirImporte() && (caja.getImporteInicial().compareTo(BigDecimal.ZERO) > 0)) {
 			logger.error("No se ha podido obtener el importe, no se activará la caja");
 			bandera = false;
 		}
@@ -105,7 +103,7 @@ public class CajaBuilder {
 	private boolean anadirCajaSingleton() {
 		logger.info("La caja ha sido iniciada correctamente");
 		// Establecemos la caja en el singleton
-		CajaDatos.set(caja);
+		ClasesEstaticas.setCaja(caja);
 		logger.info("Se ha establecido la caja en el singleton");
 		// Anadimos la caja en el DAO
 		dao.insertarCaja(caja);
@@ -165,11 +163,11 @@ public class CajaBuilder {
 	 */
 	private boolean anadirRestaurante() {
 		// Si la caja es nula se retorna un error
-		if (RestauranteDatos.get() == null) {
+		if (ClasesEstaticas.getRestaurante() == null) {
 			logger.error("El restaurante en singleton no existe");
 			return false;
 		}
-		caja.setRestaurante(RestauranteDatos.get());
+		caja.setRestaurante(ClasesEstaticas.getRestaurante());
 		logger.debug("Se ha establecido el restaurante ID {}", caja.getRestaurante().getIdRestaurante());
 		return true;
 	}
@@ -187,7 +185,7 @@ public class CajaBuilder {
 		// Si el empleado no es nulo lo añadimos a singleton y en caja
 		if (emp != null) {
 			caja.setEmpleado(emp);
-			EmpleadoDatos.set(emp);
+			ClasesEstaticas.setEmpleado(emp);
 			logger.info("Se ha recuperado el empleado con id {}, se añade en singleton y en caja", emp.getIdEmpleado());
 			return true;
 		}

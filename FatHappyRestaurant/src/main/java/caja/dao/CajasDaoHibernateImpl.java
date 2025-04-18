@@ -10,15 +10,13 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 import caja.modelo.Caja;
-import caja.modelo.CajaDatos;
 import caja.modelo.Operacion;
 import empleados.modelo.Empleado;
-import empleados.modelo.EmpleadoDatos;
 import pedido.modelo.Pedido;
 import pool.HibernateUtil;
 import restaurante.modelo.Restaurante;
-import restaurante.modelo.RestauranteDatos;
 
 public class CajasDaoHibernateImpl implements CajasDao {
 
@@ -188,7 +186,7 @@ public class CajasDaoHibernateImpl implements CajasDao {
 
 	@Override
 	public boolean cerrarCaja() {
-		Caja caja = CajaDatos.get();
+		Caja caja = ClasesEstaticas.getCaja();
 		Caja cajaActualizada = null;
 		// Realizamos la persistencia del objeto operacion
 		Transaction transaction = null;
@@ -240,7 +238,7 @@ public class CajasDaoHibernateImpl implements CajasDao {
 	 * @return {@link Restaurante} obtenido de hibernate
 	 */
 	private Restaurante obtenerRestaurante(Session sesion) {
-		Restaurante res = RestauranteDatos.get();
+		Restaurante res = ClasesEstaticas.getRestaurante();
 		logger.info("Se esta recuperando el restaurante con ID {}", res.getIdRestaurante());
 		return sesion.find(Restaurante.class, res.getIdRestaurante());
 	}
@@ -252,7 +250,7 @@ public class CajasDaoHibernateImpl implements CajasDao {
 	 * @return {@link Empleado} obtenido de hibernate
 	 */
 	private Empleado obtenerEmpleado(Session sesion) {
-		Empleado emp = EmpleadoDatos.get();
+		Empleado emp = ClasesEstaticas.getEmpleado();
 		logger.info("Se esta recuperando el empleado con ID {}", emp.getIdEmpleado());
 		return sesion.find(Empleado.class, emp.getIdEmpleado());
 	}
@@ -264,7 +262,7 @@ public class CajasDaoHibernateImpl implements CajasDao {
 	 * @return {@link Caja} obtenida de hibernate
 	 */
 	private Caja obtenerCaja(Session sesion) {
-		Caja caja = CajaDatos.get();
+		Caja caja = ClasesEstaticas.getCaja();
 		logger.info("Se esta recuperando la caja con ID {}", caja.getId());
 		return sesion.find(Caja.class, caja.getId());
 	}

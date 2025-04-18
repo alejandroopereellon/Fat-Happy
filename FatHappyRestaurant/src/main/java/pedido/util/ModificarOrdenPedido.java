@@ -5,9 +5,9 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
+import auxiliares.singleton.ClasesEstaticas;
 import pedido.interfazPedido.PanelPedido;
 import pedido.modelo.Pedido;
-import pedido.modelo.PedidoDatos;
 import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoGlobal;
 import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
@@ -90,8 +90,8 @@ public class ModificarOrdenPedido {
 		}
 
 		// Seleccionamos el ultimo objeto de la lista
-		PedidoDatos.getPanel().getListaProductosPedidos()
-				.setSelectedIndex(PedidoDatos.getPanel().getModeloLista().getSize());
+		ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
+				.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize());
 
 	}
 
@@ -147,10 +147,10 @@ public class ModificarOrdenPedido {
 			buscarProductoYEliminar(ham);
 
 			// Anadimos el menu a la lista de objetos
-			PedidoDatos.getPanel().getModeloLista().addElement(menu);
+			ClasesEstaticas.getPanelPedido().getModeloLista().addElement(menu);
 
 			// Anadimos el menu a la orden de pedido
-			PedidoDatos.getPedido().getOrden().getListaMenus().add(menu);
+			ClasesEstaticas.getPedido().getOrden().getListaMenus().add(menu);
 
 			logger.debug("Se ha anadido el menu a la orden de pedido");
 		}
@@ -170,7 +170,7 @@ public class ModificarOrdenPedido {
 	}
 
 	private Object obtenerElementoSeleccionadoLista() {
-		PanelPedido panel = PedidoDatos.getPanel();
+		PanelPedido panel = ClasesEstaticas.getPanelPedido();
 		Object objeto = null;
 		// Obtenemos la posicion del elemento seleccionado
 		int posicion = panel.getListaProductosPedidos().getSelectedIndex();
@@ -195,7 +195,7 @@ public class ModificarOrdenPedido {
 			logger.info("Se ha añadido el producto con id {} en la lista", pro.getCodigo());
 
 			// Anadimos el producto pedido en la casilla del producto
-			new ListaProductosPedidosMetodos(PedidoDatos.getPanel()).anadirElemento(pro);
+			new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).anadirElemento(pro);
 		}
 	}
 
@@ -217,7 +217,7 @@ public class ModificarOrdenPedido {
 				pedido.getOrden().getListaMenus().remove(menuBucle);
 
 				// Eliminamos el producto de la orden de pedido
-				PedidoDatos.getPanel().getModeloLista().removeElement(menuObtenido);
+				ClasesEstaticas.getPanelPedido().getModeloLista().removeElement(menuObtenido);
 
 				logger.debug("Se ha eliminado el producto {} de la lista", menuObtenido);
 				break;
@@ -241,7 +241,7 @@ public class ModificarOrdenPedido {
 			// Si el numero de identificacion cuadra con el numero del objeto lo eliminamos
 			if (productoBucle.getNumeroIdentificacion().equals(productoObtenido.getNumeroIdentificacion())) {
 				pedido.getOrden().getListaProductos().remove(productoObtenido);
-				PedidoDatos.getPanel().getModeloLista().removeElement(obj);
+				ClasesEstaticas.getPanelPedido().getModeloLista().removeElement(obj);
 				logger.debug("Se ha eliminado el producto {} de la lista", productoObtenido);
 				break;
 			}

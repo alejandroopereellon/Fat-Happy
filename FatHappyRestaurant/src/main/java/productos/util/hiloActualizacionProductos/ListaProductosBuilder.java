@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.singleton.ClasesEstaticas;
 import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoGlobal;
 import productos.modelo.ListaProductos;
 import productos.modelo.Producto;
-import productos.modelo.ProductoDatos;
 
 /**
  * Metodo que constuye el objeto {@link ListaProductos} realizando varias
@@ -40,7 +40,7 @@ public class ListaProductosBuilder {
 		logger.info("Se ha cargado la lista de postres");
 
 		// Almacenamos la lista de productos en el singleton
-		ProductoDatos.set(lista);
+		ClasesEstaticas.setListaProductos(lista);
 		logger.info("Se ha cargado en singleton las listas de productos");
 	}
 

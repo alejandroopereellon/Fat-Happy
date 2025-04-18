@@ -15,10 +15,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import auxiliares.crearTicket.TicketBuilder;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensaje;
+import auxiliares.singleton.ClasesEstaticas;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
 import caja.modelo.Caja;
-import caja.modelo.CajaDatos;
 import empleados.util.ActividadEmpleados;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
@@ -33,7 +33,7 @@ public class CerrarCaja {
 	static Logger logger = LogManager.getLogger(CerrarCaja.class);
 
 	private CajasDao dao = new CajasDaoHibernateImpl();
-	private Caja caja = CajaDatos.get();
+	private Caja caja = ClasesEstaticas.getCaja();
 
 	File fichero = new File(ConfiguracionInicial.get().getDirectorioLocal() + File.separator + "cierreCaja"
 			+ File.separator + LocalDate.now() + File.separator + "caja" + caja.getNumeroCaja() + File.separator
@@ -72,7 +72,7 @@ public class CerrarCaja {
 				crearTicketCaja();
 
 				// Volvemos el objeto caja de singleton en null
-				CajaDatos.set(null);
+				ClasesEstaticas.setCaja(null);
 				// Establecemos los datos de la caja cerrada en la ventana principal
 				new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
 						.configurarPanelCaja();
