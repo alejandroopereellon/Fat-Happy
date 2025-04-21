@@ -2,6 +2,7 @@ package pedido.interfazPedido.filtros;
 
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
+import java.awt.Dimension;
 import javax.swing.ButtonGroup;
 import pedido.interfazPedido.PanelPedidoMetodos;
 
@@ -16,6 +17,7 @@ public class FiltroPostre extends javax.swing.JPanel {
      */
     public FiltroPostre() {
         initComponents();
+        this.setPreferredSize(new Dimension(159, 437));
     }
 
     /**
@@ -81,7 +83,7 @@ public class FiltroPostre extends javax.swing.JPanel {
         todosLosProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         todosLosProductos.setSelected(true);
         todosLosProductos.setText("Todos");
-        todosLosProductos.setActionCommand("Todos");
+        todosLosProductos.setActionCommand("todos");
         todosLosProductos.setContentAreaFilled(false);
         todosLosProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +109,6 @@ public class FiltroPostre extends javax.swing.JPanel {
         grupoTipoHelado.add(soloFrostie);
         soloFrostie.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         soloFrostie.setText("Frostie");
-        soloFrostie.setActionCommand("Frostie");
         soloFrostie.setContentAreaFilled(false);
         soloFrostie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

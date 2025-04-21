@@ -46,6 +46,7 @@ public class FiltroHamburguesa extends javax.swing.JPanel {
         setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
 
         panelFiltros.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
+        panelFiltros.setPreferredSize(new java.awt.Dimension(159, 437));
 
         textoFiltro.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
         textoFiltro.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -141,7 +142,7 @@ public class FiltroHamburguesa extends javax.swing.JPanel {
                     .addComponent(todosLosProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(soloVacuno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(soloPollo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textoOpcionMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addComponent(textoOpcionMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addComponent(todosLosProductos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(soloConMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(soloSinMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))

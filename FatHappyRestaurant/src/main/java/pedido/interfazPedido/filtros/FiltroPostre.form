@@ -159,7 +159,7 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Todos"/>
-            <Property name="actionCommand" type="java.lang.String" value="Todos"/>
+            <Property name="actionCommand" type="java.lang.String" value="todos"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -200,7 +200,6 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Frostie"/>
-            <Property name="actionCommand" type="java.lang.String" value="Frostie"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
           <Events>

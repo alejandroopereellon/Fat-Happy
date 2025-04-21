@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.PanelUtil;
+import pedido.interfazPedido.filtros.FiltroBebidas;
 import pedido.interfazPedido.filtros.FiltroComplementos;
 import pedido.interfazPedido.filtros.FiltroHamburguesa;
 import pedido.interfazPedido.filtros.FiltroPostre;
@@ -215,7 +216,7 @@ public class PanelPedidoMetodos {
 	public void mostrarCasillasPostres(FiltroPostre filtro) {
 		interfaz.getPanelProductos().removeAll();
 
-		// Obtenemos la lista de bebidas
+		// Obtenemos la lista de postres
 		List<Producto> listaPostres = ClasesEstaticas.getListaProductos().getListaPostres();
 		// Obtenemos la seleccion de topping
 		String seleccionTopping = filtro.getGrupoTopping().getSelection().getActionCommand();
@@ -249,23 +250,56 @@ public class PanelPedidoMetodos {
 	}
 
 	protected void mostrarBebidas() {
+
 		vaciarPanelesCategorias();
+
+		// Anadimos el panel de filtros
+		FiltroBebidas filtro = new FiltroBebidas();
+		new PanelUtil().insertarEnPanel(interfaz.getPanelFiltros(), filtro);
+		logger.debug("Se ha insertado el filtro en el panel");
+
+		mostrarCasillasBebidas(filtro);
+	}
+
+	/**
+	 * Metodo que muestra las casillas de las bebidas con los correspondientes
+	 * filtrados necesarios
+	 * 
+	 * @param filtro es el {@link FiltroBebidas} que se aplica para mostrar o no una
+	 *               casilla
+	 */
+	public void mostrarCasillasBebidas(FiltroBebidas filtro) {
+		interfaz.getPanelProductos().removeAll();
 
 		// Obtenemos la lista de bebidas
 		List<Producto> listaBebidas = ClasesEstaticas.getListaProductos().getListaBebidas();
 
+		// Obtenemos los parametros de las bebidas
+		String tipoBebida = filtro.getGrupoTipoBebida().getSelection().getActionCommand();
+
 		// Recorremos toda la lista de bebidas disponibles
 		for (Producto producto : listaBebidas) {
-			// Creamos el panel del producto
-			CasillaProducto casilla = new CasillaProducto(producto, interfaz.getPedido());
 
-			// Iniciamos los datos de la casilla
-			new CasillaProductoMetodos(casilla).establecerDatosProducto();
+			// Comprobamos el filtro tipo de bebida
+			boolean mostrarTipo = tipoBebida.equalsIgnoreCase("todos")
+					|| producto.getTipoProducto().equalsIgnoreCase(tipoBebida);
 
-			// Anadimos cada bebida en el panel
-			new PanelUtil().insertarEnPanelSinBorrar(interfaz.getPanelProductos(), casilla);
+			boolean productoMostrar = String.valueOf(producto.getCodigo()).endsWith("0")
+					|| producto.getTipoProducto().equalsIgnoreCase("singas");
 
-			logger.debug("Se ha insertado la bebida {}", producto);
+			// filtramos las bebidas por tamanos (si terminan en 0 o 9)
+			if (productoMostrar && mostrarTipo) {
+				// Creamos el panel del producto
+				CasillaProducto casilla = new CasillaProducto(producto, interfaz.getPedido());
+
+				// Iniciamos los datos de la casilla
+				new CasillaProductoMetodos(casilla).establecerDatosProducto();
+
+				// Anadimos cada bebida en el panel
+				new PanelUtil().insertarEnPanelSinBorrar(interfaz.getPanelProductos(), casilla);
+
+				logger.debug("Se ha insertado la bebida {}", producto);
+			}
 		}
 		logger.info("Se han cargado todas las bebidas");
 	}

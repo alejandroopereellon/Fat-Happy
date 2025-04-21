@@ -43,6 +43,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
         soloGrande = new javax.swing.JRadioButton();
 
         panelFiltros.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
+        panelFiltros.setPreferredSize(new java.awt.Dimension(159, 437));
 
         jLabel1.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -152,7 +153,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
         panelFiltros.setLayout(panelFiltrosLayout);
         panelFiltrosLayout.setHorizontalGroup(
             panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
             .addGroup(panelFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +193,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
                 .addComponent(soloMediano, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(soloGrande, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

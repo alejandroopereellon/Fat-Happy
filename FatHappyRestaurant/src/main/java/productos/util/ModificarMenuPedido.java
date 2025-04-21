@@ -3,6 +3,7 @@ package productos.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.singleton.ClasesEstaticas;
 import productos.modelo.Bebida;
 import productos.modelo.Complemento;
 import productos.modelo.MenuPedido;
@@ -94,15 +95,34 @@ public class ModificarMenuPedido {
 	 *         no se haya podido añadir
 	 */
 	private boolean anadirBebida(Bebida bebida) {
-		// Si el producto es de tamaño unico o es del mismo tamaño que el menu se acepta
-		if (bebida.getTamano() == 0 || bebida.getTamano() == menu.getTamano()) {
+		if (bebida.getTamano() == 0) {
 			menu.setBebida(bebida);
 			logger.info("Se ha insertado la bebida id {} en el menu", bebida.getCodigo());
-			return true;
 		} else {
-			logger.info("El producto a anadir no cumple los requistos del menu");
-			return false;
+			return obtenerBebidaTamanoAdecuado(bebida);
 		}
+		return true;
+	}
+
+	/**
+	 * Metodo que obtiene la bebida si el tamano de la bebida no es unico se va a
+	 * obtener la ebida adecuada para el menu
+	 * 
+	 * @return {@link Bebida} adecuada al menu
+	 */
+	private boolean obtenerBebidaTamanoAdecuado(Bebida beb) {
+		for (Producto producto : ClasesEstaticas.getListaProductos().getListaBebidas()) {
+			// Convertimos el producto en una bebida
+			Bebida bebida = (Bebida) producto;
+			if (bebida.getTamano() == menu.getTamano()
+					&& bebida.getNombreProducto().startsWith(beb.getNombreProducto())) {
+				menu.setBebida(bebida);
+				logger.debug("Se ha establecido la bebida {} como bebida adecudada al menú seleccionado", bebida);
+				return true;
+			}
+		}
+		logger.debug("No se ha establecido la bebida {} debido a que no se ha encontrado la adecuada", beb);
+		return false;
 	}
 
 }

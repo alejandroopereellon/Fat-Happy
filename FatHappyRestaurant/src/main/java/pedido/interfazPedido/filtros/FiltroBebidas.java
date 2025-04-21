@@ -1,6 +1,10 @@
 package pedido.interfazPedido.filtros;
 
+import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
+import java.awt.Dimension;
+import javax.swing.ButtonGroup;
+import pedido.interfazPedido.PanelPedidoMetodos;
 
 /**
  *
@@ -13,6 +17,7 @@ public class FiltroBebidas extends javax.swing.JPanel {
      */
     public FiltroBebidas() {
         initComponents();
+        this.setPreferredSize(new Dimension(159, 437));
     }
 
     /**
@@ -24,8 +29,15 @@ public class FiltroBebidas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoTipoBebida = new javax.swing.ButtonGroup();
         panelFiltros = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        textoTipoBebida = new javax.swing.JLabel();
+        soloConGas = new javax.swing.JRadioButton();
+        soloSinGas = new javax.swing.JRadioButton();
+        todosLosProductos = new javax.swing.JRadioButton();
+
+        setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
 
         panelFiltros.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
 
@@ -35,17 +47,71 @@ public class FiltroBebidas extends javax.swing.JPanel {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/filtrar.png"))); // NOI18N
         jLabel1.setText("FILTROS");
 
+        textoTipoBebida.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        textoTipoBebida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textoTipoBebida.setText("Tipo bebida");
+
+        grupoTipoBebida.add(soloConGas);
+        soloConGas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        soloConGas.setText("Con gas");
+        soloConGas.setActionCommand("Refresco");
+        soloConGas.setContentAreaFilled(false);
+        soloConGas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accion(evt);
+            }
+        });
+
+        grupoTipoBebida.add(soloSinGas);
+        soloSinGas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        soloSinGas.setText("Sin gas");
+        soloSinGas.setActionCommand("singas");
+        soloSinGas.setContentAreaFilled(false);
+        soloSinGas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accion(evt);
+            }
+        });
+
+        grupoTipoBebida.add(todosLosProductos);
+        todosLosProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        todosLosProductos.setSelected(true);
+        todosLosProductos.setText("Todos");
+        todosLosProductos.setActionCommand("todos");
+        todosLosProductos.setContentAreaFilled(false);
+        todosLosProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accion(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelFiltrosLayout = new javax.swing.GroupLayout(panelFiltros);
         panelFiltros.setLayout(panelFiltrosLayout);
         panelFiltrosLayout.setHorizontalGroup(
             panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFiltrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textoTipoBebida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(todosLosProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(soloConGas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(soloSinGas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelFiltrosLayout.setVerticalGroup(
             panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFiltrosLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 400, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textoTipoBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(todosLosProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(soloConGas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(soloSinGas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 232, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -60,9 +126,19 @@ public class FiltroBebidas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    private void accion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accion
+        new PanelPedidoMetodos(ClasesEstaticas.getPanelPedido()).mostrarCasillasBebidas(this);
+    }//GEN-LAST:event_accion
+    public ButtonGroup getGrupoTipoBebida() {
+        return grupoTipoBebida;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup grupoTipoBebida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelFiltros;
+    private javax.swing.JRadioButton soloConGas;
+    private javax.swing.JRadioButton soloSinGas;
+    private javax.swing.JLabel textoTipoBebida;
+    private javax.swing.JRadioButton todosLosProductos;
     // End of variables declaration//GEN-END:variables
 }
