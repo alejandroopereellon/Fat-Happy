@@ -17,6 +17,7 @@ import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import pedido.modelo.OrdenPedido;
 import pedido.util.ModificarOrdenPedido;
 import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
+import productos.modelo.Bebida;
 import productos.modelo.Producto;
 
 /**
@@ -47,10 +48,10 @@ public class CasillaProductoMetodos {
 		interfaz.getCuadroImagen().setIcon(new ImageIcon(obtenerRutaImagen(pro.getImagenProducto64())));
 
 		// Establecemos el precio del producto
-		if (!pro.getPrecioVenta().equals(BigDecimal.ZERO)) {
-			interfaz.getTextoPrecio().setText(pro.getPrecioVenta().setScale(2) + " €");
-		} else {
+		if (pro instanceof Bebida && pro.getPrecioVenta().equals(BigDecimal.ZERO)) {
 			interfaz.getTextoPrecio().setText("Seleccionar tamaño");
+		} else {
+			interfaz.getTextoPrecio().setText(pro.getPrecioVenta().setScale(2) + " €");
 		}
 
 		// Establecemos el nombre del producto

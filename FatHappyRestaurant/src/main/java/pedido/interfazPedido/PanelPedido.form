@@ -94,17 +94,11 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Hamburguesas" alignment="3" max="32767" attributes="0"/>
-                      <Component id="Complementos" alignment="3" max="32767" attributes="0"/>
-                      <Component id="bebidas" alignment="3" max="32767" attributes="0"/>
-                      <Component id="Postres" alignment="3" max="32767" attributes="0"/>
-                      <Component id="listaCompleta" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
+              <Component id="Hamburguesas" alignment="1" pref="44" max="32767" attributes="0"/>
+              <Component id="Complementos" alignment="1" max="32767" attributes="0"/>
+              <Component id="bebidas" alignment="1" max="32767" attributes="0"/>
+              <Component id="Postres" alignment="1" max="32767" attributes="0"/>
+              <Component id="listaCompleta" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

@@ -140,39 +140,89 @@ public class MenuPedido implements Serializable {
 		}
 
 		// Anadimos el nombre y precio del producto
-		stb.append("Menu " + tamanoString + " (" + precioMenu.setScale(2, RoundingMode.HALF_UP) + " Eur)");
+		stb.append("Menu " + tamanoString + "\t (" + precioMenu.setScale(2, RoundingMode.HALF_UP) + " Eur)");
 		// Si el articulo esta promocionado se informara
 		if (menuPromocionado) {
 			stb.append("\tPRM");
 		}
 
 		// Anadimos la informacion de la hamburguesa
-		stb.append(System.lineSeparator() + hamburguesa.toString());
+		stb.append(System.lineSeparator() + informacionHamburguesa());
 
 		// Trabajamos el complemento
-		stb.append(System.lineSeparator());
-		if (complemento == null) {
-			stb.append("Complemento pendiente");
-		} else {
-			stb.append(complemento.toString());
-		}
+		stb.append(System.lineSeparator() + informacionComplemento());
 
 		// Trabajamos la bebida
-		stb.append(System.lineSeparator());
-		if (bebida == null) {
-			stb.append("Bebida pendiente");
-		} else {
-			stb.append(bebida.toString());
-		}
+		stb.append(System.lineSeparator() + informacionBebida());
 
-		// Trabajamos la bebida
-		stb.append(System.lineSeparator());
-		if (postre == null) {
-			stb.append("Postre opcional");
-		} else {
-			stb.append(postre.toString());
-		}
+		// Trabajamos el postre
+		stb.append(System.lineSeparator() + informacionPostre());
 
 		return stb.toString();
+	}
+
+	private StringBuilder informacionPostre() {
+		StringBuilder texto = new StringBuilder();
+
+		if (postre == null) {
+			texto.append("Postre opcional");
+		} else {
+			texto.append(postre.getNombreProducto());
+			// Mostramos los ingredientes
+			for (Ingrediente ing : postre.getListaIngredientes()) {
+				if (!ing.isActivo()) {
+					texto.append(ing.toString());
+				}
+			}
+			// Mostramos los extras
+			for (Extra ext : postre.getListaExtras()) {
+				if (ext.getCantidadExtra() > 0) {
+					texto.append(ext.toString());
+				}
+			}
+		}
+		return texto;
+	}
+
+	private StringBuilder informacionHamburguesa() {
+		StringBuilder texto = new StringBuilder();
+
+		texto.append(hamburguesa.getNombreProducto());
+
+		// Mostramos los ingredientes
+		for (Ingrediente ing : hamburguesa.getListaIngredientes()) {
+			if (!ing.isActivo()) {
+				texto.append(ing.toString());
+			}
+		}
+		// Mostramos los extras
+		for (Extra ext : hamburguesa.getExtras()) {
+			if (ext.getCantidadExtra() > 0) {
+				texto.append(ext.toString());
+			}
+		}
+		return texto;
+	}
+
+	private StringBuilder informacionComplemento() {
+		StringBuilder stb = new StringBuilder();
+
+		if (complemento == null) {
+			stb.append("Anadir complemento");
+		} else {
+			stb.append(complemento.getNombreProducto());
+		}
+
+		return stb;
+	}
+
+	private StringBuilder informacionBebida() {
+		StringBuilder stb = new StringBuilder();
+		if (bebida == null) {
+			stb.append("Anadir bebida");
+		} else {
+			stb.append(bebida.getNombreProducto());
+		}
+		return stb;
 	}
 }

@@ -216,7 +216,7 @@ public class ModificarOrdenPedido {
 	 * @return {@link Object} que es el {@link MenuPedido} o el {@link Producto}
 	 *         seleccionado en el {@link PanelPedido}
 	 */
-	private Object obtenerElementoSeleccionadoLista() {
+	public Object obtenerElementoSeleccionadoLista() {
 		PanelPedido panel = ClasesEstaticas.getPanelPedido();
 		Object objeto = null;
 		// Obtenemos la posicion del elemento seleccionado

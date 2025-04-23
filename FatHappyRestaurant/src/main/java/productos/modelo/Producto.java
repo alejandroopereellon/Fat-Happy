@@ -196,7 +196,7 @@ public class Producto implements Serializable {
 	// toString
 	@Override
 	public String toString() {
-		return nombreProducto + "\t" + precioVenta;
+		return nombreProducto + "\t(" + precioVenta.setScale(2)+ " Eur)";
 	}
 
 	public UUID getNumeroIdentificacion() {

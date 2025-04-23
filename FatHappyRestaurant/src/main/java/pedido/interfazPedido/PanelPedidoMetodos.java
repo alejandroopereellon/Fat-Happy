@@ -20,6 +20,7 @@ import productos.interfazProducto.casillaProducto.CasillaProductoMetodos;
 import productos.interfazProducto.listaProductosPedidos.ToStringRenderer;
 import productos.modelo.Complemento;
 import productos.modelo.Hamburguesa;
+import productos.modelo.MenuPedido;
 import productos.modelo.Postre;
 import productos.modelo.Producto;
 import productos.modelo.Salsa;
@@ -122,6 +123,9 @@ public class PanelPedidoMetodos {
 	public void mostrarCasillasComplementos(FiltroComplementos filtro) {
 		interfaz.getPanelProductos().removeAll();
 
+		// Configuramos los filtros si es un menu
+		configurarFiltrosComplementos(filtro);
+
 		// Obtenemos la lista de complementos
 		List<Producto> listaComplementos = ClasesEstaticas.getListaProductos().getListaComplementos();
 
@@ -169,6 +173,29 @@ public class PanelPedidoMetodos {
 		}
 
 		logger.debug("Se han insertado todos los complementos");
+	}
+
+	/**
+	 * Metodo que busca si el producto seleccionado es un {@link MenuPedido} y
+	 * aplica el filtro de patatas y de tamano segun corresponda al pedido
+	 * 
+	 * @param filtro es el {@link FiltroComplementos} que se aplica
+	 */
+	private void configurarFiltrosComplementos(FiltroComplementos filtro) {
+		// Obtenemos la informacion de si es un menu y establecemos los filtros para el
+		// menu
+		Object objeto = new ModificarOrdenPedido(interfaz.getPedido()).obtenerElementoSeleccionadoLista();
+		if (objeto instanceof MenuPedido) {
+			MenuPedido menu = (MenuPedido) objeto;
+			filtro.getSoloPatatas().setSelected(true);
+
+			// Seleccionamos el tamano del menu
+			if (menu.getTamano() == 2) {
+				filtro.getSoloMediano().setSelected(true);
+			} else {
+				filtro.getSoloGrande().setSelected(true);
+			}
+		}
 	}
 
 	/**

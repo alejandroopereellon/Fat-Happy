@@ -3,6 +3,7 @@ package pedido.interfazPedido.filtros;
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 import pedido.interfazPedido.PanelPedidoMetodos;
 
 /**
@@ -218,6 +219,18 @@ public class FiltroComplementos extends javax.swing.JPanel {
 
     public ButtonGroup getGrupoTipo() {
         return grupoTipo;
+    }
+
+    public JRadioButton getSoloGrande() {
+        return soloGrande;
+    }
+
+    public JRadioButton getSoloMediano() {
+        return soloMediano;
+    }
+
+    public JRadioButton getSoloPatatas() {
+        return soloPatatas;
     }
 
 

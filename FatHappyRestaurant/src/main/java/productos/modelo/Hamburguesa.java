@@ -96,7 +96,7 @@ public class Hamburguesa extends Producto {
 	public String toString() {
 		StringBuilder texto = new StringBuilder();
 
-		texto.append(super.getNombreProducto());
+		texto.append(super.getNombreProducto() + "\t " + super.getPrecioVenta());
 
 		// Mostramos los ingredientes
 		for (Ingrediente ing : listaIngredientes) {
