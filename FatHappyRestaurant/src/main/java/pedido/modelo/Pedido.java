@@ -32,7 +32,7 @@ public class Pedido {
 	@Column(name = "ruta_fichero_pedido", length = 200)
 	private String rutaPedido;
 
-	@Column(name = "importe_total")
+	@Column(name = "importe_pedido")
 	private BigDecimal importeTotal;
 
 	@Column(name = "descuento")

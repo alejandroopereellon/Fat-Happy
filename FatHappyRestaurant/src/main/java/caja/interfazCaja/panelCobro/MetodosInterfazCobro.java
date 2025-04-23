@@ -1,5 +1,6 @@
 package caja.interfazCaja.panelCobro;
 
+import java.awt.Color;
 import java.math.BigDecimal;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,8 +13,11 @@ import auxiliares.utilidadesGraficas.PanelUtil;
 import caja.interfazCaja.descuentos.DescuentoInterfaz;
 import caja.util.OperacionBuilder;
 import empleados.modelo.Empleado;
+import empleados.util.ActividadEmpleados;
 import pedido.modelo.Pedido;
+import pedido.util.AlmacenarOrdenPedidoJson;
 import pedido.util.CalcularImporte;
+import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
 /**
  * Clase que reune todos los metodos que se aplican en la interfaz grafica de
@@ -110,6 +114,12 @@ public class MetodosInterfazCobro {
 	 * En caso de que la cantidad de cobro sea menor se va a restar las cantidades
 	 */
 	public void cobrarOperacion() {
+
+		// Comprobamos que hay permisos de cobros de mas de 100 euros
+		if (!new ActividadEmpleados().solicitarPermisos("Cobro de mas de 100 euros", 2)) {
+			return;
+		}
+
 		// Calculamos el resto de la cantidad pagada por el cliente
 		BigDecimal cantidadRestante = restarCantidades(pedido.getImporteTotal(), interfaz.getCantidadPropuesta());
 		logger.debug("La cantidad restante es {}", cantidadRestante);
@@ -122,14 +132,26 @@ public class MetodosInterfazCobro {
 				cambiarEstadoElementos(false);
 				interfaz.getBotonContinuar().setVisible(true);
 				logger.info("Se creado la operacion de pedido correctamente");
+
+				// Modificamos el texto pagado para mostrar la devolucion
+				interfaz.getTextoCantidadPagado().setText(cantidadRestante.toString());
+				interfaz.getTextoPagado().setText("DEVOLUCION");
+				interfaz.getTextoCantidadPagado().setForeground(Color.decode("#FF0000"));
+
+				// Almacenamos el pedido en fichero json
+				new AlmacenarOrdenPedidoJson(pedido).almacenarOrdenPedido();
 			} else {
 				logger.warn("No se ha podido almacenar la operacion del pedido ID {} correctamente", pedido.getId());
 			}
 		} else {
 			logger.info("El importe pagado es inferior al importe total, no se ha realizado ninguna operacion");
+			// Establecemos el nuevo importe
+			pedido.setImporteTotal(cantidadRestante);
+			// Establecemos el importe de pago a 0
+			interfaz.setCantidadPropuesta(new BigDecimal("0.00"));
+			actualizarPantalla();
 		}
-		// Reiniciamos el importe total a 0
-		borrarCantidad();
+
 	}
 
 	protected void establecerDescuento() {
@@ -156,27 +178,6 @@ public class MetodosInterfazCobro {
 		new CalcularImporte(pedido).obtenerImporteDescuento();
 
 		logger.info("Se ha aplicado un descuento del {} al pedido", pedido.getDescuento());
-	}
-
-	/**
-	 * Metodo que convierte el {@link String} del texto pendiente de pago pagar en
-	 * un bigdecimal
-	 * 
-	 * @return {@link BigDecimal} del total a pagar
-	 */
-	private BigDecimal obtenerCantidadPagadoCliente() {
-		logger.debug("Se ha consultado la cantidad de dinero pagada por el cliente");
-		return new BigDecimal(interfaz.getTextoCantidadTotalPagar().getText());
-	}
-
-	/**
-	 * Metodo que convierte el {@link String} del texto total pagar en un bigdecimal
-	 * 
-	 * @return {@link BigDecimal} del total a pagar
-	 */
-	private BigDecimal obtenerCantidadTotal() {
-		logger.debug("Se ha consultado la cantidad de dinero pendiente de pagar");
-		return new BigDecimal(interfaz.getTextoCantidadTotalPagar().getText());
 	}
 
 	/**
@@ -238,8 +239,12 @@ public class MetodosInterfazCobro {
 		logger.info("Se ha establecido el estado de los botones de la interfaz a {}", estado);
 	}
 
-	void continuar() {
-		// TODO
+	protected void continuar() {
+		// Eliminamos el pedido
+		ClasesEstaticas.setPedido(null);
+		// Establecemos un nuevo panel de pedido
+		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
+				.configurarPanelPrincipal();
 	}
 
 }

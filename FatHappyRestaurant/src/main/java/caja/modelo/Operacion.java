@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import pedido.modelo.Pedido;
 
 /**
@@ -15,9 +19,11 @@ import pedido.modelo.Pedido;
 @Table(name = "operaciones")
 public class Operacion {
 
-	@Id
-	@Column(columnDefinition = "BINARY(16)", name = "id_operacion")
-	private UUID id = UUID.randomUUID();
+    @Id
+    @JdbcTypeCode(SqlTypes.BINARY)
+    @Column(name = "id_operacion", columnDefinition = "BINARY(16)")
+    private UUID id = UUID.randomUUID();
+
 
 	@ManyToOne
 	@JoinColumn(name = "id_caja")
