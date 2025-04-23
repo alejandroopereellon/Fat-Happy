@@ -96,18 +96,19 @@ public class Hamburguesa extends Producto {
 	public String toString() {
 		StringBuilder texto = new StringBuilder();
 
-		texto.append(super.getNombreProducto() + "\t " + super.getPrecioVenta());
+		texto.append(this.getNombreProducto());
+		texto.append("("+this.getPrecioVenta()+ " Eur)");
 
 		// Mostramos los ingredientes
-		for (Ingrediente ing : listaIngredientes) {
+		for (Ingrediente ing : this.getListaIngredientes()) {
 			if (!ing.isActivo()) {
-				texto.append(System.lineSeparator() + ing.toString());
+				texto.append(ing.toString());
 			}
 		}
 		// Mostramos los extras
-		for (Extra ext : listaExtras) {
+		for (Extra ext : this.getExtras()) {
 			if (ext.getCantidadExtra() > 0) {
-				texto.append(System.lineSeparator() + ext.toString());
+				texto.append(ext.toString());
 			}
 		}
 		return texto.toString();

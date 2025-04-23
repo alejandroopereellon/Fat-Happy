@@ -105,28 +105,6 @@ public class ModificarOrdenPedido {
 				logger.debug("El producto no se ha podido anadir al menu o la salsa al complemento");
 				anadirProducto(productoInsertar);
 			}
-
-//			// Si el objeto es un menuPedido se va a insertar el producto al menu
-//			if (elementoSeleccionado instanceof MenuPedido) {
-//				logger.debug("El objeto es un menuPedido");
-//				// Comprobamos si el menu ha insertado correctamente el producto
-//				if (!new ModificarMenuPedido((MenuPedido) elementoSeleccionado).añadirProducto(productoInsertar)) {
-//
-//				}
-//			}
-//			/*
-//			 * Comprobamos si el producto es un complemento y si el producto es una salsa se
-//			 * va a añadir la salsa al producto
-//			 */
-//			else if (elementoSeleccionado instanceof Complemento
-//					&& productoInsertar.getTipoProducto().equalsIgnoreCase("salsa")) {
-//				// Anadimos la salsa en el complemento
-//				if (!new ModificarComplemento((Complemento) elementoSeleccionado)
-//						.anadirSalsaComplemento(productoInsertar)) {
-//					logger.debug("La salsa no se ha podido anadir al menu");
-//					anadirProducto(productoInsertar);
-//				}
-//			}
 		}
 	}
 
@@ -235,7 +213,7 @@ public class ModificarOrdenPedido {
 	 */
 	private void anadirProducto(Producto pro) {
 		// Comprobamos primero si el producto es una bebida para solicita el tamano
-		if (pro instanceof Bebida) {
+		if (pro instanceof Bebida && ((Bebida) pro).getTamano() != 0) {
 			pro = solicitarTamanoBebida((Bebida) pro);
 			if (pro == null) {
 				return;

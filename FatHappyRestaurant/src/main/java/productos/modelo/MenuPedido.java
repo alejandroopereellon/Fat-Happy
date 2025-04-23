@@ -168,6 +168,7 @@ public class MenuPedido implements Serializable {
 			texto.append("Postre opcional");
 		} else {
 			texto.append(postre.getNombreProducto());
+			texto.append("(" + postre.getPrecioVenta() + " Eur)");
 			// Mostramos los ingredientes
 			for (Ingrediente ing : postre.getListaIngredientes()) {
 				if (!ing.isActivo()) {

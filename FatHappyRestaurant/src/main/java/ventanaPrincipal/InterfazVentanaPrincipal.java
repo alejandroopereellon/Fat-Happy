@@ -61,7 +61,7 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
         );
 
         botonAdministrador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        botonAdministrador.setText("MenuAdministrador");
+        botonAdministrador.setText("Menu administrador");
         botonAdministrador.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(93, 64, 55), 2, true));
         botonAdministrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

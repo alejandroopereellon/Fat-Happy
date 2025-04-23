@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
+import auxiliares.utilidadesGraficas.PanelUtil;
 import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
 import caja.util.CerrarCaja;
@@ -91,7 +92,7 @@ public class AccionesSobreCajaMetodos {
 		} else {
 			logger.error("No existe una caja iniciada");
 			new DialogoMostrarMensajeMetodos().mostrarMensaje("No existe una caja iniciada");
-		}		
+		}
 	}
 
 	/**
@@ -119,8 +120,9 @@ public class AccionesSobreCajaMetodos {
 	 * Metodo que cambia el panel actual por el principal del sistema
 	 */
 	protected void volverPantallaPrincipal() {
-		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
-				.configurarPanelPrincipal();
+		// Añadimos el panel pedido al panel principal
+		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
+				ClasesEstaticas.getPanelPedido());
 	}
 
 }

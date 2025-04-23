@@ -104,8 +104,12 @@ public class Complemento extends Producto {
 	// toString
 	@Override
 	public String toString() {
+		StringBuilder texto = new StringBuilder();
+
+		texto.append(this.getNombreProducto());
+		texto.append("(" + this.getPrecioVenta() + " Eur)");
+
 		boolean noMasSalsas = false;
-		String datos = getNombreProducto();
 		// Mientras salsas no sea empty
 
 		// Recorremos todas las salsas que existan
@@ -114,7 +118,7 @@ public class Complemento extends Producto {
 				noMasSalsas = true;
 				break;
 			}
-			datos = datos + System.lineSeparator() + sal.toString();
+			texto.append(System.lineSeparator() + sal.toString());
 		}
 		/**
 		 * Si la cantidad de salsas seleccionadas es menor que el numero de salsas
@@ -123,10 +127,10 @@ public class Complemento extends Producto {
 		 */
 		if ((salsas.size() < numeroSalsas) && !noMasSalsas) {
 			for (int i = 0; i < (numeroSalsas - salsas.size()); i++) {
-				datos = datos + System.lineSeparator() + "Escoger salsa";
+				texto.append(System.lineSeparator() + "Escoger salsa");
 			}
 		}
-		return datos;
+		return texto.toString();
 	}
 
 }

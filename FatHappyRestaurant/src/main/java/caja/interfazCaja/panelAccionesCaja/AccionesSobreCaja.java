@@ -1,6 +1,9 @@
 package caja.interfazCaja.panelAccionesCaja;
 
+import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import empleados.util.ActividadEmpleados;
+import java.awt.Color;
+import java.awt.color.ColorSpace;
 import javax.swing.JButton;
 
 /**
@@ -40,6 +43,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         consultarProductos = new javax.swing.JButton();
         pantallaPrincipla = new javax.swing.JButton();
         CerrarAplicacion = new javax.swing.JButton();
+        checkModoOscuro = new javax.swing.JCheckBox();
 
         setPreferredSize(new java.awt.Dimension(1366, 550));
 
@@ -118,12 +122,20 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
             }
         });
 
+        checkModoOscuro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        checkModoOscuro.setText("Activar modo oscuro");
+        checkModoOscuro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkModoOscuroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelPrincipalLayout.createSequentialGroup()
@@ -134,7 +146,8 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
                                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(iniciarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(checkModoOscuro, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(33, 33, 33)
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,8 +158,8 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
                                     .addComponent(activarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(consultarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 493, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CerrarAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -173,10 +186,11 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
                         .addComponent(cerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CerrarAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CerrarAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkModoOscuro, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -190,7 +204,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -228,6 +242,14 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_CerrarAplicacionActionPerformed
 
+    private void checkModoOscuroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkModoOscuroActionPerformed
+        if (checkModoOscuro.isSelected()) {
+            ColoresInterfaz.SECUNDARIO_CHAMPAGNE = Color.decode("#353535");
+        } else {
+            ColoresInterfaz.SECUNDARIO_CHAMPAGNE = new Color(0xF5F5DC);
+        }
+    }//GEN-LAST:event_checkModoOscuroActionPerformed
+
     public JButton getActivarProductos() {
         return activarProductos;
     }
@@ -257,6 +279,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
     private javax.swing.JButton CerrarAplicacion;
     private javax.swing.JButton activarProductos;
     private javax.swing.JButton cerrarCaja;
+    private javax.swing.JCheckBox checkModoOscuro;
     private javax.swing.JButton consultarProductos;
     private javax.swing.JButton desactivarProductos;
     private javax.swing.JButton estadisticasVentas;

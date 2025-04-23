@@ -75,7 +75,7 @@ public class editarMenu extends javax.swing.JDialog {
             }
         });
 
-        listaProductosMenu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        listaProductosMenu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         listaProductosMenu.setModel(modeloLista);
         listaProductosMenu.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaProductosMenu.setCellRenderer(new ToStringRenderer());

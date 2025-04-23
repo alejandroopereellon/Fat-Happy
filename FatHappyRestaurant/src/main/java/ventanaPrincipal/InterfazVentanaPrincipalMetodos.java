@@ -17,6 +17,7 @@ import caja.interfazCaja.panelAccionesCaja.AccionesSobreCaja;
 import caja.interfazCaja.panelAccionesCaja.AccionesSobreCajaMetodos;
 import caja.interfazCaja.panelPrincipalCaja.PanelCaja;
 import caja.interfazCaja.panelPrincipalCaja.PanelCajaMetodos;
+import empleados.util.ActividadEmpleados;
 import pedido.interfazPedido.PanelPedido;
 import pedido.interfazPedido.PanelPedidoMetodos;
 
@@ -42,7 +43,7 @@ public class InterfazVentanaPrincipalMetodos {
 	 */
 	public void iniciarConfiguracionInicial() {
 		// Establecemos resolucion a pantalla completa
-		//configuracionPantalla();
+		// configuracionPantalla();
 		// Establecemos el look and feel
 		aplicarLookAndFeel();
 		// Hacemos la interfaz visible
@@ -89,14 +90,16 @@ public class InterfazVentanaPrincipalMetodos {
 	 * Metodo que muestra el panel de administrador
 	 */
 	protected void mostrarPanelAdministrador() {
-		// Establecemos el layout del panel de administrador
-		interfaz.getPanelSecundario().setLayout(new BorderLayout());
-		// Generamos el objeto de accionCaja
-		AccionesSobreCaja panelAdministrador = new AccionesSobreCaja();
-		// Configuramos el panel de pedido
-		new AccionesSobreCajaMetodos(panelAdministrador).iniciarConfiguracion();
-		// Añadimos la el panel pedido al panel principal
-		new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panelAdministrador);
+		if (new ActividadEmpleados().solicitarPermisos("Acceso al panel de administrador", 2)) {
+			// Establecemos el layout del panel de administrador
+			interfaz.getPanelSecundario().setLayout(new BorderLayout());
+			// Generamos el objeto de accionCaja
+			AccionesSobreCaja panelAdministrador = new AccionesSobreCaja();
+			// Configuramos el panel de pedido
+			new AccionesSobreCajaMetodos(panelAdministrador).iniciarConfiguracion();
+			// Añadimos la el panel pedido al panel principal
+			new PanelUtil().insertarEnPanel(interfaz.getPanelSecundario(), panelAdministrador);
+		}
 	}
 
 	/**

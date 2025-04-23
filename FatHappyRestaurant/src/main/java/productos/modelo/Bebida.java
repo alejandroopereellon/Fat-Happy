@@ -66,17 +66,19 @@ public class Bebida extends Producto {
 
 	@Override
 	public String toString() {
-		String datos = getNombreProducto();
-		if (tamano != 0) {
-			datos = datos + " " + tamano;
-		}
+
+		StringBuilder texto = new StringBuilder();
+
+		texto.append(this.getNombreProducto());
+		texto.append("(" + this.getPrecioVenta() + " Eur)");
+
 		if (nombreExtra != null) {
 			if (!extraActivo && nombreExtra.equalsIgnoreCase("hielo")) {
-				datos = datos + "\n\tSin hielo";
+				texto.append(System.lineSeparator() + "\tSin hielo");
 			} else if (extraActivo && nombreExtra.equalsIgnoreCase("del tiempo")) {
-				datos = datos + "\n\textra del tiempo";
+				texto.append(System.lineSeparator() + "\tExtra del tiempo");
 			}
 		}
-		return datos;
+		return texto.toString();
 	}
 }

@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import pedido.modelo.OrdenPedido;
@@ -73,12 +74,13 @@ public class CasillaProductoMetodos {
 		// Primero comprobamos que hay stock del producto
 		if (!interfaz.getProducto().isStockDisponible()) {
 			logger.debug("El producto seleccionado no tiene stock");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("El producto seleccionado no esta disponible");
 			return;
 		}
 
 		interfaz.setBackground(ColoresInterfaz.PRIMARIO_DORADO);
 
-		new javax.swing.Timer(150, _ -> {
+		new javax.swing.Timer(200, _ -> {
 			interfaz.setBackground(Color.white);
 		}).start();
 

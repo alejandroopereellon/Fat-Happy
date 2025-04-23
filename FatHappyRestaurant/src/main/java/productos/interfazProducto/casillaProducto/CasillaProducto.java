@@ -53,7 +53,7 @@ public class CasillaProducto extends javax.swing.JPanel {
             }
         });
 
-        textoPrecio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        textoPrecio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textoPrecio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         textoPrecio.setText("€ 0,00");
 
@@ -61,6 +61,7 @@ public class CasillaProducto extends javax.swing.JPanel {
         cuadroImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaErrorProducto/imageNotFound64.png"))); // NOI18N
         cuadroImagen.setDisabledIcon(null);
 
+        textoNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         textoNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         textoNombre.setText("SAMPLE TEXT");
 

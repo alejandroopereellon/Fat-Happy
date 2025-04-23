@@ -40,12 +40,12 @@ public class InicioAplicacion {
 		// Iniciar descarga de imágenes del servidor ftp
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
 		grafica.getBarraProgreso().setValue(15);
-//		if (new FTPDownloader().iniciarConexionYDescargar()) {
-//			logger.info("Se han cargado los ficheros en local");
-//		} else {
-//			logger.error("No se han podido cargar los ficheros en local");
-//			return false;
-//		}
+		if (new FTPDownloader().iniciarConexionYDescargar()) {
+			logger.info("Se han cargado los ficheros en local");
+		} else {
+			logger.error("No se han podido cargar los ficheros en local");
+			return false;
+		}
 		grafica.getBarraProgreso().setValue(20);
 
 		// Cargar datos del restaurante
@@ -75,23 +75,23 @@ public class InicioAplicacion {
 		grafica.getEstadoInicio().setText("Recuperando la ultima caja del sistema");
 		if (new IniciarCaja().recuperarCajaInicio()) {
 			logger.info("Se ha cargado la caja {}", ConfiguracionInicial.get().getNumeroCaja());
-			logger.info("Se ha cargado el empleado con ID {} en la caja {}", ClasesEstaticas.getEmpleado().getIdEmpleado(),
-					ConfiguracionInicial.get().getNumeroCaja());
+			logger.info("Se ha cargado el empleado con ID {} en la caja {}",
+					ClasesEstaticas.getEmpleado().getIdEmpleado(), ConfiguracionInicial.get().getNumeroCaja());
 		}
 		grafica.getBarraProgreso().setValue(70);
 
 		// Cargamos todos los productos en memoria haciendo uso del hilo
 		grafica.getEstadoInicio().setText("Cargando los productos del sistema");
-		
+
 		// Creamos el objeto de actualizacion de productos
 		ActualizarListaProductos actualizarProductos = new ActualizarListaProductos();
-		
+
 		// Actualizamos todos los productos
 		actualizarProductos.actualizarDatos();
 		grafica.getBarraProgreso().setValue(80);
-		
+
 		// Iniciamos el hilo de actualizacion automatica del stock
-		//actualizarProductos.start();
+		actualizarProductos.start();
 		grafica.getBarraProgreso().setValue(85);
 
 		// Iniciamos la ventana principal del programa
@@ -100,7 +100,7 @@ public class InicioAplicacion {
 		ConfiguracionInicial.get().setVentanaPrincipal(new InterfazVentanaPrincipal());
 		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
 				.iniciarConfiguracionInicial();
-		
+
 		// Hacemos visible la ventana
 		ConfiguracionInicial.get().getVentanaPrincipal().setVisible(true);
 		grafica.getBarraProgreso().setValue(100);

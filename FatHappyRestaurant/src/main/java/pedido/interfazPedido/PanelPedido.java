@@ -137,10 +137,10 @@ public class PanelPedido extends javax.swing.JPanel {
         panelAjustesPedido.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
         panelAjustesPedido.setPreferredSize(new java.awt.Dimension(200, 666));
 
-        cobrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cobrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         cobrar.setText("Cobrar");
 
-        editar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         editar.setText("Editar");
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +148,7 @@ public class PanelPedido extends javax.swing.JPanel {
             }
         });
 
-        eliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        eliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         eliminar.setText("Eliminar");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +156,7 @@ public class PanelPedido extends javax.swing.JPanel {
             }
         });
 
-        crearMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        crearMenu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         crearMenu.setText("Crear menú");
         crearMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

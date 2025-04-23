@@ -185,7 +185,7 @@ public class PanelPedidoMetodos {
 		// Obtenemos la informacion de si es un menu y establecemos los filtros para el
 		// menu
 		Object objeto = new ModificarOrdenPedido(interfaz.getPedido()).obtenerElementoSeleccionadoLista();
-		if (objeto instanceof MenuPedido) {
+		if (objeto instanceof MenuPedido && ((MenuPedido) objeto).getComplemento() == null) {
 			MenuPedido menu = (MenuPedido) objeto;
 			filtro.getSoloPatatas().setSelected(true);
 

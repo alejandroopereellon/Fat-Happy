@@ -91,28 +91,24 @@ public class Postre extends Producto {
 	// toString
 	@Override
 	public String toString() {
-		String datos = super.toString();
+		StringBuilder texto = new StringBuilder();
+		texto.append(this.getNombreProducto());
+
+		texto.append("(" + this.getPrecioVenta() + " Eur)");
 
 		// Mostramos los ingredientes
-		for (Ingrediente ing : listaIngredientes) {
+		for (Ingrediente ing : this.getListaIngredientes()) {
 			if (!ing.isActivo()) {
-				datos = datos + ing.toString() + System.lineSeparator();
+				texto.append(ing.toString());
 			}
 		}
-
 		// Mostramos los extras
-		for (Extra ext : listaExtras) {
+		for (Extra ext : this.getListaExtras()) {
 			if (ext.getCantidadExtra() > 0) {
-				datos = datos + ext.toString() + System.lineSeparator();
+				texto.append(ext.toString());
 			}
 		}
-
-		// Si el producto se recoge despues se señalará
-		if (recogerDespues) {
-			datos += " Recoger despues";
-		}
-
-		return datos;
+		return texto.toString();
 	}
 
 }
