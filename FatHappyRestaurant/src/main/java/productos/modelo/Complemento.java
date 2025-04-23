@@ -107,7 +107,7 @@ public class Complemento extends Producto {
 		StringBuilder texto = new StringBuilder();
 
 		texto.append(this.getNombreProducto());
-		texto.append("(" + this.getPrecioVenta() + " Eur)");
+		texto.append(" (" + this.getPrecioVenta() + " Eur)");
 
 		boolean noMasSalsas = false;
 		// Mientras salsas no sea empty

@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import pedido.modelo.Pedido;
+import pedido.util.ComprobarPedidoFinalizado;
 import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
 import productos.interfazProducto.listaProductosPedidos.ToStringRenderer;
 
@@ -139,6 +140,11 @@ public class PanelPedido extends javax.swing.JPanel {
 
         cobrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         cobrar.setText("Cobrar");
+        cobrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cobrarActionPerformed(evt);
+            }
+        });
 
         editar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         editar.setText("Editar");
@@ -290,7 +296,7 @@ public class PanelPedido extends javax.swing.JPanel {
     }//GEN-LAST:event_PostresActionPerformed
 
     private void listaCompletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaCompletaActionPerformed
-      metodos.mostrarListaCompleta();
+        metodos.mostrarListaCompleta();
     }//GEN-LAST:event_listaCompletaActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -304,6 +310,10 @@ public class PanelPedido extends javax.swing.JPanel {
     private void crearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearMenuActionPerformed
         metodos.crearMenu();
     }//GEN-LAST:event_crearMenuActionPerformed
+
+    private void cobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobrarActionPerformed
+        new ComprobarPedidoFinalizado().comprobarOrdenPedido();
+    }//GEN-LAST:event_cobrarActionPerformed
 
     public DefaultListModel<Object> getModeloLista() {
         return modeloLista;
@@ -341,8 +351,7 @@ public class PanelPedido extends javax.swing.JPanel {
         return bebidas;
     }
 
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Complementos;
     private javax.swing.JButton Hamburguesas;

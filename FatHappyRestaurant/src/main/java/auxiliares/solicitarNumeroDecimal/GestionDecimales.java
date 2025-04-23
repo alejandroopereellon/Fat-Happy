@@ -1,6 +1,12 @@
 package auxiliares.solicitarNumeroDecimal;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class GestionDecimales {
+	// Crear el logger
+	static Logger logger = LogManager.getLogger(GestionDecimales.class);
+
 	/**
 	 * Este metodo procesa el numero decimal para poderlo mostrar de manera correcta
 	 * con dos decimales
@@ -19,7 +25,7 @@ public class GestionDecimales {
 	 */
 	public String procesarDecimales(String numero) {
 		// Eliminamos la ","
-		numero = numero.replace(",", "");
+		numero = numero.replace(".", "");
 
 		// Comprobamos si el primer numero es un 0 y lo eliminamos
 		if (numero.startsWith("0")) {
@@ -27,8 +33,9 @@ public class GestionDecimales {
 		}
 
 		// La ponemos en la posicion correcta (2 decimales)
-		numero = new StringBuilder(numero).insert(numero.length() - 2, ",").toString();
+		numero = new StringBuilder(numero).insert(numero.length() - 2, ".").toString();
 
+		logger.debug("El numero formateado da un total de {}", numero);
 		return numero;
 	}
 }

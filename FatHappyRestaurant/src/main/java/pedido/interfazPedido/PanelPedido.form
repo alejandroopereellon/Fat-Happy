@@ -226,6 +226,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cobrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cobrarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="editar">
           <Properties>

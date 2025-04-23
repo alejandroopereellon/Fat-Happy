@@ -213,7 +213,7 @@ public class ModificarOrdenPedido {
 	 */
 	private void anadirProducto(Producto pro) {
 		// Comprobamos primero si el producto es una bebida para solicita el tamano
-		if (pro instanceof Bebida && ((Bebida) pro).getTamano() != 0) {
+		if (pro instanceof Bebida && ((Bebida) pro).getTipoProducto().equalsIgnoreCase("refresco")) {
 			pro = solicitarTamanoBebida((Bebida) pro);
 			if (pro == null) {
 				return;

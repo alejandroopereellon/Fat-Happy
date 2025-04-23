@@ -94,7 +94,7 @@ public class Postre extends Producto {
 		StringBuilder texto = new StringBuilder();
 		texto.append(this.getNombreProducto());
 
-		texto.append("(" + this.getPrecioVenta() + " Eur)");
+		texto.append(" (" + this.getPrecioVenta() + " Eur)");
 
 		// Mostramos los ingredientes
 		for (Ingrediente ing : this.getListaIngredientes()) {

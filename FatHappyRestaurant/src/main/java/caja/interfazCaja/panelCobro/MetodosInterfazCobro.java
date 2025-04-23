@@ -5,10 +5,14 @@ import java.math.BigDecimal;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.solicitarNumeroDecimal.GestionDecimales;
+import auxiliares.utilidadesGraficas.PanelUtil;
 import caja.interfazCaja.descuentos.DescuentoInterfaz;
 import caja.util.OperacionBuilder;
 import empleados.modelo.Empleado;
+import pedido.modelo.Pedido;
 import pedido.util.CalcularImporte;
 
 /**
@@ -22,10 +26,20 @@ public class MetodosInterfazCobro {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(MetodosInterfazCobro.class);
 
+	// Establecemos la interfaz de cobro
 	private InterfazCobro interfaz;
 
-	protected MetodosInterfazCobro(InterfazCobro interfaz) {
+	// Establecemos el pedido
+	private Pedido pedido = ClasesEstaticas.getPedido();
+
+	public MetodosInterfazCobro(InterfazCobro interfaz) {
 		this.interfaz = interfaz;
+	}
+
+	public void iniciarInterfazCobro() {
+		// Anadimos la interfaz
+		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
+				interfaz);
 	}
 
 	/**
@@ -34,7 +48,7 @@ public class MetodosInterfazCobro {
 	 */
 	protected void actualizarPantalla() {
 		interfaz.getTextoCantidadPagado().setText(interfaz.getCantidadPropuesta().toString() + " €");
-		interfaz.getTextoCantidadTotalPagar().setText(interfaz.getPedido().getImporteTotal().toString() + " €");
+		interfaz.getTextoCantidadTotalPagar().setText(pedido.getImporteTotal().toString() + " €");
 		logger.debug("Se ha actualizado la pantalla");
 	}
 
@@ -47,14 +61,16 @@ public class MetodosInterfazCobro {
 	 */
 	protected void introducirNumero(int numero) {
 		// Añadimos el numero a la cantidad pagada
-		String cantidad = interfaz.getTextoCantidadPagado() + String.valueOf(numero);
+		String cantidad = interfaz.getCantidadPropuesta() + String.valueOf(numero);
+		logger.debug("El total del texto es {}", cantidad);
 		// Calculamos el nuevo importe
 		cantidad = new GestionDecimales().procesarDecimales(cantidad);
-		// Establecemos la nueva cantidad actualizada
-		interfaz.getTextoCantidadPagado().setText(cantidad);
+		// Modificamos la cantidad propuesta
+		interfaz.setCantidadPropuesta(new BigDecimal(cantidad));
 		// Actualizamos la pantalla
 		actualizarPantalla();
-		logger.debug("Se ha introducido el numero {}, dando un total de {}", numero, interfaz.getTextoCantidadPagado());
+		logger.debug("Se ha introducido el numero {}, dando un total de {}", numero,
+				interfaz.getTextoCantidadPagado().getText());
 	}
 
 	/**
@@ -63,7 +79,7 @@ public class MetodosInterfazCobro {
 	 */
 	protected void borrarCantidad() {
 		// Establecemos el importe en 0
-		interfaz.getTextoCantidadPagado().setText("0.00");
+		interfaz.setCantidadPropuesta(new BigDecimal("0.00"));
 		// Actualizamos la pantalla
 		actualizarPantalla();
 		logger.info("Se ha borrado la cantidad");
@@ -79,7 +95,7 @@ public class MetodosInterfazCobro {
 	 */
 	protected void billetes(int billete) {
 		// Cambiamos la cantidad introcudida
-		interfaz.getTextoCantidadPagado().setText(String.valueOf(billete) + .00);
+		interfaz.setCantidadPropuesta(new BigDecimal(billete + ".00"));
 		// Comprobamos si se puede cobrar la operacion automaticamente si la cantidad
 		// pendiente es menor o 0 que la total
 		cobrarOperacion();
@@ -88,23 +104,26 @@ public class MetodosInterfazCobro {
 
 	/**
 	 * Metodo que al pulsar el boton de cobrar o introducir un billete se calcula el
-	 * importe, en caso de que la cantidad introdu
+	 * importe, en caso de que la cantidad introducida sea mayor que la cantidad de
+	 * cobro.
+	 * 
+	 * En caso de que la cantidad de cobro sea menor se va a restar las cantidades
 	 */
-	protected void cobrarOperacion() {
-		// Restamos al total pediente de pago lo que esta pagado por el cliente
-		interfaz.getTextoCantidadTotalPagar()
-				.setText(restarCantidades(obtenerCantidadTotal(), obtenerCantidadPagadoCliente()).toString());
+	public void cobrarOperacion() {
+		// Calculamos el resto de la cantidad pagada por el cliente
+		BigDecimal cantidadRestante = restarCantidades(pedido.getImporteTotal(), interfaz.getCantidadPropuesta());
+		logger.debug("La cantidad restante es {}", cantidadRestante);
+
 		// Si el pendiente es negativo o 0 se va a generar la operacion de pago
-		if (obtenerCantidadTotal().compareTo(BigDecimal.ZERO) <= 0) {
+		if (cantidadRestante.compareTo(BigDecimal.ZERO) <= 0) {
 			// Generamos una nueva operacion
-			if (new OperacionBuilder().GenerarOperacion(interfaz.getPedido(), "cobro", "efectivo")) {
+			if (new OperacionBuilder().GenerarOperacion(pedido, "cobro", "efectivo")) {
 				// Desactivamos los botones y mostramos el boton de continuar
 				cambiarEstadoElementos(false);
 				interfaz.getBotonContinuar().setVisible(true);
 				logger.info("Se creado la operacion de pedido correctamente");
 			} else {
-				logger.warn("No se ha podido almacenar la operacion del pedido ID {} correctamente",
-						interfaz.getPedido().getId());
+				logger.warn("No se ha podido almacenar la operacion del pedido ID {} correctamente", pedido.getId());
 			}
 		} else {
 			logger.info("El importe pagado es inferior al importe total, no se ha realizado ninguna operacion");
@@ -132,11 +151,11 @@ public class MetodosInterfazCobro {
 		descuento.dispose();
 
 		// Establecemos al pedido el nuevo descuento
-		interfaz.getPedido().setDescuento(cantidadDescuento);
+		pedido.setDescuento(cantidadDescuento);
 		// Actualizamos el importe del pedido
-		new CalcularImporte(interfaz.getPedido()).obtenerImporteDescuento();
+		new CalcularImporte(pedido).obtenerImporteDescuento();
 
-		logger.info("Se ha aplicado un descuento del {} al pedido", interfaz.getPedido().getDescuento());
+		logger.info("Se ha aplicado un descuento del {} al pedido", pedido.getDescuento());
 	}
 
 	/**
@@ -178,7 +197,9 @@ public class MetodosInterfazCobro {
 	 */
 	protected void importeExacto() {
 		// Establecemos el importe pagado como el importe a pagar
-		interfaz.getTextoCantidadPagado().setText(interfaz.getTextoCantidadTotalPagar().getText());
+		interfaz.setCantidadPropuesta(pedido.getImporteTotal());
+
+		actualizarPantalla();
 		logger.info("Se ha establecido un pago del importe total del pedido");
 		// Cobramos la operacion
 		cobrarOperacion();

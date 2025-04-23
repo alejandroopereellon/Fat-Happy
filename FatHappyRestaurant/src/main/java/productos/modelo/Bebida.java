@@ -70,7 +70,7 @@ public class Bebida extends Producto {
 		StringBuilder texto = new StringBuilder();
 
 		texto.append(this.getNombreProducto());
-		texto.append("(" + this.getPrecioVenta() + " Eur)");
+		texto.append(" (" + this.getPrecioVenta() + " Eur)");
 
 		if (nombreExtra != null) {
 			if (!extraActivo && nombreExtra.equalsIgnoreCase("hielo")) {

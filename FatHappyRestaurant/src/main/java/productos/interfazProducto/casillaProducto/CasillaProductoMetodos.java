@@ -98,7 +98,6 @@ public class CasillaProductoMetodos {
 
 		// 3. Actualizamos la lista
 		new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).actualizarLista();
-		;
 
 		// 4. Seleccionamos el ultimo elemento de la lista (el anadido)
 		ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
