@@ -46,7 +46,7 @@ public class PanelPedido extends javax.swing.JPanel {
         bebidas = new javax.swing.JButton();
         Complementos = new javax.swing.JButton();
         Postres = new javax.swing.JButton();
-        categoria5 = new javax.swing.JButton();
+        listaCompleta = new javax.swing.JButton();
         panelAjustesPedido = new javax.swing.JPanel();
         cobrar = new javax.swing.JButton();
         editar = new javax.swing.JButton();
@@ -63,7 +63,8 @@ public class PanelPedido extends javax.swing.JPanel {
 
         panelSeleccionTipoProducto.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
 
-        Hamburguesas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Hamburguesas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Hamburguesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/hamburguesa.png"))); // NOI18N
         Hamburguesas.setText("Hamburguesas");
         Hamburguesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +72,8 @@ public class PanelPedido extends javax.swing.JPanel {
             }
         });
 
-        bebidas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bebidas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        bebidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/refresco.png"))); // NOI18N
         bebidas.setText("Bebidas");
         bebidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +81,8 @@ public class PanelPedido extends javax.swing.JPanel {
             }
         });
 
-        Complementos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Complementos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Complementos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/papas-fritas.png"))); // NOI18N
         Complementos.setText("Complementos");
         Complementos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +90,8 @@ public class PanelPedido extends javax.swing.JPanel {
             }
         });
 
-        Postres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Postres.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Postres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/helado.png"))); // NOI18N
         Postres.setText("Postres");
         Postres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,11 +99,12 @@ public class PanelPedido extends javax.swing.JPanel {
             }
         });
 
-        categoria5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        categoria5.setText("Categoria 5");
-        categoria5.addActionListener(new java.awt.event.ActionListener() {
+        listaCompleta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        listaCompleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/lista.png"))); // NOI18N
+        listaCompleta.setText("Lista Completa");
+        listaCompleta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoria5ActionPerformed(evt);
+                listaCompletaActionPerformed(evt);
             }
         });
 
@@ -109,16 +114,16 @@ public class PanelPedido extends javax.swing.JPanel {
             panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeleccionTipoProductoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Hamburguesas, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Hamburguesas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Complementos, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Complementos, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bebidas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Postres, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Postres, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(categoria5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(listaCompleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelSeleccionTipoProductoLayout.setVerticalGroup(
             panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +134,7 @@ public class PanelPedido extends javax.swing.JPanel {
                     .addComponent(Complementos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bebidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Postres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(categoria5))
+                    .addComponent(listaCompleta))
                 .addContainerGap())
         );
 
@@ -241,12 +246,12 @@ public class PanelPedido extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelFiltros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(panelAjustesPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -288,9 +293,9 @@ public class PanelPedido extends javax.swing.JPanel {
         metodos.mostrarPostres();
     }//GEN-LAST:event_PostresActionPerformed
 
-    private void categoria5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoria5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_categoria5ActionPerformed
+    private void listaCompletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaCompletaActionPerformed
+      metodos.mostrarListaCompleta();
+    }//GEN-LAST:event_listaCompletaActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         metodos.eliminarProducto();
@@ -347,13 +352,13 @@ public class PanelPedido extends javax.swing.JPanel {
     private javax.swing.JButton Hamburguesas;
     private javax.swing.JButton Postres;
     private javax.swing.JButton bebidas;
-    private javax.swing.JButton categoria5;
     private javax.swing.JButton cobrar;
     private javax.swing.JButton crearMenu;
     private javax.swing.JButton editar;
     private javax.swing.JButton eliminar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton listaCompleta;
     private javax.swing.JList<Object> listaProductosPedidos;
     private javax.swing.JPanel panelAjustesPedido;
     private javax.swing.JPanel panelFiltros;

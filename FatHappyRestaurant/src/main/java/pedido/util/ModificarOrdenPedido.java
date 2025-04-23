@@ -60,46 +60,73 @@ public class ModificarOrdenPedido {
 		// 3.Obtenemos el producto del dao
 		Producto productoInsertar = dao.obtenerProducto(pro.getCodigo());
 
-		// 4. Insertamos el producto en el menu o pedido
-		// Comprobamos si el producto recuperado no es nulo
-		if (productoInsertar != null && elementoSeleccionado != null) {
+		// 4.Insertamos el producto en el menu o pedido si el producto no es nulo
+		if (productoInsertar != null) {
 			insertarProductoEnMenuOPedido(elementoSeleccionado, productoInsertar);
-		} else {
-			logger.info("El producto solicitado no se ha podido obtener correctamente");
+		} else if (productoInsertar == null) {
+			logger.warn("El producto a insertar es nulo");
 		}
 
-		// Seleccionamos el ultimo objeto de la lista
+		// 5.Seleccionamos el ultimo objeto de la lista
 		ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
-				.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize());
+				.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize() - 1);
+		logger.debug("Se ha seleccionado el ultimo elemento de la lista");
 
 	}
 
+	/**
+	 * Metodo que insertar un producto en un {@link MenuPedido}
+	 * 
+	 * @param elementoSeleccionado es el elemento seleccionado en el
+	 *                             {@link PanelPedido} y si es un menu se inserta el
+	 *                             {@link Producto} en el menu. En caso de ser un
+	 *                             {@link Producto} se va a insertar suelto
+	 * @param productoInsertar     es el {@link Producto} que se va a insertar en el
+	 *                             menu
+	 */
 	private void insertarProductoEnMenuOPedido(Object elementoSeleccionado, Producto productoInsertar) {
-
-		// Si el objeto es un menuPedido se va a insertar el producto al menu
-		if (elementoSeleccionado instanceof MenuPedido) {
-			logger.debug("El objeto es un menuPedido");
-			// Comprobamos si el menu ha insertado correctamente el producto
-			if (!new ModificarMenuPedido((MenuPedido) elementoSeleccionado).añadirProducto(productoInsertar)) {
-				logger.debug("El producto no se ha podido anadir al menu");
-				anadirProducto(productoInsertar);
-			}
-		}
-		// Comprobamos si el producto es un complemento y si el producto es una salsa se
-		// va a añadir la salsa al producto
-		else if (elementoSeleccionado instanceof Complemento
-				&& productoInsertar.getTipoProducto().equalsIgnoreCase("salsa")) {
-			// Anadimos la salsa en el complemento
-			if (!new ModificarComplemento((Complemento) elementoSeleccionado)
-					.anadirSalsaComplemento(productoInsertar)) {
-				logger.debug("La salsa no se ha podido anadir al menu");
-				anadirProducto(productoInsertar);
-			}
-		}
-		// Si el objeto es un producto se va a insertar el producto directamente
-		else {
-			logger.debug("El objeto es un producto");
+		/**
+		 * Comprobamos si el elemento seleccionado es nulo para no comprobar si es menu
+		 * o complementos
+		 */
+		if (elementoSeleccionado == null) {
+			logger.debug("No hay un elemento seleccionado, se va a insertar el producto", productoInsertar);
 			anadirProducto(productoInsertar);
+		} else {
+			boolean objetoEsMenu = elementoSeleccionado instanceof MenuPedido
+					&& new ModificarMenuPedido((MenuPedido) elementoSeleccionado).añadirProducto(productoInsertar);
+
+			boolean objetoEsComplementoInsertaSalsa = elementoSeleccionado instanceof Complemento
+					&& productoInsertar.getTipoProducto().equalsIgnoreCase("salsa")
+					&& new ModificarComplemento((Complemento) elementoSeleccionado)
+							.anadirSalsaComplemento(productoInsertar);
+
+			if (!objetoEsMenu && !objetoEsComplementoInsertaSalsa) {
+				logger.debug("El producto no se ha podido anadir al menu o la salsa al complemento");
+				anadirProducto(productoInsertar);
+			}
+
+//			// Si el objeto es un menuPedido se va a insertar el producto al menu
+//			if (elementoSeleccionado instanceof MenuPedido) {
+//				logger.debug("El objeto es un menuPedido");
+//				// Comprobamos si el menu ha insertado correctamente el producto
+//				if (!new ModificarMenuPedido((MenuPedido) elementoSeleccionado).añadirProducto(productoInsertar)) {
+//
+//				}
+//			}
+//			/*
+//			 * Comprobamos si el producto es un complemento y si el producto es una salsa se
+//			 * va a añadir la salsa al producto
+//			 */
+//			else if (elementoSeleccionado instanceof Complemento
+//					&& productoInsertar.getTipoProducto().equalsIgnoreCase("salsa")) {
+//				// Anadimos la salsa en el complemento
+//				if (!new ModificarComplemento((Complemento) elementoSeleccionado)
+//						.anadirSalsaComplemento(productoInsertar)) {
+//					logger.debug("La salsa no se ha podido anadir al menu");
+//					anadirProducto(productoInsertar);
+//				}
+//			}
 		}
 	}
 
@@ -109,8 +136,7 @@ public class ModificarOrdenPedido {
 	 * para saber si es apta para ser un menu
 	 */
 	public void crearMenuPedido() {
-
-		// 1. Obtenemos el producto seleccionado y comprobamos si es una hamburguesa
+		// Obtenemos el producto seleccionado y comprobamos si es una hamburguesa
 		Object obj = obtenerElementoSeleccionadoLista();
 		// Si el objeto es una hamburguesa
 		if (obj instanceof Hamburguesa && ((Hamburguesa) obj).isOpcionMenu()) {
@@ -119,6 +145,7 @@ public class ModificarOrdenPedido {
 			logger.debug("El producto no tiene opcion de menu");
 			new DialogoMostrarMensajeMetodos().mostrarMensaje("Este producto no tiene opción de menú");
 		}
+
 	}
 
 	/**
@@ -126,7 +153,7 @@ public class ModificarOrdenPedido {
 	 * una manera u otra dependiendo del tipo de producto
 	 */
 	public void eliminarElemento() {
-		// 1. Obtenemos el objeto seleccionado
+		// Obtenemos el objeto seleccionado
 		Object obj = obtenerElementoSeleccionadoLista();
 
 		// Comprobamos si el objeto es un producto y lo eliminamos
@@ -162,6 +189,11 @@ public class ModificarOrdenPedido {
 
 			logger.debug("Se ha anadido el menu a la orden de pedido");
 		}
+
+		// Seleccionamos el ultimo objeto de la lista
+		ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
+				.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize() - 1);
+		logger.debug("Se ha seleccionado el ultimo elemento de la lista");
 	}
 
 	/**
@@ -177,6 +209,13 @@ public class ModificarOrdenPedido {
 		return stm.getTamano();
 	}
 
+	/**
+	 * Metodo que acceder al {@link PanelPedido} y obtiene el elemento seleccionado
+	 * en la lista de pedido
+	 * 
+	 * @return {@link Object} que es el {@link MenuPedido} o el {@link Producto}
+	 *         seleccionado en el {@link PanelPedido}
+	 */
 	private Object obtenerElementoSeleccionadoLista() {
 		PanelPedido panel = ClasesEstaticas.getPanelPedido();
 		Object objeto = null;
@@ -195,21 +234,22 @@ public class ModificarOrdenPedido {
 	 * @param pro producto que se va a añadir a pedido
 	 */
 	private void anadirProducto(Producto pro) {
-		if (pro != null) {
-			// Comprobamos primero si el producto es una bebida para solicita el tamano
-			if (pro instanceof Bebida) {
-				solicitarTamanoBebida((Bebida) pro);
+		// Comprobamos primero si el producto es una bebida para solicita el tamano
+		if (pro instanceof Bebida) {
+			pro = solicitarTamanoBebida((Bebida) pro);
+			if (pro == null) {
+				return;
 			}
-
-			// Anadimos el producto en la orden de pedido
-			pedido.getOrden().getListaProductos().add(pro);
-			// Actualizamos el importe del pedido
-			pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
-			logger.info("Se ha añadido el producto con id {} en la lista", pro.getCodigo());
-
-			// Anadimos el producto pedido en la casilla del producto
-			new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).anadirElemento(pro);
 		}
+
+		// Anadimos el producto en la orden de pedido
+		pedido.getOrden().getListaProductos().add(pro);
+		// Actualizamos el importe del pedido
+		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
+		logger.info("Se ha añadido el producto con id {} en la lista", pro.getCodigo());
+
+		// Anadimos el producto pedido en la casilla del producto
+		new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).anadirElemento(pro);
 	}
 
 	/**
@@ -218,24 +258,26 @@ public class ModificarOrdenPedido {
 	 * 
 	 * @param pro es la {@link Bebida} que se va a modificar
 	 */
-	private void solicitarTamanoBebida(Bebida pro) {
+	private Bebida solicitarTamanoBebida(Bebida pro) {
 		// Creamos el objeto selectorBebida y lo hacemos visible
 		SelectorBebida selector = new SelectorBebida();
 		selector.setVisible(true);
 
 		// Obtenemos el tamano del pedido
 		int tamanoPedido = selector.getTamano();
+		logger.debug("El tamano de la bebida seleccionada es: {}", tamanoPedido);
 
+		// Buscamos entre todas las bebidas la que se adapte al tamano y nombre
 		for (Producto producto : ClasesEstaticas.getListaProductos().getListaBebidas()) {
 			// Convertimos el producto en una bebida
 			Bebida bebida = (Bebida) producto;
 			if (bebida.getTamano() == tamanoPedido && bebida.getNombreProducto().startsWith(pro.getNombreProducto())) {
-				pro = bebida;
+
 				logger.debug("Se ha establecido la bebida {} como bebida adecudada al menú seleccionado", bebida);
-				break;
+				return bebida;
 			}
 		}
-
+		return null;
 	}
 
 	/**

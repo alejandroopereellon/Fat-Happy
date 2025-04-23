@@ -34,13 +34,14 @@ public class ModificarMenuPedido {
 	 */
 	public boolean añadirProducto(Producto pro) {
 		// Comprobamos si el producto es una bebida
-		if (pro instanceof Bebida) {
+		if (menu.getBebida() == null && pro instanceof Bebida) {
 			return anadirBebida((Bebida) pro);
-		} else if (pro instanceof Complemento) {
+		} else if (menu.getComplemento() == null && pro instanceof Complemento) {
 			return anadirComplemento((Complemento) pro);
-		} else if (pro instanceof Postre) {
+		} else if (menu.getPostre() == null && pro instanceof Postre) {
 			return anadirPostre((Postre) pro);
 		}
+		logger.debug("Ya existe un producto del mismo tipo en el menu, se anadira como producto adicional");
 		return false;
 	}
 
@@ -97,11 +98,11 @@ public class ModificarMenuPedido {
 	private boolean anadirBebida(Bebida bebida) {
 		if (bebida.getTamano() == 0) {
 			menu.setBebida(bebida);
-			logger.info("Se ha insertado la bebida id {} en el menu", bebida.getCodigo());
+			logger.info("Se ha insertado la bebida id {} en el menu", bebida);
+			return true;
 		} else {
 			return obtenerBebidaTamanoAdecuado(bebida);
 		}
-		return true;
 	}
 
 	/**

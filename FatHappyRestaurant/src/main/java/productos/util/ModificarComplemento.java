@@ -17,7 +17,7 @@ public class ModificarComplemento {
 	}
 
 	public boolean anadirSalsaComplemento(Producto pro) {
-		if (complemento.getSalsas().size() <= complemento.getNumeroSalsas()) {
+		if (complemento.getSalsas().size() < complemento.getNumeroSalsas()) {
 			complemento.getSalsas().add((Salsa) pro);
 			return true;
 		}

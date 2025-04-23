@@ -2,6 +2,7 @@ package productos.interfazProducto.casillaProducto;
 
 import java.awt.Color;
 import java.io.File;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -46,7 +47,11 @@ public class CasillaProductoMetodos {
 		interfaz.getCuadroImagen().setIcon(new ImageIcon(obtenerRutaImagen(pro.getImagenProducto64())));
 
 		// Establecemos el precio del producto
-		interfaz.getTextoPrecio().setText(pro.getPrecioVenta().setScale(2) + " €");
+		if (!pro.getPrecioVenta().equals(BigDecimal.ZERO)) {
+			interfaz.getTextoPrecio().setText(pro.getPrecioVenta().setScale(2) + " €");
+		} else {
+			interfaz.getTextoPrecio().setText("Seleccionar tamaño");
+		}
 
 		// Establecemos el nombre del producto
 		interfaz.getTextoNombre().setText(pro.getNombreProducto());

@@ -13,6 +13,7 @@ import pedido.interfazPedido.filtros.FiltroBebidas;
 import pedido.interfazPedido.filtros.FiltroComplementos;
 import pedido.interfazPedido.filtros.FiltroHamburguesa;
 import pedido.interfazPedido.filtros.FiltroPostre;
+import pedido.interfazPedido.filtros.FiltroTodosLosProductos;
 import pedido.util.ModificarOrdenPedido;
 import productos.interfazProducto.casillaProducto.CasillaProducto;
 import productos.interfazProducto.casillaProducto.CasillaProductoMetodos;
@@ -94,20 +95,9 @@ public class PanelPedidoMetodos {
 					|| opcionMenu.equalsIgnoreCase("todos");
 
 			if (tipoCarne && tipoOpcionMenu) {
-				// Creamos el panel del producto
-				CasillaProducto casilla = new CasillaProducto(producto, interfaz.getPedido());
-
-				// Iniciamos los datos de la casilla
-				new CasillaProductoMetodos(casilla).establecerDatosProducto();
-
-				// Anadimos cada bebida en el panel
-				new PanelUtil().insertarEnPanelSinBorrar(interfaz.getPanelProductos(), casilla);
-
-				logger.debug("Se ha insertado la bebida {}", producto);
+				crearCasillaProducto(producto);
 			}
-
 		}
-
 		logger.debug("Se han insertado todas las hamburburguesas");
 	}
 
@@ -173,16 +163,7 @@ public class PanelPedidoMetodos {
 			}
 
 			if (tamano && tipo) {
-				// Creamos el panel del producto
-				CasillaProducto casilla = new CasillaProducto(producto, interfaz.getPedido());
-
-				// Iniciamos los datos de la casilla
-				new CasillaProductoMetodos(casilla).establecerDatosProducto();
-
-				// Anadimos cada bebida en el panel
-				new PanelUtil().insertarEnPanelSinBorrar(interfaz.getPanelProductos(), casilla);
-
-				logger.debug("Se ha insertado el complemento {}", producto);
+				crearCasillaProducto(producto);
 			}
 
 		}
@@ -233,16 +214,7 @@ public class PanelPedidoMetodos {
 					|| producto.getNombreProducto().startsWith(seleccionTipo);
 
 			if (topping && tipoHelado) {
-				// Creamos el panel del producto
-				CasillaProducto casilla = new CasillaProducto(producto, interfaz.getPedido());
-
-				// Iniciamos los datos de la casilla
-				new CasillaProductoMetodos(casilla).establecerDatosProducto();
-
-				// Anadimos cada bebida en el panel
-				new PanelUtil().insertarEnPanelSinBorrar(interfaz.getPanelProductos(), casilla);
-
-				logger.debug("Se ha insertado el postre {}", producto);
+				crearCasillaProducto(producto);
 			}
 		}
 		logger.debug("Se han insertado todos los postres");
@@ -289,19 +261,29 @@ public class PanelPedidoMetodos {
 
 			// filtramos las bebidas por tamanos (si terminan en 0 o 9)
 			if (productoMostrar && mostrarTipo) {
-				// Creamos el panel del producto
-				CasillaProducto casilla = new CasillaProducto(producto, interfaz.getPedido());
-
-				// Iniciamos los datos de la casilla
-				new CasillaProductoMetodos(casilla).establecerDatosProducto();
-
-				// Anadimos cada bebida en el panel
-				new PanelUtil().insertarEnPanelSinBorrar(interfaz.getPanelProductos(), casilla);
-
-				logger.debug("Se ha insertado la bebida {}", producto);
+				crearCasillaProducto(producto);
 			}
 		}
 		logger.info("Se han cargado todas las bebidas");
+	}
+
+	/**
+	 * Metodo que anade al {@link PanelPedido} la casilla del producto
+	 * 
+	 * @param producto es el {@link Producto} que se va a añadir al
+	 *                 {@link PanelPedido}
+	 */
+	private void crearCasillaProducto(Producto producto) {
+		// Creamos el panel del producto
+		CasillaProducto casilla = new CasillaProducto(producto, interfaz.getPedido());
+
+		// Iniciamos los datos de la casilla
+		new CasillaProductoMetodos(casilla).establecerDatosProducto();
+
+		// Anadimos cada bebida en el panel
+		new PanelUtil().insertarEnPanelSinBorrar(interfaz.getPanelProductos(), casilla);
+
+		logger.debug("Se ha insertado la casilla del producto {}", producto);
 	}
 
 	/**
@@ -331,6 +313,68 @@ public class PanelPedidoMetodos {
 		interfaz.getPanelProductos().removeAll();
 		// Vaciamos el panel de filtros
 		interfaz.getPanelFiltros().removeAll();
+	}
+
+	/**
+	 * Metodo que muestra todos los productos de todas las categorias para permitir
+	 * la busqueda
+	 */
+	protected void mostrarListaCompleta() {
+		vaciarPanelesCategorias();
+
+		// Anadimos el panel de filtros
+		FiltroTodosLosProductos filtro = new FiltroTodosLosProductos();
+		new PanelUtil().insertarEnPanel(interfaz.getPanelFiltros(), filtro);
+		logger.debug("Se ha insertado el filtro en el panel");
+
+		mostrarTodasCasillas(filtro);
+	}
+
+	/**
+	 * Metodo que muestra todos los productos sin categorias
+	 * 
+	 * En caso de haber una busqueda realizada mostrará los productos que contengan
+	 * esa cadena de caracteres
+	 * 
+	 * @param filtro es el {@link FiltroTodosLosProductos}
+	 */
+	public void mostrarTodasCasillas(FiltroTodosLosProductos filtro) {
+		// Borramos todos los elementos del panel
+		interfaz.getPanelProductos().removeAll();
+
+		// Comprobamos que la cadena de texto es diferente
+		String cadena = filtro.getTextoBuscado().getText();
+		Boolean buscar = !cadena.equalsIgnoreCase("busqueda...");
+
+		// Buscamos en todas las hamburguesas
+		mostrarCasillasLista(ClasesEstaticas.getListaProductos().getListaHamburguesas(), buscar, cadena);
+		// Buscamos en todos los complementos
+		mostrarCasillasLista(ClasesEstaticas.getListaProductos().getListaComplementos(), buscar, cadena);
+		// Buscamos en todas las bebidas
+		mostrarCasillasLista(ClasesEstaticas.getListaProductos().getListaBebidas(), buscar, cadena);
+		// Buscamos en todos los postres
+		mostrarCasillasLista(ClasesEstaticas.getListaProductos().getListaPostres(), buscar, cadena);
+	}
+
+	/**
+	 * Metodo que recorre la lista de productos comprobando si hay que realizar
+	 * busqueda y contiene los datos
+	 * 
+	 * @param lista  es la {@link List}a de {@link Producto} que se va a recorrer
+	 * @param buscar indica si hay que realizar una busqueda por parametro o no
+	 * @param cadena es la cadena de caracteres que hay que buscar
+	 */
+	private void mostrarCasillasLista(List<Producto> lista, boolean buscar, String cadena) {
+
+		for (Producto producto : lista) {
+			if (buscar && producto.getNombreProducto().toUpperCase().contains(cadena.toUpperCase())) {
+				crearCasillaProducto(producto);
+				logger.debug("Se ha insertado la casilla con el patron de busqueda '{}'", cadena);
+			} else if (!buscar) {
+				crearCasillaProducto(producto);
+				logger.debug("Se ha insertado la casilla sin patron de busqueda");
+			}
+		}
 	}
 
 }

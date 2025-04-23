@@ -38,9 +38,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cuadroImagen" min="-2" pref="64" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="textoNombre" min="-2" pref="174" max="-2" attributes="0"/>
-                  <Component id="textoPrecio" min="-2" pref="115" max="-2" attributes="0"/>
+                  <Component id="textoPrecio" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
