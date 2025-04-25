@@ -2,7 +2,6 @@ package pedido.interfazPedido.filtros;
 
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
-import java.awt.Panel;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;

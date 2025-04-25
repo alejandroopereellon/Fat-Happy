@@ -445,9 +445,7 @@ public class InterfazCobro extends javax.swing.JPanel {
     }//GEN-LAST:event_boton7ActionPerformed
 
     private void boton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton0ActionPerformed
-        if (cantidadPropuesta.compareTo(BigDecimal.ZERO) == 0) {
             metodo.introducirNumero(0);
-        }
     }//GEN-LAST:event_boton0ActionPerformed
 
     private void botonCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCobrarActionPerformed

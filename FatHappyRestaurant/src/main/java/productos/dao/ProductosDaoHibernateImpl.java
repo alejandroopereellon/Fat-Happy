@@ -7,8 +7,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import auxiliares.singleton.ClasesEstaticas;
+import caja.modelo.Operacion;
 import pool.HibernateUtil;
 import productos.modelo.Bebida;
 import productos.modelo.Complemento;
@@ -17,7 +19,9 @@ import productos.modelo.Hamburguesa;
 import productos.modelo.Ingrediente;
 import productos.modelo.Postre;
 import productos.modelo.Producto;
+import productos.modelo.ProductoVendido;
 import productos.modelo.Salsa;
+import restaurante.modelo.Restaurante;
 
 /**
  * Esta modelo utilizará Hibernate para acceder a los datos de todos los
@@ -397,4 +401,82 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 		return tiempo;
 	}
 
+	@Override
+	public boolean insertarProductoVendido(ProductoVendido producto) {
+		// Comprobamos si el objeto pedido es nulo
+		if (producto == null) {
+			logger.warn("El objeto producto es nulo, no se puede persistir");
+			return false;
+		}
+
+		// Realizamos la persistencia del objeto pedido
+		Transaction transaction = null;
+		logger.debug("Se ha iniciado la transaccion");
+		// Iniciamos una sesion
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			logger.debug("Se ha iniciado una sesion de hibernate para insertar el objeto productoVendido con ID {}",
+					producto.getId());
+
+			// Iniciamos la transaccion
+			transaction = session.beginTransaction();
+			logger.debug("Se ha asignado la sesion a la transaccion");
+
+			// Insertamos el restaurante en el pedidoVendido
+			producto.setRestaurante(obtenerRestaurante(session));
+			// Insertamos el producto el pedidoVendido
+			producto.setProducto(obtenerProducto(session, producto));
+			// Insertamos el la operacion
+			producto.setOperacion(obtenerOperacion(session, producto.getOperacion()));
+
+			// Persistimos el pedido
+			session.persist(producto);
+			// Confirmamos la persistencia
+			transaction.commit();
+			logger.debug("Se ha persistido el objeto productoVendido id {}", producto.getId());
+			return true;
+		} catch (Exception e) {
+			logger.error("Ha ocurrido un error al obtener el productoVendido con ID " + producto.getId(), e);
+			if (transaction != null && transaction.isActive()) {
+				logger.warn("Se va a realizar un rollback de la base de datos");
+				transaction.rollback();
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Metodo que recupera la {@link Operacion} de hibernate
+	 * 
+	 * @param operacion es la {@link Operacion} de hibernate
+	 * @param session   es la sesion de hibernate
+	 * @return {@link Operacion} obtenida de hibernate
+	 */
+	private Operacion obtenerOperacion(Session session, Operacion operacion) {
+		logger.info("Se esta recuperando el la operacion con ID {}", operacion.getId());
+		return session.find(operacion.getClass(), operacion);
+	}
+
+	/**
+	 * Metodo que recupera de la sesion de hibernate el producto
+	 * 
+	 * @param producto es el {@link Producto} de hibernate
+	 * @param session  es la sesion de hibernate
+	 * @return {@link Producto} obtenido de hibernate
+	 */
+	private Producto obtenerProducto(Session session, ProductoVendido producto) {
+		logger.info("Se esta recuperando el producto con ID {}", producto.getId());
+		return session.find(Producto.class, producto);
+	}
+
+	/**
+	 * Metodo que recupera de la sesion de hibernate el restaurante
+	 * 
+	 * @param sesion es la sesion de hibernate
+	 * @return {@link Restaurante} obtenido de hibernate
+	 */
+	private Restaurante obtenerRestaurante(Session sesion) {
+		Restaurante res = ClasesEstaticas.getRestaurante();
+		logger.info("Se esta recuperando el restaurante con ID {}", res.getIdRestaurante());
+		return sesion.find(Restaurante.class, res.getIdRestaurante());
+	}
 }

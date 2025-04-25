@@ -1,21 +1,22 @@
 package caja.interfazCaja.descuentos;
 
+import auxiliares.inicioAplicacion.ConfiguracionInicial;
+
 /**
- * Interfaz grafica que permite seleccionar un porcentaje de descuento,
- * aplicarlo en el pedido y volver a calcular el importe
+ * Clase de interfaz grafica que solicita un descuento para el pedido
  *
  * @author Alejandro Perellón López
  */
-public class DescuentoInterfaz extends javax.swing.JFrame {
+public class SolicitarDescuento extends javax.swing.JDialog {
 
-    private int cantidadDescuento=1;
+    private int cantidadDescuento = 0;
 
     /**
-     * Creates new form DescuentoInterfaz
+     * Creates new form SolicitarDescuento
      */
-    public DescuentoInterfaz() {
+    public SolicitarDescuento() {
+        super(ConfiguracionInicial.get().getVentanaPrincipal(), true);
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -34,12 +35,11 @@ public class DescuentoInterfaz extends javax.swing.JFrame {
         boton15 = new javax.swing.JButton();
         boton20 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Selecciona el descuento");
-        setBackground(new java.awt.Color(255, 255, 255));
-        setType(java.awt.Window.Type.UTILITY);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -129,28 +129,33 @@ public class DescuentoInterfaz extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void boton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton10ActionPerformed
+        cantidadDescuento = 10;
+        dispose();
+    }//GEN-LAST:event_boton10ActionPerformed
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
         cantidadDescuento = 0;
+        dispose();
     }//GEN-LAST:event_botonBorrarActionPerformed
 
-    private void boton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton10ActionPerformed
-        cantidadDescuento=10;
-    }//GEN-LAST:event_boton10ActionPerformed
-
     private void boton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton15ActionPerformed
-       cantidadDescuento=20;
+        cantidadDescuento = 20;
+        dispose();
     }//GEN-LAST:event_boton15ActionPerformed
 
     private void boton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton20ActionPerformed
-       cantidadDescuento=30;
+        cantidadDescuento = 30;
+        dispose();
     }//GEN-LAST:event_boton20ActionPerformed
 
     public int getCantidadDescuento() {
         return cantidadDescuento;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton10;
     private javax.swing.JButton boton15;

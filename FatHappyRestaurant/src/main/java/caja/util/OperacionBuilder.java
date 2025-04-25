@@ -15,7 +15,7 @@ public class OperacionBuilder {
 
 	// Establecemos el metodo dao de las cajas
 	private CajasDao dao = new CajasDaoHibernateImpl();
-	// Establecemos el objeto caja de la clase
+	// Establecemos el objeto operacion de la clase
 	private Operacion operacion = new Operacion();
 
 	/**
@@ -54,4 +54,7 @@ public class OperacionBuilder {
 		return false;
 	}
 
+	public Operacion getOperacion() {
+		return operacion;
+	}
 }

@@ -7,15 +7,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.metodosBigDecimal.OperacionesBigDecimal;
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.solicitarNumeroDecimal.GestionDecimales;
 import auxiliares.utilidadesGraficas.PanelUtil;
-import caja.interfazCaja.descuentos.DescuentoInterfaz;
-import caja.util.OperacionBuilder;
+import caja.interfazCaja.descuentos.SolicitarDescuento;
+import caja.util.HiloFinalizarOperacion;
 import empleados.modelo.Empleado;
 import empleados.util.ActividadEmpleados;
 import pedido.modelo.Pedido;
-import pedido.util.AlmacenarOrdenPedidoJson;
 import pedido.util.CalcularImporte;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
@@ -116,33 +116,34 @@ public class MetodosInterfazCobro {
 	public void cobrarOperacion() {
 
 		// Comprobamos que hay permisos de cobros de mas de 100 euros
-		if (!new ActividadEmpleados().solicitarPermisos("Cobro de mas de 100 euros", 2)) {
+		if (pedido.getImporteTotal().compareTo(new BigDecimal("100.00")) >= 0
+				&& !new ActividadEmpleados().solicitarPermisos("Cobro de mas de 100 euros", 2)) {
 			return;
 		}
 
 		// Calculamos el resto de la cantidad pagada por el cliente
-		BigDecimal cantidadRestante = restarCantidades(pedido.getImporteTotal(), interfaz.getCantidadPropuesta());
+		BigDecimal cantidadRestante = new OperacionesBigDecimal().restar(pedido.getImporteTotal(),
+				interfaz.getCantidadPropuesta());
 		logger.debug("La cantidad restante es {}", cantidadRestante);
 
 		// Si el pendiente es negativo o 0 se va a generar la operacion de pago
 		if (cantidadRestante.compareTo(BigDecimal.ZERO) <= 0) {
-			// Generamos una nueva operacion
-			if (new OperacionBuilder().GenerarOperacion(pedido, "cobro", "efectivo")) {
-				// Desactivamos los botones y mostramos el boton de continuar
-				cambiarEstadoElementos(false);
-				interfaz.getBotonContinuar().setVisible(true);
-				logger.info("Se creado la operacion de pedido correctamente");
+			// Realizamos las operaciones de cierre de pedido
+			new HiloFinalizarOperacion(ClasesEstaticas.getPedido()).start();
 
-				// Modificamos el texto pagado para mostrar la devolucion
-				interfaz.getTextoCantidadPagado().setText(cantidadRestante.toString());
-				interfaz.getTextoPagado().setText("DEVOLUCION");
-				interfaz.getTextoCantidadPagado().setForeground(Color.decode("#FF0000"));
+			// Ponemos el pedido actual y el panel de pedido en nulo
+			ClasesEstaticas.setPanelPedido(null);
+			ClasesEstaticas.setPedido(null);
 
-				// Almacenamos el pedido en fichero json
-				new AlmacenarOrdenPedidoJson(pedido).almacenarOrdenPedido();
-			} else {
-				logger.warn("No se ha podido almacenar la operacion del pedido ID {} correctamente", pedido.getId());
-			}
+			// Desactivamos los botones y mostramos el boton de continuar
+			cambiarEstadoElementos(false);
+			interfaz.getBotonContinuar().setVisible(true);
+
+			// Modificamos el texto pagado para mostrar la devolucion
+			interfaz.getTextoCantidadPagado().setText(cantidadRestante.toString());
+			interfaz.getTextoPagado().setText("DEVOLUCION");
+			interfaz.getTextoCantidadPagado().setForeground(Color.decode("#FF0000"));
+
 		} else {
 			logger.info("El importe pagado es inferior al importe total, no se ha realizado ninguna operacion");
 			// Establecemos el nuevo importe
@@ -156,21 +157,9 @@ public class MetodosInterfazCobro {
 
 	protected void establecerDescuento() {
 		// Solicitamos el descuento
-		DescuentoInterfaz descuento = new DescuentoInterfaz();
-		int cantidadDescuento = 0;
-
+		SolicitarDescuento descuento = new SolicitarDescuento();
 		descuento.setVisible(true);
-		while (descuento.isVisible()) {
-			// Si se ha aplicado un descuento (diferente de 1) ocultamos el panel
-			if (descuento.getCantidadDescuento() != 1) {
-				// Ocultamos el descuento
-				descuento.setVisible(false);
-				// Almacenamos la cantidad de descuento
-				cantidadDescuento = descuento.getCantidadDescuento();
-			}
-		}
-		// Hacemos dispose del descuento
-		descuento.dispose();
+		int cantidadDescuento = descuento.getCantidadDescuento();
 
 		// Establecemos al pedido el nuevo descuento
 		pedido.setDescuento(cantidadDescuento);
@@ -178,18 +167,6 @@ public class MetodosInterfazCobro {
 		new CalcularImporte(pedido).obtenerImporteDescuento();
 
 		logger.info("Se ha aplicado un descuento del {} al pedido", pedido.getDescuento());
-	}
-
-	/**
-	 * Metodo que resta a la cantidad 1 la cantidad 2
-	 * 
-	 * @param cantidad1 es la cantidad a la que se va a restar
-	 * @param cantidad2 cantidad que se resta
-	 * @return {@link BigDecimal} con el resultado de la operacion
-	 */
-	private BigDecimal restarCantidades(BigDecimal cantidad1, BigDecimal cantidad2) {
-		logger.debug("Se ha restado la cantidad de {} a {}", cantidad2, cantidad1);
-		return cantidad1.subtract(cantidad2);
 	}
 
 	/**

@@ -10,6 +10,7 @@ import productos.modelo.Hamburguesa;
 import productos.modelo.Ingrediente;
 import productos.modelo.Postre;
 import productos.modelo.Producto;
+import productos.modelo.ProductoVendido;
 import productos.modelo.Salsa;
 
 /**
@@ -114,4 +115,13 @@ public interface ProductosDAO {
 	 * @return {@link LocalDateTime} con la fecha y hora de modificacion
 	 */
 	public LocalDateTime obtenerUltimaActualizacionProductos();
+
+	/**
+	 * Metodo que inserta la informacion de un producto vendido
+	 * 
+	 * @param producto es el {@link Producto} vendido que se va a insertar
+	 * @return TRUE si se ha insertado correctamente || FALSE si no se ha podido
+	 *         insertar
+	 */
+	public boolean insertarProductoVendido(ProductoVendido producto);
 }

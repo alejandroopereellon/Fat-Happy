@@ -31,7 +31,7 @@ public class IniciarContadorPedido extends Thread {
 		panel = ClasesEstaticas.getPanelCaja();
 
 		int tiempoConsumido = 0;
-		while (pedidoOrigen.getEstadoPedido() == 1) {
+		while (pedidoOrigen.getEstadoPedido() == 5) {
 			tiempoConsumido++;
 
 			try {

@@ -1,7 +1,6 @@
 package pedido.interfazPedido.filtros;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Metodo que permite seleccionar el tamano de una bebida siempre y cuando no

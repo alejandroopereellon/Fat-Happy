@@ -5,7 +5,6 @@ import auxiliares.tecladoPantalla.TecladoEnPantalla;
 import auxiliares.tecladoPantalla.TecladoEnPantallaMetodos;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import java.awt.Dimension;
-import javax.swing.ButtonGroup;
 import javax.swing.JTextArea;
 import pedido.interfazPedido.PanelPedidoMetodos;
 

@@ -1,9 +1,6 @@
 package caja.interfazCaja.panelAccionesCaja;
 
-import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import empleados.util.ActividadEmpleados;
-import java.awt.Color;
-import java.awt.color.ColorSpace;
 import javax.swing.JButton;
 
 /**

@@ -7,8 +7,6 @@ import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import caja.interfazCaja.panelCobro.InterfazCobro;
 import caja.interfazCaja.panelCobro.MetodosInterfazCobro;
-import pedido.dao.PedidoDao;
-import pedido.dao.PedidoDaoHibernateImpl;
 import pedido.modelo.Pedido;
 import productos.modelo.MenuPedido;
 
@@ -16,9 +14,6 @@ public class ComprobarPedidoFinalizado {
 
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(ComprobarPedidoFinalizado.class);
-	
-	// Creamos el dao
-	PedidoDao dao = new PedidoDaoHibernateImpl();
 
 	/**
 	 * Metodo que comprueba si todo el pedido se ha realizado correctamente y todos
@@ -52,13 +47,12 @@ public class ComprobarPedidoFinalizado {
 			// Establecemos el panel secundario de la ventana principal para el cobro
 			InterfazCobro interfaz = new InterfazCobro(pedido);
 			new MetodosInterfazCobro(interfaz).iniciarInterfazCobro();
-			
-			//Insertamos el pedido en la base de datos
-			dao.insertarPedido(pedido);
+
+			// Calculamos el importe total del pedido
+			new CalcularImporte(pedido).obtenerImporteDescuento();
 			return true;
 		}
 		return false;
-
 	}
 
 	/**

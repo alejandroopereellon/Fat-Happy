@@ -30,8 +30,8 @@ public class PedidoBuilder {
 		Pedido pedido = new Pedido();
 
 		// Establecemos el numero de pedido
-		pedido.setNumeroPedido(
-				new ObtenerNumeroPedido().obtenerYReservarNumeroPedido(ClasesEstaticas.getRestaurante().getIdRestaurante()));
+		pedido.setNumeroPedido(new ObtenerNumeroPedido()
+				.obtenerYReservarNumeroPedido(ClasesEstaticas.getRestaurante().getIdRestaurante()));
 		logger.debug("Se ha establecido el numero de pedido: ", pedido.getNumeroPedido());
 
 		// Establecemos el orden de pedido
@@ -46,8 +46,8 @@ public class PedidoBuilder {
 		pedido.setFechaHora(LocalDateTime.now());
 
 		// Establecemos la ruta donde se almacenan los pedidos
-		String ruta = File.separator + "R" + ClasesEstaticas.getCaja().getRestaurante().getIdRestaurante() + File.separator
-				+ LocalDate.now().toString() + File.separator + pedido.getNumeroPedido();
+		String ruta = File.separator + "R" + ClasesEstaticas.getCaja().getRestaurante().getIdRestaurante()
+				+ File.separator + LocalDate.now().toString() + File.separator + pedido.getNumeroPedido();
 		pedido.setRutaPedido(ruta);
 		logger.debug("Se ha establecido la ruta de almacenamiento de pedidos en :", ruta);
 
@@ -55,11 +55,14 @@ public class PedidoBuilder {
 		pedido.setDescuento(0);
 		logger.debug("Se ha establecido el descuento en el 0%");
 
+		// Establecemos el importe del pedido
+		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento().setScale(2));
+		logger.debug("Se ha calculado el importe del pedido");
+
 		// Acciones adicionales tras creación
 		new IniciarContadorPedido(pedido).start();
 		logger.debug("Se ha iniciado el hilo del pedido");
-		new CalcularImporte(pedido).obtenerImporteDescuento();
-		logger.debug("Se ha calculado el importe del pedido");
+
 		// new AlmacenarOrdenPedidoJson(pedido).almacenarOrdenPedido();
 
 		return pedido;

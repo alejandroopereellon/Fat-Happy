@@ -18,6 +18,7 @@
 		<mapping class="productos.modelo.Postre" />
 		<mapping class="productos.modelo.Producto" />
 		<mapping class="productos.modelo.Salsa" />
+		<mapping class="productos.modelo.ProductoVendido" />
 		
 		<mapping class="restaurante.modelo.Restaurante" />
 		
