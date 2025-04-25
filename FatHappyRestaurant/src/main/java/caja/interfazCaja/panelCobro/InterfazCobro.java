@@ -3,6 +3,7 @@ package caja.interfazCaja.panelCobro;
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,7 +17,7 @@ import productos.interfazProducto.listaProductosPedidos.ToStringRenderer;
  */
 public class InterfazCobro extends javax.swing.JPanel {
 
-    private BigDecimal cantidadPropuesta = new BigDecimal("0.00");
+    private BigDecimal cantidadPropuesta = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
     private MetodosInterfazCobro metodo = new MetodosInterfazCobro(this);
     private DefaultListModel<Object> modeloLista = ClasesEstaticas.getPanelPedido().getModeloLista();
 
@@ -445,7 +446,7 @@ public class InterfazCobro extends javax.swing.JPanel {
     }//GEN-LAST:event_boton7ActionPerformed
 
     private void boton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton0ActionPerformed
-            metodo.introducirNumero(0);
+        metodo.introducirNumero(0);
     }//GEN-LAST:event_boton0ActionPerformed
 
     private void botonCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCobrarActionPerformed
@@ -567,8 +568,7 @@ public class InterfazCobro extends javax.swing.JPanel {
     public void setCantidadPropuesta(BigDecimal cantidadPropuesta) {
         this.cantidadPropuesta = cantidadPropuesta;
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton0;

@@ -2,6 +2,7 @@ package caja.interfazCaja.panelCobro;
 
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,6 +45,7 @@ public class MetodosInterfazCobro {
 		// Anadimos la interfaz
 		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
 				interfaz);
+		pedido.setEstadoPedido(4);
 	}
 
 	/**
@@ -51,8 +53,10 @@ public class MetodosInterfazCobro {
 	 * cantidad total a pagar
 	 */
 	protected void actualizarPantalla() {
-		interfaz.getTextoCantidadPagado().setText(interfaz.getCantidadPropuesta().toString() + " €");
-		interfaz.getTextoCantidadTotalPagar().setText(pedido.getImporteTotal().toString() + " €");
+		interfaz.getTextoCantidadPagado()
+				.setText(interfaz.getCantidadPropuesta().setScale(2, RoundingMode.HALF_UP) + " €");
+		interfaz.getTextoCantidadTotalPagar()
+				.setText(pedido.getImporteTotal().setScale(2, RoundingMode.HALF_UP) + " €");
 		logger.debug("Se ha actualizado la pantalla");
 	}
 

@@ -21,13 +21,6 @@ public class OrdenPedido {
 
 	private int numeroMesa = 0;
 
-//	public OrdenPedido(List<Producto> listaProductos, List<MenuPedido> listaMenus, boolean llevar, int numeroMesa) {
-//		this.listaProductos = listaProductos;
-//		this.listaMenus = listaMenus;
-//		this.llevar = llevar;
-//		this.numeroMesa = numeroMesa;
-//	}
-
 	public OrdenPedido() {
 	}
 

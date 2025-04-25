@@ -1,6 +1,7 @@
 package productos.util;
 
 import java.math.BigDecimal;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,13 +31,23 @@ public class CalcularImporteMenu {
 	public BigDecimal calcularImporte() {
 		BigDecimal importe = BigDecimal.ZERO.setScale(2);
 
+		/**
+		 * Si el menu esta promocionado se pasa un importe de 0 euros y se promociona el
+		 * postre
+		 */
+		if (menu.isMenuPromocionado()) {
+			menu.getPostre().setProductoActivo(true);
+			return importe;
+		}
+
 		// Calculamos el precio de la hamburguesa mas el coste de intereses
-		new OperacionesBigDecimal().sumar(importe,
+		importe = new OperacionesBigDecimal().sumar(importe,
 				menu.getHamburguesa().getPrecioVenta().multiply(new BigDecimal("1.65")));
 		// En caso de existir un postre en el menu se va a actualizar el precio
 		if (menu.getPostre() != null) {
-			new OperacionesBigDecimal().sumar(importe, menu.getPostre().getPrecioVenta());
+			importe = new OperacionesBigDecimal().sumar(importe, menu.getPostre().getPrecioVenta());
 		}
+
 		return importe;
 	}
 

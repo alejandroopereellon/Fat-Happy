@@ -18,6 +18,7 @@ import productos.modelo.Complemento;
 import productos.modelo.Hamburguesa;
 import productos.modelo.MenuPedido;
 import productos.modelo.Producto;
+import productos.util.CalcularImporteMenu;
 import productos.util.ModificarComplemento;
 import productos.util.ModificarMenuPedido;
 
@@ -155,6 +156,9 @@ public class ModificarOrdenPedido {
 		if (tamano != 0) {
 			MenuPedido menu = new MenuPedido(ham, tamano);
 			logger.info("Se ha creado un menu con la hamburguesa {}", ham);
+
+			// Establecemos el importe el menu
+			menu.setPrecioMenu(new CalcularImporteMenu(menu).calcularImporte());
 
 			// Eliminamos la hambruguesa
 			buscarProductoYEliminar(ham);

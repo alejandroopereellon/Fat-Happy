@@ -12,7 +12,7 @@ import pedido.modelo.Pedido;
  * tiempo que tarde el pedido en realizarse, una vez que el pedido haya
  * finalizado se va a finalizar el contador y se establece el valor en el pedido
  */
-public class IniciarContadorPedido extends Thread {
+public class HiloContadorTiempoPedido extends Thread {
 
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(PedidoBuilder.class);
@@ -20,7 +20,7 @@ public class IniciarContadorPedido extends Thread {
 	private Pedido pedidoOrigen;
 	private PanelCaja panel;
 
-	public IniciarContadorPedido(Pedido pedidoOrigen) {
+	public HiloContadorTiempoPedido(Pedido pedidoOrigen) {
 		this.pedidoOrigen = pedidoOrigen;
 	}
 
@@ -31,7 +31,7 @@ public class IniciarContadorPedido extends Thread {
 		panel = ClasesEstaticas.getPanelCaja();
 
 		int tiempoConsumido = 0;
-		while (pedidoOrigen.getEstadoPedido() == 5) {
+		while (pedidoOrigen.getEstadoPedido() != 5) {
 			tiempoConsumido++;
 
 			try {
@@ -43,7 +43,7 @@ public class IniciarContadorPedido extends Thread {
 			actualizarContador(tiempoConsumido);
 		}
 		// Establecemos el tiempo del pedido en segundos al pedido
-		pedidoOrigen.setTiempoPedido(tiempoConsumido);
+		ClasesEstaticas.getPedido().setTiempoPedido(tiempoConsumido);
 		// Establecemos el contador del panel en 0
 		panel.getTiempoPedido().setText("00:00");
 

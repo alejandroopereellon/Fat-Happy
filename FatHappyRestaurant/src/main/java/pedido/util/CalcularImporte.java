@@ -1,6 +1,7 @@
 package pedido.util;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -58,7 +59,7 @@ public class CalcularImporte {
 		}
 
 		logger.info("Se ha recorrido todos los productos, importe total del pedido: {}", importe);
-		return importe;
+		return importe.setScale(2, RoundingMode.HALF_UP);
 
 	}
 
@@ -94,7 +95,7 @@ public class CalcularImporte {
 		logger.info("Se aplicó un descuento de {}% al pedido. Importe con descuento: {}", pedido.getDescuento(),
 				importe);
 
-		return importe.setScale(2);
+		return importe.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	/**

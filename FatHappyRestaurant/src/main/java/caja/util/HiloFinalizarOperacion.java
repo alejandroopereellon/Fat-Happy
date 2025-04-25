@@ -38,6 +38,9 @@ public class HiloFinalizarOperacion extends Thread {
 	}
 
 	public void run() {
+		// Establecemos el estado del pedido en pagado
+		pedido.setEstadoPedido(5);
+
 		// Restablecemos el importe original del pedido
 		new CalcularImporte(pedido).obtenerImporteDescuento();
 
@@ -52,7 +55,7 @@ public class HiloFinalizarOperacion extends Thread {
 		operacion.GenerarOperacion(pedido, "cobro", "efectivo");
 
 		// Almacenamos los productos vendidos en la base de datos
-		almacenarProductosVendidos(operacion.getOperacion());
+		almacenarProductosVendidos(operacion.getOperacion(), pedido.getOrden());
 	}
 
 	/**
@@ -62,8 +65,8 @@ public class HiloFinalizarOperacion extends Thread {
 	 *                  {@link Pedido} y a traves de la {@link OrdenPedido} se
 	 *                  almacena cada producto individualmente
 	 */
-	private void almacenarProductosVendidos(Operacion operacion) {
-		OrdenPedido orden = operacion.getPedido().getOrden();
+	private void almacenarProductosVendidos(Operacion operacion, OrdenPedido orden) {
+
 		Boolean bandera = true;
 
 		// Almacenamos los productos sueltos

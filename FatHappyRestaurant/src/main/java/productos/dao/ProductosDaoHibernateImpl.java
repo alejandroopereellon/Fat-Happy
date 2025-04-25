@@ -402,9 +402,9 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 	}
 
 	@Override
-	public boolean insertarProductoVendido(ProductoVendido producto) {
+	public boolean insertarProductoVendido(ProductoVendido productoVendido) {
 		// Comprobamos si el objeto pedido es nulo
-		if (producto == null) {
+		if (productoVendido == null) {
 			logger.warn("El objeto producto es nulo, no se puede persistir");
 			return false;
 		}
@@ -415,27 +415,27 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 		// Iniciamos una sesion
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			logger.debug("Se ha iniciado una sesion de hibernate para insertar el objeto productoVendido con ID {}",
-					producto.getId());
+					productoVendido.getId());
 
 			// Iniciamos la transaccion
 			transaction = session.beginTransaction();
 			logger.debug("Se ha asignado la sesion a la transaccion");
 
 			// Insertamos el restaurante en el pedidoVendido
-			producto.setRestaurante(obtenerRestaurante(session));
+			productoVendido.setRestaurante(obtenerRestaurante(session));
 			// Insertamos el producto el pedidoVendido
-			producto.setProducto(obtenerProducto(session, producto));
+			productoVendido.setProducto(obtenerProducto(session, productoVendido.getProducto()));
 			// Insertamos el la operacion
-			producto.setOperacion(obtenerOperacion(session, producto.getOperacion()));
+			productoVendido.setOperacion(obtenerOperacion(session, productoVendido.getOperacion()));
 
 			// Persistimos el pedido
-			session.persist(producto);
+			session.persist(productoVendido);
 			// Confirmamos la persistencia
 			transaction.commit();
-			logger.debug("Se ha persistido el objeto productoVendido id {}", producto.getId());
+			logger.debug("Se ha persistido el objeto productoVendido id {}", productoVendido.getId());
 			return true;
 		} catch (Exception e) {
-			logger.error("Ha ocurrido un error al obtener el productoVendido con ID " + producto.getId(), e);
+			logger.error("Ha ocurrido un error al insertar el productoVendido con ID " + productoVendido.getId(), e);
 			if (transaction != null && transaction.isActive()) {
 				logger.warn("Se va a realizar un rollback de la base de datos");
 				transaction.rollback();
@@ -453,7 +453,7 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 	 */
 	private Operacion obtenerOperacion(Session session, Operacion operacion) {
 		logger.info("Se esta recuperando el la operacion con ID {}", operacion.getId());
-		return session.find(operacion.getClass(), operacion);
+		return session.find(operacion.getClass(), operacion.getId());
 	}
 
 	/**
@@ -463,9 +463,9 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 	 * @param session  es la sesion de hibernate
 	 * @return {@link Producto} obtenido de hibernate
 	 */
-	private Producto obtenerProducto(Session session, ProductoVendido producto) {
-		logger.info("Se esta recuperando el producto con ID {}", producto.getId());
-		return session.find(Producto.class, producto);
+	private Producto obtenerProducto(Session session, Producto pro) {
+		logger.info("Se esta recuperando el producto con ID {}", pro.getCodigo());
+		return session.find(Producto.class, pro.getCodigo());
 	}
 
 	/**

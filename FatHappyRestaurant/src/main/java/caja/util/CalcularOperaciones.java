@@ -1,11 +1,13 @@
 package caja.util;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.metodosBigDecimal.OperacionesBigDecimal;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
 import caja.modelo.Caja;
@@ -31,7 +33,7 @@ public class CalcularOperaciones {
 	 * @return {@link BigDecimal} con el importe total
 	 */
 	public BigDecimal calcularTotalOperaciones() {
-		BigDecimal totalOperaciones = new BigDecimal("0.00");
+		BigDecimal totalOperaciones = BigDecimal.ZERO;
 
 		List<Operacion> listaOperacionesRealizadas = dao.listarOperaciones();
 		logger.info("Se ha obtenido una lista de operaciones con {} operaciones", listaOperacionesRealizadas.size());
@@ -41,17 +43,17 @@ public class CalcularOperaciones {
 			if (operacion.getTipoOperacion().toLowerCase().equalsIgnoreCase("cobro")) {
 				logger.debug("Se va a sumar el importe de {} al total de {} por cobro", operacion.getImporte(),
 						totalOperaciones);
-				totalOperaciones.add(operacion.getImporte());
+				totalOperaciones = new OperacionesBigDecimal().sumar(totalOperaciones, operacion.getImporte());
 			} else {
 				logger.debug("Se va a restar el importe de {} al total de {} por devolucion", operacion.getImporte(),
 						totalOperaciones);
-				totalOperaciones.subtract(operacion.getImporte());
+				totalOperaciones = new OperacionesBigDecimal().restar(totalOperaciones, operacion.getImporte());
 			}
 		}
 
 		// Retornamos el total de operaciones
 		logger.info("Se ha retornado un total de operaciones de {} Eur", totalOperaciones);
-		return totalOperaciones;
+		return totalOperaciones.setScale(2, RoundingMode.HALF_UP);
 	}
 
 }

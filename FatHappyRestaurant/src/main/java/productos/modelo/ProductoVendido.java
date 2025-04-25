@@ -32,7 +32,7 @@ public class ProductoVendido {
 	private Producto producto;
 
 	@ManyToOne
-	@JoinColumn(name = "id_operacion")
+	@JoinColumn(name = "id_operacion", columnDefinition = "BINARY(16)")
 	private Operacion operacion;
 
 	@Column(name = "fecha_venta")
@@ -71,5 +71,11 @@ public class ProductoVendido {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+	
+	
 
 }

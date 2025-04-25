@@ -60,7 +60,7 @@ public class PedidoBuilder {
 		logger.debug("Se ha calculado el importe del pedido");
 
 		// Acciones adicionales tras creación
-		new IniciarContadorPedido(pedido).start();
+		new HiloContadorTiempoPedido(pedido).start();
 		logger.debug("Se ha iniciado el hilo del pedido");
 
 		// new AlmacenarOrdenPedidoJson(pedido).almacenarOrdenPedido();
