@@ -203,7 +203,6 @@ public class PanelPedido extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(898, 640));
 
         panelProductos.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
-        panelProductos.setBorder(new javax.swing.border.LineBorder(ColoresInterfaz.CONFIRMACION_VERDE_TE, 1, true));
 
         javax.swing.GroupLayout panelProductosLayout = new javax.swing.GroupLayout(panelProductos);
         panelProductos.setLayout(panelProductosLayout);
@@ -223,7 +222,7 @@ public class PanelPedido extends javax.swing.JPanel {
         jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 700));
 
         listaProductosPedidos.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
-        listaProductosPedidos.setBorder(javax.swing.BorderFactory.createLineBorder(ColoresInterfaz.CONFIRMACION_VERDE_TE));
+        listaProductosPedidos.setBorder(null);
         listaProductosPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         listaProductosPedidos.setModel(modeloLista);
         listaProductosPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

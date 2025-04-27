@@ -71,7 +71,8 @@ public class ListaProductosPedidosMetodos {
 			logger.debug("Se esta editando el menu");
 		} else if (obj instanceof Bebida) {
 			((Bebida) obj).setExtraActivo(!((Bebida) obj).isExtraActivo());
-			logger.debug("Se ha activado el extra {} a la bebida", ((Bebida) obj).getNombreExtra());
+			logger.debug("Se ha modificado el extra {} a la bebida al estado {}", ((Bebida) obj).getNombreExtra(),
+					((Bebida) obj).isExtraActivo());
 		}
 	}
 

@@ -283,13 +283,6 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="ColoresInterfaz.SECUNDARIO_CHAMPAGNE" type="code"/>
             </Property>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder roundedCorners="true">
-                  <Connection PropertyName="color" code="ColoresInterfaz.CONFIRMACION_VERDE_TE" type="code"/>
-                </LineBorder>
-              </Border>
-            </Property>
           </Properties>
 
           <Layout>
@@ -326,11 +319,7 @@
               <Connection code="ColoresInterfaz.SECUNDARIO_CHAMPAGNE" type="code"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder>
-                  <Connection PropertyName="color" code="ColoresInterfaz.CONFIRMACION_VERDE_TE" type="code"/>
-                </LineBorder>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>

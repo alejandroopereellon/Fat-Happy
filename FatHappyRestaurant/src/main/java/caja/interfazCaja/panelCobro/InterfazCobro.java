@@ -255,10 +255,11 @@ public class InterfazCobro extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane3.setBorder(null);
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 700));
 
-        listaProductosPedidos.setBorder(javax.swing.BorderFactory.createLineBorder(ColoresInterfaz.CONFIRMACION_VERDE_TE));
+        listaProductosPedidos.setBorder(null);
         listaProductosPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         listaProductosPedidos.setModel(modeloLista);
         listaProductosPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -279,8 +280,8 @@ public class InterfazCobro extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
-                .addGap(116, 116, 116)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(textoPagado)
