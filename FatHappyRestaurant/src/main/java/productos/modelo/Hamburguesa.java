@@ -98,6 +98,11 @@ public class Hamburguesa extends Producto {
 
 		texto.append(this.getNombreProducto());
 		texto.append("("+this.getPrecioVenta()+ " Eur)");
+		
+		if (this.isProductoPromocionado()) {
+			texto.append(System.lineSeparator());
+			texto.append("Promocionado");
+		}
 
 		// Mostramos los ingredientes
 		for (Ingrediente ing : this.getListaIngredientes()) {

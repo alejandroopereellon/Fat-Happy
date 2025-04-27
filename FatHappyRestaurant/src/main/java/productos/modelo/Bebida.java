@@ -63,8 +63,6 @@ public class Bebida extends Producto {
 	public int getTamano() {
 		return tamano;
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -73,6 +71,11 @@ public class Bebida extends Producto {
 
 		texto.append(this.getNombreProducto());
 		texto.append(" (" + this.getPrecioVenta() + " Eur)");
+
+		if (this.isProductoPromocionado()) {
+			texto.append(System.lineSeparator());
+			texto.append("Promocionado");
+		}
 
 		if (nombreExtra != null) {
 			if (!extraActivo && nombreExtra.equalsIgnoreCase("hielo")) {

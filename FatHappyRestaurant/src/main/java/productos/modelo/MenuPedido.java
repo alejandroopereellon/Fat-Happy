@@ -139,6 +139,11 @@ public class MenuPedido implements Serializable {
 			tamanoString = "grande";
 		}
 
+		if (this.isMenuPromocionado()) {
+			stb.append(System.lineSeparator());
+			stb.append("Promocionado");
+		}
+
 		// Anadimos el nombre y precio del producto
 		stb.append("Menu " + tamanoString + "\t (" + precioMenu.setScale(2, RoundingMode.HALF_UP) + " Eur)");
 		// Si el articulo esta promocionado se informara

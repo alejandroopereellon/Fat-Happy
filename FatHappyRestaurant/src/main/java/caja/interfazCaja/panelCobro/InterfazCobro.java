@@ -2,6 +2,7 @@ package caja.interfazCaja.panelCobro;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.singleton.ClasesEstaticas;
+import auxiliares.utilidadesGraficas.PanelUtil;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -481,7 +482,9 @@ public class InterfazCobro extends javax.swing.JPanel {
     }//GEN-LAST:event_botonPromoActionPerformed
 
     private void importeExacto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importeExacto1ActionPerformed
-     new ventanaPrincipal.InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal()).configurarPanelPrincipal();
+    // Añadimos el panel pedido al panel principal
+		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
+				ClasesEstaticas.getPanelPedido());
     }//GEN-LAST:event_importeExacto1ActionPerformed
 
     public BigDecimal getCantidadPropuesta() {

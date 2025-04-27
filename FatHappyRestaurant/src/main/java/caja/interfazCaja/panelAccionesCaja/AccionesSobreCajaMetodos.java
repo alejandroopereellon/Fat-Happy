@@ -10,7 +10,6 @@ import auxiliares.utilidadesGraficas.PanelUtil;
 import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
 import caja.util.CerrarCaja;
-import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
 /**
  * Clase que contiene los metodos de la interfaz grafica de

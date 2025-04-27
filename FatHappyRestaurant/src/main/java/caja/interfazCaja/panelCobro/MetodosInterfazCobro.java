@@ -245,6 +245,14 @@ public class MetodosInterfazCobro {
 			new CalcularImporte(pedido).obtenerImporteDescuento();
 			importeExacto();
 		}
+
+		/**
+		 * Tambien comprobamos si solo hay un unico articulo en la orden de pedido, entonces se cobrará automaticamente
+		 */
+		if (pedido.getOrden().getListaMenus().size() + pedido.getOrden().getListaProductos().size() == 1) {
+			new CalcularImporte(pedido).obtenerImporteDescuento();
+			importeExacto();
+		}
 	}
 
 }

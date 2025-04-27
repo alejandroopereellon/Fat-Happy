@@ -108,6 +108,11 @@ public class Complemento extends Producto {
 
 		texto.append(this.getNombreProducto());
 		texto.append(" (" + this.getPrecioVenta() + " Eur)");
+		
+		if (this.isProductoPromocionado()) {
+			texto.append(System.lineSeparator());
+			texto.append("Promocionado");
+		}
 
 		boolean noMasSalsas = false;
 		// Mientras salsas no sea empty

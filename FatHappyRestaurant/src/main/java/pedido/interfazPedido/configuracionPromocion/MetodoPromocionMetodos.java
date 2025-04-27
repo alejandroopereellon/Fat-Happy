@@ -57,12 +57,16 @@ public class MetodoPromocionMetodos {
 
 	private void obtenerElementoSeleccionadoYPromocionar() {
 		int posicionSeleccionada = interfaz.getListaProductosPedidos().getSelectedIndex();
-		Object objetoSeleccionado = interfaz.getModeloLista().getElementAt(posicionSeleccionada);
-
-		if (objetoSeleccionado instanceof Producto) {
-			((Producto) objetoSeleccionado).setProductoPromocionado(true);
-		} else if (objetoSeleccionado instanceof MenuPedido) {
-			((MenuPedido) objetoSeleccionado).setMenuPromocionado(true);
+		if (posicionSeleccionada != -1) {
+			Object objetoSeleccionado = interfaz.getModeloLista().getElementAt(posicionSeleccionada);
+			if (objetoSeleccionado instanceof Producto) {
+				((Producto) objetoSeleccionado).setProductoPromocionado(true);
+			} else if (objetoSeleccionado instanceof MenuPedido) {
+				((MenuPedido) objetoSeleccionado).setMenuPromocionado(true);
+			}
+		}else {
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("Debes seleccionar un articulo para promocionarlo");
 		}
+
 	}
 }
