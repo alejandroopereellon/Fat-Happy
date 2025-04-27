@@ -68,6 +68,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="boton3" min="-2" pref="156" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="importeExacto1" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -171,6 +172,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="botonContinuar" min="-2" pref="63" max="-2" attributes="0"/>
                   <Component id="importeExacto" min="-2" pref="63" max="-2" attributes="0"/>
+                  <Component id="importeExacto1" min="-2" pref="63" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="37" max="32767" attributes="0"/>
           </Group>
@@ -197,6 +199,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="PROMO"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonPromoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonBillete10">
       <Properties>
@@ -477,5 +482,17 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="importeExacto1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Editar pedido"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importeExacto1ActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

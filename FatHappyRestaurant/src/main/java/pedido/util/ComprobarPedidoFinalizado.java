@@ -7,6 +7,7 @@ import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import caja.interfazCaja.panelCobro.InterfazCobro;
 import caja.interfazCaja.panelCobro.MetodosInterfazCobro;
+import pedido.interfazPedido.configuracionMetodoEntrega.MetodoEntregaMetodos;
 import pedido.modelo.Pedido;
 import productos.modelo.MenuPedido;
 
@@ -44,12 +45,18 @@ public class ComprobarPedidoFinalizado {
 			// Establecemos el estado del pedido en pendiente de cobro
 			pedido.setEstadoPedido(3);
 			logger.debug("Se ha establecido el pedido en 'pendiente de cobro'");
+
+			// Calculamos el importe total del pedido
+			new CalcularImporte(pedido).obtenerImporteDescuento();
+			logger.debug("Se ha actualizado el importe de descuento");
+
+			// Solicitamos el metodo de entrega
+			new MetodoEntregaMetodos(pedido).solicitarMetodoEntega();
+
 			// Establecemos el panel secundario de la ventana principal para el cobro
 			InterfazCobro interfaz = new InterfazCobro(pedido);
 			new MetodosInterfazCobro(interfaz).iniciarInterfazCobro();
 
-			// Calculamos el importe total del pedido
-			new CalcularImporte(pedido).obtenerImporteDescuento();
 			return true;
 		}
 		return false;

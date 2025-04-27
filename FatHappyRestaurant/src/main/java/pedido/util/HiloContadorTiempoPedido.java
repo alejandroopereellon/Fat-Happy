@@ -43,13 +43,12 @@ public class HiloContadorTiempoPedido extends Thread {
 			actualizarContador(tiempoConsumido);
 		}
 		// Establecemos el tiempo del pedido en segundos al pedido
-		ClasesEstaticas.getPedido().setTiempoPedido(tiempoConsumido);
-		// Establecemos el contador del panel en 0
-		panel.getTiempoPedido().setText("00:00");
+		pedidoOrigen.setTiempoPedido(tiempoConsumido);
 
 	}
 
 	private void actualizarContador(int tiempoConsumido) {
+		pedidoOrigen.setTiempoPedido(tiempoConsumido);
 		int segundos = tiempoConsumido;
 		int minutos = segundos / 60;
 		int segundosRestantes = segundos % 60;
@@ -68,6 +67,7 @@ public class HiloContadorTiempoPedido extends Thread {
 		}
 
 		panel.getTiempoPedido().setText(minutosCadena + ":" + segundosCadena);
+
 	}
 
 }

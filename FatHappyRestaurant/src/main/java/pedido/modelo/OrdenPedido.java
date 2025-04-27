@@ -40,4 +40,12 @@ public class OrdenPedido {
 		return numeroMesa;
 	}
 
+	public void setLlevar(boolean llevar) {
+		this.llevar = llevar;
+	}
+
+	public void setNumeroMesa(int numeroMesa) {
+		this.numeroMesa = numeroMesa;
+	}
+
 }

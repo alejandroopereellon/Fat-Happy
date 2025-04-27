@@ -16,6 +16,7 @@ import caja.interfazCaja.descuentos.SolicitarDescuento;
 import caja.util.HiloFinalizarOperacion;
 import empleados.modelo.Empleado;
 import empleados.util.ActividadEmpleados;
+import pedido.interfazPedido.configuracionPromocion.MetodoPromocionMetodos;
 import pedido.modelo.Pedido;
 import pedido.util.CalcularImporte;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
@@ -120,7 +121,7 @@ public class MetodosInterfazCobro {
 	public void cobrarOperacion() {
 
 		// Comprobamos que hay permisos de cobros de mas de 100 euros
-		if (pedido.getImporteTotal().compareTo(new BigDecimal("100.00")) >= 0
+		if (interfaz.getCantidadPropuesta().compareTo(new BigDecimal("100.00")) >= 0
 				&& !new ActividadEmpleados().solicitarPermisos("Cobro de mas de 100 euros", 2)) {
 			return;
 		}
@@ -144,7 +145,7 @@ public class MetodosInterfazCobro {
 			interfaz.getBotonContinuar().setVisible(true);
 
 			// Modificamos el texto pagado para mostrar la devolucion
-			interfaz.getTextoCantidadPagado().setText(cantidadRestante.toString());
+			interfaz.getTextoCantidadPagado().setText(cantidadRestante.setScale(2, RoundingMode.HALF_UP) + " €");
 			interfaz.getTextoPagado().setText("DEVOLUCION");
 			interfaz.getTextoCantidadPagado().setForeground(Color.decode("#FF0000"));
 
@@ -167,8 +168,12 @@ public class MetodosInterfazCobro {
 
 		// Establecemos al pedido el nuevo descuento
 		pedido.setDescuento(cantidadDescuento);
+
 		// Actualizamos el importe del pedido
 		new CalcularImporte(pedido).obtenerImporteDescuento();
+
+		// Actualizamos la pantalla
+		actualizarPantalla();
 
 		logger.info("Se ha aplicado un descuento del {} al pedido", pedido.getDescuento());
 	}
@@ -226,6 +231,20 @@ public class MetodosInterfazCobro {
 		// Establecemos un nuevo panel de pedido
 		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
 				.configurarPanelPrincipal();
+	}
+
+	protected void promocionarArticulo() {
+		// Buscamos el elemento seleccionado
+		new MetodoPromocionMetodos(pedido, interfaz).solicitarMetodoPromocion();
+		/**
+		 * Una vez cerrado el metodo de solicitarMetodoPromocion comprobamos si el
+		 * pedido esta promocionado, en este caso se calcula el importe y se paga con
+		 * dinero exacto
+		 */
+		if (pedido.isPedidoPromocionado()) {
+			new CalcularImporte(pedido).obtenerImporteDescuento();
+			importeExacto();
+		}
 	}
 
 }

@@ -36,7 +36,7 @@ public class CalcularImporte {
 	 * 
 	 * @return {@link BigDecimal} con el importe original del pedido
 	 */
-	public BigDecimal obtenerImporteOriginal() {
+	private BigDecimal obtenerImporteOriginal() {
 		BigDecimal importe = new BigDecimal("0.00");
 		logger.debug("Establecemos el importe en 0");
 
@@ -77,6 +77,11 @@ public class CalcularImporte {
 	 *         aplicado
 	 */
 	public BigDecimal obtenerImporteDescuento() {
+		// Comprobamos si el pedido esta promocionado y devolvemos 0
+		if (pedido.isPedidoPromocionado()) {
+			return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+		}
+
 		BigDecimal importe = new BigDecimal("0.00");
 		logger.debug("Establecemos el importe en 0");
 

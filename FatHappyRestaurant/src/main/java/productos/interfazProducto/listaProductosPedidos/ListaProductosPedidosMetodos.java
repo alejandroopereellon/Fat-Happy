@@ -9,6 +9,7 @@ import productos.interfazProducto.editarMenu.editarMenu;
 import productos.interfazProducto.editarMenu.editarMenuMetodos;
 import productos.interfazProducto.personalizarPedido.edicionProducto.PanelEdicionProductos;
 import productos.interfazProducto.personalizarPedido.edicionProducto.PanelEdicionProductosMetodos;
+import productos.modelo.Bebida;
 import productos.modelo.Hamburguesa;
 import productos.modelo.MenuPedido;
 import productos.modelo.Postre;
@@ -68,6 +69,9 @@ public class ListaProductosPedidosMetodos {
 					new editarMenu(ConfiguracionInicial.get().getVentanaPrincipal(), true, (MenuPedido) obj))
 					.iniciarInterfaz();
 			logger.debug("Se esta editando el menu");
+		} else if (obj instanceof Bebida) {
+			((Bebida) obj).setExtraActivo(!((Bebida) obj).isExtraActivo());
+			logger.debug("Se ha activado el extra {} a la bebida", ((Bebida) obj).getNombreExtra());
 		}
 	}
 

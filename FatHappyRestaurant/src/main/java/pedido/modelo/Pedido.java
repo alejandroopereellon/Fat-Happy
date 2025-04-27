@@ -38,6 +38,9 @@ public class Pedido {
 	@Column(name = "descuento")
 	private int descuento;
 
+	@Column(name = "pedido_promocionado")
+	private boolean pedidoPromocionado = false;
+
 	/**
 	 * Este metodo cambia el estado del pedido:
 	 * 
@@ -130,6 +133,14 @@ public class Pedido {
 
 	public int getTiempoPedido() {
 		return tiempoPedido;
+	}
+
+	public boolean isPedidoPromocionado() {
+		return pedidoPromocionado;
+	}
+
+	public void setPedidoPromocionado(boolean pedidoPromocionado) {
+		this.pedidoPromocionado = pedidoPromocionado;
 	}
 
 }

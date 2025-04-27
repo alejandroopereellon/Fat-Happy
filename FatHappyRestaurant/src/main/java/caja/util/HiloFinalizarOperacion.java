@@ -3,6 +3,7 @@ package caja.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.singleton.ClasesEstaticas;
 import caja.modelo.Operacion;
 import pedido.dao.PedidoDao;
 import pedido.dao.PedidoDaoHibernateImpl;
@@ -56,6 +57,9 @@ public class HiloFinalizarOperacion extends Thread {
 
 		// Almacenamos los productos vendidos en la base de datos
 		almacenarProductosVendidos(operacion.getOperacion(), pedido.getOrden());
+
+		// Establecemos el contador del panel en 0
+		ClasesEstaticas.getPanelCaja().getTiempoPedido().setText("00:00");
 	}
 
 	/**
