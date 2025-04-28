@@ -277,17 +277,14 @@ public class MetodosInterfazCobro {
 		 * dinero exacto
 		 */
 		if (pedido.isPedidoPromocionado()) {
-			new CalcularImporte(pedido).obtenerImporteDescuento();
 			importeExacto();
 		}
 
-		/**
-		 * Tambien comprobamos si solo hay un unico articulo en la orden de pedido,
-		 * entonces se cobrará automaticamente
-		 */
-		if (pedido.getOrden().getListaMenus().size() + pedido.getOrden().getListaProductos().size() == 1) {
-			new CalcularImporte(pedido).obtenerImporteDescuento();
-		}
+		// Actualizamos la lista de productos para mostrar las promociones
+		interfaz.getListaProductosPedidos().updateUI();
+		
+		// Actualizamos el importe total nuevo
+		new CalcularImporte(pedido).obtenerImporteDescuento();
 	}
 
 	/**

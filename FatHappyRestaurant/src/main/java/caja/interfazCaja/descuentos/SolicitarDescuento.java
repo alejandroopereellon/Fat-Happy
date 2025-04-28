@@ -141,12 +141,12 @@ public class SolicitarDescuento extends javax.swing.JDialog {
     }//GEN-LAST:event_botonBorrarActionPerformed
 
     private void boton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton15ActionPerformed
-        cantidadDescuento = 20;
+        cantidadDescuento = 15;
         dispose();
     }//GEN-LAST:event_boton15ActionPerformed
 
     private void boton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton20ActionPerformed
-        cantidadDescuento = 30;
+        cantidadDescuento = 20;
         dispose();
     }//GEN-LAST:event_boton20ActionPerformed
 

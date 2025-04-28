@@ -49,7 +49,7 @@ public class MetodoPromocionMetodos {
 				// Obtenemos el elemento seleccionado
 				obtenerElementoSeleccionadoYPromocionar();
 			} else {
-				pedido.setPedidoPromocionado(true);
+				pedido.setPedidoPromocionado(!pedido.isPedidoPromocionado());
 				logger.debug("Se ha promocionado el pedido ");
 			}
 		}
@@ -60,11 +60,13 @@ public class MetodoPromocionMetodos {
 		if (posicionSeleccionada != -1) {
 			Object objetoSeleccionado = interfaz.getModeloLista().getElementAt(posicionSeleccionada);
 			if (objetoSeleccionado instanceof Producto) {
-				((Producto) objetoSeleccionado).setProductoPromocionado(true);
+				((Producto) objetoSeleccionado)
+						.setProductoPromocionado(!((Producto) objetoSeleccionado).isProductoPromocionado());
 			} else if (objetoSeleccionado instanceof MenuPedido) {
-				((MenuPedido) objetoSeleccionado).setMenuPromocionado(true);
+				((MenuPedido) objetoSeleccionado)
+						.setMenuPromocionado(!((MenuPedido) objetoSeleccionado).isMenuPromocionado());
 			}
-		}else {
+		} else {
 			new DialogoMostrarMensajeMetodos().mostrarMensaje("Debes seleccionar un articulo para promocionarlo");
 		}
 

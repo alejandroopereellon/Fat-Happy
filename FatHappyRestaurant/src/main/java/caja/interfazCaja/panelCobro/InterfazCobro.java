@@ -164,7 +164,7 @@ public class InterfazCobro extends javax.swing.JPanel {
         });
 
         importeExacto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        importeExacto.setText("<html>Importe<br>Exacto</html> ");
+        importeExacto.setText("<html>Importe<br>exacto</html> ");
         importeExacto.setToolTipText("");
         importeExacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -348,7 +348,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Importe&lt;br&gt;Exacto&lt;/html&gt; "/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Importe&lt;br&gt;exacto&lt;/html&gt; "/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
