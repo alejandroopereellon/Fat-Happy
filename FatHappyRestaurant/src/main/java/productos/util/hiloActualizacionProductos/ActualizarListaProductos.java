@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
+import auxiliares.singleton.ClasesEstaticas;
+import pedido.interfazPedido.PanelPedidoMetodos;
 import productos.dao.ProductosDAO;
 import productos.dao.ProductosDaoGlobal;
 
@@ -45,6 +48,14 @@ public class ActualizarListaProductos extends Thread {
 			LocalDateTime nueva = dao.obtenerUltimaActualizacionProductos();
 			if (nueva != null && nueva.isAfter(tiempo)) {
 				actualizarDatos();
+				if (ClasesEstaticas.getPanelPedido() != null) {
+					// Mostramos actualizado el menu de hamburguesa
+					new PanelPedidoMetodos(ClasesEstaticas.getPanelPedido()).mostrarHamburguesas();
+					logger.debug("Se esta mostrando el panel de hamburguesas actualizado");
+
+					// Mostramos un panel informando la actualizacion
+					new DialogoMostrarMensajeMetodos().mostrarMensaje("Se ha actualizado el inventario del sistema");
+				}
 			}
 
 			// Dormimos el proceso durante 5 segundos para temas de consumo de recursos

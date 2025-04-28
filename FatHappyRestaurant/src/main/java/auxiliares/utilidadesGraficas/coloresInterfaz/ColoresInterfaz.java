@@ -10,7 +10,9 @@ public class ColoresInterfaz {
 
 	// 🎨 Colores principales
 	public static final Color PRIMARIO_DORADO = new Color(0xD4AF37); // Dorado suave
-	public static Color SECUNDARIO_CHAMPAGNE = new Color(0xF5F5DC); // Champagne claro
+	public static Color SECUNDARIO_CHAMPAGNE = Color.decode("#fff7d4"); // Champagne claro
+	// public static Color SECUNDARIO_CHAMPAGNE = new Color(0xF5F5DC); // Champagne
+	// claro
 
 	// 🖋 Colores de texto
 	public static final Color TEXTO_MARRON_OSCURO = new Color(0x5D4037); // Marrón oscuro suave

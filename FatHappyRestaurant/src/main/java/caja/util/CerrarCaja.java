@@ -104,10 +104,10 @@ public class CerrarCaja {
 			ticket.linea();
 
 			// Mostramos los datos del restaurante, caja y empleado
-			ticket.izquierda("Restaurante ID: " + caja.getRestaurante());
+			ticket.izquierda("Restaurante ID: " + caja.getRestaurante().getIdRestaurante());
 			ticket.izquierda("Caja #: " + caja.getNumeroCaja());
 			ticket.izquierda("Sesion #: " + caja.getNumeroSesion());
-			ticket.izquierda("Empleado: " + caja.getEmpleado());
+			ticket.izquierda("Empleado: " + caja.getEmpleado().getIdRestauranteEmpleado());
 
 			ticket.linea();
 

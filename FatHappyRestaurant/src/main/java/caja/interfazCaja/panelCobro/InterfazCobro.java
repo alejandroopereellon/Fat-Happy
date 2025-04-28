@@ -1,8 +1,6 @@
 package caja.interfazCaja.panelCobro;
 
-import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.singleton.ClasesEstaticas;
-import auxiliares.utilidadesGraficas.PanelUtil;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -31,8 +29,6 @@ public class InterfazCobro extends javax.swing.JPanel {
         initComponents();
         //Actualizamos la pantalla para mostrar los valores iniciales
         metodo.actualizarPantalla();
-        // Hacemos desaparecer el boton de continuar
-        botonContinuar.setVisible(false);
     }
 
     /**
@@ -71,7 +67,10 @@ public class InterfazCobro extends javax.swing.JPanel {
         botonContinuar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         listaProductosPedidos = new javax.swing.JList<>();
-        importeExacto1 = new javax.swing.JButton();
+        botonEditarPedido = new javax.swing.JButton();
+        botonReintentarCobro = new javax.swing.JButton();
+        textoDescuento = new javax.swing.JLabel();
+        textoCantidadDescuento = new javax.swing.JLabel();
 
         setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
 
@@ -257,23 +256,38 @@ public class InterfazCobro extends javax.swing.JPanel {
 
         jScrollPane3.setBorder(null);
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 700));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 690));
 
-        listaProductosPedidos.setBorder(null);
+        listaProductosPedidos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         listaProductosPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         listaProductosPedidos.setModel(modeloLista);
         listaProductosPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaProductosPedidos.setCellRenderer(new ToStringRenderer<>());
         jScrollPane3.setViewportView(listaProductosPedidos);
 
-        importeExacto1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        importeExacto1.setText("Editar pedido");
-        importeExacto1.setToolTipText("");
-        importeExacto1.addActionListener(new java.awt.event.ActionListener() {
+        botonEditarPedido.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonEditarPedido.setText("Editar pedido");
+        botonEditarPedido.setToolTipText("");
+        botonEditarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                importeExacto1ActionPerformed(evt);
+                botonEditarPedidoActionPerformed(evt);
             }
         });
+
+        botonReintentarCobro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonReintentarCobro.setText("<html>Reintentar<br>cobro</html> ");
+        botonReintentarCobro.setToolTipText("");
+        botonReintentarCobro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReintentarCobroActionPerformed(evt);
+            }
+        });
+
+        textoDescuento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        textoDescuento.setText("DESCUENTO:");
+
+        textoCantidadDescuento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        textoCantidadDescuento.setText("Cantidad2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -291,12 +305,6 @@ public class InterfazCobro extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(botonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(boton0, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(botonCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(boton7, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(boton8, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,14 +320,24 @@ public class InterfazCobro extends javax.swing.JPanel {
                                     .addComponent(textoTotalPagar)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(textoCantidadTotalPagar)
-                                    .addGap(46, 46, 46)))
+                                    .addGap(46, 46, 46))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(botonReintentarCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(botonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(boton0, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(botonCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(botonEditarPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(importeExacto1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -339,7 +357,11 @@ public class InterfazCobro extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(importeExacto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(textoDescuento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textoCantidadDescuento)))
                 .addGap(106, 106, 106))
         );
         layout.setVerticalGroup(
@@ -353,7 +375,11 @@ public class InterfazCobro extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textoCantidadPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textoDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textoCantidadDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
@@ -396,9 +422,12 @@ public class InterfazCobro extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(importeExacto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(importeExacto1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(botonEditarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonReintentarCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -482,11 +511,13 @@ public class InterfazCobro extends javax.swing.JPanel {
         metodo.promocionarArticulo();
     }//GEN-LAST:event_botonPromoActionPerformed
 
-    private void importeExacto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importeExacto1ActionPerformed
-    // Añadimos el panel pedido al panel principal
-		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
-				ClasesEstaticas.getPanelPedido());
-    }//GEN-LAST:event_importeExacto1ActionPerformed
+    private void botonEditarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarPedidoActionPerformed
+        metodo.editarPedido();
+    }//GEN-LAST:event_botonEditarPedidoActionPerformed
+
+    private void botonReintentarCobroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReintentarCobroActionPerformed
+       metodo.reintentarCobro();
+    }//GEN-LAST:event_botonReintentarCobroActionPerformed
 
     public BigDecimal getCantidadPropuesta() {
         return cantidadPropuesta;
@@ -608,6 +639,23 @@ public class InterfazCobro extends javax.swing.JPanel {
         return listaProductosPedidos;
     }
 
+    public JButton getBotonEditarPedido() {
+        return botonEditarPedido;
+    }
+
+    public JButton getBotonVolverCobrar() {
+        return botonReintentarCobro;
+    }
+
+    public JLabel getTextoCantidadDescuento() {
+        return textoCantidadDescuento;
+    }
+
+    public JLabel getTextoDescuento() {
+        return textoDescuento;
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton0;
@@ -628,14 +676,17 @@ public class InterfazCobro extends javax.swing.JPanel {
     private javax.swing.JButton botonCobrar;
     private javax.swing.JButton botonContinuar;
     private javax.swing.JButton botonDesc;
+    private javax.swing.JButton botonEditarPedido;
     private javax.swing.JButton botonPromo;
+    private javax.swing.JButton botonReintentarCobro;
     private javax.swing.JButton importeExacto;
-    private javax.swing.JButton importeExacto1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<Object> listaProductosPedidos;
     private javax.swing.JLabel textoBilletes;
+    private javax.swing.JLabel textoCantidadDescuento;
     private javax.swing.JLabel textoCantidadPagado;
     private javax.swing.JLabel textoCantidadTotalPagar;
+    private javax.swing.JLabel textoDescuento;
     private javax.swing.JLabel textoPagado;
     private javax.swing.JLabel textoTotalPagar;
     // End of variables declaration//GEN-END:variables

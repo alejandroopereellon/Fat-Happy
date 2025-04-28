@@ -50,6 +50,7 @@ public class DialogoSolicitudNumeroDecimal extends javax.swing.JDialog {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         boton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         boton1.setText("1");
@@ -102,9 +103,14 @@ public class DialogoSolicitudNumeroDecimal extends javax.swing.JDialog {
         cuadroTexto.setEditable(false);
         cuadroTexto.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         cuadroTexto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cuadroTexto.setText("0,00");
+        cuadroTexto.setText("0.00");
         cuadroTexto.setToolTipText("");
         cuadroTexto.setBorder(null);
+        cuadroTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cuadroTextoActionPerformed(evt);
+            }
+        });
 
         boton7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         boton7.setText("7");
@@ -306,6 +312,10 @@ public class DialogoSolicitudNumeroDecimal extends javax.swing.JDialog {
     private void botonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCActionPerformed
         metodos.borrarTexto();
     }//GEN-LAST:event_botonCActionPerformed
+
+    private void cuadroTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuadroTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cuadroTextoActionPerformed
 
     public JTextField getCuadroTexto() {
         return cuadroTexto;

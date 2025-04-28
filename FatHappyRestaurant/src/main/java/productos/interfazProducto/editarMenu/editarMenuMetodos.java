@@ -74,6 +74,10 @@ public class editarMenuMetodos {
 		} else if (pro instanceof Postre) {
 			new PanelEdicionProductosMetodos(new PanelEdicionProductos((Postre) pro)).iniciarPanelEdicion();
 			logger.debug("Se esta editando el postre");
+		} else if (pro instanceof Bebida) {
+			((Bebida) pro).setExtraActivo(!((Bebida) pro).isExtraActivo());
+			logger.debug("Se ha modificado el extra {} a la bebida al estado {}", ((Bebida) pro).getNombreExtra(),
+					((Bebida) pro).isExtraActivo());
 		}
 	}
 
@@ -115,7 +119,7 @@ public class editarMenuMetodos {
 	 */
 	void actualizarBotonEdicion() {
 		interfaz.getBotonEditar().setEnabled(true);
-		if (obtenerSeleccion() instanceof Bebida || obtenerSeleccion() instanceof Complemento) {
+		if (obtenerSeleccion() instanceof Complemento) {
 			interfaz.getBotonEditar().setEnabled(false);
 		}
 	}

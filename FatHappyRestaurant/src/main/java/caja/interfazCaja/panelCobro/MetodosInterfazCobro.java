@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.metodosBigDecimal.OperacionesBigDecimal;
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.solicitarNumeroDecimal.GestionDecimales;
 import auxiliares.utilidadesGraficas.PanelUtil;
@@ -47,6 +48,10 @@ public class MetodosInterfazCobro {
 		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
 				interfaz);
 		pedido.setEstadoPedido(4);
+		logger.debug("Se ha iniciado la interfaz de la caja");
+		cambiarEstadoElementos(true);
+
+		mostrarDescuentoInterfaz();
 	}
 
 	/**
@@ -123,6 +128,7 @@ public class MetodosInterfazCobro {
 		// Comprobamos que hay permisos de cobros de mas de 100 euros
 		if (interfaz.getCantidadPropuesta().compareTo(new BigDecimal("100.00")) >= 0
 				&& !new ActividadEmpleados().solicitarPermisos("Cobro de mas de 100 euros", 2)) {
+			logger.info("No existen permisos suficientes para cobrar mas de 100 euros");
 			return;
 		}
 
@@ -133,16 +139,9 @@ public class MetodosInterfazCobro {
 
 		// Si el pendiente es negativo o 0 se va a generar la operacion de pago
 		if (cantidadRestante.compareTo(BigDecimal.ZERO) <= 0) {
-			// Realizamos las operaciones de cierre de pedido
-			new HiloFinalizarOperacion(ClasesEstaticas.getPedido()).start();
-
-			// Ponemos el pedido actual y el panel de pedido en nulo
-			ClasesEstaticas.setPanelPedido(null);
-			ClasesEstaticas.setPedido(null);
 
 			// Desactivamos los botones y mostramos el boton de continuar
 			cambiarEstadoElementos(false);
-			interfaz.getBotonContinuar().setVisible(true);
 
 			// Modificamos el texto pagado para mostrar la devolucion
 			interfaz.getTextoCantidadPagado().setText(cantidadRestante.setScale(2, RoundingMode.HALF_UP) + " €");
@@ -166,8 +165,16 @@ public class MetodosInterfazCobro {
 		descuento.setVisible(true);
 		int cantidadDescuento = descuento.getCantidadDescuento();
 
-		// Establecemos al pedido el nuevo descuento
-		pedido.setDescuento(cantidadDescuento);
+		// Si se aplica algun descuento se solicitan permisos
+		if (cantidadDescuento > 0
+				&& new ActividadEmpleados().solicitarPermisos("Aplicar descuento " + cantidadDescuento + "%", 2)) {
+			// Establecemos al pedido el nuevo descuento
+			pedido.setDescuento(cantidadDescuento);
+		} // Si no se aplican permisos o descuentos se pone a 0
+		else {
+			// Establecemos al pedido el nuevo descuento
+			pedido.setDescuento(0);
+		}
 
 		// Actualizamos el importe del pedido
 		new CalcularImporte(pedido).obtenerImporteDescuento();
@@ -175,7 +182,27 @@ public class MetodosInterfazCobro {
 		// Actualizamos la pantalla
 		actualizarPantalla();
 
+		// Mostramos el descuento en la interfaz
+		mostrarDescuentoInterfaz();
+
 		logger.info("Se ha aplicado un descuento del {} al pedido", pedido.getDescuento());
+
+	}
+
+	/**
+	 * Metodo que dependiendo del porcentaje de descuento muestra u oculta el texto
+	 * informativo de la cantidad de descuento que se va a aplicar en el pedido
+	 */
+	private void mostrarDescuentoInterfaz() {
+		// Ocultamos el texto del descuento
+		if (pedido.getDescuento() > 0) {
+			interfaz.getTextoDescuento().setVisible(true);
+			interfaz.getTextoCantidadDescuento().setVisible(true);
+			interfaz.getTextoCantidadDescuento().setText(pedido.getDescuento() + " %");
+		} else {
+			interfaz.getTextoDescuento().setVisible(false);
+			interfaz.getTextoCantidadDescuento().setVisible(false);
+		}
 	}
 
 	/**
@@ -221,14 +248,22 @@ public class MetodosInterfazCobro {
 		interfaz.getBotonDesc().setEnabled(estado);
 		interfaz.getBotonPromo().setEnabled(estado);
 		interfaz.getImporteExacto().setEnabled(estado);
+		interfaz.getBotonEditarPedido().setEnabled(estado);
+
+		interfaz.getBotonContinuar().setVisible(!estado);
+		interfaz.getBotonVolverCobrar().setVisible(!estado);
 
 		logger.info("Se ha establecido el estado de los botones de la interfaz a {}", estado);
 	}
 
 	protected void continuar() {
-		// Eliminamos el pedido
+		// Realizamos las operaciones de cierre de pedido
+		new HiloFinalizarOperacion(ClasesEstaticas.getPedido()).start();
+
+		// Ponemos el pedido actual y el panel de pedido en nulo
+		ClasesEstaticas.setPanelPedido(null);
 		ClasesEstaticas.setPedido(null);
-		// Establecemos un nuevo panel de pedido
+		// Establecemos un nuevo panel de pedido y lo mostramos
 		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
 				.configurarPanelPrincipal();
 	}
@@ -247,12 +282,55 @@ public class MetodosInterfazCobro {
 		}
 
 		/**
-		 * Tambien comprobamos si solo hay un unico articulo en la orden de pedido, entonces se cobrará automaticamente
+		 * Tambien comprobamos si solo hay un unico articulo en la orden de pedido,
+		 * entonces se cobrará automaticamente
 		 */
 		if (pedido.getOrden().getListaMenus().size() + pedido.getOrden().getListaProductos().size() == 1) {
 			new CalcularImporte(pedido).obtenerImporteDescuento();
-			importeExacto();
 		}
+	}
+
+	/**
+	 * Metodo que permite volver atras en el cobro del {@link Pedido} y poder volver
+	 * a cobrar de manera diferente el {@link Pedido}
+	 */
+	protected void reintentarCobro() {
+		if (new ActividadEmpleados().solicitarPermisos("Reintentar cobro", 2)) {
+			// Volvemos a calcular el importe
+			new CalcularImporte(pedido).obtenerImporteDescuento();
+			// Establecemos la cantidad propuesta en 0
+			interfaz.setCantidadPropuesta(BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP));
+			// Establecemos el pendiente en el total a pagar
+			interfaz.getTextoCantidadTotalPagar()
+					.setText(pedido.getImporteTotal().setScale(2, RoundingMode.HALF_UP) + " €");
+
+			// Modificamos el texto pagado para mostrar la devolucion
+			interfaz.getTextoPagado().setText("PAGADO");
+			interfaz.getTextoCantidadPagado().setForeground(Color.black);
+
+			// Actualizamos la pantalla
+			actualizarPantalla();
+
+			// Mostramos los botones disponibles de nuevo y ocultamos los de continuar y
+			// reintentar cobro
+			cambiarEstadoElementos(true);
+		} else {
+			logger.debug("No existen permisos suficientes para reintentar el cobro");
+			new DialogoMostrarMensajeMetodos()
+					.mostrarMensaje("No existen permisos suficientes para reintentar el cobro");
+		}
+
+	}
+
+	/**
+	 * Metodo que vuelve al menu de edicion del pedido
+	 */
+	protected void editarPedido() {
+		// Añadimos el panel pedido al panel principal
+		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
+				ClasesEstaticas.getPanelPedido());
+		// Ponemos el pedido en modo de edicion
+		pedido.setEstadoPedido(2);
 	}
 
 }

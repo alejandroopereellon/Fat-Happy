@@ -114,7 +114,6 @@ public class PanelPedido extends javax.swing.JPanel {
         panelSeleccionTipoProductoLayout.setHorizontalGroup(
             panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSeleccionTipoProductoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(Hamburguesas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Complementos, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,8 +122,7 @@ public class PanelPedido extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(Postres, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(listaCompleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(listaCompleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelSeleccionTipoProductoLayout.setVerticalGroup(
             panelSeleccionTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,8 +219,7 @@ public class PanelPedido extends javax.swing.JPanel {
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setPreferredSize(new java.awt.Dimension(250, 700));
 
-        listaProductosPedidos.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
-        listaProductosPedidos.setBorder(null);
+        listaProductosPedidos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         listaProductosPedidos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         listaProductosPedidos.setModel(modeloLista);
         listaProductosPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

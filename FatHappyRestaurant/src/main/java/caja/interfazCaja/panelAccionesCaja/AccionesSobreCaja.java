@@ -1,5 +1,6 @@
 package caja.interfazCaja.panelAccionesCaja;
 
+import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import empleados.util.ActividadEmpleados;
 import javax.swing.JButton;
 
@@ -43,7 +44,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1366, 550));
 
-        panelPrincipal.setBackground(new java.awt.Color(244, 241, 226));
+        panelPrincipal.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
         panelPrincipal.setPreferredSize(new java.awt.Dimension(1366, 550));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N

@@ -52,6 +52,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         tituloVentana.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tituloVentana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

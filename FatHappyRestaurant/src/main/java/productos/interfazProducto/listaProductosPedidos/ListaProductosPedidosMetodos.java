@@ -1,5 +1,7 @@
 package productos.interfazProducto.listaProductosPedidos;
 
+import java.util.ArrayList;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,10 +12,12 @@ import productos.interfazProducto.editarMenu.editarMenuMetodos;
 import productos.interfazProducto.personalizarPedido.edicionProducto.PanelEdicionProductos;
 import productos.interfazProducto.personalizarPedido.edicionProducto.PanelEdicionProductosMetodos;
 import productos.modelo.Bebida;
+import productos.modelo.Complemento;
 import productos.modelo.Hamburguesa;
 import productos.modelo.MenuPedido;
 import productos.modelo.Postre;
 import productos.modelo.Producto;
+import productos.modelo.Salsa;
 
 /**
  * Clase que maneja el modelo de la lista para poder ver y manipular los
@@ -73,6 +77,11 @@ public class ListaProductosPedidosMetodos {
 			((Bebida) obj).setExtraActivo(!((Bebida) obj).isExtraActivo());
 			logger.debug("Se ha modificado el extra {} a la bebida al estado {}", ((Bebida) obj).getNombreExtra(),
 					((Bebida) obj).isExtraActivo());
+			actualizarLista();
+		} else if (obj instanceof Complemento) {
+			((Complemento) obj).setSalsas(new ArrayList<Salsa>());
+			logger.debug("Se ha vaciado la lista de salsas al complemento {}", ((Complemento) obj).getNombreProducto());
+			actualizarLista();
 		}
 	}
 

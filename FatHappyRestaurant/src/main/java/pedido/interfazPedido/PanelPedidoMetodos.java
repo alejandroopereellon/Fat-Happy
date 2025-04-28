@@ -57,7 +57,7 @@ public class PanelPedidoMetodos {
 		interfaz.getPanelFiltros().setLayout(new FlowLayout());
 	}
 
-	protected void mostrarHamburguesas() {
+	public void mostrarHamburguesas() {
 		vaciarPanelesCategorias();
 
 		// Anadimos el panel de filtros
