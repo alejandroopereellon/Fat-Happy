@@ -10,6 +10,7 @@ import productos.dao.ProductosDaoGlobal;
 import productos.dao.ProductosDaoHibernateImpl;
 import productos.util.hiloActualizacionProductos.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
+import socket.util.HiloComprobacionConexionSocket;
 import ventanaPrincipal.InterfazVentanaPrincipal;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
@@ -64,6 +65,12 @@ public class InicioAplicacion {
 			return false;
 		}
 		grafica.getBarraProgreso().setValue(40);
+
+		// Establecemos la conexion al socket
+		grafica.getEstadoInicio().setText("Conectando al servidor");
+		new HiloComprobacionConexionSocket().start();
+		logger.info("Se ha iniciado el hilo de conexion al socket");
+		grafica.getBarraProgreso().setValue(50);
 
 		// Establecemos el dao
 		grafica.getEstadoInicio().setText("Estableciendo la obtencion de datos");

@@ -2,7 +2,7 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mariadb://79.116.186.62:3306/restaurante2</property>
+		<property name="hibernate.connection.url">jdbc:mariadb://79.116.84.38:3306/restaurante2</property>
 		<property name="hibernate.connection.username">restaurante_user</property>
 		<property name="hibernate.connection.password">7PeuAQgx</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>

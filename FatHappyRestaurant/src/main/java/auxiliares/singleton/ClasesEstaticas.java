@@ -12,6 +12,7 @@ import pedido.util.PedidoBuilder;
 import productos.modelo.ListaProductos;
 import productos.modelo.Producto;
 import restaurante.modelo.Restaurante;
+import socket.modelo.SocketCliente;
 
 public class ClasesEstaticas {
 
@@ -35,6 +36,9 @@ public class ClasesEstaticas {
 
 	// Dato estatico que mantiene en memoria el panel de la caja
 	private static PanelCaja panelCaja;
+
+	// Daot estatico que mantiene en memoria el socket del sevidor
+	private static SocketCliente socket;
 
 	/**
 	 * Guarda el pedido actual en memoria.
@@ -199,6 +203,14 @@ public class ClasesEstaticas {
 
 	public static void setPanelCaja(PanelCaja panel) {
 		panelCaja = panel;
+	}
+
+	public static SocketCliente getSocket() {
+		return socket;
+	}
+
+	public static void setSocket(SocketCliente socket) {
+		ClasesEstaticas.socket = socket;
 	}
 
 }
