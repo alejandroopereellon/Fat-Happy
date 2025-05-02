@@ -1,7 +1,5 @@
 package socket.util;
 
-import java.io.IOException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,58 +31,36 @@ public class HiloComprobacionConexionSocket extends Thread {
 		logger.info("Se ha iniciado el hilo de conexion al servidor");
 
 		// Iniciamos la conexion al socket
+		new ConectarAlServidor().crearConexion();
 
-		if (new ConectarAlServidor().crearConexion()) {
-			while (true) {
-				if (ClasesEstaticas.getSocket() == null || conexion.comprobar()) {
+		while (true) {
+			if (ClasesEstaticas.getSocket() == null || conexion.comprobar()) {
+
+				// Si el socket es diferente de null se cierra
+				if (ClasesEstaticas.getSocket() != null) {
+					logger.debug("El socket se ha quedado sin conexion, se van a limpiar todos los datos");
 					// Cerramos el recurso de la clases estaticas
-					cerrarRecursosSocket();
-
-					// Creamos el nuevo socket
-					logger.warn("El socket se ha desconectado, se vuelve a realizar la conexion");
-					new ConectarAlServidor().crearConexion();
-
-					// Alertamos al usuario si llevamos un multiplo de 5 intentos
-					alertarUsuario();
+					new CerrarConexionSocket().cerrar(ClasesEstaticas.getSocket());
 				}
 
-				// Esperamos 5 segundos y volvemos a comprobar el estado del socket
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					Thread.currentThread().interrupt();
-					logger.error("Ha ocurrido un error al realizar la espera del hilo de conexion al servidor");
-				}
+				// Creamos el nuevo socket
+				new ConectarAlServidor().crearConexion();
 
+				// Alertamos al usuario si llevamos un multiplo de 5 intentos
+				alertarUsuario();
 			}
-		} else {
-			logger.error(
-					"Ha ocurrido un error en la conexion al socket y no se ha iniciado el hilo de comprobacion de conexion");
-			new DialogoMostrarMensajeMetodos().mostrarMensaje(
-					"Ha ocurrido un error en la conexion al socket y no se ha iniciado el hilo de comprobacion de conexion");
+
+			// Esperamos 5 segundos y volvemos a comprobar el estado del socket
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				logger.error("Ha ocurrido un error al realizar la espera del hilo de conexion al servidor", e);
+				this.interrupt();
+				logger.debug("Se ha interrumpido el hilo por seguridad");
+				break;
+			}
 		}
-
-	}
-
-	/**
-	 * Metodo que se inicia cuando ocurre un error cerrando los recursos del socket
-	 * y borrando el socket de la {@link ClasesEstaticas}
-	 */
-	private void cerrarRecursosSocket() {
-
-		try {
-			ClasesEstaticas.getSocket().getSocketCliente().close();
-			logger.debug("Se ha cerrado el socket de la clase estatica");
-			ClasesEstaticas.getSocket().getInput().close();
-			logger.debug("Se ha cerrado el input de la clase estatica");
-			ClasesEstaticas.getSocket().getOutput().close();
-			logger.debug("Se ha cerrado el output de la clase estatica");
-		} catch (IOException e) {
-			logger.error("Ha ocurrido un error al cerrar los datos de la clase estatica", e);
-		}
-
-		ClasesEstaticas.setSocket(null);
-		logger.debug("Se ha puesto en estado null el socket de la clase estatica");
 	}
 
 	/**

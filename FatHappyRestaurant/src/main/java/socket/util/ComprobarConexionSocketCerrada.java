@@ -21,7 +21,7 @@ public class ComprobarConexionSocketCerrada {
 	public boolean comprobar() {
 		Socket so = ClasesEstaticas.getSocket().getSocketCliente();
 
-		if (so.isClosed() || !so.isConnected() || so.isInputShutdown()) {
+		if (so == null || so.isClosed() || !so.isConnected() || so.isInputShutdown() || so.isOutputShutdown()) {
 			// Cerramos la conexion del socket
 			new CerrarConexionSocket().cerrar(ClasesEstaticas.getSocket());
 			// Retornamos el true

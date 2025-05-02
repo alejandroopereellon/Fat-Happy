@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import socket.util.CerrarConexionSocket;
-import socket.util.EnviarRecibirObjetos;
 
 /**
  * Clase que almacena el {@link Socket} de cliente y los
@@ -19,11 +18,9 @@ import socket.util.EnviarRecibirObjetos;
  * 
  * @author Alejandro Perellón López
  */
-public class SocketCliente implements Serializable {
+public class SocketCliente {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(SocketCliente.class);
-
-	private static final long serialVersionUID = 1L;
 
 	private Socket socketCliente;
 
