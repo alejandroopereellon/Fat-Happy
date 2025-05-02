@@ -22,26 +22,25 @@ public class PedidoSocket implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unused")
-	private int numeroRestaurante = ClasesEstaticas.getRestaurante().getIdRestaurante();
+	private final int numeroRestaurante = ClasesEstaticas.getRestaurante().getIdRestaurante();
 
-	@SuppressWarnings("unused")
-	private int numeroCaja = ClasesEstaticas.getCaja().getNumeroCaja();
+	private final int numeroCaja = ClasesEstaticas.getCaja().getNumeroCaja();
 
-	private int numeroPedido = ClasesEstaticas.getPedido().getNumeroPedido();
+	private final int numeroPedido = ClasesEstaticas.getPedido().getNumeroPedido();
 
 	/**
 	 * -1 LLEVAR 0 TOMAR SIN MESA !0 LLevar a mesa al numer indicado
 	 */
-	@SuppressWarnings("unused")
 	private int estadoEntrega = 0;
 
 	private List<Producto> listaProductos = new ArrayList<Producto>();
 
+	// Constructor
 	public PedidoSocket(int estadoEntrega) {
 		this.estadoEntrega = estadoEntrega;
 	}
 
+	// Getter && setters
 	/**
 	 * Retornamos la lista de producos para poder insertar los nuevos productos
 	 * necesarios
@@ -54,6 +53,28 @@ public class PedidoSocket implements Serializable {
 
 	public int getNumeroPedido() {
 		return numeroPedido;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public int getNumeroRestaurante() {
+		return numeroRestaurante;
+	}
+
+	public int getNumeroCaja() {
+		return numeroCaja;
+	}
+
+	public int getEstadoEntrega() {
+		return estadoEntrega;
+	}
+
+	@Override
+	public String toString() {
+		return "PedidoSocket [numeroRestaurante=" + numeroRestaurante + ", numeroCaja=" + numeroCaja + ", numeroPedido="
+				+ numeroPedido + "]";
 	}
 
 }

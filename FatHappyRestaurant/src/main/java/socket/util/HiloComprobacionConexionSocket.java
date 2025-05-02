@@ -18,6 +18,8 @@ public class HiloComprobacionConexionSocket extends Thread {
 
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(HiloComprobacionConexionSocket.class);
+	// Creamos el comprobador del socket
+	static final ComprobarConexionSocketCerrada conexion = new ComprobarConexionSocketCerrada();
 
 	private int numeroIntentos = 0;
 
@@ -32,15 +34,15 @@ public class HiloComprobacionConexionSocket extends Thread {
 
 		// Iniciamos la conexion al socket
 
-		if (new ConectarSocket().crearConexion()) {
-			while (!Thread.interrupted()) {
-				if (new ComprobarConexionSocketCerrada().comprobarConexionSocketCerrada()) {
+		if (new ConectarAlServidor().crearConexion()) {
+			while (true) {
+				if (ClasesEstaticas.getSocket() == null || conexion.comprobar()) {
 					// Cerramos el recurso de la clases estaticas
 					cerrarRecursosSocket();
 
 					// Creamos el nuevo socket
 					logger.warn("El socket se ha desconectado, se vuelve a realizar la conexion");
-					new ConectarSocket().crearConexion();
+					new ConectarAlServidor().crearConexion();
 
 					// Alertamos al usuario si llevamos un multiplo de 5 intentos
 					alertarUsuario();
