@@ -26,17 +26,17 @@ public class PedidoSocket implements Serializable {
 
 	private final int numeroCaja = ClasesEstaticas.getCaja().getNumeroCaja();
 
-	private final int numeroPedido = ClasesEstaticas.getPedido().getNumeroPedido();
+	private final int numeroPedido;
 
 	/**
 	 * -1 LLEVAR 0 TOMAR SIN MESA !0 LLevar a mesa al numer indicado
 	 */
-	private int estadoEntrega = 0;
+	private final int estadoEntrega;
 
-	private List<Producto> listaProductos = new ArrayList<Producto>();
+	private final List<Producto> listaProductos = new ArrayList<Producto>();
 
-	// Constructor
-	public PedidoSocket(int estadoEntrega) {
+	public PedidoSocket(int numeroPedido, int estadoEntrega) {
+		this.numeroPedido = numeroPedido;
 		this.estadoEntrega = estadoEntrega;
 	}
 

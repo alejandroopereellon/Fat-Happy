@@ -21,7 +21,7 @@ public class Complemento extends Producto {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3556051122005475200L;
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "tamano", nullable = true)
 	private int tamano;

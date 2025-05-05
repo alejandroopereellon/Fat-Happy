@@ -15,11 +15,7 @@ import jakarta.persistence.*;
 @Table(name = "hamburguesas")
 @PrimaryKeyJoinColumn(name = "codigo")
 public class Hamburguesa extends Producto {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5792154736849070272L;
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "opcionMenu")
 	private boolean opcionMenu;
@@ -97,8 +93,8 @@ public class Hamburguesa extends Producto {
 		StringBuilder texto = new StringBuilder();
 
 		texto.append(this.getNombreProducto());
-		texto.append("("+this.getPrecioVenta()+ " Eur)");
-		
+		texto.append("(" + this.getPrecioVenta() + " Eur)");
+
 		if (this.isProductoPromocionado()) {
 			texto.append(System.lineSeparator());
 			texto.append("Promocionado");

@@ -18,7 +18,7 @@ public class Postre extends Producto {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8161558963465451979L;
+	private static final long serialVersionUID = 1L;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "postre_ingredientes", joinColumns = @JoinColumn(name = "codigo_postre"), inverseJoinColumns = @JoinColumn(name = "codigo_ingrediente"))

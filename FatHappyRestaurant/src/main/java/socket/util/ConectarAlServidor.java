@@ -49,7 +49,8 @@ public class ConectarAlServidor {
 
 				// Enviamos los datos del rol al cliente
 				new EnviarRecibirObjetos()
-						.EnviarObjetos(new RolSocket(ClasesEstaticas.getRestaurante().getIdRestaurante(), 0));
+						.EnviarObjetos(new RolSocket(ClasesEstaticas.getRestaurante().getIdRestaurante(), 0 /** Caja **/
+						));
 				logger.info("Se ha establecido la conexion con el servidor");
 
 				logger.debug("Se ha establecido en el singleton el socketCliente {}", socketCliente);

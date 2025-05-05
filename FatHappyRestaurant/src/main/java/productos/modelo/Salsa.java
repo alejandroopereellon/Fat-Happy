@@ -8,11 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "salsas")
 @PrimaryKeyJoinColumn(name = "codigo")
 public class Salsa extends Producto {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3467903908490343597L;
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "nivel_picante")
 	private int nivelPicante;

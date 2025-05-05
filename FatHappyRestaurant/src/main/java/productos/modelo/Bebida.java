@@ -20,7 +20,7 @@ public class Bebida extends Producto {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2782110912587635477L;
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "nombre_extra")
 	private String nombreExtra;

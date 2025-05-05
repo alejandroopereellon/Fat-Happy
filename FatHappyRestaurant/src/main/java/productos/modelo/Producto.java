@@ -23,10 +23,7 @@ import jakarta.persistence.Transient;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "productos")
 public class Producto implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1170377486509864736L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "codigo")

@@ -24,7 +24,7 @@ public class Ingrediente implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6963124789621050534L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

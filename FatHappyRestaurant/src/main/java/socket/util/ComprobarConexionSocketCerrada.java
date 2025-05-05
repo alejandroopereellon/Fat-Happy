@@ -21,12 +21,21 @@ public class ComprobarConexionSocketCerrada {
 	public boolean comprobar() {
 		Socket so = ClasesEstaticas.getSocket().getSocketCliente();
 
-		if (so == null || so.isClosed() || !so.isConnected() || so.isInputShutdown() || so.isOutputShutdown()) {
+		try {
+			if (so == null || so.isClosed() || !so.isConnected() || so.isInputShutdown() || so.isOutputShutdown()) {
+				// Cerramos la conexion del socket
+				new CerrarConexionSocket().cerrar(ClasesEstaticas.getSocket());
+				// Retornamos el true
+				return true;
+			}
+		} catch (Exception e) {
+			logger.error("Ha ocurrido un error al comprobar si el cliente esta conectado, se va a cerrar el socket", e);
+
 			// Cerramos la conexion del socket
 			new CerrarConexionSocket().cerrar(ClasesEstaticas.getSocket());
-			// Retornamos el true
-			return true;
 		}
+
+		logger.debug("Se va a retornar false en la comprobacion del estado de la conexion");
 		return false;
 	}
 }

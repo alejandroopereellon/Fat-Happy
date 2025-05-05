@@ -16,6 +16,12 @@ import productos.modelo.MenuPedido;
 import productos.modelo.Producto;
 import productos.modelo.ProductoVendido;
 import productos.util.ProcesarProductoVendido;
+import socket.modelo.PedidoSocket;
+import socket.util.CerrarConexionSocket;
+import socket.util.ComprobarConexionSocketCerrada;
+import socket.util.ConectarAlServidor;
+import socket.util.EnviarRecibirObjetos;
+import socket.util.PedidoSocketBuilder;
 
 /**
  * Clase que maneja un hilo que realiza las operaciones necesarias tras el cobro
@@ -60,6 +66,31 @@ public class HiloFinalizarOperacion extends Thread {
 
 		// Establecemos el contador del panel en 0
 		ClasesEstaticas.getPanelCaja().getTiempoPedido().setText("00:00");
+
+		// Enviamos el pedido al servidor
+		enviarPedidoServidor();
+	}
+
+	/**
+	 * Metodo encargado de realizar las comprobaciones necesarias y enviar el pedido
+	 * al sevidor
+	 */
+	private void enviarPedidoServidor() {
+		// 1.Comprobamos si el servidor esta activo y enviamos el pedido
+		if (new ComprobarConexionSocketCerrada().comprobar()) {
+			logger.debug("La conexion al servidor ha fallado, se vuelve a intentarlo");
+			// Cerramos la conexion al servidor, iniciamos
+			new CerrarConexionSocket().cerrar(ClasesEstaticas.getSocket());
+
+			// Iniciamos la conexion al socket
+			new ConectarAlServidor().crearConexion();
+		}
+		// Creamos el pedido para el servidor
+		PedidoSocket pedidoEnviarServidor = new PedidoSocketBuilder().crearPedido(pedido);
+		;
+		// Enviamos el objeto al servidor
+		new EnviarRecibirObjetos().EnviarObjetos(pedidoEnviarServidor);
+
 	}
 
 	/**

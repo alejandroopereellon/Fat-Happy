@@ -42,7 +42,6 @@ public class CerrarConexionSocket {
 		// Establecemos el output en null
 		try {
 			logger.debug("Se va a cerrar el output del cliente");
-			cliente.getOutput().close();
 			// Comprobamos si el output es nulo
 			if (cliente.getOutput() != null) {
 				cliente.getOutput().close();
@@ -63,7 +62,7 @@ public class CerrarConexionSocket {
 			ClasesEstaticas.setSocket(null);
 			logger.debug("Se ha cerrado el socket del cliente");
 		} catch (IOException e) {
-			logger.error("Ha ocurrido un error al cerrar el socket del cliente");
+			logger.error("Ha ocurrido un error al cerrar el socket del cliente", e);
 			bandera = false;
 		}
 
