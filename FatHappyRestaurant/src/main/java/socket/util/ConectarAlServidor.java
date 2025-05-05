@@ -9,8 +9,6 @@ import java.net.UnknownHostException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.singleton.ClasesEstaticas;
-import socket.modelo.RolSocket;
 import socket.modelo.SocketCliente;
 
 /**
@@ -25,8 +23,10 @@ public class ConectarAlServidor {
 	static Logger logger = LogManager.getLogger(ConectarAlServidor.class);
 
 	public boolean crearConexion() {
+
+		// Si NO existe conexion al servidor establecemos una nueva conexion
 		logger.info("Se va a establecer una conexion socket al servidor");
-		// Establecemos el socket
+		// Creamos el socket
 		Socket cliente = new Socket();
 
 		// Configuramos el socket
@@ -38,22 +38,10 @@ public class ConectarAlServidor {
 					cliente.getPort());
 
 			if (cliente.isConnected()) {
-
 				// Creamos el objeto socketCliente
-				SocketCliente socketCliente = new SocketCliente(cliente);
+				new SocketCliente(cliente);
 				logger.debug("Se ha establecido el socket del cliente {}", cliente);
-
-				// Anadimos a la clase singleton el socket
-				ClasesEstaticas.setSocket(socketCliente);
-				logger.debug("Se ha establecido el socket del cliente en la clase estatica");
-
-				// Enviamos los datos del rol al cliente
-				new EnviarRecibirObjetos()
-						.EnviarObjetos(new RolSocket(ClasesEstaticas.getRestaurante().getIdRestaurante(), 0 /** Caja **/
-						));
 				logger.info("Se ha establecido la conexion con el servidor");
-
-				logger.debug("Se ha establecido en el singleton el socketCliente {}", socketCliente);
 				return true;
 			}
 		} catch (SocketTimeoutException e) {

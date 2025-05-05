@@ -10,7 +10,7 @@ import productos.dao.ProductosDaoGlobal;
 import productos.dao.ProductosDaoHibernateImpl;
 import productos.util.hiloActualizacionProductos.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
-import socket.util.HiloComprobacionConexionSocket;
+import socket.util.ConectarAlServidor;
 import ventanaPrincipal.InterfazVentanaPrincipal;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
@@ -68,7 +68,10 @@ public class InicioAplicacion {
 
 		// Establecemos la conexion al socket
 		grafica.getEstadoInicio().setText("Conectando al servidor");
-		new HiloComprobacionConexionSocket().start();
+		// new HiloComprobacionConexionSocket().start();
+		if (new ConectarAlServidor().crearConexion()) {
+			logger.debug("Se ha realizado la conexion al servidor");
+		}
 		logger.info("Se ha iniciado el hilo de conexion al socket");
 		grafica.getBarraProgreso().setValue(50);
 
@@ -98,7 +101,7 @@ public class InicioAplicacion {
 		grafica.getBarraProgreso().setValue(80);
 
 		// Iniciamos el hilo de actualizacion automatica del stock
-		//actualizarProductos.start();
+		// actualizarProductos.start();
 		grafica.getBarraProgreso().setValue(85);
 
 		// Iniciamos la ventana principal del programa

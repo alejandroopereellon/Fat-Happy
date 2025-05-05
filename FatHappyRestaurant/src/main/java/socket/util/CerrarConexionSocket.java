@@ -17,11 +17,31 @@ public class CerrarConexionSocket {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(EnviarRecibirObjetos.class);
 
-	public boolean cerrar(SocketCliente cliente) {
+	public boolean cerrar() {
+
+		SocketCliente cliente = ClasesEstaticas.getSocket();
+
 		boolean bandera = true;
 
+		// Comprobamos si el socket es nulo
 		if (ClasesEstaticas.getSocket() == null) {
 			return true;
+		}
+
+		// Paramos el hilo
+		logger.debug("Se va a cerrar el hilo de recepcion de mensajes");
+		cliente.getRecibirMensajes().interrupt();
+		try {
+			// Espera como mucho 2 segundos
+			cliente.getRecibirMensajes().join(2000);
+			cliente.getSocketCliente().close();
+
+			// Cerramos la tarea de comprobacion de ping
+			ClasesEstaticas.getSocket().stopTasks();
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt(); // vuelve a marcarse como interrumpido
+		} catch (IOException e) {
+			logger.error("Se ha interrumpido la ejecucion del hilo de recepcion de objetos (ERROR CONTEMPLADO)");
 		}
 
 		// Establecemos el input en null

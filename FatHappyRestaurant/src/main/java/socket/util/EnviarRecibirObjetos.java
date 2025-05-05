@@ -22,75 +22,64 @@ import socket.modelo.PedidoSocket;
 public class EnviarRecibirObjetos {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(EnviarRecibirObjetos.class);
-	static final ComprobarConexionSocketCerrada conexion = new ComprobarConexionSocketCerrada();
 	static final CerrarConexionSocket cerrar = new CerrarConexionSocket();
 
 	public boolean EnviarObjetos(Object objeto) {
 		// Comprobamos si la conexion no esta cerrada
-		if (!conexion.comprobar()) {
-			logger.debug("Se va a enviar el objeto {}", objeto);
+		logger.debug("Se va a enviar el objeto {}", objeto);
 
-			try {
-				ClasesEstaticas.getSocket().getOutput().writeObject(objeto);
-				ClasesEstaticas.getSocket().getOutput().flush();
-				logger.debug("Se ha enviado el objeto al servidor");
-				return true;
-			} catch (NotSerializableException e) {
-				logger.error("El objeto enviado no es serializable");
-			} catch (SocketTimeoutException e) {
-				logger.error("El servidor no responde: Se ha agotado el tiempo de conexion al sevidor", e);
-			} catch (SocketException e) {
-				logger.error("Conexión interrumpida: {}", e.toString());
-				cerrarConexion();
-			} catch (IOException e) {
-				logger.error("No se ha podido enviar el objeto {} al servidor", objeto, e);
-			}
-		} else {
-			logger.error("No existe una conexion con el servidor");
+		try {
+			ClasesEstaticas.getSocket().getOutput().writeObject(objeto);
+			ClasesEstaticas.getSocket().getOutput().flush();
+			logger.debug("Se ha enviado el objeto al servidor");
+			return true;
+		} catch (NotSerializableException e) {
+			logger.error("El objeto enviado no es serializable");
+		} catch (SocketTimeoutException e) {
+			logger.error("El servidor no responde: Se ha agotado el tiempo de conexion al sevidor", e);
+		} catch (SocketException e) {
+			logger.error("Conexión interrumpida: {}", e.toString());
+			cerrarConexion();
+		} catch (IOException e) {
+			logger.error("No se ha podido enviar el objeto {} al servidor", objeto, e);
+			cerrarConexion();
 		}
-
 		return false;
 	}
 
-	public Object RecibirObjetos() {
+	public void RecibirObjetos() {
 		// Comprobamos si la conexion no esta cerrada
-		if (!conexion.comprobar()) {
-			logger.debug("Se va a recibir el pedido");
+		logger.debug("Se va a recibir el pedido");
 
-			// Creamos el objeto vacio
-			Object objeto = null;
+		// Creamos el objeto vacio
+		Object objeto = null;
 
-			try {
-				objeto = ClasesEstaticas.getSocket().getInput().readObject();
-				logger.debug("Se ha recibido el objeto desde el servidor");
-				return objeto;
-			} catch (NotSerializableException e) {
-				logger.error("El objeto recibido no es serializable", e);
-			} catch (EOFException e) {
-				logger.error("Ha ocurrido un error final inesperado de datos", e);
-			} catch (SocketTimeoutException e) {
-				logger.error("El servidor no responde: Se ha agotado el tiempo de conexion al sevidor", e);
-			} catch (StreamCorruptedException e) {
-				logger.error("El objeto desSerializado esta corrupto", e);
-				cerrarConexion();
-			} catch (SocketException e) {
-				logger.error("Conexión interrumpida: {}", e.toString());
-				cerrarConexion();
-			} catch (IOException e) {
-				logger.error("Error leyendo objeto desde el servidor", e);
-			} catch (ClassNotFoundException e) {
-				logger.error(
-						"El objeto serializado no existe, considera actualizar la version del cliente/servidor para tener las mismas clases",
-						e);
-			}
-		} else {
-			logger.error("No existe una conexion con el servidor");
+		try {
+			objeto = ClasesEstaticas.getSocket().getInput().readObject();
+			logger.debug("Se ha recibido el objeto desde el servidor");
+			new ProcesarObjetos().procesar(objeto);
+		} catch (NotSerializableException e) {
+			logger.error("El objeto recibido no es serializable", e);
+		} catch (EOFException e) {
+			logger.error("Ha ocurrido un error final inesperado de datos", e);
+		} catch (SocketTimeoutException e) {
+			logger.error("El servidor no responde: Se ha agotado el tiempo de conexion al sevidor", e);
+		} catch (StreamCorruptedException e) {
+			logger.error("El objeto desSerializado esta corrupto", e);
+			cerrarConexion();
+		} catch (SocketException e) {
+			logger.error("Conexión interrumpida: {}", e.toString());
+			cerrarConexion();
+		} catch (IOException e) {
+			logger.error("Error leyendo objeto desde el servidor", e);
+		} catch (ClassNotFoundException e) {
+			logger.error(
+					"El objeto serializado no existe, considera actualizar la version del cliente/servidor para tener las mismas clases",
+					e);
 		}
-		return null;
-
 	}
 
 	private void cerrarConexion() {
-		cerrar.cerrar(ClasesEstaticas.getSocket());
+		cerrar.cerrar();
 	}
 }

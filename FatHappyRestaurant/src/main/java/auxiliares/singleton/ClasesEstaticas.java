@@ -1,6 +1,8 @@
 package auxiliares.singleton;
 
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import caja.interfazCaja.panelPrincipalCaja.PanelCaja;
@@ -12,6 +14,7 @@ import pedido.util.PedidoBuilder;
 import productos.modelo.ListaProductos;
 import productos.modelo.Producto;
 import restaurante.modelo.Restaurante;
+import socket.modelo.Pong;
 import socket.modelo.SocketCliente;
 
 public class ClasesEstaticas {
@@ -37,8 +40,11 @@ public class ClasesEstaticas {
 	// Dato estatico que mantiene en memoria el panel de la caja
 	private static PanelCaja panelCaja;
 
-	// Daot estatico que mantiene en memoria el socket del sevidor
+	// Dato estatico que mantiene en memoria el socket del sevidor
 	private static SocketCliente socket;
+
+	// Dato estatico que mantiene en memoria los pongs recibidos
+	public static final BlockingQueue<Pong> colaPong = new LinkedBlockingQueue<>();
 
 	/**
 	 * Guarda el pedido actual en memoria.
@@ -211,6 +217,10 @@ public class ClasesEstaticas {
 
 	public static void setSocket(SocketCliente socket) {
 		ClasesEstaticas.socket = socket;
+	}
+
+	public static BlockingQueue<Pong> getColapong() {
+		return colaPong;
 	}
 
 }

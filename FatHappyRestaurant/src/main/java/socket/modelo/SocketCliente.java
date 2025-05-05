@@ -4,11 +4,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.singleton.ClasesEstaticas;
 import socket.util.CerrarConexionSocket;
+import socket.util.ComprobarConexionSocket;
+import socket.util.EnviarRecibirObjetos;
+import socket.util.IniciarHiloRecibirMensaje;
 
 /**
  * Clase que almacena el {@link Socket} de cliente y los
@@ -27,6 +34,10 @@ public class SocketCliente {
 
 	private ObjectInputStream input;
 
+	private IniciarHiloRecibirMensaje recibirMensajes;
+
+	private final ScheduledExecutorService pingExec = Executors.newSingleThreadScheduledExecutor();
+
 	// Constructor
 	public SocketCliente(Socket socketCliente) throws IOException {
 		this.socketCliente = socketCliente;
@@ -44,11 +55,40 @@ public class SocketCliente {
 
 			// Establecemos el inpput en base al socket del cliente
 			this.input = new ObjectInputStream(socketCliente.getInputStream());
+
+			// Anadimos a la clase singleton el socket
+			ClasesEstaticas.setSocket(this);
+			logger.debug("Se ha establecido el socket del cliente en la clase estatica");
+
+			// Enviamos los datos del rol al cliente
+			new EnviarRecibirObjetos()
+					.EnviarObjetos(new RolSocket(ClasesEstaticas.getRestaurante().getIdRestaurante(), 0 /* Caja */));
+			logger.debug("Se ha enviado el rol al cliente");
+
+			// Iniciamos el hilo de recepcion de mensajes
+			this.recibirMensajes = new IniciarHiloRecibirMensaje();
+			this.recibirMensajes.start();
+			logger.debug("Se ha iniciado el hilo de recepcion de mensajes del socket");
+
+			arrancarPingTask();
+			logger.debug("Se ha iniciado la task de comprobacion de ping");
+
 		} catch (IOException e) {
 			logger.error("Ha ocurrido un error al crear el input y el output del socket cliente", e);
-			new CerrarConexionSocket().cerrar(this);
+			new CerrarConexionSocket().cerrar();
 		}
 
+	}
+
+	private void arrancarPingTask() {
+		pingExec.scheduleAtFixedRate(() -> {
+			ClasesEstaticas.getColapong().clear();
+			new ComprobarConexionSocket().comprobar();
+		}, 0, 60, TimeUnit.SECONDS);
+	}
+
+	public void stopTasks() {
+		pingExec.shutdownNow();
 	}
 
 	// Getters
@@ -74,6 +114,10 @@ public class SocketCliente {
 
 	public void setInput(ObjectInputStream input) {
 		this.input = input;
+	}
+
+	public IniciarHiloRecibirMensaje getRecibirMensajes() {
+		return recibirMensajes;
 	}
 
 }
