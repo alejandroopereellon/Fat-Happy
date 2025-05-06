@@ -32,8 +32,7 @@ public class ConectarAlServidor {
 		// Configuramos el socket
 		try {
 			// Se va a establecer una conexion con el servidor en el puerto 5000
-			cliente.connect(new InetSocketAddress("localhost"/* ConfiguracionInicial.get().getFtpHost() */, 5000),
-					5000);
+			cliente.connect(new InetSocketAddress("192.168.1.132", 5000), 5000);
 			logger.info("Se va a stablecer conexion en la ip {}, puerto {}", cliente.getInetAddress(),
 					cliente.getPort());
 

@@ -2,6 +2,7 @@ package socket.util;
 
 import java.io.EOFException;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.NotSerializableException;
 import java.io.StreamCorruptedException;
 import java.net.SocketException;
@@ -25,7 +26,6 @@ public class EnviarRecibirObjetos {
 	static final CerrarConexionSocket cerrar = new CerrarConexionSocket();
 
 	public boolean EnviarObjetos(Object objeto) {
-		// Comprobamos si la conexion no esta cerrada
 		logger.debug("Se va a enviar el objeto {}", objeto);
 
 		try {
@@ -48,8 +48,7 @@ public class EnviarRecibirObjetos {
 	}
 
 	public void RecibirObjetos() {
-		// Comprobamos si la conexion no esta cerrada
-		logger.debug("Se va a recibir el pedido");
+		logger.debug("Se va a recibir el objeto");
 
 		// Creamos el objeto vacio
 		Object objeto = null;
@@ -61,10 +60,11 @@ public class EnviarRecibirObjetos {
 		} catch (NotSerializableException e) {
 			logger.error("El objeto recibido no es serializable", e);
 		} catch (EOFException e) {
-			logger.error("Ha ocurrido un error final inesperado de datos", e);
+			logger.error("Ha ocurrido un error final inesperado de datos, el servidor ha cerrado el stream", e);
+			cerrarConexion();
 		} catch (SocketTimeoutException e) {
-			logger.error("El servidor no responde: Se ha agotado el tiempo de conexion al sevidor", e);
-		} catch (StreamCorruptedException e) {
+			logger.error("El servidor no responde: Se ha agotado el tiempo de conexion al sevidor (FALLO NO GRAVE)");
+		} catch (StreamCorruptedException | InvalidClassException e) {
 			logger.error("El objeto desSerializado esta corrupto", e);
 			cerrarConexion();
 		} catch (SocketException e) {

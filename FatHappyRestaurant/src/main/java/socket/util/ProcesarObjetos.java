@@ -23,7 +23,7 @@ public class ProcesarObjetos {
 			logger.debug("El cliente ha enviado una peticion de vida al servidor");
 			ClasesEstaticas.getColapong().offer((Pong) objeto);
 		} else {
-			logger.warn("Objeto desconocido {}", objeto.getClass().getSimpleName()); // <<< ADD
+			logger.warn("Objeto desconocido {}", objeto.getClass().getSimpleName());
 		}
 	}
 }

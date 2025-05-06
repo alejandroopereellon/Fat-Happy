@@ -12,6 +12,8 @@ import socket.modelo.Pong;
 public class ComprobarConexionSocket {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(ComprobarConexionSocket.class);
+	
+	private static CerrarConexionSocket cerrar = new CerrarConexionSocket();
 
 	/**
 	 * Metodo que hace uso del sistema {@link Ping} {@link Pong}, en el cual el
@@ -44,11 +46,15 @@ public class ComprobarConexionSocket {
 				logger.warn("No se ha recibido pong: tiempo agotado");
 			}
 
+		} catch (InterruptedException ie) {
+			Thread.currentThread().interrupt();
+			logger.error("Se ha rechazado la recepcion del pong, se va a cerrar el hilo");
+			cerrar.cerrar();
 		} catch (Exception e) {
 			logger.error("Ha ocurrido un erro en la conexion al servidor, se va a reiniciar el servidor", e);
-			//Cerramos la conexion al servidor
+			// Cerramos la conexion al servidor
 			logger.warn("Se va a cerrar el socket del servidor");
-			new CerrarConexionSocket().cerrar();
+			cerrar.cerrar();
 		}
 		return false;
 	}

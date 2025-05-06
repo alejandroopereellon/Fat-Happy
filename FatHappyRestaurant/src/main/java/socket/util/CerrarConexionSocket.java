@@ -28,22 +28,6 @@ public class CerrarConexionSocket {
 			return true;
 		}
 
-		// Paramos el hilo
-		logger.debug("Se va a cerrar el hilo de recepcion de mensajes");
-		cliente.getRecibirMensajes().interrupt();
-		try {
-			// Espera como mucho 2 segundos
-			cliente.getRecibirMensajes().join(2000);
-			cliente.getSocketCliente().close();
-
-			// Cerramos la tarea de comprobacion de ping
-			ClasesEstaticas.getSocket().stopTasks();
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt(); // vuelve a marcarse como interrumpido
-		} catch (IOException e) {
-			logger.error("Se ha interrumpido la ejecucion del hilo de recepcion de objetos (ERROR CONTEMPLADO)");
-		}
-
 		// Establecemos el input en null
 		try {
 			logger.debug("Se va a cerrar el input del cliente");
@@ -72,6 +56,22 @@ public class CerrarConexionSocket {
 		} catch (Exception e) {
 			logger.error("Ha ocurrido un error al cerrar el output del socket cliente", e);
 			bandera = false;
+		}
+
+		// Paramos el hilo
+		logger.debug("Se va a cerrar el hilo de recepcion de mensajes");
+		cliente.getRecibirMensajes().interrupt();
+		try {
+			// Espera como mucho 2 segundos
+			cliente.getRecibirMensajes().join(2000);
+			cliente.getSocketCliente().close();
+
+			// Cerramos la tarea de comprobacion de ping
+			cliente.stopTasks();
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt(); // vuelve a marcarse como interrumpido
+		} catch (IOException e) {
+			logger.error("Se ha interrumpido la ejecucion del hilo de recepcion de objetos (ERROR CONTEMPLADO)");
 		}
 
 		// Cerramos el socket del cliente
