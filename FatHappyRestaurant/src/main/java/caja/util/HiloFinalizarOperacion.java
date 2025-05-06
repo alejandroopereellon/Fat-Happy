@@ -45,6 +45,9 @@ public class HiloFinalizarOperacion extends Thread {
 		// Establecemos el estado del pedido en pagado
 		pedido.setEstadoPedido(5);
 
+		// Enviamos el pedido al servidor
+		enviarPedidoServidor();
+
 		// Restablecemos el importe original del pedido
 		new CalcularImporte(pedido).obtenerImporteDescuento();
 
@@ -63,9 +66,6 @@ public class HiloFinalizarOperacion extends Thread {
 
 		// Establecemos el contador del panel en 0
 		ClasesEstaticas.getPanelCaja().getTiempoPedido().setText("00:00");
-
-		// Enviamos el pedido al servidor
-		enviarPedidoServidor();
 	}
 
 	/**

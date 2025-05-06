@@ -7,6 +7,7 @@ import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.singleton.ClasesEstaticas;
 import caja.interfazCaja.Reloj;
 import caja.modelo.Caja;
+import socket.util.CambiarEstadoConexion;
 
 /**
  * Clase que gestiona la interfaz del panel de caja
@@ -35,6 +36,9 @@ public class PanelCajaMetodos {
 
 		rellenarDatosCaja();
 		interfaz.setVisible(true);
+
+		// Informamos del estado de la conexion en la interfaz
+		new CambiarEstadoConexion().cambiarEstadoConexion();
 	}
 
 	/**
@@ -96,5 +100,4 @@ public class PanelCajaMetodos {
 		actualizarEstadoCaja(null);
 		logger.info("Se ha establecido el estado de la caja en cerrada");
 	}
-
 }

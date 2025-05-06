@@ -85,6 +85,9 @@ public class CerrarConexionSocket {
 			logger.error("Ha ocurrido un error al cerrar el socket del cliente", e);
 			bandera = false;
 		}
+		
+		//Cambiamos el estado de la conexion
+		new CambiarEstadoConexion().cambiarEstadoConexion();
 
 		return bandera;
 	}

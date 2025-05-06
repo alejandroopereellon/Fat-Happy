@@ -2,6 +2,7 @@ package caja.interfazCaja.panelPrincipalCaja;
 
 import caja.modelo.Caja;
 import javax.swing.JLabel;
+import java.awt.Color;
 
 /**
  * Interfaz grafica que representa la informacion basica de la caja
@@ -29,11 +30,22 @@ public class PanelCaja extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        extadoConexion = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         fechaHora = new javax.swing.JLabel();
-        DatosEmpleado = new javax.swing.JLabel();
+        datosEmpleado = new javax.swing.JLabel();
         PuestoSesion = new javax.swing.JLabel();
         estadoCaja = new javax.swing.JLabel();
         TiempoPedido = new javax.swing.JLabel();
+        textoConexion = new javax.swing.JLabel();
+        estadoConexion = new javax.swing.JLabel();
+
+        extadoConexion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        extadoConexion.setText("Estado conexion:");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(Color.RED);
+        jLabel1.setText("Desconectado");
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -42,9 +54,9 @@ public class PanelCaja extends javax.swing.JPanel {
         fechaHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fechaHora.setText("00/00/2000   00:00:00");
 
-        DatosEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        DatosEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DatosEmpleado.setText("No hay usuario activo");
+        datosEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        datosEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        datosEmpleado.setText("No hay usuario activo");
 
         PuestoSesion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PuestoSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -58,6 +70,13 @@ public class PanelCaja extends javax.swing.JPanel {
         TiempoPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TiempoPedido.setText("00:00");
 
+        textoConexion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textoConexion.setText("Estado conexion:");
+
+        estadoConexion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        estadoConexion.setForeground(Color.RED);
+        estadoConexion.setText("Desconectado");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,23 +87,31 @@ public class PanelCaja extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(DatosEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(datosEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PuestoSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(estadoCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(textoConexion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(estadoConexion)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fechaHora)
-                    .addComponent(DatosEmpleado)
-                    .addComponent(PuestoSesion)
-                    .addComponent(estadoCaja)
-                    .addComponent(TiempoPedido))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(estadoConexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textoConexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(fechaHora)
+                        .addComponent(datosEmpleado)
+                        .addComponent(PuestoSesion)
+                        .addComponent(estadoCaja)
+                        .addComponent(TiempoPedido)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -94,7 +121,7 @@ public class PanelCaja extends javax.swing.JPanel {
     }
 
     public JLabel getDatosEmpleado() {
-        return DatosEmpleado;
+        return datosEmpleado;
     }
 
     public JLabel getPuestoSesion() {
@@ -113,12 +140,21 @@ public class PanelCaja extends javax.swing.JPanel {
         return TiempoPedido;
     }
 
+    public JLabel getExtadoConexion() {
+        return extadoConexion;
+    }
+
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DatosEmpleado;
     private javax.swing.JLabel PuestoSesion;
     private javax.swing.JLabel TiempoPedido;
+    private javax.swing.JLabel datosEmpleado;
     private javax.swing.JLabel estadoCaja;
+    private javax.swing.JLabel estadoConexion;
+    private javax.swing.JLabel extadoConexion;
     private javax.swing.JLabel fechaHora;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel textoConexion;
     // End of variables declaration//GEN-END:variables
 }

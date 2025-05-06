@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.singleton.ClasesEstaticas;
+import socket.util.CambiarEstadoConexion;
 import socket.util.CerrarConexionSocket;
 import socket.util.ComprobarConexionSocket;
 import socket.util.EnviarRecibirObjetos;
@@ -72,6 +73,9 @@ public class SocketCliente {
 
 			arrancarPingTask();
 			logger.debug("Se ha iniciado la task de comprobacion de ping");
+
+			// Informamos del estado de la conexion en la interfaz
+			new CambiarEstadoConexion().cambiarEstadoConexion();
 
 		} catch (IOException e) {
 			logger.error("Ha ocurrido un error al crear el input y el output del socket cliente", e);

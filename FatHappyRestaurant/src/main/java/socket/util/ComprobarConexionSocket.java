@@ -12,7 +12,7 @@ import socket.modelo.Pong;
 public class ComprobarConexionSocket {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(ComprobarConexionSocket.class);
-	
+
 	private static CerrarConexionSocket cerrar = new CerrarConexionSocket();
 
 	/**
@@ -36,7 +36,7 @@ public class ComprobarConexionSocket {
 			enviarRecibir.EnviarObjetos(new Ping());
 
 			// Esperamos hasta 5 segundos el pong
-			Pong pong = ClasesEstaticas.getColapong().poll(5, TimeUnit.SECONDS);
+			Pong pong = ClasesEstaticas.getColapong().poll(15, TimeUnit.SECONDS);
 
 			// Esperamos recibir un pong
 			if (pong != null) {
@@ -45,6 +45,9 @@ public class ComprobarConexionSocket {
 			} else {
 				logger.warn("No se ha recibido pong: tiempo agotado");
 			}
+
+			// Informamos del estado de la conexion en la interfaz
+			new CambiarEstadoConexion().cambiarEstadoConexion();
 
 		} catch (InterruptedException ie) {
 			Thread.currentThread().interrupt();
