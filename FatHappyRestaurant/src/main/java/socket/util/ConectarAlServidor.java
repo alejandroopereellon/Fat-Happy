@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import socket.modelo.SocketCliente;
 
 /**
@@ -31,7 +32,7 @@ public class ConectarAlServidor {
 		// Configuramos el socket
 		try {
 			// Se va a establecer una conexion con el servidor en el puerto 5000
-			cliente.connect(new InetSocketAddress("localhost", 5000), 5000);
+			cliente.connect(new InetSocketAddress(/*"79.116.84.38"*/ "192.168.1.111", 1114), 5000);
 			logger.info("Se va a stablecer conexion en la ip {}, puerto {}", cliente.getInetAddress(),
 					cliente.getPort());
 
@@ -41,6 +42,8 @@ public class ConectarAlServidor {
 				logger.debug("Se ha establecido el socket del cliente {}", cliente);
 				logger.info("Se ha establecido la conexion con el servidor");
 
+				new CambiarEstadoConexion().cambiarEstadoConexion();
+				;
 				return true;
 			}
 		} catch (SocketTimeoutException e) {

@@ -12,11 +12,13 @@ public class ProcesarObjetos {
 	static Logger logger = LogManager.getLogger(ProcesarObjetos.class);
 
 	protected void procesar(Object objeto) {
+		
 
 		// Si el objeto es una peticion de que estamos activo
 		if (objeto instanceof Ping) {
 			logger.debug("El servidor ha enviado una peticion de vida al cliente");
-			new EnviarRecibirObjetos().EnviarObjetos(new Pong());
+			int numero = ((Ping) objeto).getNumeroComprobacion();
+			new EnviarRecibirObjetos().EnviarObjetos(new Pong(numero));
 		}
 		// Si el objeto es una respuesta de que estamos activos
 		else if (objeto instanceof Pong) {
