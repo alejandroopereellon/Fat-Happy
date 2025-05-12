@@ -45,7 +45,7 @@ public class ConfiguracionInicial {
 		porDefecto.setCodigoRestaurante(
 				new SolicitarNumeroMetodos("Introduce el número de restaurante").solicitarNumero());
 		porDefecto.setDirectorioLocal(System.getProperty("user.home") + File.separator + "fathappyrestaurant");
-		porDefecto.setFtpHost("79.116.84.38");
+		porDefecto.setFtpHost("79.112.49.122");
 		porDefecto.setFtpPuerto(1115);
 		porDefecto.setFtpUsuario("restaurante");
 		porDefecto.setFtpContrasena("restaurante123");

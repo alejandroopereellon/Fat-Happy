@@ -3,7 +3,6 @@ package socket.util;
 import java.awt.Color;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,10 +22,9 @@ public class CambiarEstadoConexion {
 	 */
 	public void cambiarEstadoConexion() {
 		if (ClasesEstaticas.getPanelCaja() != null) {
-			JLabel label = ClasesEstaticas.getPanelCaja().getExtadoConexion();
+			JLabel label = ClasesEstaticas.getPanelCaja().getEstadoConexion();
 
 			if (comprobar.comprobar()) {
-				JOptionPane.showMessageDialog(null, "jaja", null, 0, null);
 				label.setForeground(Color.green);
 				label.setText("Conectado");
 				logger.debug("Se ha establecido el estado de la conexion a conectado");

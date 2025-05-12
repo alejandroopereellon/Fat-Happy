@@ -17,15 +17,13 @@ public class CerrarConexionSocket {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(EnviarRecibirObjetos.class);
 
-	public boolean cerrar() {
+	public synchronized void cerrar() {
 
 		SocketCliente cliente = ClasesEstaticas.getSocket();
 
-		boolean bandera = true;
-
 		// Comprobamos si el socket es nulo
 		if (ClasesEstaticas.getSocket() == null) {
-			return true;
+			return;
 		}
 
 		// Establecemos el input en null
@@ -40,7 +38,6 @@ public class CerrarConexionSocket {
 			logger.debug("Se ha cerrado el input del cliente");
 		} catch (IOException e) {
 			logger.error("Ha ocurrido un error al cerrar el input del socket cliente", e);
-			bandera = false;
 		}
 
 		// Establecemos el output en null
@@ -55,7 +52,6 @@ public class CerrarConexionSocket {
 			logger.debug("Se ha cerrado el output del cliente");
 		} catch (Exception e) {
 			logger.error("Ha ocurrido un error al cerrar el output del socket cliente", e);
-			bandera = false;
 		}
 
 		// Paramos el hilo
@@ -83,13 +79,11 @@ public class CerrarConexionSocket {
 			logger.debug("Se ha cerrado el socket del cliente");
 		} catch (IOException e) {
 			logger.error("Ha ocurrido un error al cerrar el socket del cliente", e);
-			bandera = false;
 		}
-		
-		//Cambiamos el estado de la conexion
-		new CambiarEstadoConexion().cambiarEstadoConexion();
 
-		return bandera;
+
+		// Volvemos a iniciar la conexion
+		new ConectarAlServidor().start();
 	}
 
 }

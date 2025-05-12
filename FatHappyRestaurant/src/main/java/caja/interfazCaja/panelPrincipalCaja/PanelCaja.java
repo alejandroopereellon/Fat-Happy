@@ -36,7 +36,7 @@ public class PanelCaja extends javax.swing.JPanel {
         datosEmpleado = new javax.swing.JLabel();
         PuestoSesion = new javax.swing.JLabel();
         estadoCaja = new javax.swing.JLabel();
-        TiempoPedido = new javax.swing.JLabel();
+        tiempoPedido = new javax.swing.JLabel();
         textoConexion = new javax.swing.JLabel();
         estadoConexion = new javax.swing.JLabel();
 
@@ -66,9 +66,9 @@ public class PanelCaja extends javax.swing.JPanel {
         estadoCaja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         estadoCaja.setText("Cerrada");
 
-        TiempoPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TiempoPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TiempoPedido.setText("00:00");
+        tiempoPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tiempoPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tiempoPedido.setText("00:00");
 
         textoConexion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textoConexion.setText("Estado conexion:");
@@ -83,7 +83,7 @@ public class PanelCaja extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TiempoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tiempoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -111,7 +111,7 @@ public class PanelCaja extends javax.swing.JPanel {
                         .addComponent(datosEmpleado)
                         .addComponent(PuestoSesion)
                         .addComponent(estadoCaja)
-                        .addComponent(TiempoPedido)))
+                        .addComponent(tiempoPedido)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -137,18 +137,19 @@ public class PanelCaja extends javax.swing.JPanel {
     }
 
     public JLabel getTiempoPedido() {
-        return TiempoPedido;
+        return tiempoPedido;
     }
 
-    public JLabel getExtadoConexion() {
-        return extadoConexion;
+    public JLabel getEstadoConexion() {
+        return estadoConexion;
     }
+
+  
 
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PuestoSesion;
-    private javax.swing.JLabel TiempoPedido;
     private javax.swing.JLabel datosEmpleado;
     private javax.swing.JLabel estadoCaja;
     private javax.swing.JLabel estadoConexion;
@@ -156,5 +157,6 @@ public class PanelCaja extends javax.swing.JPanel {
     private javax.swing.JLabel fechaHora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel textoConexion;
+    private javax.swing.JLabel tiempoPedido;
     // End of variables declaration//GEN-END:variables
 }

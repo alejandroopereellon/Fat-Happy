@@ -41,12 +41,12 @@ public class InicioAplicacion {
 		// Iniciar descarga de imágenes del servidor ftp
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
 		grafica.getBarraProgreso().setValue(15);
-//		if (new FTPDownloader().iniciarConexionYDescargar()) {
-//			logger.info("Se han cargado los ficheros en local");
-//		} else {
-//			logger.error("No se han podido cargar los ficheros en local");
-//			return false;
-//		}
+		if (new FTPDownloader().iniciarConexionYDescargar()) {
+			logger.info("Se han cargado los ficheros en local");
+		} else {
+			logger.error("No se han podido cargar los ficheros en local");
+			return false;
+		}
 		grafica.getBarraProgreso().setValue(20);
 
 		// Cargar datos del restaurante
@@ -69,9 +69,7 @@ public class InicioAplicacion {
 		// Establecemos la conexion al socket
 		grafica.getEstadoInicio().setText("Conectando al servidor");
 		// new HiloComprobacionConexionSocket().start();
-		if (new ConectarAlServidor().crearConexion()) {
-			logger.debug("Se ha realizado la conexion al servidor");
-		}
+		new ConectarAlServidor().start();
 		logger.info("Se ha iniciado el hilo de conexion al socket");
 		grafica.getBarraProgreso().setValue(50);
 
