@@ -1,6 +1,9 @@
 package socket.util;
 
+import java.awt.Color;
 import java.io.IOException;
+
+import javax.swing.JLabel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,14 +63,11 @@ public class CerrarConexionSocket {
 		try {
 			// Espera como mucho 2 segundos
 			cliente.getRecibirMensajes().join(2000);
-			cliente.getSocketCliente().close();
 
 			// Cerramos la tarea de comprobacion de ping
 			cliente.stopTasks();
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt(); // vuelve a marcarse como interrumpido
-		} catch (IOException e) {
-			logger.error("Se ha interrumpido la ejecucion del hilo de recepcion de objetos (ERROR CONTEMPLADO)");
 		}
 
 		// Cerramos el socket del cliente
@@ -81,6 +81,10 @@ public class CerrarConexionSocket {
 			logger.error("Ha ocurrido un error al cerrar el socket del cliente", e);
 		}
 
+		JLabel label = ClasesEstaticas.getPanelCaja().getEstadoConexion();
+		label.setForeground(Color.orange);
+		label.setText("Estableciendo conexion");
+		logger.debug("Se va a intentar establecer conexion con el servidor");
 
 		// Volvemos a iniciar la conexion
 		new ConectarAlServidor().start();

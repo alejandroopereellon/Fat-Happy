@@ -46,7 +46,7 @@ public class ConectarAlServidor extends Thread {
 			// Configuramos el socket
 			try {
 				// Se va a establecer una conexion con el servidor en el puerto 5000
-				cliente.connect(new InetSocketAddress(/* "79.116.84.38" */ "192.168.1.132", 1114), 5000);
+				cliente.connect(new InetSocketAddress("79.112.49.122", 1114), 5000);
 				logger.info("Se va a stablecer conexion en la ip {}, puerto {}", cliente.getInetAddress(),
 						cliente.getPort());
 

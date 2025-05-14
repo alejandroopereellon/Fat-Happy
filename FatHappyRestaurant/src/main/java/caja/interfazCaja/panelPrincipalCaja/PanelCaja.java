@@ -74,8 +74,8 @@ public class PanelCaja extends javax.swing.JPanel {
         textoConexion.setText("Estado conexion:");
 
         estadoConexion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        estadoConexion.setForeground(Color.RED);
-        estadoConexion.setText("Desconectado");
+        estadoConexion.setForeground(Color.ORANGE);
+        estadoConexion.setText("Estableciendo conexion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,8 +95,8 @@ public class PanelCaja extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(textoConexion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estadoConexion)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addComponent(estadoConexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
