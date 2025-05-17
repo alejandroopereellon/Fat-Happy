@@ -1,8 +1,6 @@
 <!-- Banner/logo principal -->
-<!-- Sustituye docs/images/banner.png por la ruta real -->
-<p align="center">
-  <img src="docs/images/banner.png" alt="Fat-Happy banner" width="600">
-</p>
+
+ ![LogotipoTransparente](https://github.com/user-attachments/assets/9fdae98b-c1d1-4962-979d-b26b291ab96f)
 
 <h1 align="center">Fat-Happy 🍔</h1>
 <p align="center">
@@ -12,7 +10,6 @@
 <p align="center">
   <!-- Badges básicos -->
   <a href="https://github.com/alejandroopereellon/Fat-Happy/actions">
-    <img src="https://github.com/alejandroopereellon/Fat-Happy/actions/workflows/maven.yml/badge.svg" alt="Build status"/>
   </a>
   <img src="https://img.shields.io/badge/JDK-17%2B-blue" alt="JDK 17+"/>
   <img src="https://img.shields.io/badge/Hibernate-6.6.11.Final-green" alt="Hibernate 6.6.11"/>
@@ -45,11 +42,6 @@ Fat-Happy es un conjunto de **tres micro-proyectos Maven 100 % Java**:
 ---
 
 ## 🏗️ Arquitectura
-
-<!-- Inserta aquí un diagrama PNG/SVG -->
-<p align="center">
-  <img src="docs/images/arquitectura.svg" alt="Diagrama de arquitectura" width="700">
-</p>
 
 1. La app **Cliente** envía peticiones locales y escucha eventos del **Servidor**.  
 2. El **Servidor de sockets** difunde los cambios a todos los clientes conectados.  
