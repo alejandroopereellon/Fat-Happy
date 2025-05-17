@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.MutationQuery;
 
 import auxiliares.singleton.ClasesEstaticas;
 import caja.modelo.Operacion;
@@ -479,4 +480,33 @@ public class ProductosDaoHibernateImpl implements ProductosDAO {
 		logger.info("Se esta recuperando el restaurante con ID {}", res.getIdRestaurante());
 		return sesion.find(Restaurante.class, res.getIdRestaurante());
 	}
+
+	@Override
+	public boolean modificarStockProducto(Producto producto, boolean nuevoEstado) {
+		// Abrimos sesión con try-with-resources para que se cierre sola
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+			Transaction transaction = session.beginTransaction(); // 1. comienza la tx
+			try {
+				// 2. consulta SQL nativa → createNativeMutationQuery
+				MutationQuery sentencia = session
+						.createNativeMutationQuery("UPDATE stock_restaurante " + "SET activo = :estado "
+								+ "WHERE id_restaurante = :restaurante " + "  AND id_producto    = :producto");
+
+				sentencia.setParameter("estado", nuevoEstado)
+						.setParameter("restaurante", ClasesEstaticas.getRestaurante().getIdRestaurante())
+						.setParameter("producto", producto.getCodigo());
+
+				sentencia.executeUpdate();
+				transaction.commit();
+				return true;
+
+			} catch (Exception ex) { // ⇒ cualquier error → rollback
+				transaction.rollback();
+				logger.error("Error actualizando stock del producto {}", producto.getCodigo(), ex);
+				return false;
+			}
+		}
+	}
+
 }

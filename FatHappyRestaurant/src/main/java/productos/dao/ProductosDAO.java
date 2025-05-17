@@ -124,4 +124,14 @@ public interface ProductosDAO {
 	 *         insertar
 	 */
 	public boolean insertarProductoVendido(ProductoVendido producto);
+
+	/**
+	 * Metodo encargado de modificar el estado de un producto y actualizar el estado
+	 * del stock
+	 * 
+	 * @param producto es el {@link Producto} que se va a modificar en la base de
+	 *                 datos
+	 * @return true si se ha modificado o false si no se ha podido modificar
+	 */
+	public boolean modificarStockProducto(Producto producto, boolean nuevoEstado);
 }

@@ -37,10 +37,11 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         estadisticasVentas = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         activarProductos = new javax.swing.JButton();
-        desactivarProductos = new javax.swing.JButton();
         consultarProductos = new javax.swing.JButton();
         pantallaPrincipla = new javax.swing.JButton();
         CerrarAplicacion = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        actualizarImagenesServidor = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1366, 550));
 
@@ -80,18 +81,10 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         jLabel3.setText("Selecciona una accion de inventario");
 
         activarProductos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        activarProductos.setText("Activar productos");
+        activarProductos.setText("Modificar stock productos");
         activarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 activarProductosActionPerformed(evt);
-            }
-        });
-
-        desactivarProductos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        desactivarProductos.setText("Desactivar Productos");
-        desactivarProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                desactivarProductosActionPerformed(evt);
             }
         });
 
@@ -119,39 +112,56 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Selecciona una accion de productos");
+
+        actualizarImagenesServidor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        actualizarImagenesServidor.setText("Actualizar imagenes servidor");
+        actualizarImagenesServidor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarImagenesServidorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGap(110, 110, 110)
-                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(iniciarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(33, 33, 33)
-                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(desactivarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(activarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(consultarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 493, Short.MAX_VALUE))
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CerrarAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CerrarAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iniciarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(33, 33, 33)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(activarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(consultarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(actualizarImagenesServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,8 +173,6 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(activarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(desactivarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(consultarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,7 +181,11 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(cerrarCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(estadisticasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(actualizarImagenesServidor, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,12 +224,8 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
     }//GEN-LAST:event_consultarProductosActionPerformed
 
     private void activarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activarProductosActionPerformed
-        metodos.activarProductos();
+        metodos.cambiarEstockProductos();
     }//GEN-LAST:event_activarProductosActionPerformed
-
-    private void desactivarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_desactivarProductosActionPerformed
-        metodos.desactivarProductos();
-    }//GEN-LAST:event_desactivarProductosActionPerformed
 
     private void pantallaPrinciplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pantallaPrinciplaActionPerformed
         metodos.volverPantallaPrincipal();
@@ -229,6 +237,10 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_CerrarAplicacionActionPerformed
 
+    private void actualizarImagenesServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarImagenesServidorActionPerformed
+        metodos.actualizarImagenesServidor();
+    }//GEN-LAST:event_actualizarImagenesServidorActionPerformed
+
     public JButton getActivarProductos() {
         return activarProductos;
     }
@@ -239,10 +251,6 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
 
     public JButton getConsultarProductos() {
         return consultarProductos;
-    }
-
-    public JButton getDesactivarProductos() {
-        return desactivarProductos;
     }
 
     public JButton getEstadisticasVentas() {
@@ -257,13 +265,14 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CerrarAplicacion;
     private javax.swing.JButton activarProductos;
+    private javax.swing.JButton actualizarImagenesServidor;
     private javax.swing.JButton cerrarCaja;
     private javax.swing.JButton consultarProductos;
-    private javax.swing.JButton desactivarProductos;
     private javax.swing.JButton estadisticasVentas;
     private javax.swing.JButton iniciarCaja;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JButton pantallaPrincipla;
     // End of variables declaration//GEN-END:variables

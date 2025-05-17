@@ -4,9 +4,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.inicioAplicacion.FTPDownloader;
+import auxiliares.mostrarMensaje.DialogoMostrarMensaje;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.PanelUtil;
+import basesDatos.panelMostrarProductos.PanelMostrarProductosMetodos;
+import basesDatos.panelMostrarProductos.PanelMuestraProductos;
 import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
 import caja.util.CerrarCaja;
@@ -107,12 +111,15 @@ public class AccionesSobreCajaMetodos {
 		// TODO
 	}
 
-	protected void activarProductos() {
-		// TODO
-	}
+	protected void cambiarEstockProductos() {
+		// Cargamos el panel de muestra de productos
+		PanelMuestraProductos panel = new PanelMuestraProductos();
 
-	protected void desactivarProductos() {
-		// TODO
+		// Iniciamos la configuracion del panel
+		new PanelMostrarProductosMetodos(panel).mostrarProductos();
+
+		// Añadimos el panel pedido al panel principal
+		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(), panel);
 	}
 
 	/**
@@ -122,6 +129,19 @@ public class AccionesSobreCajaMetodos {
 		// Añadimos el panel pedido al panel principal
 		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
 				ClasesEstaticas.getPanelPedido());
+	}
+
+	/**
+	 * metodo que fuerza la actualizacion de los productos desde la base de datos
+	 */
+	protected void actualizarImagenesServidor() {
+		if (new FTPDownloader().iniciarConexionYDescargar()) {
+			logger.info("Se han cargado los ficheros en local");
+			new DialogoMostrarMensaje("Se han actualizado las imagenes correctamente");
+		} else {
+			logger.error("No se han podido cargar los ficheros en local");
+			new DialogoMostrarMensaje("No se han podido actualizar las imagenes correctamente");
+		}
 	}
 
 }

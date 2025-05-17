@@ -43,8 +43,8 @@ public class SocketCliente {
 	public SocketCliente(Socket socketCliente) throws IOException {
 		this.socketCliente = socketCliente;
 
-		this.socketCliente.setSoTimeout(15000);
-		logger.debug("Se ha establecido un tiempo de espera de 15 segundos en el socket");
+		this.socketCliente.setSoTimeout(60000);
+		logger.debug("Se ha establecido un tiempo de espera de 60 segundos en el socket");
 
 		this.socketCliente.setKeepAlive(true);
 		logger.debug("Se ha establecido el keep alive en el socket");
@@ -88,7 +88,7 @@ public class SocketCliente {
 		pingExec.scheduleAtFixedRate(() -> {
 			ClasesEstaticas.getColapong().clear();
 			new ComprobarConexionSocket().comprobar();
-		}, 0, 60, TimeUnit.SECONDS);
+		}, 0, 30, TimeUnit.SECONDS);
 	}
 
 	public void stopTasks() {

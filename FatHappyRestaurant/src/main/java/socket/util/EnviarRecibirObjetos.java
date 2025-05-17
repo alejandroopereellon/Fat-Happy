@@ -63,7 +63,7 @@ public class EnviarRecibirObjetos {
 			logger.error("Ha ocurrido un error final inesperado de datos, el servidor ha cerrado el stream", e);
 			cerrarConexion();
 		} catch (SocketTimeoutException e) {
-			logger.error("El servidor no responde: Se ha agotado el tiempo de conexion al sevidor (FALLO NO GRAVE)");
+			logger.warn("El servidor no responde: Se ha agotado el tiempo de conexion al sevidor (FALLO NO GRAVE)");
 		} catch (StreamCorruptedException | InvalidClassException e) {
 			logger.error("El objeto desSerializado esta corrupto", e);
 			cerrarConexion();
