@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="60">
+
+    <Properties>
+        <Property name="logPath">${sys:user.home}/fathappyserver/logs</Property>
+        <Property name="filePattern">%d{yyyy-MM-dd HH:mm:ss} - %level - %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${filePattern}" />
+        </Console>
+
+        <RollingFile name="RollingFile" fileName="${logPath}/app_server.log"
+                     filePattern="${logPath}/app-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="${filePattern}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="ErrorFile" fileName="${logPath}/errors.log"
+                     filePattern="${logPath}/errors-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="${filePattern}" />
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <!-- Captura desde nivel DEBUG hacia arriba -->
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="ErrorFile"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
