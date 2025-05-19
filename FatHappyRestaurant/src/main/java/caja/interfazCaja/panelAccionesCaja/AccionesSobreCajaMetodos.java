@@ -1,5 +1,7 @@
 package caja.interfazCaja.panelAccionesCaja;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,6 +16,8 @@ import basesDatos.panelMostrarProductos.PanelMuestraProductos;
 import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
 import caja.util.CerrarCaja;
+import socket.util.CerrarConexionSocket;
+import socket.util.ConectarAlServidor;
 
 /**
  * Clase que contiene los metodos de la interfaz grafica de
@@ -69,14 +73,13 @@ public class AccionesSobreCajaMetodos {
 	public void iniciarCaja() {
 		logger.info("Se va a iniciar una nueva caja");
 		// Si la caja es nula y se ha podido crear una nueva caja
-		if (ClasesEstaticas.getCaja() == null && new CajaBuilder().crearNuevaCaja()) {
+		if (ClasesEstaticas.getCaja() != null) {
+			logger.info("Ya existe una caja iniciada");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("Ya existe una caja iniciada");
+		} else if (ClasesEstaticas.getCaja() == null && new CajaBuilder().crearNuevaCaja()) {
 			// Modificamos el estado de los botones
 			habilitarDeshabilitarBotonesCaja();
-
 			logger.info("Se ha iniciado la caja desde la interfaz correctamente");
-		} else {
-			logger.error("Ya existe una caja iniciada");
-			new DialogoMostrarMensajeMetodos().mostrarMensaje("Ya existe una caja iniciada");
 		}
 	}
 
@@ -142,6 +145,86 @@ public class AccionesSobreCajaMetodos {
 			logger.error("No se han podido cargar los ficheros en local");
 			new DialogoMostrarMensaje("No se han podido actualizar las imagenes correctamente");
 		}
+	}
+
+	/**
+	 * Metodo que mediante un checkbox permite la reconexion automatica al servidor
+	 * o permite deshabilitarla
+	 */
+	protected void actualizarReconexionAutomatica() {
+		if (interfaz.getCheckReintentarConexion().isSelected()) {
+			ClasesEstaticas.setReconexionAutomatica(true);
+			logger.info("Se ha establecido la reconexion automatica con el servidor");
+		} else {
+			ClasesEstaticas.setReconexionAutomatica(false);
+			logger.info("Se ha deshabilitado la reconexion automatica con el servidor");
+		}
+
+	}
+
+	/**
+	 * Metodo que permite forzar la conexion al servidor en caso de ocurrir un error
+	 */
+	protected void forzarConexionServidor() {
+		if (ClasesEstaticas.getHiloconexionservidor() != null) {
+			try {
+				// Cerramos el hilo de conexion automatica
+				ClasesEstaticas.getHiloconexionservidor().interrupt();
+
+				ClasesEstaticas.getHiloconexionservidor().join();
+				ClasesEstaticas.setHiloConexionServidor(null);
+				logger.info("El hilo de conexion automatica ha terminado.");
+			} catch (InterruptedException e) {
+				logger.warn("El hilo de conexion automatica  actual fue interrumpido mientras esperaba.", e);
+			} catch (NullPointerException e) {
+				logger.warn("El hilo de conexion automatica es nulo", e);
+			}
+		}
+
+		// Cerramos la conexion al servidor
+		new CerrarConexionSocket().cerrar();
+
+		// Iniciamos la conexion al servidor de nuevo
+		try {
+			ClasesEstaticas.setHiloConexionServidor(new ConectarAlServidor());
+			logger.debug("Se ha puesto en null el hilo de conexion al servidor");
+			ClasesEstaticas.getHiloconexionservidor().start();
+			logger.debug("Se ha iniciado el hilo de conexion al servidor");
+		} catch (NullPointerException e) {
+			logger.error("Ha ocurrido un error al iniciar el hilo de conexion automatica al servidor", e);
+		}
+
+		logger.debug("Se esta reiniciado la conexion al servidor ");
+		new DialogoMostrarMensajeMetodos().mostrarMensaje("Se esta reiniciado la conexion al servidor ");
+
+	}
+
+	/**
+	 * Metodo que realiza una desconexion del servidor
+	 */
+	protected void desconectarDelServidor() {
+		new CerrarConexionSocket().cerrar();
+		logger.debug("Se ha cerrado la conexion al servidor");
+		new DialogoMostrarMensajeMetodos().mostrarMensaje("Se ha cerrado la conexion al servidor");
+
+		// Modificamos el checkbox a desactivado
+		interfaz.getCheckReintentarConexion().setSelected(false);
+		actualizarImagenesServidor();
+		logger.debug("Se ha deshabilitado el check de conexion automatica");
+	}
+
+	/**
+	 * Metodo que abri los logs del servidor automaticamente
+	 */
+	protected void abrirLogsServidor() {
+		try {
+			String ruta = System.getProperty("user.home") + "\\fathappyrestaurant\\logs\\app.log";
+			ProcessBuilder pb = new ProcessBuilder("notepad.exe", ruta);
+			pb.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

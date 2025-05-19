@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.solicitarNumeroDecimal.SolicitarNumeroDecimalMetodos;
 import caja.dao.CajasDao;
@@ -47,7 +48,8 @@ public class CajaBuilder {
 	public boolean crearNuevaCaja() {
 		// Solicitamos permisos de administrador
 		if (!new ActividadEmpleados().solicitarPermisos("Iniciar una nueva caja", 3)) {
-			logger.error("No existen permisos suficientes para iniciar una nueva caja");
+			logger.warn("No existen permisos suficientes para iniciar una nueva caja");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("No hay permisos suficientes para iniciar una nueva caja");
 			return false;
 		}
 		Boolean bandera = true;

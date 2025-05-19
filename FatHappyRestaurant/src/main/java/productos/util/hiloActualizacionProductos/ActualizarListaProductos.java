@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import pedido.interfazPedido.PanelPedidoMetodos;
 import productos.dao.ProductosDAO;
@@ -54,7 +53,7 @@ public class ActualizarListaProductos extends Thread {
 					logger.debug("Se esta mostrando el panel de hamburguesas actualizado");
 
 					// Mostramos un panel informando la actualizacion
-					new DialogoMostrarMensajeMetodos().mostrarMensaje("Se ha actualizado el inventario del sistema");
+					//new DialogoMostrarMensajeMetodos().mostrarMensaje("Se ha actualizado el inventario del sistema");
 				}
 			}
 

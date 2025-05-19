@@ -49,19 +49,104 @@ public class PanelMostrarProductosMetodos {
 	 * Metodo que inserta en el panel de productos todos los productos, teniendo en
 	 * cuenta si la casilla de busqueda contiene algun nombre
 	 * 
-	 * @param lista
+	 * @param lista es la lista de productos que se van a mostrar
 	 */
 	private void anadirProductosAlPanel(List<Producto> lista) {
-		String textoBusqueda = panelMuestra.getCasillaBusqueda().getText().trim();
-		boolean filtrar = !textoBusqueda.isEmpty()
-				&& !textoBusqueda.equalsIgnoreCase("Introduce el nombre de un producto");
+		// Filtramos por el tipo de producto
+		String filtroProductos = panelMuestra.getFiltroCategoria().getSelection().getActionCommand();
+		// Filtramos por la actividad del producto
+		String filtroEstado = panelMuestra.getFiltroEstado().getSelection().getActionCommand();
+		// Filtramos por la busqueda de producto
+		String filtroBusqueda = panelMuestra.getCasillaBusqueda().getText().trim();
+
+		int numeroElementos = 0, numeroActivos = 0, numeroInactivos = 0;
 
 		for (Producto pro : lista) {
-			if (!filtrar || (filtrar && pro.getNombreProducto().toLowerCase()
-					.contains((panelMuestra.getCasillaBusqueda().getText().toLowerCase())))) {
-				insertarPanelProducto(pro);
+			// Comprobamos si pasa el filtro de busqueda
+			if (filtrarBusqueda(pro, filtroBusqueda)) {
+				// Comprobamos si pasa el filtro de actividad
+				if (filtrarEstado(pro, filtroEstado)) {
+					// Comprobamos si pasa el filtro de categoria
+					if (filtrarProductos(pro, filtroProductos)) {
+						insertarPanelProducto(pro);
+
+						// Establecemos los contadores de los productos
+						numeroElementos++;
+						if (pro.isStockDisponible()) {
+							numeroActivos++;
+						} else {
+							numeroInactivos++;
+						}
+					}
+				}
 			}
 		}
+
+		// Establecemos las variables en el panel
+		panelMuestra.getNumeroTotales().setText(String.valueOf(numeroElementos));
+		panelMuestra.getNumeroActivos().setText(String.valueOf(numeroActivos));
+		panelMuestra.getNumeroInactivos().setText(String.valueOf(numeroInactivos));
+	}
+
+	/**
+	 * Metodo que comprueba si un producto cumple los requisitos de categoria o no
+	 * 
+	 * @param pro             es el {@link Producto} que se va a filtrar
+	 * @param filtroProductos es el filtro que se va a utilizar
+	 * @return TRUE si cumple el requisito || False si no se cumple
+	 */
+	private boolean filtrarProductos(Producto pro, String filtroProductos) {
+		// Comprobamos si el producto contiene todos los productos
+		if (filtroProductos.equalsIgnoreCase("todasCategorias")) {
+			return true;
+		} else
+		// Comprobamos si el producto pertenece a la categoria o no
+		if (pro.getCategoria().equalsIgnoreCase(filtroProductos)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Metodo que comprueba si un producto cumple los requisitos de actividad o no
+	 * 
+	 * @param pro          es el {@link Producto} que se va a filtrar
+	 * @param filtroEstado es el filtro que se va a utilizar
+	 * @return TRUE si cumple el requisito || False si no se cumple
+	 */
+	private boolean filtrarEstado(Producto pro, String filtroEstado) {
+		// Comprobamos si el producto contiene todos los productos
+		if (filtroEstado.equalsIgnoreCase("todosactivosDesactivados")) {
+			return true;
+		} else
+		// Comprobamos si el producto esta activo y la seleccion es activa
+		if (pro.isStockDisponible() && filtroEstado.contentEquals("activado")) {
+			return true;
+		} else
+		// Comprobamos si el producto esta desactivado y la seleccion es desactivado
+		if (!pro.isStockDisponible() && filtroEstado.equalsIgnoreCase("desactivado")) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Metodo que comprueba si un producto cumple los requisitos de busqueda o no
+	 * 
+	 * @param pro             es el {@link Producto} que se va a filtrar
+	 * @param filtrarBusqueda es el filtro que se va a utilizar
+	 * @return TRUE si cumple el requisito || False si no se cumple
+	 */
+	private boolean filtrarBusqueda(Producto pro, String filtrarBusqueda) {
+		// Si la busqueda el completa retornamos true
+		if (filtrarBusqueda.equalsIgnoreCase("Introduce el nombre de un producto")) {
+			return true;
+		} else
+		// Si el nombre del producto contiene el texto del filtro
+		if (pro.getNombreProducto().toLowerCase().contains(filtrarBusqueda.toLowerCase())) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -102,6 +187,10 @@ public class PanelMostrarProductosMetodos {
 		return lista;
 	}
 
+	/**
+	 * Metodo que busca los productos que contengan el contenido escrito en el
+	 * buscador
+	 */
 	void iniciarBusqueda() {
 
 		// Iniciamos el teclado en pantalla
@@ -121,5 +210,23 @@ public class PanelMostrarProductosMetodos {
 		// Añadimos el panel pedido al panel principal
 		new PanelUtil().insertarEnPanel(ConfiguracionInicial.get().getVentanaPrincipal().getPanelSecundario(),
 				ClasesEstaticas.getPanelPedido());
+	}
+
+	/**
+	 * Metodo encargado de reiniciar todos los parametros
+	 */
+	protected void reiniciarParametros() {
+		// Restablecemos la busqueda
+		panelMuestra.getCasillaBusqueda().setText("Introduce el nombre de un producto");
+
+		// Restablecemos el panel de activos e inactivos
+		panelMuestra.getTodosProductos().setSelected(true);
+
+		// Restablecemos el panel de categorias
+		panelMuestra.getTodasCategorias().setSelected(true);
+
+		// Volvemos a mostrar todos los productos
+		mostrarProductos();
+
 	}
 }

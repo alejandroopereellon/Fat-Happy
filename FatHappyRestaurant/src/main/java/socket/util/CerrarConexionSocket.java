@@ -22,12 +22,12 @@ public class CerrarConexionSocket {
 
 	public synchronized void cerrar() {
 
-		SocketCliente cliente = ClasesEstaticas.getSocket();
-
 		// Comprobamos si el socket es nulo
 		if (ClasesEstaticas.getSocket() == null) {
 			return;
 		}
+
+		SocketCliente cliente = ClasesEstaticas.getSocket();
 
 		// Establecemos el input en null
 		try {
@@ -73,21 +73,23 @@ public class CerrarConexionSocket {
 		// Cerramos el socket del cliente
 		try {
 			logger.debug("Se va a cerrar el socket del cliente");
-			cliente.getSocketCliente().close();
-			cliente.setSocketCliente(null);
+			if (cliente != null) {
+				cliente.getSocketCliente().close();
+				cliente.setSocketCliente(null);
+			}
 			ClasesEstaticas.setSocket(null);
 			logger.debug("Se ha cerrado el socket del cliente");
 		} catch (IOException e) {
 			logger.error("Ha ocurrido un error al cerrar el socket del cliente", e);
 		}
 
-		JLabel label = ClasesEstaticas.getPanelCaja().getEstadoConexion();
-		label.setForeground(Color.orange);
-		label.setText("Estableciendo conexion");
-		logger.debug("Se va a intentar establecer conexion con el servidor");
+//		JLabel label = ClasesEstaticas.getPanelCaja().getEstadoConexion();
+//		label.setForeground(Color.orange);
+//		label.setText("Estableciendo conexion");
 
-		// Volvemos a iniciar la conexion
-		new ConectarAlServidor().start();
+		JLabel label = ClasesEstaticas.getPanelCaja().getEstadoConexion();
+		label.setForeground(Color.red);
+		label.setText("Desconectado");
 	}
 
 }

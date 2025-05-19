@@ -6,6 +6,8 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -74,6 +76,8 @@ public class FTPDownloader {
 
 		} catch (IOException e) {
 			logger.error("Error en la conexión FTP", e);
+			new DialogoMostrarMensajeMetodos()
+					.mostrarMensaje("ERROR: Ha ocurrido un error al realizar la conexion con el servidor FTP");
 		} finally {
 			if (ftpClient.isConnected()) {
 				try {

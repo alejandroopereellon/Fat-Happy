@@ -89,19 +89,27 @@ public class CasillaProductoMetodos {
 		if (ClasesEstaticas.getPedido() == null) {
 			// Iniciamos el pedido
 			ClasesEstaticas.iniciarPedido();
+			logger.debug("Se ha inciado un nuevo pedido");
 		}
 
-		// 2. Anadimos el producto al pedido si el pedido esta iniciado
 		if (ClasesEstaticas.getPedido() != null) {
-			new ModificarOrdenPedido(ClasesEstaticas.getPedido()).insertarProductoEnPedido(interfaz.getProducto());
+			Thread hiloAnadirProducto = new Thread(() -> {
+				// 2. Anadimos el producto al pedido si el pedido esta iniciado
+				new ModificarOrdenPedido(ClasesEstaticas.getPedido()).insertarProductoEnPedido(interfaz.getProducto());
+
+				// 3. Actualizamos la lista
+				new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).actualizarLista();
+
+				// 4. Seleccionamos el ultimo elemento de la lista (el anadido)
+				ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
+						.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize() - 1);
+			});
+
+			// Iniciamos el hilo de conexion FTP
+			hiloAnadirProducto.start();
+			logger.debug("Se ha iniciado el hilo que añade el producto en el pedido");
 		}
 
-		// 3. Actualizamos la lista
-		new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).actualizarLista();
-
-		// 4. Seleccionamos el ultimo elemento de la lista (el anadido)
-		ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
-				.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize() - 1);
 	}
 
 	/**

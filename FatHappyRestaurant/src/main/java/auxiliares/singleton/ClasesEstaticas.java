@@ -16,6 +16,7 @@ import productos.modelo.Producto;
 import restaurante.modelo.Restaurante;
 import socket.modelo.Pong;
 import socket.modelo.SocketCliente;
+import socket.util.ConectarAlServidor;
 
 public class ClasesEstaticas {
 
@@ -45,6 +46,14 @@ public class ClasesEstaticas {
 
 	// Dato estatico que mantiene en memoria los pongs recibidos
 	public static final BlockingQueue<Pong> colaPong = new LinkedBlockingQueue<>();
+
+	// Dato estatico que mantiene en memoria el check de actualizar constantemente
+	// el servidor
+	public static boolean reconexionAutomatica = true;
+
+	// Dato estatico que mantiene en memoria el hilo que mantiene la conexion al
+	// servidor
+	public static ConectarAlServidor hiloConexionServidor = new ConectarAlServidor();
 
 	/**
 	 * Guarda el pedido actual en memoria.
@@ -221,6 +230,22 @@ public class ClasesEstaticas {
 
 	public static BlockingQueue<Pong> getColapong() {
 		return colaPong;
+	}
+
+	public static boolean isReconexionautomatica() {
+		return reconexionAutomatica;
+	}
+
+	public static void setReconexionAutomatica(boolean reconexionAutomatica) {
+		ClasesEstaticas.reconexionAutomatica = reconexionAutomatica;
+	}
+
+	public static ConectarAlServidor getHiloconexionservidor() {
+		return hiloConexionServidor;
+	}
+	
+	public static void setHiloConexionServidor(ConectarAlServidor hiloConexionServidor) {
+		ClasesEstaticas.hiloConexionServidor = hiloConexionServidor;
 	}
 
 }

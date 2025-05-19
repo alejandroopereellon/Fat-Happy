@@ -1,11 +1,14 @@
 package socket.util;
 
+import java.awt.Color;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -37,6 +40,12 @@ public class ConectarAlServidor extends Thread {
 
 			logger.info("Se va a establecer una conexion socket al servidor");
 
+			if (ClasesEstaticas.getPanelCaja() != null) {
+				JLabel label = ClasesEstaticas.getPanelCaja().getEstadoConexion();
+				label.setForeground(Color.orange);
+				label.setText("Estableciendo conexion");
+			}
+
 			// Establecemos la informacion del estado de la conexion
 			// new VentanaPrincipalMetodos().establecerConexionPendiente();
 
@@ -65,6 +74,8 @@ public class ConectarAlServidor extends Thread {
 			} catch (UnknownHostException e) {
 				logger.error("No se ha podido resolver la direccion ip del servidor", e);
 				new CerrarConexionSocket().cerrar();
+			} catch (ConnectException e) {
+				logger.error("El servidor no esta activo",e);
 			} catch (IOException e) {
 				logger.error("Ha ocurrido un error de red", e);
 				new CerrarConexionSocket().cerrar();
@@ -91,6 +102,12 @@ public class ConectarAlServidor extends Thread {
 				logger.error("Ha ocurrido un error en la espera del hilo de inicio de servidor", e);
 			}
 
-		} while (ClasesEstaticas.getSocket() == null);
+		} while (!Thread.currentThread().isInterrupted() && ClasesEstaticas.isReconexionautomatica());
+
+		// Cerramos la conexion al servidor
+		new CerrarConexionSocket().cerrar();
+
+		// Volvemos el hilo de la clase estatica en null
+		ClasesEstaticas.setHiloConexionServidor(null);
 	}
 }

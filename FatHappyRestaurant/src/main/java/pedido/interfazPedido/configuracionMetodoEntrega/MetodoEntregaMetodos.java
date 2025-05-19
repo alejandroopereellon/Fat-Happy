@@ -3,7 +3,6 @@ package pedido.interfazPedido.configuracionMetodoEntrega;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.solicitarNumero.SolicitarNumeroMetodos;
 import pedido.modelo.Pedido;
 
@@ -41,7 +40,7 @@ public class MetodoEntregaMetodos {
 			// Solicitamos el numero de mesa
 			int numeroMesa = new SolicitarNumeroMetodos("Introduce numero de mesa").solicitarNumero();
 			if (numeroMesa == 0) {
-				new DialogoMostrarMensajeMetodos().mostrarMensaje("No se ha asignado una mesa al pedido");
+				logger.debug("No se ha asignado una mesa al pedido");
 			} else {
 				pedido.getOrden().setNumeroMesa(numeroMesa);
 				logger.debug("Se ha asignado el numero {} de mesa al pedido {}", numeroMesa, pedido.getNumeroPedido());

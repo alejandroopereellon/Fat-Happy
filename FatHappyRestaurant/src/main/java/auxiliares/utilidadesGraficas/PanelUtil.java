@@ -27,7 +27,7 @@ public class PanelUtil {
 
 		panel.revalidate();
 		panel.repaint();
-		logger.info("Panel actualizado correctamente");
+		logger.debug("Panel actualizado correctamente");
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class PanelUtil {
 		panel.removeAll();
 		panel.revalidate();
 		panel.repaint();
-		logger.info("Panel limpiado correctamente");
+		logger.debug("Panel limpiado correctamente");
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class PanelUtil {
 		contenedor.add(componente);
 		contenedor.revalidate();
 		contenedor.repaint();
-		logger.info("Se ha insertado un componente en el panel correctamente");
+		logger.debug("Se ha insertado un componente en el panel correctamente");
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class PanelUtil {
 		contenedor.add(componente);
 		contenedor.revalidate();
 		contenedor.repaint();
-		logger.info("Se ha insertado un componente en el panel correctamente");
+		logger.debug("Se ha insertado un componente en el panel correctamente");
 	}
 
 }

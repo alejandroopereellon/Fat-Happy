@@ -4,13 +4,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.grafica.InicioApp;
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import caja.util.IniciarCaja;
 import productos.dao.ProductosDaoGlobal;
 import productos.dao.ProductosDaoHibernateImpl;
 import productos.util.hiloActualizacionProductos.ActualizarListaProductos;
 import restaurante.dao.RestauranteDaoHibernateImpl;
-import socket.util.ConectarAlServidor;
 import ventanaPrincipal.InterfazVentanaPrincipal;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
@@ -41,12 +41,13 @@ public class InicioAplicacion {
 		// Iniciar descarga de imágenes del servidor ftp
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
 		grafica.getBarraProgreso().setValue(15);
-//		if (new FTPDownloader().iniciarConexionYDescargar()) {
-//			logger.info("Se han cargado los ficheros en local");
-//		} else {
-//			logger.error("No se han podido cargar los ficheros en local");
-//			return false;
-//		}
+		Thread hiloFTP = new Thread(() -> {
+			new FTPDownloader().iniciarConexionYDescargar();
+		});
+		// Iniciamos el hilo de conexion FTP
+		hiloFTP.start();
+		logger.debug("Se ha iniciado el hilo de conexion al servidor");
+
 		grafica.getBarraProgreso().setValue(20);
 
 		// Cargar datos del restaurante
@@ -54,24 +55,11 @@ public class InicioAplicacion {
 		ClasesEstaticas.setRestaurante(new RestauranteDaoHibernateImpl()
 				.obtenerRestaurante(ConfiguracionInicial.get().getCodigoRestaurante()));
 		grafica.getBarraProgreso().setValue(25);
-		// Realizamos comprobacion de si el restaurante se ha podido volcar
-		// correctamente
-		if (ClasesEstaticas.getRestaurante() != null) {
-			logger.info("Se ha cargado el restaurante con ID {}", ClasesEstaticas.getRestaurante().getIdRestaurante());
-			grafica.getBarraProgreso().setValue(30);
-		} else {
-			logger.error("No se ha podido cargar los datos del restaurante con ID {}",
-					ConfiguracionInicial.get().getCodigoRestaurante());
+
+		// Obtenemos el restaurante, y en caso
+		if (!extraerDatosRestaurante(grafica)) {
 			return false;
 		}
-		grafica.getBarraProgreso().setValue(40);
-
-		// Establecemos la conexion al socket
-		grafica.getEstadoInicio().setText("Conectando al servidor");
-		// new HiloComprobacionConexionSocket().start();
-		new ConectarAlServidor().start();
-		logger.info("Se ha iniciado el hilo de conexion al socket");
-		grafica.getBarraProgreso().setValue(50);
 
 		// Establecemos el dao
 		grafica.getEstadoInicio().setText("Estableciendo la obtencion de datos");
@@ -88,19 +76,15 @@ public class InicioAplicacion {
 		}
 		grafica.getBarraProgreso().setValue(70);
 
-		// Cargamos todos los productos en memoria haciendo uso del hilo
-		grafica.getEstadoInicio().setText("Cargando los productos del sistema");
+		cargarProductos(grafica);
 
-		// Creamos el objeto de actualizacion de productos
-		ActualizarListaProductos actualizarProductos = new ActualizarListaProductos();
-
-		// Actualizamos todos los productos
-		actualizarProductos.actualizarDatos();
-		grafica.getBarraProgreso().setValue(80);
-
-		// Iniciamos el hilo de actualizacion automatica del stock
-		actualizarProductos.start();
-		grafica.getBarraProgreso().setValue(85);
+		try {
+			hiloFTP.join();
+		} catch (InterruptedException e) {
+			logger.error("Ha ocurrido un error con los hilos de FTP o de obtencion de productos desde la base de datos",
+					e);
+		}
+		extablecerConexionSocket(grafica);
 
 		// Iniciamos la ventana principal del programa
 		grafica.getEstadoInicio().setText("Iniciando la ventana principal...");
@@ -117,6 +101,48 @@ public class InicioAplicacion {
 		grafica.dispose();
 
 		return true;
+	}
+
+	private void extablecerConexionSocket(InicioApp grafica) {
+		// Establecemos la conexion al socket
+		grafica.getEstadoInicio().setText("Conectando al servidor");
+		ClasesEstaticas.getHiloconexionservidor().start();
+		logger.info("Se ha iniciado el hilo de conexion al socket");
+		grafica.getBarraProgreso().setValue(50);
+	}
+
+	private boolean extraerDatosRestaurante(InicioApp grafica) {
+		// Realizamos comprobacion de si el restaurante se ha podido volcar
+		// correctamente
+		if (ClasesEstaticas.getRestaurante() != null) {
+			logger.info("Se ha cargado el restaurante con ID {}", ClasesEstaticas.getRestaurante().getIdRestaurante());
+			grafica.getBarraProgreso().setValue(30);
+
+		} else {
+			logger.error("No se ha podido cargar los datos del restaurante con ID {}",
+					ConfiguracionInicial.get().getCodigoRestaurante());
+			new DialogoMostrarMensajeMetodos()
+					.mostrarMensaje("ERROR: No se ha podido cargar los datos del restaurante");
+			return false;
+		}
+		grafica.getBarraProgreso().setValue(40);
+		return true;
+	}
+
+	private void cargarProductos(InicioApp grafica) {
+		// Cargamos todos los productos en memoria
+		grafica.getEstadoInicio().setText("Cargando los productos del sistema");
+
+		// Creamos el objeto de actualizacion de productos
+		ActualizarListaProductos actualizarProductos = new ActualizarListaProductos();
+
+		// Actualizamos todos los productos
+		actualizarProductos.actualizarDatos();
+		grafica.getBarraProgreso().setValue(80);
+
+		// Iniciamos el hilo de actualizacion automatica del stock
+		actualizarProductos.start();
+		grafica.getBarraProgreso().setValue(85);
 	}
 
 }
