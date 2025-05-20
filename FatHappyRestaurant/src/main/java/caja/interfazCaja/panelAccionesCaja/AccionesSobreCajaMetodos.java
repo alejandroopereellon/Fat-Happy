@@ -41,6 +41,8 @@ public class AccionesSobreCajaMetodos {
 		// Configuramos los botones segun la caja
 		habilitarDeshabilitarBotonesCaja();
 
+		// Establecemos el checkbox segun el estado del reintento de conexion
+		interfaz.getCheckReintentarConexion().setSelected(ClasesEstaticas.reconexionAutomatica);
 	}
 
 	/*
@@ -138,13 +140,20 @@ public class AccionesSobreCajaMetodos {
 	 * metodo que fuerza la actualizacion de los productos desde la base de datos
 	 */
 	protected void actualizarImagenesServidor() {
-		if (new FTPDownloader().iniciarConexionYDescargar()) {
-			logger.info("Se han cargado los ficheros en local");
-			new DialogoMostrarMensaje("Se han actualizado las imagenes correctamente");
-		} else {
-			logger.error("No se han podido cargar los ficheros en local");
-			new DialogoMostrarMensaje("No se han podido actualizar las imagenes correctamente");
-		}
+		Thread hiloFTP = new Thread(() -> {
+			if (new FTPDownloader().descargarImagenesServidor()) {
+				logger.info("Se han cargado los ficheros en local");
+				new DialogoMostrarMensajeMetodos().mostrarMensaje("Se han actualizado las imagenes correctamente");
+			} else {
+				logger.error("No se han podido cargar los ficheros en local");
+				new DialogoMostrarMensajeMetodos()
+						.mostrarMensaje("No se han podido actualizar las imagenes correctamente");
+			}
+		});
+		// Iniciamos el hilo de conexion FTP
+		hiloFTP.start();
+		logger.debug("Se ha iniciado el hilo de conexion al servidor");
+		new DialogoMostrarMensajeMetodos().mostrarMensaje("Se van a descargar las imagenes");
 	}
 
 	/**
@@ -166,6 +175,10 @@ public class AccionesSobreCajaMetodos {
 	 * Metodo que permite forzar la conexion al servidor en caso de ocurrir un error
 	 */
 	protected void forzarConexionServidor() {
+		// Marcamos el check como activo
+		interfaz.getCheckReintentarConexion().setSelected(true);
+		actualizarReconexionAutomatica();
+
 		if (ClasesEstaticas.getHiloconexionservidor() != null) {
 			try {
 				// Cerramos el hilo de conexion automatica
@@ -203,6 +216,10 @@ public class AccionesSobreCajaMetodos {
 	 * Metodo que realiza una desconexion del servidor
 	 */
 	protected void desconectarDelServidor() {
+		// Marcamos el check como activo
+		interfaz.getCheckReintentarConexion().setSelected(false);
+		actualizarReconexionAutomatica();
+
 		new CerrarConexionSocket().cerrar();
 		logger.debug("Se ha cerrado la conexion al servidor");
 		new DialogoMostrarMensajeMetodos().mostrarMensaje("Se ha cerrado la conexion al servidor");

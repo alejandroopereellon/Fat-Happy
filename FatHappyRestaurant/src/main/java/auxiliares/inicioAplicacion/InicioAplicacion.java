@@ -42,7 +42,7 @@ public class InicioAplicacion {
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
 		grafica.getBarraProgreso().setValue(15);
 		Thread hiloFTP = new Thread(() -> {
-			new FTPDownloader().iniciarConexionYDescargar();
+			new FTPDownloader().descargarImagenesServidor();
 		});
 		// Iniciamos el hilo de conexion FTP
 		hiloFTP.start();

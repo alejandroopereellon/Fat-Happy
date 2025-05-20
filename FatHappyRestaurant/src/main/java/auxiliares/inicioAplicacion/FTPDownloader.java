@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Metodo que realiza la connexion y la descarga de todos los ficheros
@@ -24,13 +26,59 @@ public class FTPDownloader {
 	private static final Logger logger = LogManager.getLogger(FTPDownloader.class);
 
 	/**
+	 * Metodo que ejecuta multiples hilos para descargar las diferentes carpetas
+	 * simultaneamente
+	 * 
+	 * @return TRUE si se ha ejecutado correctamente el proceso
+	 */
+	public boolean descargarImagenesServidor() {
+		Configuracion config = ConfiguracionInicial.get();
+		String rutaLocal = config.getDirectorioLocal() + File.separator + "imagenes";
+		String directorioRemoto = config.getFtpDirectorioRemoto();
+
+		String[] remoto = { directorioRemoto, (directorioRemoto + "/128"), (directorioRemoto + "/64"),
+				(directorioRemoto + "/256"), (directorioRemoto + "/ImagenExtra"),
+				(directorioRemoto + "/ImagenIngredientes") };
+
+		String[] ficheros = { rutaLocal, (rutaLocal + "/128"), (rutaLocal + "/64"), (rutaLocal + "/256"),
+				(rutaLocal + "/ImagenExtra"), (rutaLocal + "/ImagenIngredientes") };
+
+		List<Thread> listaHilos = new ArrayList<Thread>();
+
+		for (int i = 0; i < ficheros.length; i++) {
+			final int idx = i;
+			listaHilos.add(new Thread(() -> {
+				iniciarConexionYDescargar(ficheros[idx], remoto[idx]);
+			}));
+
+			// Iniciamos el hilo de conexion
+			listaHilos.getLast().start();
+			logger.debug("Se ha iniciado el hilo de conexion al servidor");
+		}
+
+		// Realizamos el bucle de espera
+		for (Thread thread : listaHilos) {
+			// Iniciamos la espera
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				logger.error("Ha ocurrido un error al hacer join a los hilos de la conexion FTP", e);
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
+	/**
 	 * Metodo que principalmente realiza la conexion con el servidor
 	 * 
 	 * @return TRUE en caso de que se haya realizado la conexion y la descarga de
 	 *         todos los ficheros || FALSE en caso de que ocurra algun error al
 	 *         descargar los ficheros o establecer conexion con el servidor FTP
 	 */
-	public boolean iniciarConexionYDescargar() {
+	public boolean iniciarConexionYDescargar(String rutaLocal, String directorioRemoto) {
 		Configuracion config = ConfiguracionInicial.get();
 
 		// Configuramos la conexion con el servidor
@@ -38,8 +86,6 @@ public class FTPDownloader {
 		int puerto = config.getFtpPuerto();
 		String usuario = config.getFtpUsuario();
 		String contrasena = config.getFtpContrasena();
-		String directorioRemoto = config.getFtpDirectorioRemoto();
-		String rutaLocal = config.getDirectorioLocal() + File.separator + "imagenes";
 
 		logger.info("Conectando a servidor FTP: {}:{}", servidor, puerto);
 		logger.info("Ruta local de destino: {}", rutaLocal);
@@ -123,7 +169,7 @@ public class FTPDownloader {
 			String rutaLocalArchivo = rutaLocal + File.separator + nombreArchivo;
 
 			if (archivo.isDirectory()) {
-				descargarDirectorio(ftpClient, rutaRemota, rutaLocalArchivo);
+				// descargarDirectorio(ftpClient, rutaRemota, rutaLocalArchivo);
 			} else {
 				try (OutputStream outputStream = new FileOutputStream(rutaLocalArchivo)) {
 					boolean exito = ftpClient.retrieveFile(rutaRemota, outputStream);
