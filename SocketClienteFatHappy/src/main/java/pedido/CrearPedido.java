@@ -47,7 +47,7 @@ public class CrearPedido extends Thread {
 		StringBuilder textoPanel = new StringBuilder();
 
 		// Creamos la bandera que informa de si el panel es adicional o no
-		boolean bandera = false;
+		boolean bandera = true;
 
 		// Por cada linea, vamos a añadirla, cuando sea divisor de 15 se genera un nuevo
 		// panel
@@ -61,7 +61,7 @@ public class CrearPedido extends Thread {
 				PanelPedido panel = new PanelPedidoMetodos(pedido, textoPanel).configuracionInicialPanelPedido(bandera);
 				pedido.getPaneles().add(panel);
 
-				bandera = true;
+				bandera = false;
 
 				// Reiniciamos el textoPanel
 				textoPanel.setLength(0);
@@ -71,7 +71,7 @@ public class CrearPedido extends Thread {
 		// Si hay elementos restantes se añaden
 		if (textoPanel.length() > 0) {
 			// Insertamos el panel de pedidos con el texto
-			PanelPedido panel = new PanelPedidoMetodos(pedido, textoPanel).configuracionInicialPanelPedido(true);
+			PanelPedido panel = new PanelPedidoMetodos(pedido, textoPanel).configuracionInicialPanelPedido(false);
 			pedido.getPaneles().add(panel);
 		}
 
