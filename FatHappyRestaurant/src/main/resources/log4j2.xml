@@ -35,7 +35,7 @@
 
     <Loggers>
         <!-- Captura desde nivel DEBUG hacia arriba -->
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
             <AppenderRef ref="ErrorFile"/>

@@ -101,7 +101,7 @@ public class FiltroTodosLosProductos extends javax.swing.JPanel {
         textoBuscado.setText(new TecladoEnPantallaMetodos(new TecladoEnPantalla()).iniciarTecladoPantalla());
         new PanelPedidoMetodos(ClasesEstaticas.getPanelPedido()).mostrarTodasCasillas(this);
     }//GEN-LAST:event_botonBuscarActionPerformed
-    
+
     public JTextArea getTextoBuscado() {
         return textoBuscado;
     }

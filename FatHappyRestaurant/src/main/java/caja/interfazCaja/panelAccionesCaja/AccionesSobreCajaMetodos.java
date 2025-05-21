@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.inicioAplicacion.FTPDownloader;
-import auxiliares.mostrarMensaje.DialogoMostrarMensaje;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.PanelUtil;
@@ -16,8 +15,10 @@ import basesDatos.panelMostrarProductos.PanelMuestraProductos;
 import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
 import caja.util.CerrarCaja;
+import empleados.util.ActividadEmpleados;
 import socket.util.CerrarConexionSocket;
 import socket.util.ConectarAlServidor;
+import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
 
 /**
  * Clase que contiene los metodos de la interfaz grafica de
@@ -116,6 +117,9 @@ public class AccionesSobreCajaMetodos {
 		// TODO
 	}
 
+	/**
+	 * Metodo que inicia el panel que permite modificar el stock de los productos
+	 */
 	protected void cambiarEstockProductos() {
 		// Cargamos el panel de muestra de productos
 		PanelMuestraProductos panel = new PanelMuestraProductos();
@@ -226,7 +230,7 @@ public class AccionesSobreCajaMetodos {
 
 		// Modificamos el checkbox a desactivado
 		interfaz.getCheckReintentarConexion().setSelected(false);
-		actualizarImagenesServidor();
+		actualizarReconexionAutomatica();
 		logger.debug("Se ha deshabilitado el check de conexion automatica");
 	}
 
@@ -240,6 +244,42 @@ public class AccionesSobreCajaMetodos {
 			pb.start();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Metodo enfocado en cancelar el pedido en curso
+	 */
+	protected void cancelarPedido() {
+		// Comprobamos si el pedido esta iniciado
+		if (ClasesEstaticas.getPedido() != null) {
+			logger.debug("Se tiene permisos de administrador para cancelar el pedido");
+			// Solicitamos permisos de encargado
+			if (new ActividadEmpleados()
+					.solicitarPermisos("Cancelar el pedido " + ClasesEstaticas.getPedido().getNumeroPedido(), 2)) {
+				// Notificamos que se ha cancelado el pedido
+				new DialogoMostrarMensajeMetodos()
+						.mostrarMensaje("Se ha cancelado el pedido " + ClasesEstaticas.getPedido().getNumeroPedido());
+				logger.debug("Se ha notificado la cancelacion del pedido");
+
+				// Ponemos el pedido actual y el panel de pedido en nulo
+				ClasesEstaticas.setPanelPedido(null);
+				ClasesEstaticas.setPedido(null);
+				logger.debug("Se han puesto en nulo el panel de pedido y el pedido");
+
+				// Establecemos un nuevo panel de pedido y lo mostramos
+				new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
+						.configurarPanelPrincipal();
+				logger.info("Se ha cancelado el pedido actual");
+			} else {
+				new DialogoMostrarMensajeMetodos()
+						.mostrarMensaje("No existen los permisos necesarios para cancelar el pedido");
+				logger.debug("No hay permisos de adminsitrador para cancelar el pedido");
+			}
+		} else {
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("No hay un pedido en curso para cancelar");
+			logger.debug("No hay ningun pedido activo para cancelar");
 		}
 
 	}

@@ -23,7 +23,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="jScrollPane3" min="-2" pref="300" max="-2" attributes="0"/>
-              <EmptySpace pref="81" max="32767" attributes="0"/>
+              <EmptySpace pref="75" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="textoPagado" min="-2" max="-2" attributes="0"/>
@@ -55,17 +55,22 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="botonReintentarCobro" min="-2" pref="156" max="-2" attributes="0"/>
                                       <Component id="botonBorrar" min="-2" pref="156" max="-2" attributes="0"/>
+                                      <Component id="botonrealizarDevolucion" min="-2" pref="156" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="boton0" min="-2" pref="156" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="botonCobrar" min="-2" pref="156" max="-2" attributes="0"/>
+                                          <Component id="botonCobrar" min="-2" pref="162" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="botonEditarPedido" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                          <Component id="botonReintentarCobro" min="-2" pref="156" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="botonEditarPedido" min="-2" pref="156" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -189,14 +194,20 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="botonContinuar" min="-2" pref="63" max="-2" attributes="0"/>
                   <Component id="importeExacto" min="-2" pref="63" max="-2" attributes="0"/>
-                  <Component id="botonEditarPedido" min="-2" pref="63" max="-2" attributes="0"/>
-                  <Component id="botonReintentarCobro" min="-2" pref="63" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="botonReintentarCobro" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
+                      <Component id="botonrealizarDevolucion" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="botonEditarPedido" alignment="1" min="-2" pref="63" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="68" pref="68" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -543,6 +554,18 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cantidad2"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonrealizarDevolucion">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Devolucion&lt;br&gt;pedido&lt;/html&gt; "/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonrealizarDevolucionActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

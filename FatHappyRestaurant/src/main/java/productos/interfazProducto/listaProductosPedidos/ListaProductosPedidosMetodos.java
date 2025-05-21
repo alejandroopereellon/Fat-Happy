@@ -2,6 +2,8 @@ package productos.interfazProducto.listaProductosPedidos;
 
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,7 +42,7 @@ public class ListaProductosPedidosMetodos {
 	 *            {@link MenuPedido}
 	 */
 	public void anadirElemento(Object obj) {
-		interfaz.getModeloLista().addElement(obj);
+		runInEdt(() -> interfaz.getModeloLista().addElement(obj));
 		logger.info("Se ha añadido a la lista el objeto {}", obj);
 
 	}
@@ -91,4 +93,14 @@ public class ListaProductosPedidosMetodos {
 	public void actualizarLista() {
 		interfaz.getListaProductosPedidos().updateUI();
 	}
+	
+	/**  Ejecuta el runnable en el EDT; si ya estamos, lo hace directamente. */
+	private void runInEdt(Runnable r) {
+	    if (SwingUtilities.isEventDispatchThread()) {
+	        r.run();
+	    } else {
+	        SwingUtilities.invokeLater(r);
+	    }
+	}
+
 }

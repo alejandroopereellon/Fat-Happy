@@ -1,5 +1,7 @@
 package pedido.util;
 
+import javax.swing.SwingUtilities;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -69,9 +71,20 @@ public class ModificarOrdenPedido {
 		}
 
 		// 5.Seleccionamos el ultimo objeto de la lista
-		ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
-				.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize() - 1);
-		logger.debug("Se ha seleccionado el ultimo elemento de la lista");
+		// DESPUÉS
+		runInEdt(() -> {
+			PanelPedido panel = ClasesEstaticas.getPanelPedido();
+			int ultimo = panel.getModeloLista().getSize() - 1;
+			if (ultimo >= 0) {
+				panel.getListaProductosPedidos().setSelectedIndex(ultimo);
+				panel.getListaProductosPedidos().ensureIndexIsVisible(ultimo);
+				logger.debug("Se ha seleccionado el último elemento de la lista (EDT)");
+			}
+		});
+
+//		ClasesEstaticas.getPanelPedido().getListaProductosPedidos()
+//				.setSelectedIndex(ClasesEstaticas.getPanelPedido().getModeloLista().getSize() - 1);
+//		logger.debug("Se ha seleccionado el ultimo elemento de la lista");
 
 	}
 
@@ -230,8 +243,11 @@ public class ModificarOrdenPedido {
 		pedido.setImporteTotal(new CalcularImporte(pedido).obtenerImporteDescuento());
 		logger.info("Se ha añadido el producto con id {} en la lista", pro.getCodigo());
 
-		// Anadimos el producto pedido en la casilla del producto
-		new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).anadirElemento(pro);
+		final Producto proFinal = pro;
+		runInEdt(() -> {
+			// Anadimos el producto pedido en la casilla del producto
+			new ListaProductosPedidosMetodos(ClasesEstaticas.getPanelPedido()).anadirElemento(proFinal);
+		});
 	}
 
 	/**
@@ -310,4 +326,14 @@ public class ModificarOrdenPedido {
 			}
 		}
 	}
+
+	/** Ejecuta el runnable en el EDT; si ya estamos, lo hace directamente. */
+	private void runInEdt(Runnable r) {
+		if (SwingUtilities.isEventDispatchThread()) {
+			r.run();
+		} else {
+			SwingUtilities.invokeLater(r);
+		}
+	}
+
 }

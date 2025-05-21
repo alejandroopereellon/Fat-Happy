@@ -10,6 +10,7 @@ import pedido.dao.PedidoDaoHibernateImpl;
 import pedido.modelo.OrdenPedido;
 import pedido.modelo.Pedido;
 import pedido.util.AlmacenarOrdenPedidoJson;
+import pedido.util.AlmacenarTicketPedidoTxt;
 import pedido.util.CalcularImporte;
 import pedido.util.PedidoBuilder;
 import productos.modelo.MenuPedido;
@@ -45,8 +46,14 @@ public class HiloFinalizarOperacion extends Thread {
 		// Establecemos el estado del pedido en pagado
 		pedido.setEstadoPedido(5);
 
-		// Enviamos el pedido al servidor
-		enviarPedidoServidor();
+		if (ClasesEstaticas.getSocket() != null) {
+			try {
+				// Enviamos el pedido al servidor
+				enviarPedidoServidor();
+			} catch (Exception e) {
+				logger.error("Ha ocurrido un error al enviar el pedido al servidor");
+			}
+		}
 
 		// Restablecemos el importe original del pedido
 		new CalcularImporte(pedido).obtenerImporteDescuento();
@@ -56,6 +63,9 @@ public class HiloFinalizarOperacion extends Thread {
 
 		// Almacenamos el pedido en fichero json
 		new AlmacenarOrdenPedidoJson(pedido).almacenarOrdenPedido();
+		
+		//Creamos el ticket del pedido
+		AlmacenarTicketPedidoTxt.guardar(pedido);
 
 		// Insertamos la operacion en la base de datos
 		OperacionBuilder operacion = new OperacionBuilder();

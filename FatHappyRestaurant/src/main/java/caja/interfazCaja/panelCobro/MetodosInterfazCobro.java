@@ -11,12 +11,15 @@ import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.metodosBigDecimal.OperacionesBigDecimal;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
+import auxiliares.solicitarNumero.SolicitarNumeroMetodos;
 import auxiliares.solicitarNumeroDecimal.GestionDecimales;
 import auxiliares.utilidadesGraficas.PanelUtil;
 import caja.interfazCaja.descuentos.SolicitarDescuento;
 import caja.util.HiloFinalizarOperacion;
+import caja.util.OperacionBuilder;
 import empleados.modelo.Empleado;
 import empleados.util.ActividadEmpleados;
+import pedido.dao.PedidoDaoHibernateImpl;
 import pedido.interfazPedido.configuracionPromocion.MetodoPromocionMetodos;
 import pedido.modelo.Pedido;
 import pedido.util.CalcularImporte;
@@ -136,6 +139,7 @@ public class MetodosInterfazCobro {
 		BigDecimal cantidadRestante = new OperacionesBigDecimal().restar(pedido.getImporteTotal(),
 				interfaz.getCantidadPropuesta());
 		logger.debug("La cantidad restante es {}", cantidadRestante);
+		actualizarPantalla();
 
 		// Si el pendiente es negativo o 0 se va a generar la operacion de pago
 		if (cantidadRestante.compareTo(BigDecimal.ZERO) <= 0) {
@@ -179,11 +183,11 @@ public class MetodosInterfazCobro {
 		// Actualizamos el importe del pedido
 		new CalcularImporte(pedido).obtenerImporteDescuento();
 
-		// Actualizamos la pantalla
-		actualizarPantalla();
-
 		// Mostramos el descuento en la interfaz
 		mostrarDescuentoInterfaz();
+
+		// Actualizamos la pantalla
+		actualizarPantalla();
 
 		logger.info("Se ha aplicado un descuento del {} al pedido", pedido.getDescuento());
 
@@ -249,6 +253,7 @@ public class MetodosInterfazCobro {
 		interfaz.getBotonPromo().setEnabled(estado);
 		interfaz.getImporteExacto().setEnabled(estado);
 		interfaz.getBotonEditarPedido().setEnabled(estado);
+		interfaz.getBotonrealizarDevolucion().setEnabled(estado);
 
 		interfaz.getBotonContinuar().setVisible(!estado);
 		interfaz.getBotonVolverCobrar().setVisible(!estado);
@@ -282,9 +287,12 @@ public class MetodosInterfazCobro {
 
 		// Actualizamos la lista de productos para mostrar las promociones
 		interfaz.getListaProductosPedidos().updateUI();
-		
+
 		// Actualizamos el importe total nuevo
 		new CalcularImporte(pedido).obtenerImporteDescuento();
+
+		// Actualizamos la pantalla
+		actualizarPantalla();
 	}
 
 	/**
@@ -328,6 +336,43 @@ public class MetodosInterfazCobro {
 				ClasesEstaticas.getPanelPedido());
 		// Ponemos el pedido en modo de edicion
 		pedido.setEstadoPedido(2);
+	}
+
+	/**
+	 * Metodo que realiza la devolucion de un importe en la aplicacion
+	 */
+	protected void realizarDevolucion() {
+
+		/**
+		 * Solicitamos el numero de pedido referenciado y a continuacion pedimos los
+		 * permisos de administrador
+		 */
+		if (new ActividadEmpleados().solicitarPermisos(
+				"Realizar devolucion pedido" + new SolicitarNumeroMetodos("Introduce el numero de pedido referenciado"),
+				2)) {
+
+			// Insertamos la operacion en la base de datos
+			new PedidoDaoHibernateImpl().insertarPedido(pedido);
+			// Creamos la operacion de devolucion
+			if (new OperacionBuilder().GenerarOperacion(ClasesEstaticas.getPedido(), "Devolucion", "efectivo")) {
+				new DialogoMostrarMensajeMetodos().mostrarMensaje("Se ha realizado la devolucion correctamente");
+				logger.debug("Se ha realizado la devolucion del pedido {}", pedido.getNumeroPedido());
+
+				// Ponemos el pedido actual y el panel de pedido en nulo
+				ClasesEstaticas.setPanelPedido(null);
+				ClasesEstaticas.setPedido(null);
+				// Establecemos un nuevo panel de pedido y lo mostramos
+				new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
+						.configurarPanelPrincipal();
+			} else {
+				new DialogoMostrarMensajeMetodos().mostrarMensaje("ERROR: NO ha realizado la devolucion correctamente");
+				logger.debug("ERROR: NO se ha realizado la devolucion del pedido {}", pedido.getNumeroPedido());
+			}
+
+		} else {
+			new DialogoMostrarMensajeMetodos()
+					.mostrarMensaje("El usuario introducido no esta autorizado para realizar la devolucion");
+		}
 	}
 
 }

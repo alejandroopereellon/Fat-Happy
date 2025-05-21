@@ -100,13 +100,10 @@ public class Restaurante {
 	}
 
 	// toString
-
 	@Override
 	public String toString() {
-		return "Restaurante [idRestaurante=" + idRestaurante + ", razon_social=" + razon_social + ", direccion="
-				+ direccion + ", provincia=" + provincia + ", ciudad=" + ciudad + ", codigoPostal=" + codigoPostal
-				+ ", nif=" + nif + ", gerente=" + gerente + ", telefonoContacto=" + telefonoContacto
-				+ ", email_contacto=" + email_contacto + "]";
+		return razon_social + "\n" + direccion + "\n" + codigoPostal + " " + ciudad + " (" + provincia + ")\n" + "NIF: "
+				+ nif + "\n" + "Tel: " + telefonoContacto + "  ·  " + email_contacto;
 	}
 
 }

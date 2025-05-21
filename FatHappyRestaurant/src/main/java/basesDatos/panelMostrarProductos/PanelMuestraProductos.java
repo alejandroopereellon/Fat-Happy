@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 public class PanelMuestraProductos extends javax.swing.JPanel {
 
     private final PanelMostrarProductosMetodos metodos = new PanelMostrarProductosMetodos(this);
-    
+
     /**
      * Creates new form PanelMuestraProductos
      */
@@ -283,10 +283,10 @@ public class PanelMuestraProductos extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CasillaBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Restablecer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(CasillaBusqueda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Restablecer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -346,7 +346,7 @@ public class PanelMuestraProductos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBusquedaActionPerformed
-      metodos.iniciarBusqueda();
+        metodos.iniciarBusqueda();
     }//GEN-LAST:event_botonBusquedaActionPerformed
 
     private void pantallaPrinciplaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pantallaPrinciplaActionPerformed
@@ -358,7 +358,7 @@ public class PanelMuestraProductos extends javax.swing.JPanel {
     }//GEN-LAST:event_productosPostresActionPerformed
 
     private void RestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestablecerActionPerformed
-       metodos.reiniciarParametros();
+        metodos.reiniciarParametros();
     }//GEN-LAST:event_RestablecerActionPerformed
 
     public JTextArea getCasillaBusqueda() {
@@ -438,8 +438,6 @@ public class PanelMuestraProductos extends javax.swing.JPanel {
     }
 
 
-
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea CasillaBusqueda;
     private javax.swing.JButton Restablecer;
