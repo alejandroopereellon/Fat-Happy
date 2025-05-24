@@ -24,14 +24,13 @@ public class PurgarPedidos {
 
 	protected void iniciar() {
 		logger.debug("Se ha iniciado la tarea programada del purgado de pedidos");
-		
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 
 		programador.scheduleWithFixedDelay(() -> {
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			ClasesEstaticas.getListaPedidos().removeIf(ped -> comprobarPedidoPasadoTiempo(ped));
 			logger.debug("Se han purgado los pedidos no activos");
 		}, 0, 300, TimeUnit.SECONDS);
@@ -49,11 +48,11 @@ public class PurgarPedidos {
 
 		if (LocalDateTime.now().isAfter(fechaCaducidad)) {
 			logger.debug("El pedido {} restaurante {} lleva mas de 25 minutos, se liberará", pedido.getNumeroPedido(),
-				pedido.getNumeroRestaurante());
+					pedido.getNumeroRestaurante());
 			return true;
 		}
 		return false;
-		
+
 	}
 
 	public void detener() {

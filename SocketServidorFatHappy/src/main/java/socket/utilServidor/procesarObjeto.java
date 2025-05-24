@@ -35,7 +35,9 @@ public class procesarObjeto extends Thread {
 		if (objeto instanceof Ping) {
 			logger.debug("El servidor ha enviado una peticion {} de vida al cliente", ((Ping) objeto));
 			int numero = ((Ping) objeto).getNumeroComprobacion();
-			socket.getListaObjetosPendientes().add(new Pong(numero));
+			Pong pong = new Pong(numero);
+			socket.getListaObjetosPendientes().add(pong);
+			logger.debug("Se va a insertar un nuevo pong {}", pong);
 		}
 		// Si el objeto es una respuesta de que estamos activos
 		else if (objeto instanceof Pong) {

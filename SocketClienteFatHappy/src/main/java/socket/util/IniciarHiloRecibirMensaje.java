@@ -14,7 +14,7 @@ public class IniciarHiloRecibirMensaje extends Thread {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(IniciarHiloRecibirMensaje.class);
 
-	public static ComprobarConexionSocket comprobar = new ComprobarConexionSocket();
+	//public static ComprobarConexionSocket comprobar = new ComprobarConexionSocket();
 
 	private final EnviarRecibirObjetos enviarRecibir = new EnviarRecibirObjetos();
 

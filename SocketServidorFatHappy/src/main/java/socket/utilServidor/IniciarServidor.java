@@ -65,11 +65,11 @@ public class IniciarServidor extends Thread {
 			servidor.bind(new InetSocketAddress("0.0.0.0", 1114));
 			logger.info("Servidor escuchando en {}:{}", servidor.getInetAddress(), servidor.getLocalPort());
 
-			// Iniciamos el purgado de usuarios
-			purgadoCliente.iniciar();
-
-			// Iniciamos el purgado de pedidos
-			purgadoPedidos.iniciar();
+//			// Iniciamos el purgado de usuarios
+//			purgadoCliente.iniciar();
+//
+//			// Iniciamos el purgado de pedidos
+//			purgadoPedidos.iniciar();
 
 			while (true) {
 				try (Socket cliente = servidor.accept()) {

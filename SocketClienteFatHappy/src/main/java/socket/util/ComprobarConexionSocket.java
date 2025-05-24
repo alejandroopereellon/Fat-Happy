@@ -26,7 +26,7 @@ public class ComprobarConexionSocket {
 	 * @return TRUE si se recibe el {@link Pong} (conexion correcta) || FALSE si no
 	 *         se ha recibido {@link Pong}
 	 */
-	public boolean comprobar() {
+	private boolean comprobar() {
 		if (ClasesEstaticas.getSocket() == null) {
 			return false;
 		}
@@ -38,7 +38,7 @@ public class ComprobarConexionSocket {
 			// Enviamos un ping
 			ClasesEstaticas.getListaobjetospendientes().add(new Ping());
 
-			// Esperamos hasta 5 segundos el pong
+			// Esperamos hasta 15 segundos el pong
 			Pong pong = ClasesEstaticas.getColaPong().poll(15, TimeUnit.SECONDS);
 
 			// Esperamos recibir un pong

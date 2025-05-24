@@ -5,7 +5,7 @@
         <!-- ① Carpeta configurable por variable de entorno -->
         <Property name="logPath">${env:LOG_DIR:-${sys:user.home}/fathappyserver/logs}</Property>
         <!-- ② Patrón de log con nivel, hilo y clase -->
-        <Property name="filePattern">%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n</Property>
+        <Property name="filePattern">%d{yyyy-MM-dd HH:mm:ss.SSSSSSSSS} [%t] %-5level %c.%M:%L - %msg%n</Property>
     </Properties>
 
     <Appenders>

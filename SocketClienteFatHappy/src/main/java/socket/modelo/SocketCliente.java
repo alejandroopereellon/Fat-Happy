@@ -30,11 +30,12 @@ public class SocketCliente {
 
 	private ObjectInputStream input;
 
-	private IniciarHiloRecibirMensaje recibirMensajes = new IniciarHiloRecibirMensaje();
+	private IniciarHiloRecibirMensaje recibirMensajes;
 
 	private IniciarHiloEnvioMensaje enviarMensaje = new IniciarHiloEnvioMensaje();
 
-	//private final ScheduledExecutorService pingExec = Executors.newSingleThreadScheduledExecutor();
+	// private final ScheduledExecutorService pingExec =
+	// Executors.newSingleThreadScheduledExecutor();
 
 	// Constructor
 	public SocketCliente(Socket socketCliente) throws IOException {
@@ -50,20 +51,23 @@ public class SocketCliente {
 			// Establecemos el output en base al socket de cliente
 			this.output = new ObjectOutputStream(socketCliente.getOutputStream());
 			this.output.flush();
+			logger.debug("Se ha iniciado el output {}", this.output);
 
-			// Establecemos el inpput en base al socket del cliente
+			// Establecemos el input en base al socket del cliente
 			this.input = new ObjectInputStream(socketCliente.getInputStream());
+			logger.debug("Se ha iniciado el input {}", this.input);
 
 			// Anadimos a la clase singleton el socket
 			ClasesEstaticas.setSocket(this);
-			logger.debug("Se ha establecido el socket del cliente en la clase estatica");
+			logger.debug("Se ha establecido el socket del cliente en la clase estatica {}", ClasesEstaticas.getSocket());
 
-			// Enviamos los datos del rol al cliente
-			ClasesEstaticas.listaObjetosPendientes
-					.add(new RolSocket(ClasesEstaticas.getNumerorestaurante(), ClasesEstaticas.getRolcliente()));
-			logger.debug("Se ha enviado el rol al cliente ");
+//			// Enviamos los datos del rol al cliente
+//			ClasesEstaticas.listaObjetosPendientes
+//					.add(new RolSocket(ClasesEstaticas.getNumerorestaurante(), ClasesEstaticas.getRolcliente()));
+//			logger.debug("Se ha enviado el rol al cliente ");
 
 			// Iniciamos el hilo de recepcion de mensajes
+			this.recibirMensajes= new IniciarHiloRecibirMensaje();
 			this.recibirMensajes.start();
 			logger.debug("Se ha iniciado el hilo de recepcion de mensajes del socket");
 
@@ -71,8 +75,8 @@ public class SocketCliente {
 			this.enviarMensaje.start();
 			logger.debug("Se ha iniciado el hilo de envio de mensajes del socket");
 
-			//arrancarPingTask();
-			logger.debug("Se ha iniciado la task de comprobacion de ping");
+			// arrancarPingTask();
+			// logger.debug("Se ha iniciado la task de comprobacion de ping");
 
 		} catch (IOException e) {
 			logger.error("Ha ocurrido un error al crear el input y el output del socket cliente", e);
@@ -120,7 +124,7 @@ public class SocketCliente {
 	public IniciarHiloRecibirMensaje getRecibirMensajes() {
 		return recibirMensajes;
 	}
-	
+
 	public IniciarHiloEnvioMensaje getEnviarMensaje() {
 		return enviarMensaje;
 	}

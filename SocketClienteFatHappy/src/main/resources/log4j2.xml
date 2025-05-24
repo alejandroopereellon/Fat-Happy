@@ -4,8 +4,8 @@
     <Properties>
         <!-- Carpeta configurable con fallback -->
         <Property name="logPath">${env:LOG_DIR:-${sys:user.home}/fathappyclient/logs}</Property>
-        <Property name="filePattern">%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n</Property>
-    </Properties>
+        <Property name="filePattern">%d{yyyy-MM-dd HH:mm:ss.SSSSSSSSS} [%t] %-5level %c.%M:%L - %msg%n</Property>
+</Properties>
 
     <Appenders>
 

@@ -25,13 +25,13 @@ public class PurgarClientes {
 	protected void iniciar() {
 		logger.debug("Se ha iniciado la tarea programada del purgado de usuarios");
 
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
 		programador.scheduleWithFixedDelay(() -> {
+			try {
+				Thread.sleep(6000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
 			ClasesEstaticas.getListaClientes().removeIf(cli -> !comprobarConexion.comprobar(cli));
 			logger.debug("Se han purgado los clientes no activos");
 		}, 0, 120, TimeUnit.SECONDS);

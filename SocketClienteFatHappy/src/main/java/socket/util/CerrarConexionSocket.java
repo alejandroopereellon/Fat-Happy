@@ -91,7 +91,7 @@ public class CerrarConexionSocket {
 		new VentanaPrincipalMetodos().cambiarEstadoConexion();
 
 		// Volvemos a iniciar la conexion
-		new ConectarAlServidor().start();
+		//new ConectarAlServidor().start();
 	}
 
 }
