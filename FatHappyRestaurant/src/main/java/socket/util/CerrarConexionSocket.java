@@ -29,6 +29,23 @@ public class CerrarConexionSocket {
 
 		SocketCliente cliente = ClasesEstaticas.getSocket();
 
+		// Paramos los hilos
+		logger.debug("Se van a cerrar todos los hilos del cliente ( recibirMensajes, enviarMensajes, PingTask");
+		cliente.getRecibirMensajes().interrupt();
+		try {
+			// Espera como mucho 2 segundos
+			cliente.getRecibirMensajes().join(2000);
+
+			// Cerramos la tarea de comprobacion de ping
+			//cliente.stopTasks();
+		} catch (NullPointerException e) {
+			logger.error("Ha ocurrido un error de nullPointer en le cierre de los hilos");
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt(); // vuelve a marcarse como interrumpido
+		}catch (Exception e) {
+			logger.error("Ha ocurrido un error generico en el cierre de los hilos",e);
+		}
+
 		// Establecemos el input en null
 		try {
 			logger.debug("Se va a cerrar el input del cliente");
@@ -57,18 +74,18 @@ public class CerrarConexionSocket {
 			logger.error("Ha ocurrido un error al cerrar el output del socket cliente", e);
 		}
 
-		// Paramos el hilo
-		logger.debug("Se va a cerrar el hilo de recepcion de mensajes");
-		cliente.getRecibirMensajes().interrupt();
-		try {
-			// Espera como mucho 2 segundos
-			cliente.getRecibirMensajes().join(2000);
-
-			// Cerramos la tarea de comprobacion de ping
-			cliente.stopTasks();
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt(); // vuelve a marcarse como interrumpido
-		}
+//		// Paramos el hilo
+//		logger.debug("Se va a cerrar el hilo de recepcion de mensajes");
+//		cliente.getRecibirMensajes().interrupt();
+//		try {
+//			// Espera como mucho 2 segundos
+//			cliente.getRecibirMensajes().join(2000);
+//
+//			// Cerramos la tarea de comprobacion de ping
+//			cliente.stopTasks();
+//		} catch (InterruptedException e) {
+//			Thread.currentThread().interrupt(); // vuelve a marcarse como interrumpido
+//		}
 
 		// Cerramos el socket del cliente
 		try {

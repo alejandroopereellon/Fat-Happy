@@ -4,16 +4,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.singleton.ClasesEstaticas;
 import socket.util.CerrarConexionSocket;
-import socket.util.ComprobarConexionSocket;
 import socket.util.IniciarHiloEnvioMensaje;
 import socket.util.IniciarHiloRecibirMensaje;
 
@@ -38,7 +34,7 @@ public class SocketCliente {
 
 	private IniciarHiloEnvioMensaje enviarMensaje = new IniciarHiloEnvioMensaje();
 
-	private final ScheduledExecutorService pingExec = Executors.newSingleThreadScheduledExecutor();
+	//private final ScheduledExecutorService pingExec = Executors.newSingleThreadScheduledExecutor();
 
 	// Constructor
 	public SocketCliente(Socket socketCliente) throws IOException {
@@ -75,7 +71,7 @@ public class SocketCliente {
 			this.enviarMensaje.start();
 			logger.debug("Se ha iniciado el hilo de envio de mensajes del socket");
 
-			arrancarPingTask();
+			//arrancarPingTask();
 			logger.debug("Se ha iniciado la task de comprobacion de ping");
 
 		} catch (IOException e) {
@@ -85,16 +81,16 @@ public class SocketCliente {
 
 	}
 
-	private void arrancarPingTask() {
-		pingExec.scheduleAtFixedRate(() -> {
-			ClasesEstaticas.getColaPong().clear();
-			new ComprobarConexionSocket().comprobar();
-		}, 0, 30, TimeUnit.SECONDS);
-	}
-
-	public void stopTasks() {
-		pingExec.shutdownNow();
-	}
+//	private void arrancarPingTask() {
+//		pingExec.scheduleAtFixedRate(() -> {
+//			ClasesEstaticas.getColaPong().clear();
+//			new ComprobarConexionSocket().comprobar();
+//		}, 0, 30, TimeUnit.SECONDS);
+//	}
+//
+//	public void stopTasks() {
+//		pingExec.shutdownNow();
+//	}
 
 	// Getters
 	public Socket getSocketCliente() {

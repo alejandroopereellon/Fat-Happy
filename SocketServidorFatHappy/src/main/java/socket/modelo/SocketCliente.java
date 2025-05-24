@@ -104,7 +104,7 @@ public class SocketCliente {
 		pingExec.scheduleAtFixedRate(() -> {
 			colaPong.clear();
 			new ComprobarConexionSocket().comprobar(this);
-		}, 0, 60, TimeUnit.SECONDS);
+		}, 0, 30, TimeUnit.SECONDS);
 	}
 
 	public void stopTasks() {

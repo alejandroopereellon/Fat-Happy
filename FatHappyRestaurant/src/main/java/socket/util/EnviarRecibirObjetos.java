@@ -25,7 +25,7 @@ public class EnviarRecibirObjetos {
 	static Logger logger = LogManager.getLogger(EnviarRecibirObjetos.class);
 	static final CerrarConexionSocket cerrar = new CerrarConexionSocket();
 
-	public boolean EnviarObjetos(Object objeto) {
+	public synchronized boolean EnviarObjetos(Object objeto) {
 
 		logger.debug("Se va a enviar el objeto {}", objeto);
 
@@ -73,6 +73,7 @@ public class EnviarRecibirObjetos {
 			cerrarConexion();
 		} catch (IOException e) {
 			logger.error("Error leyendo objeto desde el servidor", e);
+			cerrarConexion();
 		} catch (ClassNotFoundException e) {
 			logger.error(
 					"El objeto serializado no existe, considera actualizar la version del cliente/servidor para tener las mismas clases",

@@ -75,6 +75,7 @@ public class EnviarRecibirObjetos {
 			cerrarConexion();
 		} catch (IOException e) {
 			logger.error("Error leyendo objeto desde el servidor", e);
+			cerrarConexion();
 		} catch (ClassNotFoundException e) {
 			logger.error(
 					"El objeto serializado no existe, considera actualizar la version del cliente/servidor para tener las mismas clases",

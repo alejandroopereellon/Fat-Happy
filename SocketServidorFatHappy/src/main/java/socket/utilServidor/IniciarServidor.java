@@ -128,6 +128,7 @@ public class IniciarServidor extends Thread {
 
 		} catch (IOException e) {
 			e.printStackTrace();
+			logger.error("Ha ocurrido un error durante el cierre del servidor");
 		}
 	}
 }
