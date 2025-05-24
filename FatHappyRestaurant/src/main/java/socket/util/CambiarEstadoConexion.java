@@ -14,8 +14,6 @@ public class CambiarEstadoConexion {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(CambiarEstadoConexion.class);
 
-	private static ComprobarConexionSocket comprobar = new ComprobarConexionSocket();
-
 	/**
 	 * Metodo que muestra en la parte inferior de la {@link VentanaPrincipal} si se
 	 * ha establecido la conexion con el servidor
@@ -24,7 +22,7 @@ public class CambiarEstadoConexion {
 		if (ClasesEstaticas.getPanelCaja() != null) {
 			JLabel label = ClasesEstaticas.getPanelCaja().getEstadoConexion();
 
-			if (comprobar.comprobar()) {
+			if (ClasesEstaticas.getSocket() != null) {
 				label.setForeground(Color.green);
 				label.setText("Conectado");
 				logger.debug("Se ha establecido el estado de la conexion a conectado");

@@ -26,6 +26,7 @@ public class EnviarRecibirObjetos {
 	static final CerrarConexionSocket cerrar = new CerrarConexionSocket();
 
 	public boolean EnviarObjetos(Object objeto) {
+
 		logger.debug("Se va a enviar el objeto {}", objeto);
 
 		try {

@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +19,7 @@ import pedido.interfazPedido.filtros.FiltroTodosLosProductos;
 import pedido.util.ModificarOrdenPedido;
 import productos.interfazProducto.casillaProducto.CasillaProducto;
 import productos.interfazProducto.casillaProducto.CasillaProductoMetodos;
+import productos.interfazProducto.casillaVacia.CasillaVacia;
 import productos.interfazProducto.listaProductosPedidos.ToStringRenderer;
 import productos.modelo.Complemento;
 import productos.modelo.Hamburguesa;
@@ -66,6 +69,8 @@ public class PanelPedidoMetodos {
 		logger.debug("Se ha insertado el filtro en el panel");
 
 		mostraCasillasHamburguesas(filtro);
+		
+		rellenarPanel();
 	}
 
 	/**
@@ -111,6 +116,8 @@ public class PanelPedidoMetodos {
 		logger.debug("Se ha insertado el filtro en el panel");
 
 		mostrarCasillasComplementos(filtro);
+		
+		rellenarPanel();
 	}
 
 	/**
@@ -212,6 +219,8 @@ public class PanelPedidoMetodos {
 		logger.debug("Se ha insertado el filtro en el panel");
 
 		mostrarCasillasPostres(filtro);
+		
+		rellenarPanel();
 	}
 
 	/**
@@ -258,6 +267,8 @@ public class PanelPedidoMetodos {
 		logger.debug("Se ha insertado el filtro en el panel");
 
 		mostrarCasillasBebidas(filtro);
+		
+		rellenarPanel();
 	}
 
 	/**
@@ -401,6 +412,25 @@ public class PanelPedidoMetodos {
 				crearCasillaProducto(producto);
 				logger.debug("Se ha insertado la casilla sin patron de busqueda");
 			}
+		}
+	}
+	
+	
+	/**
+	 * Metodo que rellena el resto del panel de productos con paneles vacios para
+	 * evitar el aumento de tamaño de las casillas por culpa del layot del panel
+	 */
+	private void rellenarPanel() {
+		JPanel panel = interfaz.getPanelProductos();
+		int maxCasillas = 20;
+		int casillasActuales = panel.getComponentCount();
+		int casillasFaltantes = maxCasillas - casillasActuales;
+
+		if (casillasFaltantes > 0) {
+		    for (int i = 0; i < casillasFaltantes; i++) {
+		        new PanelUtil().insertarEnPanelSinBorrar(panel, new CasillaVacia());
+		    }
+		    logger.info("Se han insertado {} casillas vacias", casillasFaltantes);
 		}
 	}
 

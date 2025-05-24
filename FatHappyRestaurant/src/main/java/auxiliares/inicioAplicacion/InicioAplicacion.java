@@ -106,6 +106,7 @@ public class InicioAplicacion {
 	private void extablecerConexionSocket(InicioApp grafica) {
 		// Establecemos la conexion al socket
 		grafica.getEstadoInicio().setText("Conectando al servidor");
+		
 		ClasesEstaticas.getHiloconexionservidor().start();
 		logger.info("Se ha iniciado el hilo de conexion al socket");
 		grafica.getBarraProgreso().setValue(50);

@@ -74,7 +74,13 @@ public class PanelUtil {
 	 */
 	public void insertarEnPanelSinBorrar(JPanel contenedor, java.awt.Component componente) {
 		if (contenedor == null || componente == null) {
-			logger.warn("El contenedor o el componente son nulos");
+			if (contenedor == null) {
+				logger.warn("El contenedor es nulo");
+			}
+
+			if (componente == null) {
+				logger.warn("El componente es nulo");
+			}
 			return;
 		}
 		contenedor.add(componente);

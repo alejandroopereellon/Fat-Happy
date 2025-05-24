@@ -85,7 +85,7 @@ public class VentanaPrincipalMetodos {
 		JLabel label = ClasesEstaticas.getVentana().getLabelEstadoConexion();
 
 		// Si la conexion es correcta se va a notificar en la interfaz
-		if (new ComprobarConexionSocket().comprobar()) {
+		if (ClasesEstaticas.getSocket() != null) {
 			label.setForeground(Color.green);
 			label.setText("Conectado");
 			logger.debug("Se ha establecido el estado de la conexion a conectado");

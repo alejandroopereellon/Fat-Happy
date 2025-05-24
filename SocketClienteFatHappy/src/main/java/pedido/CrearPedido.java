@@ -46,8 +46,31 @@ public class CrearPedido extends Thread {
 		// Creamos el texto dedicado al nuevo panel
 		StringBuilder textoPanel = new StringBuilder();
 
+		// Si el pedido tiene mas de 15 lineas
+		if (filas.length > 15) {
+			crearPedidoGrande(filas, textoPanel);
+		} else {
+			// Si el pedido tiene menos de 15 lineas
+			//Añadimos las filas y componemos un texto
+			for (String fila : filas) {
+				textoPanel.append(fila).append(System.lineSeparator());
+			}
+			// Insertamos el panel de pedidos con el texto
+			PanelPedido panel = new PanelPedidoMetodos(pedido, textoPanel).configuracionInicialPanelPedido(false);
+			pedido.getPaneles().add(panel);
+		}
+
+		// reproducimos el sonido de nuevo pedido
+		new ReproducirSonido("campana.wav");
+		logger.debug("Se ha reproducido el sonido");
+
+		// Actualizamos la interfaz
+		new ActualizarInterfaz().actualizar();
+	}
+
+	private void crearPedidoGrande(String[] filas, StringBuilder textoPanel) {
 		// Creamos la bandera que informa de si el panel es adicional o no
-		boolean bandera = true;
+		boolean bandera = false;
 
 		// Por cada linea, vamos a añadirla, cuando sea divisor de 15 se genera un nuevo
 		// panel
@@ -61,7 +84,7 @@ public class CrearPedido extends Thread {
 				PanelPedido panel = new PanelPedidoMetodos(pedido, textoPanel).configuracionInicialPanelPedido(bandera);
 				pedido.getPaneles().add(panel);
 
-				bandera = false;
+				bandera = true;
 
 				// Reiniciamos el textoPanel
 				textoPanel.setLength(0);
@@ -71,15 +94,8 @@ public class CrearPedido extends Thread {
 		// Si hay elementos restantes se añaden
 		if (textoPanel.length() > 0) {
 			// Insertamos el panel de pedidos con el texto
-			PanelPedido panel = new PanelPedidoMetodos(pedido, textoPanel).configuracionInicialPanelPedido(false);
+			PanelPedido panel = new PanelPedidoMetodos(pedido, textoPanel).configuracionInicialPanelPedido(bandera);
 			pedido.getPaneles().add(panel);
 		}
-
-		// reproducimos el sonido de nuevo pedido
-		new ReproducirSonido("campana.wav");
-		logger.debug("Se ha reproducido el sonido");
-
-		// Actualizamos la interfaz
-		new ActualizarInterfaz().actualizar();
 	}
 }
