@@ -37,8 +37,8 @@ public class IniciarServidor extends Thread {
 	 * siempre se pueda mantener una conexion al servidor en todo momentoº
 	 */
 	public void run() {
-		System.out.println("Se esta iniciando el servidor" + LocalDateTime.now());
-		do {
+		while (true) {
+			System.out.println("Se esta iniciando el servidor" + LocalDateTime.now());
 			// Si el servidor es nulo se va a iniciar
 			if (servidor == null) {
 				iniciarServidor();
@@ -50,7 +50,8 @@ public class IniciarServidor extends Thread {
 			} catch (InterruptedException e) {
 				logger.error("Ha ocurrido un error en el hilo de inicio de servidor", e);
 			}
-		} while (true);
+		}
+
 	}
 
 	private void iniciarServidor() {
@@ -71,9 +72,9 @@ public class IniciarServidor extends Thread {
 			purgadoPedidos.iniciar();
 
 			while (true) {
-				try {
+				try (Socket cliente = servidor.accept()) {
 					logger.debug("Esperando cliente");
-					Socket cliente = servidor.accept(); // Acepta un cliente
+					
 					/*
 					 * Comprobamos si se ha aceptado el cliente e iniciamos el hilo de recepcion de
 					 * mensajes
@@ -103,9 +104,14 @@ public class IniciarServidor extends Thread {
 			logger.fatal("Política de seguridad bloquea el socket", se);
 		} catch (IOException ioe) {
 			logger.fatal("Error al iniciar ServerSocket", ioe);
+		} catch (Exception e) {
+			logger.error("Ha ocurrido no contemplado en el inicio del servidor");
 		} finally {
-			cerrarServidor();
 			System.out.println("Se ha cerrado el servidor" + LocalDateTime.now());
+			// Cerramos el servidor comprobando que no sea nulo o este activo ahora mismo
+			if (servidor != null && !servidor.isClosed()) {
+				cerrarServidor();
+			}
 		}
 	}
 
@@ -129,6 +135,10 @@ public class IniciarServidor extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 			logger.error("Ha ocurrido un error durante el cierre del servidor");
+		} finally {
+			System.out.println("Se ha cerrado la conexion al servidor");
 		}
+
 	}
+
 }
