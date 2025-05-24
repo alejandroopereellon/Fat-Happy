@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO" monitorInterval="60">
+<Configuration status="WARN" monitorInterval="60">
 
     <Properties>
-        <Property name="logPath">${sys:user.home}/fathappyserver/logs</Property>
-        <Property name="filePattern">%d{yyyy-MM-dd HH:mm:ss} - %level - %msg%n</Property>
+        <!-- ① Carpeta configurable por variable de entorno -->
+        <Property name="logPath">${env:LOG_DIR:-${sys:user.home}/fathappyserver/logs}</Property>
+        <!-- ② Patrón de log con nivel, hilo y clase -->
+        <Property name="filePattern">%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n</Property>
     </Properties>
 
     <Appenders>
 
+        <!-- Consola con todos los niveles -->
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="${filePattern}" />
         </Console>
 
-        <RollingFile name="RollingFile" fileName="${logPath}/app_server.log"
+        <!-- Fichero rotativo con todos los niveles -->
+        <RollingFile name="RollingFile"
+                     fileName="${logPath}/app_server.log"
                      filePattern="${logPath}/app-%d{yyyy-MM-dd}.log.gz">
             <PatternLayout pattern="${filePattern}" />
             <Policies>
@@ -20,12 +25,12 @@
             </Policies>
         </RollingFile>
 
-        <RollingFile name="ErrorFile" fileName="${logPath}/errors.log"
+        <!-- Sólo errores (se mantiene) -->
+        <RollingFile name="ErrorFile"
+                     fileName="${logPath}/errors.log"
                      filePattern="${logPath}/errors-%d{yyyy-MM-dd}.log.gz">
             <PatternLayout pattern="${filePattern}" />
-            <Filters>
-                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
-            </Filters>
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1"/>
             </Policies>
@@ -33,8 +38,8 @@
 
     </Appenders>
 
+    <!-- ③ Todos los niveles a todos los appenders -->
     <Loggers>
-        <!-- Captura desde nivel DEBUG hacia arriba -->
         <Root level="debug">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>

@@ -105,7 +105,7 @@ public class IniciarServidor extends Thread {
 		} catch (IOException ioe) {
 			logger.fatal("Error al iniciar ServerSocket", ioe);
 		} catch (Exception e) {
-			logger.error("Ha ocurrido no contemplado en el inicio del servidor");
+			logger.error("Ha ocurrido no contemplado en el inicio del servidor",e);
 		} finally {
 			System.out.println("Se ha cerrado el servidor" + LocalDateTime.now());
 			// Cerramos el servidor comprobando que no sea nulo o este activo ahora mismo
