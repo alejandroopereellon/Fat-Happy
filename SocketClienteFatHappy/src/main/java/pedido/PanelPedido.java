@@ -65,7 +65,7 @@ public class PanelPedido extends javax.swing.JPanel {
                 .addComponent(labelDatosPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelTiempoPasado)
-                .addContainerGap())
+                .addGap(22, 22, 22))
         );
         panelInformacionPedidosLayout.setVerticalGroup(
             panelInformacionPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,7 +76,6 @@ public class PanelPedido extends javax.swing.JPanel {
 
         panelInformacionProductos.setBackground(new java.awt.Color(255, 255, 255));
 
-        textArea.setBackground(new java.awt.Color(255, 255, 255));
         textArea.setColumns(20);
         textArea.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         textArea.setLineWrap(true);

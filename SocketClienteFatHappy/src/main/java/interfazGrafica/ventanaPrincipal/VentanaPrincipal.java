@@ -49,10 +49,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         panelPedidosLayout.setVerticalGroup(
             panelPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGap(0, 742, Short.MAX_VALUE)
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         labelConexion.setBackground(new java.awt.Color(255, 255, 255));
         labelConexion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -78,7 +79,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(labelReloj)
                 .addGap(18, 18, 18)
                 .addComponent(puesto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 898, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 896, Short.MAX_VALUE)
                 .addComponent(labelConexion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelEstadoConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))

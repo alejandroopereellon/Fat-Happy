@@ -61,10 +61,10 @@ public class SocketCliente {
 			ClasesEstaticas.setSocket(this);
 			logger.debug("Se ha establecido el socket del cliente en la clase estatica {}", ClasesEstaticas.getSocket());
 
-//			// Enviamos los datos del rol al cliente
-//			ClasesEstaticas.listaObjetosPendientes
-//					.add(new RolSocket(ClasesEstaticas.getNumerorestaurante(), ClasesEstaticas.getRolcliente()));
-//			logger.debug("Se ha enviado el rol al cliente ");
+			// Enviamos los datos del rol al cliente
+			ClasesEstaticas.listaObjetosPendientes
+					.add(new RolSocket(ClasesEstaticas.getNumerorestaurante(), ClasesEstaticas.getRolcliente()));
+			logger.debug("Se ha enviado el rol al cliente ");
 
 			// Iniciamos el hilo de recepcion de mensajes
 			this.recibirMensajes= new IniciarHiloRecibirMensaje();

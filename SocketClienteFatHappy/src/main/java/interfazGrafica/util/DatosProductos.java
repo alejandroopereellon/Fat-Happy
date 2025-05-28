@@ -60,6 +60,7 @@ public class DatosProductos {
 
 		for (Salsa salsa : complemento.getSalsas()) {
 			stb.append(ESPACIO).append(salsa.toString().trim()).append(LINEA);
+			stb.append(LINEA);
 		}
 
 		return stb;
@@ -71,7 +72,7 @@ public class DatosProductos {
 		stb.append(bebida.getNombreProducto()).append(LINEA);
 
 		if (bebida.getNombreExtra() != null) {
-			if (bebida.isExtraActivo() && bebida.getNombreExtra().equalsIgnoreCase("hielo")) {
+			if (!bebida.isExtraActivo() && bebida.getNombreExtra().equalsIgnoreCase("hielo")) {
 				stb.append(ESPACIO).append("Sin hielo").append(LINEA);
 			} else if (bebida.isExtraActivo() && bebida.getNombreExtra().equalsIgnoreCase("del tiempo")) {
 				stb.append(ESPACIO).append("Extra del tiempo").append(LINEA);

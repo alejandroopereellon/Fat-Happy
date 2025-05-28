@@ -57,8 +57,9 @@ public class CerrarConexionSocket {
 			// Comprobamos si el output es nulo
 			if (cliente.getOutput() != null) {
 				cliente.getOutput().close();
+				cliente.setOutput(null);
 			}
-			cliente.setOutput(null);
+			
 			logger.debug("Se ha cerrado el output del cliente");
 		} catch (Exception e) {
 			logger.error("Ha ocurrido un error al cerrar el output del socket cliente", e);
@@ -67,9 +68,12 @@ public class CerrarConexionSocket {
 		// Cerramos el socket del cliente
 		try {
 			logger.debug("Se va a cerrar el socket del cliente");
-			cliente.getSocketCliente().close();
-			cliente.setSocketCliente(null);
-			logger.debug("Se ha cerrado el socket del cliente");
+			if (cliente.getSocketCliente() != null) {
+				cliente.getSocketCliente().close();
+				cliente.setSocketCliente(null);
+				logger.debug("Se ha cerrado el socket del cliente");
+			}
+
 		} catch (IOException e) {
 			logger.error("Ha ocurrido un error al cerrar el socket del cliente", e);
 		} catch (Exception e) {

@@ -72,9 +72,9 @@ public class IniciarServidor extends Thread {
 //			purgadoPedidos.iniciar();
 
 			while (true) {
-				try (Socket cliente = servidor.accept()) {
+				try  {
 					logger.debug("Esperando cliente");
-					
+					Socket cliente = servidor.accept();
 					/*
 					 * Comprobamos si se ha aceptado el cliente e iniciamos el hilo de recepcion de
 					 * mensajes

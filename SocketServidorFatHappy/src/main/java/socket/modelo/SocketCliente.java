@@ -70,10 +70,10 @@ public class SocketCliente {
 			this.input = new ObjectInputStream(socketCliente.getInputStream());
 			logger.debug("Se ha iniciado el inputStream del cliente {}", this);
 
-//			// Cargamos el hilo de recepcion de mensajes
-//			logger.debug("Se esta creando el hilo de recepcion de mensajes");
-//			this.recibirMensajes = new HiloRecibirMensajes(this);
-//			recibirMensajes.start();
+			// Cargamos el hilo de recepcion de mensajes
+			logger.debug("Se esta creando el hilo de recepcion de mensajes");
+			this.recibirMensajes = new HiloRecibirMensajes(this);
+			recibirMensajes.start();
 
 			// Cargamos el hilo de envio de mensajeria
 			logger.debug("Se esta creando el hilo de envio de mensajes");

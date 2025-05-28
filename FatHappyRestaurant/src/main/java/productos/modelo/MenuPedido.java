@@ -224,6 +224,10 @@ public class MenuPedido implements Serializable {
 			stb.append("Anadir bebida");
 		} else {
 			stb.append(bebida.getNombreProducto());
+			stb.append(System.lineSeparator());
+			if (!bebida.isExtraActivo() && bebida.getNombreExtra().toLowerCase().contains("hielo")) {
+				stb.append(bebida.getNombreExtra());
+			}
 		}
 		return stb;
 	}
