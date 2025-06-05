@@ -60,7 +60,6 @@ public class DatosProductos {
 
 		for (Salsa salsa : complemento.getSalsas()) {
 			stb.append(ESPACIO).append(salsa.toString().trim()).append(LINEA);
-			stb.append(LINEA);
 		}
 
 		return stb;
