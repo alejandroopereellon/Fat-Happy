@@ -1,4 +1,4 @@
-package auxiliares.solicitarNumeroDecimal;
+package auxiliares.solicitarDatos.solicitarNumeroDecimal;
 
 import javax.swing.JTextField;
 

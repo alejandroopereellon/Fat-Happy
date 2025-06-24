@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package auxiliares.solicitarNumeroDecimal;
+package auxiliares.solicitarDatos.solicitarNumeroDecimal;
 
 import java.math.BigDecimal;
 
@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.solicitarNumero.DialogoSolicitudNumero;
+import auxiliares.solicitarDatos.solicitarNumero.DialogoSolicitudNumero;
 
 /**
  * Clase de metodos que realiza todas las funciones necesarias para el

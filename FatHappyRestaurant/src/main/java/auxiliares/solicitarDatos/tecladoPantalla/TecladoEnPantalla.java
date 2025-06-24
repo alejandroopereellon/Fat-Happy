@@ -1,4 +1,4 @@
-package auxiliares.tecladoPantalla;
+package auxiliares.solicitarDatos.tecladoPantalla;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import javax.swing.JLabel;

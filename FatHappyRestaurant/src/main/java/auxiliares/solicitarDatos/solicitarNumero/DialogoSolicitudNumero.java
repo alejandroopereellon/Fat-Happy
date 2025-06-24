@@ -1,4 +1,4 @@
-package auxiliares.solicitarNumero;
+package auxiliares.solicitarDatos.solicitarNumero;
 
 import javax.swing.JTextField;
 

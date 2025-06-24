@@ -3,7 +3,7 @@ package auxiliares.inicioAplicacion;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import auxiliares.solicitarNumero.SolicitarNumeroMetodos;
+import auxiliares.solicitarDatos.solicitarNumero.SolicitarNumeroMetodos;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
