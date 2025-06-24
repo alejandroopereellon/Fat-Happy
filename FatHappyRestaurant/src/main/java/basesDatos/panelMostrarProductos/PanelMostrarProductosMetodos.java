@@ -9,8 +9,8 @@ import org.apache.logging.log4j.Logger;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.singleton.ClasesEstaticas;
-import auxiliares.tecladoPantalla.TecladoEnPantalla;
-import auxiliares.tecladoPantalla.TecladoEnPantallaMetodos;
+import auxiliares.solicitarDatos.tecladoPantalla.TecladoEnPantalla;
+import auxiliares.solicitarDatos.tecladoPantalla.TecladoEnPantallaMetodos;
 import auxiliares.utilidadesGraficas.PanelUtil;
 import basesDatos.casillaProductos.CasillaProducto;
 import basesDatos.casillaProductos.CasillaProductoMetodos;

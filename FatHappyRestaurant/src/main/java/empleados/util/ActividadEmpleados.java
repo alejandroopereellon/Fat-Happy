@@ -3,7 +3,7 @@ package empleados.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.solicitarNumero.SolicitarNumeroMetodos;
+import auxiliares.solicitarDatos.solicitarNumero.SolicitarNumeroMetodos;
 import empleados.dao.EmpleadoDaoHibernateImpl;
 import empleados.dao.EmpleadosDao;
 import empleados.modelo.Empleado;

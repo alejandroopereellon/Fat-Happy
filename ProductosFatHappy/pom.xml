@@ -20,9 +20,5 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>6.6.11.Final</version>
 		</dependency>
-		<dependency>
-		<groupId>FatHappy</groupId>
-		<artifactId>FatHappyRestaurant</artifactId>
-		<version>0.0.1-SNAPSHOT</version></dependency>
   </dependencies>
 </project>

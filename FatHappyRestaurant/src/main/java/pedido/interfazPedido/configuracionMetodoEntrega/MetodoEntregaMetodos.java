@@ -3,7 +3,7 @@ package pedido.interfazPedido.configuracionMetodoEntrega;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import auxiliares.solicitarNumero.SolicitarNumeroMetodos;
+import auxiliares.solicitarDatos.solicitarNumero.SolicitarNumeroMetodos;
 import pedido.modelo.Pedido;
 
 /**

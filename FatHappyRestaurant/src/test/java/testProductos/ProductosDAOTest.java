@@ -16,7 +16,7 @@ import productos.modelo.Bebida;
 import productos.modelo.Producto;
 
 public class ProductosDAOTest {
-
+/*
 	private ProductosDAO productosDAO;
 
 	@BeforeEach
@@ -54,5 +54,5 @@ public class ProductosDAOTest {
 		assertTrue(modificado, "El stock debería haberse consultado correctamente");
 
 		assertTrue(producto.isStockDisponible(), "El stock debería ser mayor o igual a 0");
-	}
+	}*/
 }

@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
-import auxiliares.solicitarNumeroDecimal.SolicitarNumeroDecimalMetodos;
+import auxiliares.solicitarDatos.solicitarNumeroDecimal.SolicitarNumeroDecimalMetodos;
 import caja.dao.CajasDao;
 import caja.dao.CajasDaoHibernateImpl;
 import caja.modelo.Caja;

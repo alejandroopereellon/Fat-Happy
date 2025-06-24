@@ -1,8 +1,8 @@
 package pedido.interfazPedido.filtros;
 
 import auxiliares.singleton.ClasesEstaticas;
-import auxiliares.tecladoPantalla.TecladoEnPantalla;
-import auxiliares.tecladoPantalla.TecladoEnPantallaMetodos;
+import auxiliares.solicitarDatos.tecladoPantalla.TecladoEnPantalla;
+import auxiliares.solicitarDatos.tecladoPantalla.TecladoEnPantallaMetodos;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import java.awt.Dimension;
 import javax.swing.JTextArea;
