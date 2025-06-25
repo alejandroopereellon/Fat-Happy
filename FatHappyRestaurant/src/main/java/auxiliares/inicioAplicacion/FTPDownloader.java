@@ -1,5 +1,12 @@
 package auxiliares.inicioAplicacion;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -7,13 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Metodo que realiza la connexion y la descarga de todos los ficheros
@@ -82,10 +82,10 @@ public class FTPDownloader {
 		Configuracion config = ConfiguracionInicial.get();
 
 		// Configuramos la conexion con el servidor
-		String servidor = config.getFtpHost();
-		int puerto = config.getFtpPuerto();
-		String usuario = config.getFtpUsuario();
-		String contrasena = config.getFtpContrasena();
+		String servidor = config.getDatosFTP().getDireccionIp();
+		int puerto = config.getDatosFTP().getPuerto();
+		String usuario = config.getDatosFTP().getUsuario();
+		String contrasena = config.getDatosFTP().getContrasena();
 
 		logger.info("Conectando a servidor FTP: {}:{}", servidor, puerto);
 		logger.info("Ruta local de destino: {}", rutaLocal);

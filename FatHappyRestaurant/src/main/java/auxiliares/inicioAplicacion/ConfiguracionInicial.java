@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import auxiliares.solicitarDatos.solicitarNumero.SolicitarNumeroMetodos;
+import auxiliares.solicitarDatos.solicitudInicioSesion.InicioSesion;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,10 +46,13 @@ public class ConfiguracionInicial {
 		porDefecto.setCodigoRestaurante(
 				new SolicitarNumeroMetodos("Introduce el número de restaurante").solicitarNumero());
 		porDefecto.setDirectorioLocal(System.getProperty("user.home") + File.separator + "fathappyrestaurant");
-		porDefecto.setFtpHost("79.112.49.122");
-		porDefecto.setFtpPuerto(1115);
-		porDefecto.setFtpUsuario("restaurante");
-		porDefecto.setFtpContrasena("restaurante123");
+		porDefecto.setDatosBBDD(
+				new InicioSesion("Introduce el usuario del servidor BBDD", "Introduce la contraseña de la BBDD",
+						"Introduce la direccion IP de la BBDD", "Introduce el puerto de la BBDD"));
+
+		porDefecto.setDatosBBDD(new InicioSesion("Introduce el usuario del servidor FTP",
+				"Introduce la contraseña del FTP", "Introduce la direccion IP del FTP", "Introduce el puerto del FTP"));
+
 		porDefecto.setFtpDirectorioRemoto("/Imagenes");
 		// Vamos a solicitar el numero de caja
 		porDefecto.setNumeroCaja(new SolicitarNumeroMetodos("Introduce el numero de caja").solicitarNumero());

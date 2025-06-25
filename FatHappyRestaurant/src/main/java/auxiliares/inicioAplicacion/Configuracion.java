@@ -2,20 +2,23 @@ package auxiliares.inicioAplicacion;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import auxiliares.solicitarDatos.solicitudInicioSesion.InicioSesion;
 import ventanaPrincipal.InterfazVentanaPrincipal;
 
 public class Configuracion {
 
 	private int codigoRestaurante;
 	private String directorioLocal;
-	private String ftpHost;
-	private int ftpPuerto;
-	private String ftpUsuario;
-	private String ftpContrasena;
-	private String ftpDirectorioRemoto;
 	private int numeroCaja;
 	@JsonIgnore
 	private InterfazVentanaPrincipal ventanaPrincipal;
+
+	// Configuracion de base de datos
+	private InicioSesion datosBBDD;
+
+	// Configuracion de servidor FTP
+	private InicioSesion datosFTP;
+	private String ftpDirectorioRemoto;
 
 	// Getters y setters
 	public int getCodigoRestaurante() {
@@ -34,46 +37,6 @@ public class Configuracion {
 		this.directorioLocal = directorioLocal;
 	}
 
-	public String getFtpHost() {
-		return ftpHost;
-	}
-
-	public void setFtpHost(String ftpHost) {
-		this.ftpHost = ftpHost;
-	}
-
-	public int getFtpPuerto() {
-		return ftpPuerto;
-	}
-
-	public void setFtpPuerto(int ftpPuerto) {
-		this.ftpPuerto = ftpPuerto;
-	}
-
-	public String getFtpUsuario() {
-		return ftpUsuario;
-	}
-
-	public void setFtpUsuario(String ftpUsuario) {
-		this.ftpUsuario = ftpUsuario;
-	}
-
-	public String getFtpContrasena() {
-		return ftpContrasena;
-	}
-
-	public void setFtpContrasena(String ftpContrasena) {
-		this.ftpContrasena = ftpContrasena;
-	}
-
-	public String getFtpDirectorioRemoto() {
-		return ftpDirectorioRemoto;
-	}
-
-	public void setFtpDirectorioRemoto(String ftpDirectorioRemoto) {
-		this.ftpDirectorioRemoto = ftpDirectorioRemoto;
-	}
-
 	public int getNumeroCaja() {
 		return numeroCaja;
 	}
@@ -89,5 +52,31 @@ public class Configuracion {
 	public void setVentanaPrincipal(InterfazVentanaPrincipal ventanaPrincipal) {
 		this.ventanaPrincipal = ventanaPrincipal;
 	}
+
+	public InicioSesion getDatosBBDD() {
+		return datosBBDD;
+	}
+
+	public void setDatosBBDD(InicioSesion datosBBDD) {
+		this.datosBBDD = datosBBDD;
+	}
+
+	public InicioSesion getDatosFTP() {
+		return datosFTP;
+	}
+
+	public void setDatosFTP(InicioSesion datosFTP) {
+		this.datosFTP = datosFTP;
+	}
+
+	public String getFtpDirectorioRemoto() {
+		return ftpDirectorioRemoto;
+	}
+
+	public void setFtpDirectorioRemoto(String ftpDirectorioRemoto) {
+		this.ftpDirectorioRemoto = ftpDirectorioRemoto;
+	}
+	
+	
 
 }
