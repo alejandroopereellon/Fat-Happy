@@ -5,8 +5,11 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
+import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 
 /**
@@ -24,10 +27,15 @@ public class InicioSesion {
 	private String usuario;
 	private String contrasena;
 
-	public static void main(String[] args) {
-		InicioSesion ini = new InicioSesion("usuario", "contraena", "dip", "puerto");
+	private static final Logger logger = LogManager.getLogger(ConfiguracionInicial.class);
 
-		System.out.println(ini);
+	public static void main(String[] args) {
+
+		System.out.println(new InicioSesion("usu", "con", "ip", "port"));
+	}
+
+	public InicioSesion() {
+		super();
 	}
 
 	/**
@@ -41,10 +49,16 @@ public class InicioSesion {
 		if (direccionIp != null) {
 			this.puerto = verificarPuerto(textoPuerto);
 			// Verificamos que el puerto existe y es un numero
-			if (puerto != 0) {
+			if (puerto > 0 && puerto < 65535) {
 				this.usuario = cifrarTexto(solicitarTextoACifrar(textoUsuario));
 				this.contrasena = cifrarTexto(solicitarTextoACifrar(textoContrasena));
+			} else {
+				logger.warn("El puerto de conexion no es correcto");
+				new DialogoMostrarMensajeMetodos().mostrarMensaje("El puerto de conexion no es correcto");
 			}
+		} else {
+			logger.warn("La direccion IP introducida no es correcta");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("La direccion IP introducida no es correcta");
 		}
 	}
 
@@ -141,8 +155,14 @@ public class InicioSesion {
 		// Establecemos el algoritmo de cifrado
 		cifrar.setAlgorithm("PBEWithHmacSHA512AndAES_256");
 
-		// Establecemos la contraseña
-		cifrar.setPassword(System.getenv(NOMBRE_VARIABLE_ENTORNO));
+		try {
+			// Establecemos la contraseña
+			cifrar.setPassword(System.getenv(NOMBRE_VARIABLE_ENTORNO));
+		} catch (IllegalArgumentException e) {
+			logger.error("No se ha establecido una variable de entorno con el valor");
+			new DialogoMostrarMensajeMetodos()
+					.mostrarMensaje("No se ha establecido una variable de entorno con el valor");
+		}
 
 		// Indicamos que cada cifrado usará un IV (vector de inicialización) aleatorio
 		cifrar.setIvGenerator(new org.jasypt.iv.RandomIvGenerator());
@@ -150,24 +170,9 @@ public class InicioSesion {
 	}
 
 	// Getters && Setters
-	public String getUsuario() {
-		return desCifrarTexto(usuario);
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = cifrarTexto(usuario);
-	}
-
-	public String getContrasena() {
-		return desCifrarTexto(contrasena);
-	}
-
-	public void setContrasena(String contrasena) {
-		this.contrasena = cifrarTexto(contrasena);
-	}
 
 	public String getDireccionIp() {
-		return desCifrarTexto(direccionIp);
+		return direccionIp;
 	}
 
 	public void setDireccionIp(String direccionIp) {
@@ -180,6 +185,22 @@ public class InicioSesion {
 
 	public void setPuerto(int puerto) {
 		this.puerto = puerto;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	@Override

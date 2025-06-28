@@ -37,6 +37,13 @@ public class InicioAplicacion {
 		grafica.getEstadoInicio().setText("Iniciando aplicacion...");
 		logger.info("Iniciando aplicación...");
 		grafica.getBarraProgreso().setValue(5);
+		
+		//Iniciamos la configuracion
+		grafica.getEstadoInicio().setText("Cargando configuracion inicial");
+		logger.info("Cargando configuracion inicial");
+		grafica.getBarraProgreso().setValue(10);
+		
+		ConfiguracionInicial.get();
 
 		// Iniciar descarga de imágenes del servidor ftp
 		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");

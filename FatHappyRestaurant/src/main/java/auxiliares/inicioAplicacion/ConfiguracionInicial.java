@@ -12,6 +12,11 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Clase que contiene todos los ajustes de configuracion inicial del programa
+ * 
+ * @author Alejandro Perellón López
+ */
 public class ConfiguracionInicial {
 
 	private static final Logger logger = LogManager.getLogger(ConfiguracionInicial.class);
@@ -24,6 +29,11 @@ public class ConfiguracionInicial {
 		cargarOCrearConfiguracion();
 	}
 
+	/**
+	 * Metodo encargado de cargar o crear la configuracion, primero de todo busca en
+	 * la ruta principal del programa si ya existe el archivo de configuracion, en
+	 * caso de no existir va a ejecutar el metodo crearconfiguracionPorDefecto
+	 */
 	private static void cargarOCrearConfiguracion() {
 		ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 		File archivo = new File(RUTA_CONFIG);
@@ -40,21 +50,39 @@ public class ConfiguracionInicial {
 		}
 	}
 
+	/**
+	 * Metodo encargado de crear la configuracion por defecto de la aplicacion,
+	 * contiene los datos del restaurante al que se pertenece, contiene los
+	 * usuarios, contraseñas y direcciones ip de los distintos servicios
+	 * 
+	 * @param mapper  es el mapper del json
+	 * @param archivo es la ruta que se va a utilizar para almacenar el fichero de
+	 *                configuracion
+	 * @throws IOException es el {@link IOException}
+	 */
 	private static void crearConfiguracionPorDefecto(ObjectMapper mapper, File archivo) throws IOException {
 		Configuracion porDefecto = new Configuracion();
-		// Soliciamos el numero de restaurante
-		porDefecto.setCodigoRestaurante(
-				new SolicitarNumeroMetodos("Introduce el número de restaurante").solicitarNumero());
-		porDefecto.setDirectorioLocal(System.getProperty("user.home") + File.separator + "fathappyrestaurant");
+
+		// Solicitamos y almacenamos los datos de la base de datos
 		porDefecto.setDatosBBDD(
 				new InicioSesion("Introduce el usuario del servidor BBDD", "Introduce la contraseña de la BBDD",
 						"Introduce la direccion IP de la BBDD", "Introduce el puerto de la BBDD"));
 
-		porDefecto.setDatosBBDD(new InicioSesion("Introduce el usuario del servidor FTP",
+		// Solicitamos y almacenamos los datos del servidor FTP
+		porDefecto.setDatosFTP(new InicioSesion("Introduce el usuario del servidor FTP",
 				"Introduce la contraseña del FTP", "Introduce la direccion IP del FTP", "Introduce el puerto del FTP"));
 
+		// Soliciamos el numero de restaurante
+		porDefecto.setCodigoRestaurante(
+				new SolicitarNumeroMetodos("Introduce el número de restaurante").solicitarNumero());
+
+		// Generemos el directorio local donde se van a almacenar los datos
+		porDefecto.setDirectorioLocal(System.getProperty("user.home") + File.separator + "fathappyrestaurant");
+
+		// Establecemos la ruta del directorio remoto del servidor FTP
 		porDefecto.setFtpDirectorioRemoto("/Imagenes");
-		// Vamos a solicitar el numero de caja
+
+		// Solicitamos el numero de caja
 		porDefecto.setNumeroCaja(new SolicitarNumeroMetodos("Introduce el numero de caja").solicitarNumero());
 
 		archivo.getParentFile().mkdirs();
@@ -62,7 +90,11 @@ public class ConfiguracionInicial {
 		logger.info("Archivo de configuración por defecto creado");
 	}
 
-	// Acceso estático desde cualquier parte del programa
+	/**
+	 * Acceso estático desde cualquier parte del programa
+	 * 
+	 * @return la clase de configuracion
+	 */
 	public static Configuracion get() {
 		return configuracion;
 	}

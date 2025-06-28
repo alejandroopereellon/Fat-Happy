@@ -12,7 +12,7 @@ import org.hibernate.query.MutationQuery;
 
 import auxiliares.singleton.ClasesEstaticas;
 import caja.modelo.Operacion;
-import pool.HibernateUtil;
+import auxiliares.pool.HibernateUtil;
 import productos.modelo.Bebida;
 import productos.modelo.Complemento;
 import productos.modelo.Extra;

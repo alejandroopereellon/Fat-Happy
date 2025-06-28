@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pedido.modelo.NumeroPedido;
-import pool.HibernateUtil;
+import auxiliares.pool.HibernateUtil;
 import restaurante.modelo.Restaurante;
 
 /**

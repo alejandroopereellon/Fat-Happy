@@ -11,7 +11,7 @@ import org.hibernate.Transaction;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import empleados.modelo.Empleado;
 import empleados.modelo.MovimientosEmpleado;
-import pool.HibernateUtil;
+import auxiliares.pool.HibernateUtil;
 
 /**
  * 

@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
+import auxiliares.solicitarDatos.solicitudInicioSesion.InicioSesion;
 
 /**
  * Metodo que realiza la connexion y la descarga de todos los ficheros
@@ -82,10 +83,10 @@ public class FTPDownloader {
 		Configuracion config = ConfiguracionInicial.get();
 
 		// Configuramos la conexion con el servidor
-		String servidor = config.getDatosFTP().getDireccionIp();
+		String servidor = InicioSesion.desCifrarTexto(config.getDatosFTP().getDireccionIp()) ;
 		int puerto = config.getDatosFTP().getPuerto();
-		String usuario = config.getDatosFTP().getUsuario();
-		String contrasena = config.getDatosFTP().getContrasena();
+		String usuario = InicioSesion.desCifrarTexto(config.getDatosFTP().getUsuario());
+		String contrasena = InicioSesion.desCifrarTexto(config.getDatosFTP().getContrasena());
 
 		logger.info("Conectando a servidor FTP: {}:{}", servidor, puerto);
 		logger.info("Ruta local de destino: {}", rutaLocal);

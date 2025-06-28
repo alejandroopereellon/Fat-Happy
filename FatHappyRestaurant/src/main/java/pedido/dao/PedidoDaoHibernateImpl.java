@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pedido.modelo.Pedido;
-import pool.HibernateUtil;
+import auxiliares.pool.HibernateUtil;
 
 public class PedidoDaoHibernateImpl implements PedidoDao {
 

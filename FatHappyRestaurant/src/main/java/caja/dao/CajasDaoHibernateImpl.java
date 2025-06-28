@@ -10,12 +10,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.pool.HibernateUtil;
 import auxiliares.singleton.ClasesEstaticas;
 import caja.modelo.Caja;
 import caja.modelo.Operacion;
 import empleados.modelo.Empleado;
 import pedido.modelo.Pedido;
-import pool.HibernateUtil;
 import restaurante.modelo.Restaurante;
 
 public class CajasDaoHibernateImpl implements CajasDao {
