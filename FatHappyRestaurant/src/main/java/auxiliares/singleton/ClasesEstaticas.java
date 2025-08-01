@@ -19,6 +19,9 @@ import socket.modelo.SocketCliente;
 import socket.util.ConectarAlServidor;
 
 public class ClasesEstaticas {
+	
+	// Dato estatico que mantiene en memoria la variable de cifrado
+	private static final String NOMBRE_VARIABLE_ENTORNO = "java_password";
 
 	// Dato estatico que mantiene en memoria el restaurante
 	private static Restaurante restauranteActual;
@@ -246,6 +249,10 @@ public class ClasesEstaticas {
 	
 	public static void setHiloConexionServidor(ConectarAlServidor hiloConexionServidor) {
 		ClasesEstaticas.hiloConexionServidor = hiloConexionServidor;
+	}
+
+	public static String getNombreVariableEntorno() {
+		return NOMBRE_VARIABLE_ENTORNO;
 	}
 
 }

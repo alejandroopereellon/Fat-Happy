@@ -11,6 +11,7 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Metodo encargado de almacenar, cifrar y descifrar la contraseña de inicio de
@@ -20,7 +21,7 @@ import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
  */
 public class InicioSesion {
 
-	private static final String NOMBRE_VARIABLE_ENTORNO = "java_password";
+	private VerificacionDatos verificarDireccionIP = new VerificacionDatosInterfaz();
 
 	private String direccionIp;
 	private int puerto;
@@ -28,15 +29,6 @@ public class InicioSesion {
 	private String contrasena;
 
 	private static final Logger logger = LogManager.getLogger(ConfiguracionInicial.class);
-
-	public static void main(String[] args) {
-
-		System.out.println(new InicioSesion("usu", "con", "ip", "port"));
-	}
-
-	public InicioSesion() {
-		super();
-	}
 
 	/**
 	 * Metodo que solicita el texto que se va a pedir al usuario para poder
@@ -60,48 +52,6 @@ public class InicioSesion {
 			logger.warn("La direccion IP introducida no es correcta");
 			new DialogoMostrarMensajeMetodos().mostrarMensaje("La direccion IP introducida no es correcta");
 		}
-	}
-
-	private String verificarDireccionIp(String mensajeSolicitud) {
-		// Solicitamos la direccion ip del host
-		String direccion = solicitarTextoACifrar(mensajeSolicitud);
-
-		// Comprobamos si la direccion es una direccion existente
-		try {
-			// Si no lanza exception es una ip validad
-			InetAddress.getByName(direccion);
-
-			// Ciframos la contraseña y la retornamos
-			return cifrarTexto(direccion);
-		} catch (UnknownHostException e) {
-			return null;
-		}
-	}
-
-	private int verificarPuerto(String mensajeSolicitud) {
-		// Solicitamos el puerto del host
-		String textoPuerto = solicitarTextoACifrar(mensajeSolicitud);
-
-		// Comprobamos que el puerto es un numero exitoso
-		try {
-
-			// Convertimos el texto del puerto en un numero, si no es un numero ocurre una
-			// excepcion
-			int numeroPuerto = Integer.parseInt(textoPuerto);
-
-			// Si el puerto es un numero y esta en el rango lo devolvemos
-			if (numeroPuerto >= 1 && puerto <= 65535) {
-				return numeroPuerto;
-			} else {
-				// Si es un numero pero no esta en el rango
-				new DialogoMostrarMensajeMetodos()
-						.mostrarMensaje("El puerto introducido no esta en el rango solicitado");
-			}
-		} catch (NumberFormatException e) {
-			// Si el puerto no es un numero
-			new DialogoMostrarMensajeMetodos().mostrarMensaje("El puerto introducido no es un numero");
-		}
-		return 0;
 	}
 
 	/**
@@ -157,7 +107,7 @@ public class InicioSesion {
 
 		try {
 			// Establecemos la contraseña
-			cifrar.setPassword(System.getenv(NOMBRE_VARIABLE_ENTORNO));
+			cifrar.setPassword(System.getenv(ClasesEstaticas.getNombreVariableEntorno()));
 		} catch (IllegalArgumentException e) {
 			logger.error("No se ha establecido una variable de entorno con el valor");
 			new DialogoMostrarMensajeMetodos()
