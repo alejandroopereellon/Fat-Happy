@@ -27,7 +27,6 @@
 * [Instalación](#instalación)
 * [Configuración](#configuración)
 * [Ejecución](#ejecución)
-* [Roadmap](#roadmap)
 * [Créditos y licencia](#créditos-y-licencia)
 
 ---
@@ -179,20 +178,6 @@ Resumen del hardening aplicado al servidor (Raspberry Pi):
 
 * Ejecutar `InicioAplicacion`.
 * Flujo: carga de recursos → productos activos → interfaz de pedido → cobro → registro (operaciones + productos vendidos).
-
-### Datos de demostración
-
-* Incluye (opcional) dataset de ejemplo para productos/ingredientes/extras.
-
----
-
-## Roadmap
-
-* [ ] Publicar scripts SQL (`/db`) y dataset de ejemplo.
-* [ ] Añadir tests automáticos para DAO y lógica de negocio.
-* [ ] Publicar Docker Compose (MariaDB + servidor + FTP para demo).
-* [ ] Publicar binarios (`releases/`).
-* [ ] Internacionalización y temas.
 
 ---
 
