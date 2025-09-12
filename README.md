@@ -48,7 +48,7 @@ El objetivo es mejorar la eficiencia operativa (toma de pedidos más rápida, pr
 
 | Esquema BBDD                             | App – Selección de productos                      | App – Edición de producto                     |
 | ---------------------------------------- | ------------------------------------------------- | --------------------------------------------- |
-| ![Modelo BBDD](docs/img/modelo-bbdd.png) | ![Pantalla productos](docs/img/app-productos.png) | ![Edición producto](docs/img/app-edicion.png) |
+| ![Modelo BBDD](docs/img/modelo-bbdd.jpg) | ![Pantalla productos](docs/img/app-productos.png) | ![Edición producto](docs/img/app-edicion.png) |
 
 ---
 
@@ -96,7 +96,7 @@ El objetivo es mejorar la eficiencia operativa (toma de pedidos más rápida, pr
 
   * Alta de producto → inserta filas en `stock_restaurante` para cada restaurante.
   * Actualización de stock → inserta registro en `actualizaciones_stock` para detección eficiente de cambios.
-* **Esquema**: ver [`docs/img/modelo-bbdd.png`](docs/img/modelo-bbdd.png).
+* **Esquema**: ver [`docs/img/modelo-bbdd.png`](docs/img/modelo-bbdd.jpg).
 * **Código de producto `CCTTNNVV`** (8 dígitos): CC=categoría, TT=tipo, NN=nombre base, VV=variante.
 
 ---
