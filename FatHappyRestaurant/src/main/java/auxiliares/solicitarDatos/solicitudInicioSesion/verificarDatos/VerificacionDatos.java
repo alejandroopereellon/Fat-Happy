@@ -1,4 +1,4 @@
-package auxiliares.solicitarDatos.solicitudInicioSesion;
+package auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos;
 
 public interface VerificacionDatos {
 

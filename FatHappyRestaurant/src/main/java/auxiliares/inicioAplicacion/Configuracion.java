@@ -2,7 +2,10 @@ package auxiliares.inicioAplicacion;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import auxiliares.solicitarDatos.solicitudInicioSesion.DatosInicioSesion;
 import auxiliares.solicitarDatos.solicitudInicioSesion.InicioSesion;
+import auxiliares.solicitarDatos.solicitudInicioSesion.interfazInicioSesion.DireccionYUsuario.DireccionYUsuarioInterfaz;
+import auxiliares.solicitarDatos.solicitudInicioSesion.interfazInicioSesion.DireccionYUsuario.DireccionYUsuarioInterfazMetodos;
 import ventanaPrincipal.InterfazVentanaPrincipal;
 
 public class Configuracion {
@@ -14,7 +17,8 @@ public class Configuracion {
 	private InterfazVentanaPrincipal ventanaPrincipal;
 
 	// Configuracion de base de datos
-	private InicioSesion datosBBDD;
+	private DatosInicioSesion datosBBDD = new DireccionYUsuarioInterfazMetodos()
+			.obtenerDatosInicioSesion("Iniciar sesion base de datos");
 
 	// Configuracion de servidor FTP
 	private InicioSesion datosFTP;
@@ -76,7 +80,5 @@ public class Configuracion {
 	public void setFtpDirectorioRemoto(String ftpDirectorioRemoto) {
 		this.ftpDirectorioRemoto = ftpDirectorioRemoto;
 	}
-	
-	
 
 }

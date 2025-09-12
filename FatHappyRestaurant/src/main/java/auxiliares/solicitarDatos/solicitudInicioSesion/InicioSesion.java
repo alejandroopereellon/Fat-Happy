@@ -12,6 +12,9 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
+import auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos.CifradoDatos;
+import auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos.VerificacionDatos;
+import auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos.VerificacionDatosDireccionIP;
 
 /**
  * Metodo encargado de almacenar, cifrar y descifrar la contraseña de inicio de
@@ -21,19 +24,16 @@ import auxiliares.singleton.ClasesEstaticas;
  */
 public class InicioSesion {
 
-	private VerificacionDatos verificarDireccionIP = new VerificacionDatosInterfaz();
+	private CifradoDatos cifrado;
 
-	private String direccionIp;
-	private int puerto;
-	private String usuario;
-	private String contrasena;
+	private VerificacionDatos verificarDireccionIP = new VerificacionDatosDireccionIP();
 
 	private static final Logger logger = LogManager.getLogger(ConfiguracionInicial.class);
 
 	/**
 	 * Metodo que solicita el texto que se va a pedir al usuario para poder
 	 * 
-	 * @param texto* es el texto que se usa para informar de los datos solicitados
+	 * @param texto es el texto que se usa para informar de los datos solicitados
 	 */
 	public InicioSesion(String textoUsuario, String textoContrasena, String textoDireccionIp, String textoPuerto) {
 		this.direccionIp = verificarDireccionIp(textoDireccionIp);
@@ -65,58 +65,6 @@ public class InicioSesion {
 	private static String solicitarTextoACifrar(String mensajeMotivo) {
 		// Solicitamos el texto a cifrar
 		return JOptionPane.showInputDialog(null, mensajeMotivo, "Introduce el texto", JOptionPane.QUESTION_MESSAGE);
-	}
-
-	/**
-	 * Metodo encargado de cifrar la contraseña el dato introducido
-	 * 
-	 * @param mensaje es el texto que se va a descifrar
-	 * @return {@link String} con la cadena cifrada
-	 */
-	private static String cifrarTexto(String mensaje) {
-
-		StandardPBEStringEncryptor cifrar = configurarCifrado();
-
-		return cifrar.encrypt(mensaje);
-	}
-
-	/**
-	 * Metodo encargado de descifrar la contraseña el dato introducido
-	 * 
-	 * @param mensaje es el texto que se va a descifrar
-	 * @return {@link String} con la cadena descifrada
-	 */
-	public static String desCifrarTexto(String mensaje) {
-
-		StandardPBEStringEncryptor cifrar = configurarCifrado();
-
-		return cifrar.decrypt(mensaje);
-	}
-
-	/**
-	 * Metodo encargado de la configuracion basica del cifrado
-	 * 
-	 * @return {@link StandardPBEStringEncryptor} con la configuracion del cifrado
-	 */
-	private static StandardPBEStringEncryptor configurarCifrado() {
-		// Creamos el objeto de cifrado en el sistema
-		StandardPBEStringEncryptor cifrar = new StandardPBEStringEncryptor();
-
-		// Establecemos el algoritmo de cifrado
-		cifrar.setAlgorithm("PBEWithHmacSHA512AndAES_256");
-
-		try {
-			// Establecemos la contraseña
-			cifrar.setPassword(System.getenv(ClasesEstaticas.getNombreVariableEntorno()));
-		} catch (IllegalArgumentException e) {
-			logger.error("No se ha establecido una variable de entorno con el valor");
-			new DialogoMostrarMensajeMetodos()
-					.mostrarMensaje("No se ha establecido una variable de entorno con el valor");
-		}
-
-		// Indicamos que cada cifrado usará un IV (vector de inicialización) aleatorio
-		cifrar.setIvGenerator(new org.jasypt.iv.RandomIvGenerator());
-		return cifrar;
 	}
 
 	// Getters && Setters

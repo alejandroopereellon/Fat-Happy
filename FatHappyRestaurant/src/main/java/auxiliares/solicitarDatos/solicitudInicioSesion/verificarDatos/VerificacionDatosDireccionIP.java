@@ -1,11 +1,11 @@
-package auxiliares.solicitarDatos.solicitudInicioSesion;
+package auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 
-public class VerificacionDatosInterfaz implements VerificacionDatos {
+public class VerificacionDatosDireccionIP implements VerificacionDatos {
 
 	@Override
 	public boolean verificarPuerto(String numeroPuerto) {
@@ -32,7 +32,7 @@ public class VerificacionDatosInterfaz implements VerificacionDatos {
 			}
 		} catch (NumberFormatException e) {
 			// Si el puerto no es un numero
-			new DialogoMostrarMensajeMetodos().mostrarMensaje("El puerto introducido no es un numero");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje("ERROR: El puerto introducido no es un numero");
 		}
 		return false;
 	}
@@ -42,12 +42,16 @@ public class VerificacionDatosInterfaz implements VerificacionDatos {
 		// Comprobamos si la direccion es una direccion existente
 		try {
 			// Si no lanza exception es una ip validad
-			if (InetAddress.getByName(direccionIP) != null) {
-				// Ciframos la contraseña y la retornamos
-				return true;
-			}
+			InetAddress.getByName(direccionIP);
+
+			return true;
 		} catch (UnknownHostException e) {
-			return false;
+			/**
+			 * En caso de ocurrir una excepcion por ser un error o no estar correcta la
+			 * direccion IP se notificará al usuario
+			 */
+			new DialogoMostrarMensajeMetodos()
+					.mostrarMensaje("ERROR: La direccion IP introducida tiene un formato incorrecto");
 		}
 		return false;
 	}
