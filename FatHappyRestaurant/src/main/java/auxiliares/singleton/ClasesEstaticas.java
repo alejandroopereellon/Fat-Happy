@@ -5,6 +5,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos.CifradoDatos;
 import caja.interfazCaja.panelPrincipalCaja.PanelCaja;
 import caja.modelo.Caja;
 import empleados.modelo.Empleado;
@@ -19,7 +20,7 @@ import socket.modelo.SocketCliente;
 import socket.util.ConectarAlServidor;
 
 public class ClasesEstaticas {
-	
+
 	// Dato estatico que mantiene en memoria la variable de cifrado
 	private static final String NOMBRE_VARIABLE_ENTORNO = "java_password";
 
@@ -57,6 +58,12 @@ public class ClasesEstaticas {
 	// Dato estatico que mantiene en memoria el hilo que mantiene la conexion al
 	// servidor
 	public static ConectarAlServidor hiloConexionServidor = new ConectarAlServidor();
+
+	// Dato estatico que mantiene en memoria el sistema de cifrado de datos
+	public static CifradoDatos cifrado = new CifradoDatos();
+
+	// Dato estatico que mantiene en memoria la direccion ip del servidor
+	public static String direccionIPservidor = "79.116.12.169";
 
 	/**
 	 * Guarda el pedido actual en memoria.
@@ -246,13 +253,25 @@ public class ClasesEstaticas {
 	public static ConectarAlServidor getHiloconexionservidor() {
 		return hiloConexionServidor;
 	}
-	
+
 	public static void setHiloConexionServidor(ConectarAlServidor hiloConexionServidor) {
 		ClasesEstaticas.hiloConexionServidor = hiloConexionServidor;
 	}
 
 	public static String getNombreVariableEntorno() {
 		return NOMBRE_VARIABLE_ENTORNO;
+	}
+
+	public static CifradoDatos getCifrado() {
+		return cifrado;
+	}
+
+	public static void setCifrado(CifradoDatos cifrado) {
+		ClasesEstaticas.cifrado = cifrado;
+	}
+
+	public static String getDireccionIPservidor() {
+		return direccionIPservidor;
 	}
 
 }

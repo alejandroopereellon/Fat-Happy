@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
-import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 
@@ -15,7 +14,7 @@ import auxiliares.singleton.ClasesEstaticas;
  */
 public class CifradoDatos implements InterfazCifrarDescifrar {
 
-	private static final Logger logger = LogManager.getLogger(ConfiguracionInicial.class);
+	private static final Logger logger = LogManager.getLogger(CifradoDatos.class);
 
 	/**
 	 * Metodo encargado de cifrar el dato introducido

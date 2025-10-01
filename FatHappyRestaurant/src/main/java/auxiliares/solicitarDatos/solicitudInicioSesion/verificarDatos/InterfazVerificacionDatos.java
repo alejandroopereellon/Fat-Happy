@@ -1,6 +1,6 @@
 package auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos;
 
-public interface VerificacionDatos {
+public interface InterfazVerificacionDatos {
 
 	/**
 	 * Metodo encargado de la verificacion de que el puerto introducido por el

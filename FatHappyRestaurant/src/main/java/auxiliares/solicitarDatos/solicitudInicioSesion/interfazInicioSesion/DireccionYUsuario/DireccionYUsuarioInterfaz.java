@@ -1,6 +1,5 @@
 package auxiliares.solicitarDatos.solicitudInicioSesion.interfazInicioSesion.DireccionYUsuario;
 
-import java.lang.classfile.Interfaces;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -58,15 +57,15 @@ public class DireccionYUsuarioInterfaz extends javax.swing.JDialog {
             }
         });
 
-        direccionIP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        direccionIP.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         direccionIP.setToolTipText("Introduce la direccion IP");
         direccionIP.setBorder(javax.swing.BorderFactory.createTitledBorder("DIRECCION IP"));
 
-        puerto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        puerto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         puerto.setToolTipText("Introduce puerto de conexion");
         puerto.setBorder(javax.swing.BorderFactory.createTitledBorder("PUERTO"));
 
-        usuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        usuario.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         usuario.setToolTipText("Introduce nombre de usuario");
         usuario.setBorder(javax.swing.BorderFactory.createTitledBorder("USUARIO"));
 
@@ -139,9 +138,7 @@ public class DireccionYUsuarioInterfaz extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAceptar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptar1ActionPerformed
-        if (metodos.verificarDatos()) {
-            dispose();
-        }
+        dispose();
     }//GEN-LAST:event_botonAceptar1ActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed

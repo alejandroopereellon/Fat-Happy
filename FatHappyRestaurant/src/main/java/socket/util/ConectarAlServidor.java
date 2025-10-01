@@ -55,7 +55,7 @@ public class ConectarAlServidor extends Thread {
 			// Configuramos el socket
 			try {
 				// Se va a establecer una conexion con el servidor en el puerto 5000
-				cliente.connect(new InetSocketAddress("79.112.49.122", 1114), 5000);
+				cliente.connect(new InetSocketAddress(ClasesEstaticas.getDireccionIPservidor(), 1114), 5000);
 				logger.info("Se va a stablecer conexion en la ip {}, puerto {}", cliente.getInetAddress(),
 						cliente.getPort());
 
@@ -75,7 +75,7 @@ public class ConectarAlServidor extends Thread {
 				logger.error("No se ha podido resolver la direccion ip del servidor", e);
 				new CerrarConexionSocket().cerrar();
 			} catch (ConnectException e) {
-				logger.error("El servidor no esta activo",e);
+				logger.error("El servidor no esta activo", e);
 			} catch (IOException e) {
 				logger.error("Ha ocurrido un error de red", e);
 				new CerrarConexionSocket().cerrar();

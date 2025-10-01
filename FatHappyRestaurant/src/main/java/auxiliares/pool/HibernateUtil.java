@@ -6,16 +6,23 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
-import auxiliares.solicitarDatos.solicitudInicioSesion.InicioSesion;
+import auxiliares.singleton.ClasesEstaticas;
+import auxiliares.solicitarDatos.solicitudInicioSesion.DatosInicioSesion;
+import auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos.CifradoDatos;
 
 public class HibernateUtil {
 
-	// Obtenemos los datos de la BBDD ya descifrados cuando haga falta
-	private static final InicioSesion INICIO = ConfiguracionInicial.get().getDatosBBDD();
+	// Obtenemos los datos de la BBDD
+	private static final DatosInicioSesion INICIO = ConfiguracionInicial.get().getDatosBBDD();
 	private static final String DATABASE = "restaurante2";
 
+	// Declaramos el cifrado de datos
+	private static final CifradoDatos CIFRADO = ClasesEstaticas.getCifrado();
+
+	// Declaramos el logger
 	private static final Logger logger = LogManager.getLogger(HibernateUtil.class);
 
+	// Declaramos el sessionFactory
 	private static final SessionFactory sessionFactory = buildSessionFactory();
 
 	private static SessionFactory buildSessionFactory() {
@@ -24,16 +31,14 @@ public class HibernateUtil {
 			Configuration configuration = new Configuration();
 			configuration.configure("hibernate.cfg.xml");
 
-			// 2) Monta la URL dinámica
-			String jdbcUrl = String.format("jdbc:mariadb://%s:%d/%s",
-					InicioSesion.desCifrarTexto(INICIO.getDireccionIp()), INICIO.getPuerto(), DATABASE);
+			// 2) Monta la URL dinámica descrifando la direccion
+			String jdbcUrl = String.format("jdbc:mariadb://%s:%d/%s", CIFRADO.desCifrarTexto(INICIO.getDireccionIp()),
+					INICIO.getPuerto(), DATABASE);
 
 			// 3) Inyecta URL, usuario y contraseña en la misma Configuration
 			configuration.setProperty("hibernate.connection.url", jdbcUrl);
-			configuration.setProperty("hibernate.connection.username",
-					InicioSesion.desCifrarTexto(INICIO.getUsuario()));
-			configuration.setProperty("hibernate.connection.password",
-					InicioSesion.desCifrarTexto(INICIO.getContrasena()));
+			configuration.setProperty("hibernate.connection.username", CIFRADO.desCifrarTexto(INICIO.getUsuario()));
+			configuration.setProperty("hibernate.connection.password", CIFRADO.desCifrarTexto(INICIO.getContrasena()));
 
 			// 4) Usamos esta configuración (con las properties dinámicas) en lugar de
 			// instanciar una nueva.

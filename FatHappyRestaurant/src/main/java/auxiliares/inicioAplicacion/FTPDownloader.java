@@ -14,7 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
-import auxiliares.solicitarDatos.solicitudInicioSesion.InicioSesion;
+import auxiliares.singleton.ClasesEstaticas;
+import auxiliares.solicitarDatos.solicitudInicioSesion.DatosInicioSesion;
+import auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos.CifradoDatos;
 
 /**
  * Metodo que realiza la connexion y la descarga de todos los ficheros
@@ -82,20 +84,20 @@ public class FTPDownloader {
 	public boolean iniciarConexionYDescargar(String rutaLocal, String directorioRemoto) {
 		Configuracion config = ConfiguracionInicial.get();
 
-		// Configuramos la conexion con el servidor
-		String servidor = InicioSesion.desCifrarTexto(config.getDatosFTP().getDireccionIp()) ;
-		int puerto = config.getDatosFTP().getPuerto();
-		String usuario = InicioSesion.desCifrarTexto(config.getDatosFTP().getUsuario());
-		String contrasena = InicioSesion.desCifrarTexto(config.getDatosFTP().getContrasena());
+		// Iniciamos los datos de cifrado
 
-		logger.info("Conectando a servidor FTP: {}:{}", servidor, puerto);
+		// Configuramos la conexion con el servidor
+
+		DatosInicioSesion datos = ConfiguracionInicial.get().getDatosFTP();
+
+		logger.info("Conectando a servidor FTP");
 		logger.info("Ruta local de destino: {}", rutaLocal);
 
 		FTPClient ftpClient = new FTPClient();
 
 		try {
-			ftpClient.connect(servidor, puerto);
-			boolean login = ftpClient.login(usuario, contrasena);
+			ftpClient.connect(new CifradoDatos().desCifrarTexto(datos.getDireccionIp()), datos.getPuerto());
+			boolean login = ftpClient.login(ClasesEstaticas.getCifrado().desCifrarTexto(datos.getUsuario()),ClasesEstaticas.getCifrado().desCifrarTexto(datos.getContrasena()));
 
 			if (login) {
 				logger.info("Conexión FTP exitosa");

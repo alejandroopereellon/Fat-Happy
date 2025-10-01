@@ -3,9 +3,6 @@ package auxiliares.inicioAplicacion;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import auxiliares.solicitarDatos.solicitudInicioSesion.DatosInicioSesion;
-import auxiliares.solicitarDatos.solicitudInicioSesion.InicioSesion;
-import auxiliares.solicitarDatos.solicitudInicioSesion.interfazInicioSesion.DireccionYUsuario.DireccionYUsuarioInterfaz;
-import auxiliares.solicitarDatos.solicitudInicioSesion.interfazInicioSesion.DireccionYUsuario.DireccionYUsuarioInterfazMetodos;
 import ventanaPrincipal.InterfazVentanaPrincipal;
 
 public class Configuracion {
@@ -17,11 +14,10 @@ public class Configuracion {
 	private InterfazVentanaPrincipal ventanaPrincipal;
 
 	// Configuracion de base de datos
-	private DatosInicioSesion datosBBDD = new DireccionYUsuarioInterfazMetodos()
-			.obtenerDatosInicioSesion("Iniciar sesion base de datos");
+	private DatosInicioSesion datosBBDD;
 
 	// Configuracion de servidor FTP
-	private InicioSesion datosFTP;
+	private DatosInicioSesion datosFTP;
 	private String ftpDirectorioRemoto;
 
 	// Getters y setters
@@ -57,19 +53,19 @@ public class Configuracion {
 		this.ventanaPrincipal = ventanaPrincipal;
 	}
 
-	public InicioSesion getDatosBBDD() {
+	public DatosInicioSesion getDatosBBDD() {
 		return datosBBDD;
 	}
 
-	public void setDatosBBDD(InicioSesion datosBBDD) {
+	public void setDatosBBDD(DatosInicioSesion datosBBDD) {
 		this.datosBBDD = datosBBDD;
 	}
 
-	public InicioSesion getDatosFTP() {
+	public DatosInicioSesion getDatosFTP() {
 		return datosFTP;
 	}
 
-	public void setDatosFTP(InicioSesion datosFTP) {
+	public void setDatosFTP(DatosInicioSesion datosFTP) {
 		this.datosFTP = datosFTP;
 	}
 

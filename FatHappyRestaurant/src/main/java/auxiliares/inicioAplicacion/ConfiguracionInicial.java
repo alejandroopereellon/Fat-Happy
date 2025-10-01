@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import auxiliares.solicitarDatos.solicitarNumero.SolicitarNumeroMetodos;
-import auxiliares.solicitarDatos.solicitudInicioSesion.InicioSesion;
+import auxiliares.solicitarDatos.solicitudInicioSesion.interfazInicioSesion.DireccionYUsuario.DireccionYUsuarioInterfazMetodos;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,13 +65,11 @@ public class ConfiguracionInicial {
 
 		// Solicitamos y almacenamos los datos de la base de datos
 		porDefecto.setDatosBBDD(
-				new InicioSesion("Introduce el usuario del servidor BBDD", "Introduce la contraseña de la BBDD",
-						"Introduce la direccion IP de la BBDD", "Introduce el puerto de la BBDD"));
+				new DireccionYUsuarioInterfazMetodos().obtenerDatosInicioSesion("Iniciar sesion Base de datos"));
 
 		// Solicitamos y almacenamos los datos del servidor FTP
-		porDefecto.setDatosFTP(new InicioSesion("Introduce el usuario del servidor FTP",
-				"Introduce la contraseña del FTP", "Introduce la direccion IP del FTP", "Introduce el puerto del FTP"));
 
+		porDefecto.setDatosFTP(new DireccionYUsuarioInterfazMetodos().obtenerDatosInicioSesion("Iniciar sesion FTP"));
 		// Soliciamos el numero de restaurante
 		porDefecto.setCodigoRestaurante(
 				new SolicitarNumeroMetodos("Introduce el número de restaurante").solicitarNumero());

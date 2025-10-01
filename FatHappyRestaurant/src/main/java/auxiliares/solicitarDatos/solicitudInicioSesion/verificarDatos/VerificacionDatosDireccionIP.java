@@ -3,9 +3,12 @@ package auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class VerificacionDatosDireccionIP implements VerificacionDatos {
+public class VerificacionDatosDireccionIP implements InterfazVerificacionDatos {
+
+	private static final Logger logger = LogManager.getLogger(VerificacionDatosDireccionIP.class);
 
 	@Override
 	public boolean verificarPuerto(String numeroPuerto) {
@@ -25,14 +28,9 @@ public class VerificacionDatosDireccionIP implements VerificacionDatos {
 			// Si el puerto es un numero y esta en el rango devolvemos un true
 			if (numeroPuertoVerificar >= 1 && numeroPuertoVerificar <= 65535) {
 				return true;
-			} else {
-				// Si es un numero pero no esta en el rango
-				new DialogoMostrarMensajeMetodos()
-						.mostrarMensaje("El puerto introducido no esta en el rango solicitado");
 			}
 		} catch (NumberFormatException e) {
-			// Si el puerto no es un numero
-			new DialogoMostrarMensajeMetodos().mostrarMensaje("ERROR: El puerto introducido no es un numero");
+			logger.warn("El puertto {} no es un numero admitido", numeroPuerto);
 		}
 		return false;
 	}
@@ -48,10 +46,9 @@ public class VerificacionDatosDireccionIP implements VerificacionDatos {
 		} catch (UnknownHostException e) {
 			/**
 			 * En caso de ocurrir una excepcion por ser un error o no estar correcta la
-			 * direccion IP se notificará al usuario
+			 * direccion IP
 			 */
-			new DialogoMostrarMensajeMetodos()
-					.mostrarMensaje("ERROR: La direccion IP introducida tiene un formato incorrecto");
+			logger.warn("La direccion IP {} no cumple los requisitos", direccionIP);
 		}
 		return false;
 	}

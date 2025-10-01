@@ -1,8 +1,10 @@
 package auxiliares.solicitarDatos.solicitudInicioSesion;
 
 /**
- * Metodo encargado de almacenar los datos de inicio de sesion de un objeto,
- * mediante un {@link Boolean}o permite conocer si un dato esta cifrado o no
+ * Metodo encargado de almacenar cifrados los datos de inicio de sesion de un
+ * servicio o aplicacion
+ * 
+ * @author Alejandro Perellón López
  */
 public class DatosInicioSesion {
 
