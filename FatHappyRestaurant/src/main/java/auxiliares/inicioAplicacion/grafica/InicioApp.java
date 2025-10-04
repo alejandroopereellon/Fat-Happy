@@ -20,7 +20,7 @@ public class InicioApp extends javax.swing.JFrame {
     public InicioApp() {
         InterfazVentanaPrincipalMetodos.aplicarLookAndFeel();
         initComponents();
-        derechosAutor.setText("©" + LocalDate.now().getYear() +" - Alejandro Perellón López");
+        //derechosAutor.setText("©" + LocalDate.now().getYear() +" - Alejandro Perellón López");
     }
 
     /**
