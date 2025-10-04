@@ -39,7 +39,6 @@ public class InicioApp extends javax.swing.JFrame {
         barraProgreso = new javax.swing.JProgressBar();
         EstadoInicio = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        derechosAutor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -75,10 +74,6 @@ public class InicioApp extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("OkPos Fat & Happy");
 
-        derechosAutor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        derechosAutor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        derechosAutor.setText("© 2025 - Alejandro Perellón López");
-
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
@@ -90,8 +85,7 @@ public class InicioApp extends javax.swing.JFrame {
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EstadoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(barraProgreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                    .addComponent(derechosAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(textoInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -106,8 +100,7 @@ public class InicioApp extends javax.swing.JFrame {
                 .addComponent(barraProgreso, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EstadoInicio)
-                .addGap(14, 14, 14)
-                .addComponent(derechosAutor))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,7 +129,6 @@ public class InicioApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel EstadoInicio;
     private javax.swing.JProgressBar barraProgreso;
-    private javax.swing.JLabel derechosAutor;
     private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelImagen;
