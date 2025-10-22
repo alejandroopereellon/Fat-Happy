@@ -4,6 +4,7 @@ import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import empleados.util.ActividadEmpleados;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Clase de interfaz grafica que muestra diferentes acciones a realizar en la
@@ -51,6 +52,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         forzarDesconexion = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         cancelarPedido = new javax.swing.JButton();
+        cambiarIdioma = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1366, 550));
         setMinimumSize(new java.awt.Dimension(1366, 550));
@@ -62,10 +64,10 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Selecciona una accion de caja");
+        jLabel2.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ACCION_CAJA_TITULO"));
 
         iniciarCaja.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        iniciarCaja.setText("Iniciar caja");
+        iniciarCaja.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CAJA_INICIAR"));
         iniciarCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniciarCajaActionPerformed(evt);
@@ -73,7 +75,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         });
 
         cerrarCaja.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cerrarCaja.setText("Cerrar caja");
+        cerrarCaja.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CAJA_CERRAR"));
         cerrarCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cerrarCajaActionPerformed(evt);
@@ -81,7 +83,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         });
 
         estadisticasVentas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        estadisticasVentas.setText("Consultar estadisticas");
+        estadisticasVentas.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CAJA_CONSULTAR_ESTADISTICAS"));
         estadisticasVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estadisticasVentasActionPerformed(evt);
@@ -90,10 +92,11 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Selecciona una accion de inventario");
+        jLabel3.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ACCION_INVENTARIO_TITULO"));
 
         activarProductos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        activarProductos.setText("Modificar stock productos");
+        activarProductos.setText(
+            ClasesEstaticas.getProveedorMensaje().findMessage("INVENTARIO_MODIFICAR_STOCK"));
         activarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 activarProductosActionPerformed(evt);
@@ -101,7 +104,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         });
 
         pantallaPrincipla.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pantallaPrincipla.setText("Volver pantalla principal");
+        pantallaPrincipla.setText(ClasesEstaticas.getProveedorMensaje().findMessage("APP_VOLVER_PRINCIPAL"));
         pantallaPrincipla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pantallaPrinciplaActionPerformed(evt);
@@ -109,7 +112,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         });
 
         CerrarAplicacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        CerrarAplicacion.setText("Cerrar la aplicacion");
+        CerrarAplicacion.setText(ClasesEstaticas.getProveedorMensaje().findMessage("APP_CERRAR"));
         CerrarAplicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CerrarAplicacionActionPerformed(evt);
@@ -118,10 +121,10 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Selecciona una accion de productos");
+        jLabel4.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ACCION_PRODUCTOS_TITULO"));
 
         actualizarImagenesServidor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        actualizarImagenesServidor.setText("Actualizar imagenes productos");
+        actualizarImagenesServidor.setText(ClasesEstaticas.getProveedorMensaje().findMessage("PRODUCTOS_ACTUALIZAR_IMAGENES"));
         actualizarImagenesServidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actualizarImagenesServidorActionPerformed(evt);
@@ -130,14 +133,14 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Selecciona una accion de servidor");
+        jLabel5.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ACCION_SERVIDOR_TITULO"));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Selecciona una accion de logs");
+        jLabel6.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ACCION_LOGS_TITULO"));
 
         activarProductos2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        activarProductos2.setText("Abrir los logs de la aplicacion");
+        activarProductos2.setText(ClasesEstaticas.getProveedorMensaje().findMessage("LOGS_ABRIR"));
         activarProductos2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 activarProductos2ActionPerformed(evt);
@@ -147,7 +150,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         checkReintentarConexion.setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
         checkReintentarConexion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         checkReintentarConexion.setSelected(true);
-        checkReintentarConexion.setText("Reintentar conexion al servidor");
+        checkReintentarConexion.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SERVIDOR_REINTENTAR_CONEXION"));
         checkReintentarConexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkReintentarConexionActionPerformed(evt);
@@ -155,7 +158,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         });
 
         forzarConexionServidor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        forzarConexionServidor.setText("Forzar conexion al servidor");
+        forzarConexionServidor.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SERVIDOR_FORZAR_CONEXION"));
         forzarConexionServidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 forzarConexionServidorActionPerformed(evt);
@@ -163,7 +166,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         });
 
         forzarDesconexion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        forzarDesconexion.setText("Forzar desconexion al servidor");
+        forzarDesconexion.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SERVIDOR_FORZAR_DESCONEXION"));
         forzarDesconexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 forzarDesconexionActionPerformed(evt);
@@ -172,13 +175,21 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Selecciona una accion del pedido");
+        jLabel7.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ACCION_PEDIDO_TITULO"));
 
         cancelarPedido.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cancelarPedido.setText("Cancelar pedido");
+        cancelarPedido.setText(ClasesEstaticas.getProveedorMensaje().findMessage("PEDIDO_CANCELAR"));
         cancelarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarPedidoActionPerformed(evt);
+            }
+        });
+
+        cambiarIdioma.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cambiarIdioma.setText("Change language");
+        cambiarIdioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarIdiomaActionPerformed(evt);
             }
         });
 
@@ -200,25 +211,29 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-                            .addComponent(activarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(checkReintentarConexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(forzarConexionServidor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(forzarDesconexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(50, 50, 50)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                                .addComponent(activarProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(checkReintentarConexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(forzarConexionServidor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(forzarDesconexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(actualizarImagenesServidor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-                                .addComponent(activarProductos2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(activarProductos2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cambiarIdioma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(89, Short.MAX_VALUE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(CerrarAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pantallaPrincipla)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +272,9 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(forzarDesconexion, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(forzarDesconexion, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cambiarIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(pantallaPrincipla, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,6 +351,10 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
         metodos.cancelarPedido();
     }//GEN-LAST:event_cancelarPedidoActionPerformed
 
+    private void cambiarIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarIdiomaActionPerformed
+       metodos.cambiarIdioma();
+    }//GEN-LAST:event_cambiarIdiomaActionPerformed
+
     public JButton getActivarProductos() {
         return activarProductos;
     }
@@ -360,6 +381,7 @@ public class AccionesSobreCaja extends javax.swing.JPanel {
     private javax.swing.JButton activarProductos;
     private javax.swing.JButton activarProductos2;
     private javax.swing.JButton actualizarImagenesServidor;
+    private javax.swing.JButton cambiarIdioma;
     private javax.swing.JButton cancelarPedido;
     private javax.swing.JButton cerrarCaja;
     private javax.swing.JCheckBox checkReintentarConexion;

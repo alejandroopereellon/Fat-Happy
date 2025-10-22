@@ -1,5 +1,6 @@
 package caja.interfazCaja.panelPrincipalCaja;
 
+import auxiliares.singleton.ClasesEstaticas;
 import caja.modelo.Caja;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -56,7 +57,7 @@ public class PanelCaja extends javax.swing.JPanel {
 
         datosEmpleado.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         datosEmpleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        datosEmpleado.setText("No hay usuario activo");
+        datosEmpleado.setText(ClasesEstaticas.getProveedorMensaje().findMessage("PANELCAJA_NO_USUARIO_ACTIVO"));
 
         PuestoSesion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PuestoSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -64,18 +65,18 @@ public class PanelCaja extends javax.swing.JPanel {
 
         estadoCaja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         estadoCaja.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        estadoCaja.setText("Cerrada");
+        estadoCaja.setText(ClasesEstaticas.getProveedorMensaje().findMessage("PANELCAJA_CAJA_CERRADA"));
 
         tiempoPedido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tiempoPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tiempoPedido.setText("00:00");
 
         textoConexion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textoConexion.setText("Estado conexion:");
+        textoConexion.setText(ClasesEstaticas.getProveedorMensaje().findMessage("PANELCAJA_ESTADO_CONEXION"));
 
         estadoConexion.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         estadoConexion.setForeground(Color.ORANGE);
-        estadoConexion.setText("Estableciendo conexion");
+        estadoConexion.setText(ClasesEstaticas.getProveedorMensaje().findMessage("PANELCAJA_ESTABLECIENDO_CONEXION"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,10 +145,7 @@ public class PanelCaja extends javax.swing.JPanel {
         return estadoConexion;
     }
 
-  
 
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PuestoSesion;
     private javax.swing.JLabel datosEmpleado;

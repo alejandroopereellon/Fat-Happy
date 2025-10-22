@@ -3,6 +3,8 @@ package empleados.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
+import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.solicitarDatos.solicitarNumero.SolicitarNumeroMetodos;
 import empleados.dao.EmpleadoDaoHibernateImpl;
 import empleados.dao.EmpleadosDao;
@@ -29,7 +31,7 @@ public class ActividadEmpleados {
 	 */
 	public boolean solicitarPermisos(String motivo, int permisosMinimos) {
 		// Obtenemos el empleado
-		Empleado emp = obtenerEmpleado();
+		Empleado emp = obtenerEmpleado(motivo);
 		MovimientosEmpleado movimiento = null;
 		Boolean bandera = false;
 
@@ -43,10 +45,13 @@ public class ActividadEmpleados {
 			} else {
 				logger.debug("El objeto empleado con ID {} no tiene permisos de acceso", emp.getIdEmpleado());
 				movimiento = new MovimientosEmpleado(emp, motivo, "Empleado no tiene permisos", false);
+				new DialogoMostrarMensajeMetodos().buscarMensajes("ERROR_EMPLEADO_NO_TIENE_PERMISOS");
 			}
 		} else {
-			movimiento = new MovimientosEmpleado(emp, motivo, "Empleado no existente", false);
+			movimiento = new MovimientosEmpleado(emp, motivo, "Empleado no existente u operacion cancelada", false);
 			logger.error("El objeto empleado no existe en la base de datos");
+			bandera = false;
+			new DialogoMostrarMensajeMetodos().buscarMensajes("ERROR_EMPLEADO_NO_ENCONTRADO");
 		}
 
 		// Almacenamos el movimiento
@@ -61,14 +66,13 @@ public class ActividadEmpleados {
 	 * 
 	 * @return {@link Empleado}
 	 */
-	public Empleado obtenerEmpleado() {
+	public Empleado obtenerEmpleado(String motivo) {
 		// Solicitamos el numero de empleado
-		int idEmpleado = solicitarNumeroEmpleado();
+		int idEmpleado = solicitarNumeroEmpleado(motivo);
 		// Si el id de empleado cumple los requisitos se va a buscar
 		if (idEmpleado != 0) {
 			return dao.obtenerEmpleado(idEmpleado);
 		}
-		logger.warn("No se ha podido obtener el empleado del restaurante a traves del DAO");
 		return null;
 	}
 
@@ -76,12 +80,15 @@ public class ActividadEmpleados {
 	 * Metodo que inicia la clase {@link SolicitarNumeroMetodos} para obtener el
 	 * numero de empleado, comprueba que tenga 3 cifras y lo devuelve
 	 * 
-	 * @return numero de empleado
+	 * @return numero de empleado || 0 en caso de que no cumpla los requisitos
 	 */
-	private int solicitarNumeroEmpleado() {
+	private int solicitarNumeroEmpleado(String motivo) {
 		// Solicitamos el numero de empleado
-		logger.debug("Se va a solicitar el numero de empleado");
-		int numeroEmpleado = new SolicitarNumeroMetodos("Introduce el ID de empleado").solicitarNumero();
+		logger.debug("Se va a solicitar el numero de empleado con el siguiente motivo: {}", motivo);
+		int numeroEmpleado = new SolicitarNumeroMetodos(
+				ClasesEstaticas.getProveedorMensaje().findMessage("MOTIVO_SOLICITAR_EMPLEADO") + System.lineSeparator()
+						+ motivo)
+				.solicitarNumero();
 
 		// Comprobamos el posible numero de empleado
 		if (numeroEmpleado >= 100 && numeroEmpleado < 999) {

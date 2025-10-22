@@ -1,6 +1,7 @@
 package caja.interfazCaja.descuentos;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Clase de interfaz grafica que solicita un descuento para el pedido
@@ -43,7 +44,7 @@ public class SolicitarDescuento extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INTRODUCE EL DESCUENTO");
+        jLabel1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("DESCUENTO_INTRODUCIR_CANTIDAD"));
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 

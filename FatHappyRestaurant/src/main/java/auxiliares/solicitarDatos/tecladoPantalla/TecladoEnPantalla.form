@@ -521,7 +521,9 @@
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Introduce un texto"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;INTRODUCIR_TEXTO&quot;)" type="code"/>
+            </Property>
             <Property name="toolTipText" type="java.lang.String" value="Introduce un texto"/>
           </Properties>
         </Component>
@@ -530,7 +532,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Continuar"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;GENERAL_CONTINUE&quot;)" type="code"/>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
@@ -542,7 +546,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Espacio"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;TECLADO_ESPACIO&quot;)" type="code"/>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>
@@ -554,7 +560,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Borrar "/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;ACTION_DELETE&quot;)" type="code"/>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
           <Events>

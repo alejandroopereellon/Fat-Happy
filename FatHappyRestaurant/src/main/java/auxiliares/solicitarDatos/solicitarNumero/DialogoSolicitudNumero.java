@@ -1,6 +1,7 @@
 package auxiliares.solicitarDatos.solicitarNumero;
 
 import javax.swing.JTextField;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Clase de interfaz que permite solicitar un numero al usuario
@@ -31,7 +32,6 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        tituloVentana = new javax.swing.JLabel();
         cuadroTexto = new javax.swing.JTextField();
         boton0 = new javax.swing.JButton();
         boton1 = new javax.swing.JButton();
@@ -46,6 +46,8 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         botonC = new javax.swing.JButton();
         botonAceptar = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tituloVentana = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -53,10 +55,6 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        tituloVentana.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tituloVentana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tituloVentana.setText("Introducir numero");
 
         cuadroTexto.setEditable(false);
         cuadroTexto.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
@@ -153,7 +151,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         });
 
         botonAceptar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonAceptar.setText("Aceptar");
+        botonAceptar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("GENERAL_ACCEPT"));
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);
@@ -161,12 +159,24 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         });
 
         botonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonCancelar.setText("Cancelar");
+        botonCancelar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("GENERAL_CANCEL"));
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setBorder(null);
+
+        tituloVentana.setEditable(false);
+        tituloVentana.setBackground(new java.awt.Color(255, 255, 255));
+        tituloVentana.setColumns(20);
+        tituloVentana.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tituloVentana.setLineWrap(true);
+        tituloVentana.setWrapStyleWord(true);
+        tituloVentana.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        tituloVentana.setEnabled(false);
+        jScrollPane1.setViewportView(tituloVentana);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -174,9 +184,8 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloVentana, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cuadroTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cuadroTexto)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -205,14 +214,15 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1))
                 .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tituloVentana)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(cuadroTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -245,9 +255,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,6 +340,7 @@ public class DialogoSolicitudNumero extends javax.swing.JDialog {
     private javax.swing.JButton botonCancelar;
     private javax.swing.JTextField cuadroTexto;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel tituloVentana;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea tituloVentana;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,6 +20,12 @@ public class Configuracion {
 	private DatosInicioSesion datosFTP;
 	private String ftpDirectorioRemoto;
 
+	// Configuracion de idioma
+	private String idioma = "es";
+
+	// Configuracion predeterminada reconexion
+	private Boolean reconexionServidor = false;
+
 	// Getters y setters
 	public int getCodigoRestaurante() {
 		return codigoRestaurante;
@@ -75,6 +81,22 @@ public class Configuracion {
 
 	public void setFtpDirectorioRemoto(String ftpDirectorioRemoto) {
 		this.ftpDirectorioRemoto = ftpDirectorioRemoto;
+	}
+
+	public String getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
+	}
+
+	public Boolean getReconexionServidor() {
+		return reconexionServidor;
+	}
+
+	public void setReconexionServidor(Boolean reconexionServidor) {
+		this.reconexionServidor = reconexionServidor;
 	}
 
 }

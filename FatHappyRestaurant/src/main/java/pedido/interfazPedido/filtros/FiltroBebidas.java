@@ -45,15 +45,15 @@ public class FiltroBebidas extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/filtrar.png"))); // NOI18N
-        jLabel1.setText("FILTROS");
+        jLabel1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TITULO"));
 
         textoTipoBebida.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoTipoBebida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoTipoBebida.setText("Tipo bebida");
+        textoTipoBebida.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_BEBIDAS_TIPO"));
 
         grupoTipoBebida.add(soloConGas);
         soloConGas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloConGas.setText("Con gas");
+        soloConGas.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_BEBIDAS_CON_GAS"));
         soloConGas.setActionCommand("Refresco");
         soloConGas.setContentAreaFilled(false);
         soloConGas.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +64,7 @@ public class FiltroBebidas extends javax.swing.JPanel {
 
         grupoTipoBebida.add(soloSinGas);
         soloSinGas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloSinGas.setText("Sin gas");
+        soloSinGas.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_BEBIDAS_SIN_GAS"));
         soloSinGas.setActionCommand("singas");
         soloSinGas.setContentAreaFilled(false);
         soloSinGas.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +76,7 @@ public class FiltroBebidas extends javax.swing.JPanel {
         grupoTipoBebida.add(todosLosProductos);
         todosLosProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         todosLosProductos.setSelected(true);
-        todosLosProductos.setText("Todos");
+        todosLosProductos.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_BEBIDAS_TODOS"));
         todosLosProductos.setActionCommand("todos");
         todosLosProductos.setContentAreaFilled(false);
         todosLosProductos.addActionListener(new java.awt.event.ActionListener() {

@@ -51,15 +51,15 @@ public class FiltroPostre extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/filtrar.png"))); // NOI18N
-        jLabel1.setText("FILTROS");
+        jLabel1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TITULO"));
 
         textoTipoTopping.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoTipoTopping.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoTipoTopping.setText("Topping");
+        textoTipoTopping.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_TOPPING"));
 
         grupoTopping.add(soloChocolate);
         soloChocolate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloChocolate.setText("Chocolate");
+        soloChocolate.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_CHOCOLATE"));
         soloChocolate.setActionCommand("Choco");
         soloChocolate.setContentAreaFilled(false);
         soloChocolate.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +70,7 @@ public class FiltroPostre extends javax.swing.JPanel {
 
         grupoTopping.add(soloChocolateBlanco);
         soloChocolateBlanco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloChocolateBlanco.setText("Chocolate blanco");
+        soloChocolateBlanco.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_CHOCOLATE_BLANCO"));
         soloChocolateBlanco.setActionCommand("Blanco");
         soloChocolateBlanco.setContentAreaFilled(false);
         soloChocolateBlanco.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +82,7 @@ public class FiltroPostre extends javax.swing.JPanel {
         grupoTopping.add(todosLosProductos);
         todosLosProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         todosLosProductos.setSelected(true);
-        todosLosProductos.setText("Todos");
+        todosLosProductos.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_TODOS"));
         todosLosProductos.setActionCommand("todos");
         todosLosProductos.setContentAreaFilled(false);
         todosLosProductos.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +93,7 @@ public class FiltroPostre extends javax.swing.JPanel {
 
         grupoTopping.add(soloCaramelo);
         soloCaramelo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloCaramelo.setText("Caramelo ");
+        soloCaramelo.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_CARAMELO"));
         soloCaramelo.setActionCommand("Caramelo");
         soloCaramelo.setContentAreaFilled(false);
         soloCaramelo.addActionListener(new java.awt.event.ActionListener() {
@@ -104,11 +104,11 @@ public class FiltroPostre extends javax.swing.JPanel {
 
         textoTipoHelado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoTipoHelado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoTipoHelado.setText("Tipo helado");
+        textoTipoHelado.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_TIPO_HELADO"));
 
         grupoTipoHelado.add(soloFrostie);
         soloFrostie.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloFrostie.setText("Frostie");
+        soloFrostie.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_TIPO_HELADO_FROSTIE"));
         soloFrostie.setContentAreaFilled(false);
         soloFrostie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +118,7 @@ public class FiltroPostre extends javax.swing.JPanel {
 
         grupoTipoHelado.add(soloMiniFrostie);
         soloMiniFrostie.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloMiniFrostie.setText("Mini frostie");
+        soloMiniFrostie.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_TIPO_HELADO_MINI_FROSTIE"));
         soloMiniFrostie.setActionCommand("Mini");
         soloMiniFrostie.setContentAreaFilled(false);
         soloMiniFrostie.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +130,7 @@ public class FiltroPostre extends javax.swing.JPanel {
         grupoTipoHelado.add(todosLosProductos1);
         todosLosProductos1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         todosLosProductos1.setSelected(true);
-        todosLosProductos1.setText("Todos");
+        todosLosProductos1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_POSTRES_TIPO_HELADO_TODOS"));
         todosLosProductos1.setActionCommand("todos");
         todosLosProductos1.setContentAreaFilled(false);
         todosLosProductos1.addActionListener(new java.awt.event.ActionListener() {

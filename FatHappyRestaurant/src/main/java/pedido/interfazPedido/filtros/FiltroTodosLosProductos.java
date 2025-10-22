@@ -44,18 +44,18 @@ public class FiltroTodosLosProductos extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/filtrar.png"))); // NOI18N
-        jLabel1.setText("FILTROS");
+        jLabel1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TITULO"));
 
         textoBuscado.setEditable(false);
         textoBuscado.setBackground(new java.awt.Color(255, 255, 255));
         textoBuscado.setColumns(20);
         textoBuscado.setLineWrap(true);
         textoBuscado.setRows(5);
-        textoBuscado.setText("Busqueda...");
+        textoBuscado.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_BUSQUEDA_PLACEHOLDER"));
         textoBuscado.setWrapStyleWord(true);
 
         botonBuscar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        botonBuscar.setText("Buscar producto");
+        botonBuscar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_BUSQUEDA_BOTON"));
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonBuscarActionPerformed(evt);

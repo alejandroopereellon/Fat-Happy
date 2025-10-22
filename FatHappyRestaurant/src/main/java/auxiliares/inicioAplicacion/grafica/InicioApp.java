@@ -65,14 +65,14 @@ public class InicioApp extends javax.swing.JFrame {
 
         textoInicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         textoInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoInicio.setText("Iniciando la aplicacion POS Fat & Happy...");
+        textoInicio.setText("Loading the app...");
 
         EstadoInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         EstadoInicio.setText("jLabel1");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("OkPos Fat & Happy");
+        jLabel1.setText("Pos Fat & Happy");
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);

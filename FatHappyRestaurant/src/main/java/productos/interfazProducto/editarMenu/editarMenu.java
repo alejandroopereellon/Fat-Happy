@@ -1,5 +1,6 @@
 package productos.interfazProducto.editarMenu;
 
+import auxiliares.singleton.ClasesEstaticas;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -52,7 +53,7 @@ public class editarMenu extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         botonEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        botonEditar.setText("Editar");
+        botonEditar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("BOTON_EDITAR"));
         botonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEditarActionPerformed(evt);
@@ -60,7 +61,7 @@ public class editarMenu extends javax.swing.JDialog {
         });
 
         botonEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        botonEliminar.setText("Eliminar");
+        botonEliminar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("BOTON_ELIMINAR"));
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarActionPerformed(evt);
@@ -68,7 +69,7 @@ public class editarMenu extends javax.swing.JDialog {
         });
 
         botonVolver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        botonVolver.setText("Volver");
+        botonVolver.setText(ClasesEstaticas.getProveedorMensaje().findMessage("BOTON_VOLVER"));
         botonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVolverActionPerformed(evt);

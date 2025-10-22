@@ -1,6 +1,7 @@
 package auxiliares.solicitarDatos.solicitarNumeroDecimal;
 
 import javax.swing.JTextField;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Clase de interfaz grafica que solicita un importe al usuario
@@ -77,7 +78,7 @@ public class DialogoSolicitudNumeroDecimal extends javax.swing.JDialog {
         });
 
         botonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonCancelar.setText("Cancelar");
+        botonCancelar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("GENERAL_CANCEL"));
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
@@ -138,10 +139,10 @@ public class DialogoSolicitudNumeroDecimal extends javax.swing.JDialog {
 
         tituloVentana.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         tituloVentana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tituloVentana.setText("Introduce importe");
+        tituloVentana.setText(ClasesEstaticas.getProveedorMensaje().findMessage("INTRODUCIR_IMPORTE"));
 
         botonAceptar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonAceptar.setText("Aceptar");
+        botonAceptar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("GENERAL_ACCEPT"));
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);

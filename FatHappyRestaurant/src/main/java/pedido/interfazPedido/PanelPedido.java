@@ -9,6 +9,7 @@ import pedido.modelo.Pedido;
 import pedido.util.ComprobarPedidoFinalizado;
 import productos.interfazProducto.listaProductosPedidos.ListaProductosPedidosMetodos;
 import productos.interfazProducto.listaProductosPedidos.ToStringRenderer;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Clase que maneja de manera grafica la creacion de un pedido
@@ -66,7 +67,7 @@ public class PanelPedido extends javax.swing.JPanel {
 
         Hamburguesas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Hamburguesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/hamburguesa.png"))); // NOI18N
-        Hamburguesas.setText("Hamburguesas");
+        Hamburguesas.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CATEGORIA_HAMBURGUESAS"));
         Hamburguesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HamburguesasActionPerformed(evt);
@@ -75,7 +76,7 @@ public class PanelPedido extends javax.swing.JPanel {
 
         bebidas.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         bebidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/refresco.png"))); // NOI18N
-        bebidas.setText("Bebidas");
+        bebidas.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CATEGORIA_BEBIDAS"));
         bebidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bebidasActionPerformed(evt);
@@ -84,7 +85,7 @@ public class PanelPedido extends javax.swing.JPanel {
 
         Complementos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Complementos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/papas-fritas.png"))); // NOI18N
-        Complementos.setText("Complementos");
+        Complementos.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CATEGORIA_COMPLEMENTOS"));
         Complementos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComplementosActionPerformed(evt);
@@ -93,7 +94,7 @@ public class PanelPedido extends javax.swing.JPanel {
 
         Postres.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Postres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/helado.png"))); // NOI18N
-        Postres.setText("Postres");
+        Postres.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CATEGORIA_POSTRES"));
         Postres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PostresActionPerformed(evt);
@@ -102,7 +103,7 @@ public class PanelPedido extends javax.swing.JPanel {
 
         listaCompleta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         listaCompleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPanelPedido/lista.png"))); // NOI18N
-        listaCompleta.setText("Lista Completa");
+        listaCompleta.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CATEGORIA_LISTA_COMPLETA"));
         listaCompleta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaCompletaActionPerformed(evt);
@@ -137,7 +138,7 @@ public class PanelPedido extends javax.swing.JPanel {
         panelAjustesPedido.setPreferredSize(new java.awt.Dimension(200, 666));
 
         cobrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cobrar.setText("Cobrar");
+        cobrar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("BOTON_COBRAR"));
         cobrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cobrarActionPerformed(evt);
@@ -145,7 +146,7 @@ public class PanelPedido extends javax.swing.JPanel {
         });
 
         editar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        editar.setText("Editar");
+        editar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("BOTON_EDITAR"));
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarActionPerformed(evt);
@@ -153,7 +154,7 @@ public class PanelPedido extends javax.swing.JPanel {
         });
 
         eliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        eliminar.setText("Eliminar");
+        eliminar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("BOTON_ELIMINAR"));
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
@@ -161,7 +162,7 @@ public class PanelPedido extends javax.swing.JPanel {
         });
 
         crearMenu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        crearMenu.setText("Crear menú");
+        crearMenu.setText(ClasesEstaticas.getProveedorMensaje().findMessage("BOTON_CREAR_MENU"));
         crearMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crearMenuActionPerformed(evt);

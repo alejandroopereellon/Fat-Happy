@@ -75,16 +75,16 @@ public class InterfazCobro extends javax.swing.JPanel {
 
         setBackground(ColoresInterfaz.SECUNDARIO_CHAMPAGNE);
 
-        botonBorrar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        botonBorrar.setText("Borrar");
+        botonBorrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonBorrar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_BORRAR"));
         botonBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonBorrarActionPerformed(evt);
             }
         });
 
-        botonPromo.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        botonPromo.setText("PROMO");
+        botonPromo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        botonPromo.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_PROMO"));
         botonPromo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonPromoActionPerformed(evt);
@@ -124,8 +124,8 @@ public class InterfazCobro extends javax.swing.JPanel {
             }
         });
 
-        botonDesc.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        botonDesc.setText("DESC");
+        botonDesc.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        botonDesc.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_DESC"));
         botonDesc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonDescActionPerformed(evt);
@@ -133,13 +133,13 @@ public class InterfazCobro extends javax.swing.JPanel {
         });
 
         textoTotalPagar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoTotalPagar.setText("TOTAL PAGAR:");
+        textoTotalPagar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_TOTAL"));
 
         textoCantidadTotalPagar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoCantidadTotalPagar.setText("Cantidad1");
 
         textoPagado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoPagado.setText("PAGADO:");
+        textoPagado.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_PAGADO"));
 
         textoCantidadPagado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoCantidadPagado.setText("Cantidad2");
@@ -154,7 +154,7 @@ public class InterfazCobro extends javax.swing.JPanel {
 
         textoBilletes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoBilletes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoBilletes.setText("SELECCIONA EL BILLETE");
+        textoBilletes.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_SELECCIONA_BILLETE"));
 
         boton2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         boton2.setText("2");
@@ -165,7 +165,7 @@ public class InterfazCobro extends javax.swing.JPanel {
         });
 
         importeExacto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        importeExacto.setText("<html>Importe<br>exacto</html> ");
+        importeExacto.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_IMPORTE_EXACTO"));
         importeExacto.setToolTipText("");
         importeExacto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,16 +238,16 @@ public class InterfazCobro extends javax.swing.JPanel {
             }
         });
 
-        botonCobrar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        botonCobrar.setText("Cobrar");
+        botonCobrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonCobrar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_COBRAR"));
         botonCobrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCobrarActionPerformed(evt);
             }
         });
 
-        botonContinuar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonContinuar.setText("Continuar");
+        botonContinuar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonContinuar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_CONTINUAR"));
         botonContinuar.setToolTipText("");
         botonContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,7 +267,7 @@ public class InterfazCobro extends javax.swing.JPanel {
         jScrollPane3.setViewportView(listaProductosPedidos);
 
         botonEditarPedido.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        botonEditarPedido.setText("Editar pedido");
+        botonEditarPedido.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_EDITAR"));
         botonEditarPedido.setToolTipText("");
         botonEditarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,7 +276,7 @@ public class InterfazCobro extends javax.swing.JPanel {
         });
 
         botonReintentarCobro.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        botonReintentarCobro.setText("<html>Reintentar<br>cobro</html> ");
+        botonReintentarCobro.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_REINTENTAR"));
         botonReintentarCobro.setToolTipText("");
         botonReintentarCobro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,13 +285,13 @@ public class InterfazCobro extends javax.swing.JPanel {
         });
 
         textoDescuento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        textoDescuento.setText("DESCUENTO:");
+        textoDescuento.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_DESCUENTO"));
 
         textoCantidadDescuento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoCantidadDescuento.setText("Cantidad2");
 
         botonrealizarDevolucion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        botonrealizarDevolucion.setText("<html>Devolucion<br>pedido</html> ");
+        botonrealizarDevolucion.setText(ClasesEstaticas.getProveedorMensaje().findMessage("COBRO_DEVOLUCION"));
         botonrealizarDevolucion.setToolTipText("");
         botonrealizarDevolucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,46 +312,50 @@ public class InterfazCobro extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textoCantidadPagado))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(boton7, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(boton8, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(boton9, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(boton4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(boton5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(boton6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(textoTotalPagar)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(textoCantidadTotalPagar)
-                                    .addGap(46, 46, 46))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(botonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(botonrealizarDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(boton0, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(botonCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(6, 6, 6)
-                                            .addComponent(botonReintentarCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(botonEditarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(textoTotalPagar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textoCantidadTotalPagar)
+                                .addGap(46, 46, 46))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(boton4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(boton5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(boton6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(botonrealizarDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(botonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGap(12, 12, 12)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(botonReintentarCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(botonEditarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(168, 168, 168)
+                                                    .addComponent(botonCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(boton7, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(boton8, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(boton9, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(boton0, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -438,10 +442,10 @@ public class InterfazCobro extends javax.swing.JPanel {
                     .addComponent(importeExacto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonrealizarDevolucion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(botonReintentarCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonrealizarDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(botonEditarPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonEditarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonReintentarCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(68, 68, 68))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

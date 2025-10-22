@@ -7,6 +7,8 @@ import auxiliares.inicioAplicacion.grafica.InicioApp;
 import auxiliares.mostrarMensaje.DialogoMostrarMensajeMetodos;
 import auxiliares.singleton.ClasesEstaticas;
 import caja.util.IniciarCaja;
+import multilingual_support.getMessages.MessageProvider;
+import multilingual_support.loader.TranslationLoader;
 import productos.dao.ProductosDaoGlobal;
 import productos.dao.ProductosDaoHibernateImpl;
 import productos.util.hiloActualizacionProductos.ActualizarListaProductos;
@@ -22,6 +24,8 @@ public class InicioAplicacion {
 	// Crear el logger
 	static Logger logger = LogManager.getLogger(InicioAplicacion.class);
 
+	private MessageProvider language;
+
 	/**
 	 * Metodo que se ejecuta en el inicio de la aplicacion y realiza todos los
 	 * procesos de configuracion, y almacenamiento en memoria necesarios para el
@@ -34,19 +38,22 @@ public class InicioAplicacion {
 		InicioApp grafica = new InicioApp();
 		grafica.setVisible(true);
 
-		grafica.getEstadoInicio().setText("Iniciando aplicacion...");
+		// Cargamos en memoria las traducciones
+		cargarTraducciones(grafica);
+
+		grafica.getEstadoInicio().setText(language.findMessage("INICIANDO_APLICACION"));
 		logger.info("Iniciando aplicación...");
 		grafica.getBarraProgreso().setValue(5);
-		
-		//Iniciamos la configuracion
-		grafica.getEstadoInicio().setText("Cargando configuracion inicial");
+
+		// Iniciamos la configuracion
+		grafica.getEstadoInicio().setText(language.findMessage("CARGA_CONFIG_INICIAL"));
 		logger.info("Cargando configuracion inicial");
 		grafica.getBarraProgreso().setValue(10);
-		
+
 		ConfiguracionInicial.get();
 
 		// Iniciar descarga de imágenes del servidor ftp
-		grafica.getEstadoInicio().setText("Obteniendo imagenes del servidor");
+		grafica.getEstadoInicio().setText(language.findMessage("OBTENER_IMAGENES_SERVIDOR"));
 		grafica.getBarraProgreso().setValue(15);
 		Thread hiloFTP = new Thread(() -> {
 			new FTPDownloader().descargarImagenesServidor();
@@ -58,7 +65,7 @@ public class InicioAplicacion {
 		grafica.getBarraProgreso().setValue(20);
 
 		// Cargar datos del restaurante
-		grafica.getEstadoInicio().setText("Cargando datos del restaurante");
+		grafica.getEstadoInicio().setText(language.findMessage("CARGAR_DATOS_RESTAURANTE"));
 		ClasesEstaticas.setRestaurante(new RestauranteDaoHibernateImpl()
 				.obtenerRestaurante(ConfiguracionInicial.get().getCodigoRestaurante()));
 		grafica.getBarraProgreso().setValue(25);
@@ -69,13 +76,13 @@ public class InicioAplicacion {
 		}
 
 		// Establecemos el dao
-		grafica.getEstadoInicio().setText("Estableciendo la obtencion de datos");
+		grafica.getEstadoInicio().setText(language.findMessage("OBTENER_DATOS_DAO"));
 		ProductosDaoGlobal.set(new ProductosDaoHibernateImpl());
 		grafica.getBarraProgreso().setValue(60);
 
 		// Cargamos la caja, en caso de estar activa se añade la caja y el empleado
 		// asignado
-		grafica.getEstadoInicio().setText("Recuperando la ultima caja del sistema");
+		grafica.getEstadoInicio().setText(language.findMessage("RECUPERAR_ULTIMA_CAJA"));
 		if (new IniciarCaja().recuperarCajaInicio()) {
 			logger.info("Se ha cargado la caja {}", ConfiguracionInicial.get().getNumeroCaja());
 			logger.info("Se ha cargado el empleado con ID {} en la caja {}",
@@ -94,7 +101,7 @@ public class InicioAplicacion {
 		extablecerConexionSocket(grafica);
 
 		// Iniciamos la ventana principal del programa
-		grafica.getEstadoInicio().setText("Iniciando la ventana principal...");
+		grafica.getEstadoInicio().setText(language.findMessage("INICIO_VENTANA_PRINCIPAL"));
 		// Establecemos la ventana principal en el global
 		ConfiguracionInicial.get().setVentanaPrincipal(new InterfazVentanaPrincipal());
 		new InterfazVentanaPrincipalMetodos(ConfiguracionInicial.get().getVentanaPrincipal())
@@ -110,10 +117,20 @@ public class InicioAplicacion {
 		return true;
 	}
 
+	private void cargarTraducciones(InicioApp grafica) {
+		grafica.getEstadoInicio().setText("Cargando las traducciones del sistema");
+		TranslationLoader translation = new TranslationLoader(ConfiguracionInicial.get().getIdioma());
+		translation.loadTranslations();
+		MessageProvider provider = new MessageProvider(translation.getTranslations());
+		ClasesEstaticas.setProveedorMensaje(provider);
+
+		language = ClasesEstaticas.getProveedorMensaje();
+	}
+
 	private void extablecerConexionSocket(InicioApp grafica) {
 		// Establecemos la conexion al socket
-		grafica.getEstadoInicio().setText("Conectando al servidor");
-		
+		grafica.getEstadoInicio().setText(language.findMessage("CONECTADO_SERVIDOR"));
+
 		ClasesEstaticas.getHiloconexionservidor().start();
 		logger.info("Se ha iniciado el hilo de conexion al socket");
 		grafica.getBarraProgreso().setValue(50);
@@ -139,7 +156,7 @@ public class InicioAplicacion {
 
 	private void cargarProductos(InicioApp grafica) {
 		// Cargamos todos los productos en memoria
-		grafica.getEstadoInicio().setText("Cargando los productos del sistema");
+		grafica.getEstadoInicio().setText(language.findMessage("CARGA_PRODUCTOS_BBDD"));
 
 		// Creamos el objeto de actualizacion de productos
 		ActualizarListaProductos actualizarProductos = new ActualizarListaProductos();

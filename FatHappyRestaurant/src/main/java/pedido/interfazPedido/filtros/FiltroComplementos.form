@@ -106,7 +106,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/graficaPersonalizarProducto/filtrar.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="FILTROS"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_TITULO&quot;)" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="textoTipoComplemento">
@@ -115,7 +117,9 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Tipo"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_TIPO&quot;)" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="textoTamanoProducto">
@@ -124,7 +128,9 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Tamano"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_TAMANO&quot;)" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="soloPequeno">
@@ -135,7 +141,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Peque&#xf1;o"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_TAMANO_PEQUENO&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="1"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -151,7 +159,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Pollo"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_POLLO&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="pollo"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -167,7 +177,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Mediano"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_TAMANO_MEDIANO&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="2"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -183,7 +195,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Patatas"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_PATATAS&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="patatas"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -200,7 +214,9 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Todos"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_TAMANO_TODOS&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="todos"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -217,7 +233,9 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Todos"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_TODOS&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="todos"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -233,7 +251,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Salsas"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_SALSAS&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="salsa"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -249,7 +269,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Grande"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_COMPLEMENTOS_TAMANO_GRANDE&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="3"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>

@@ -50,19 +50,19 @@ public class FiltroComplementos extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/filtrar.png"))); // NOI18N
-        jLabel1.setText("FILTROS");
+        jLabel1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TITULO"));
 
         textoTipoComplemento.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoTipoComplemento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoTipoComplemento.setText("Tipo");
+        textoTipoComplemento.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_TIPO"));
 
         textoTamanoProducto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoTamanoProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoTamanoProducto.setText("Tamano");
+        textoTamanoProducto.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_TAMANO"));
 
         grupoTamano.add(soloPequeno);
         soloPequeno.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloPequeno.setText("Pequeño");
+        soloPequeno.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_TAMANO_PEQUENO"));
         soloPequeno.setActionCommand("1");
         soloPequeno.setContentAreaFilled(false);
         soloPequeno.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +73,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
 
         grupoTipo.add(soloPollo);
         soloPollo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloPollo.setText("Pollo");
+        soloPollo.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_POLLO"));
         soloPollo.setActionCommand("pollo");
         soloPollo.setContentAreaFilled(false);
         soloPollo.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +84,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
 
         grupoTamano.add(soloMediano);
         soloMediano.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloMediano.setText("Mediano");
+        soloMediano.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_TAMANO_MEDIANO"));
         soloMediano.setActionCommand("2");
         soloMediano.setContentAreaFilled(false);
         soloMediano.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +95,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
 
         grupoTipo.add(soloPatatas);
         soloPatatas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloPatatas.setText("Patatas");
+        soloPatatas.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_PATATAS"));
         soloPatatas.setActionCommand("patatas");
         soloPatatas.setContentAreaFilled(false);
         soloPatatas.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +107,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
         grupoTamano.add(todosLosProductos1);
         todosLosProductos1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         todosLosProductos1.setSelected(true);
-        todosLosProductos1.setText("Todos");
+        todosLosProductos1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_TAMANO_TODOS"));
         todosLosProductos1.setActionCommand("todos");
         todosLosProductos1.setContentAreaFilled(false);
         todosLosProductos1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +119,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
         grupoTipo.add(todosLosProductos);
         todosLosProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         todosLosProductos.setSelected(true);
-        todosLosProductos.setText("Todos");
+        todosLosProductos.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_TODOS"));
         todosLosProductos.setActionCommand("todos");
         todosLosProductos.setContentAreaFilled(false);
         todosLosProductos.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +130,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
 
         grupoTipo.add(soloSalsas);
         soloSalsas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloSalsas.setText("Salsas");
+        soloSalsas.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_SALSAS"));
         soloSalsas.setActionCommand("salsa");
         soloSalsas.setContentAreaFilled(false);
         soloSalsas.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +141,7 @@ public class FiltroComplementos extends javax.swing.JPanel {
 
         grupoTamano.add(soloGrande);
         soloGrande.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloGrande.setText("Grande");
+        soloGrande.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_COMPLEMENTOS_TAMANO_GRANDE"));
         soloGrande.setActionCommand("3");
         soloGrande.setContentAreaFilled(false);
         soloGrande.addActionListener(new java.awt.event.ActionListener() {

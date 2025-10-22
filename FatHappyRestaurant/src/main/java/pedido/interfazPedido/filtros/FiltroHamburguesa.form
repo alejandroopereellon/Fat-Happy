@@ -105,7 +105,9 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/graficaPersonalizarProducto/filtrar.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="FILTROS"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_TITULO&quot;)" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="todosLosProductos">
@@ -117,7 +119,9 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Todas"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_TIPO_CARNE_TODAS&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="Todos"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -133,7 +137,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Vacuno"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_TIPO_CARNE_VACUNO&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="vacuno"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -149,7 +155,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Pollo"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_TIPO_CARNE_POLLO&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="pollo"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -163,7 +171,9 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Tipo carne"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_TIPO_CARNE&quot;)" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="textoOpcionMenu">
@@ -172,7 +182,9 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Opcion men&#xfa;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_OPCION_MENU&quot;)" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="soloConMenu">
@@ -183,7 +195,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Con men&#xfa;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_OPCION_MENU_CON&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="true"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -199,7 +213,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Sin men&#xfa;"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_OPCION_MENU_SIN&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>
@@ -216,7 +232,9 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Todas"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;FILTROS_OPCION_MENU_TODAS&quot;)" type="code"/>
+            </Property>
             <Property name="actionCommand" type="java.lang.String" value="Todos"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
           </Properties>

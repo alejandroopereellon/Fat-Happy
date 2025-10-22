@@ -1,5 +1,7 @@
 package productos.interfazProducto.solicitarTamanoMenu;
 
+import auxiliares.singleton.ClasesEstaticas;
+
 /**
  * Clase de interfaz grafica basica que muesta un selector de menu
  *
@@ -40,10 +42,10 @@ public class SolicitarTamanoMenu extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Selecciona el tamaño del menú");
+        jLabel1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SOLICITARTAMANOMENU_TITULO"));
 
         menuGrande.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuGrande.setText("Grande");
+        menuGrande.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SOLICITARTAMANOMENU_GRANDE"));
         menuGrande.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuGrandeActionPerformed(evt);
@@ -51,7 +53,7 @@ public class SolicitarTamanoMenu extends javax.swing.JDialog {
         });
 
         menuMediano.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuMediano.setText("Mediano");
+        menuMediano.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SOLICITARTAMANOMENU_MEDIANO"));
         menuMediano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuMedianoActionPerformed(evt);

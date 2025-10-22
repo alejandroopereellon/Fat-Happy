@@ -1,6 +1,7 @@
 package auxiliares.mostrarMensaje;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Clase de interfaz grafica que muestra un panel con un mensaje introducido a
@@ -43,7 +44,7 @@ public class DialogoMostrarMensaje extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         botonAceptar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonAceptar.setText("Aceptar");
+        botonAceptar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("GENERAL_ACCEPT"));
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);

@@ -1,5 +1,6 @@
 package productos.interfazProducto.personalizarPedido.edicionProducto;
 
+import auxiliares.singleton.ClasesEstaticas;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import productos.modelo.Producto;
@@ -53,7 +54,7 @@ public class PanelEdicionProductos extends javax.swing.JPanel {
         nombreProducto.setText("Nombre del producto");
 
         botonVolver.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonVolver.setText("Volver");
+        botonVolver.setText(ClasesEstaticas.getProveedorMensaje().findMessage("BOTON_VOLVER"));
         botonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVolverActionPerformed(evt);

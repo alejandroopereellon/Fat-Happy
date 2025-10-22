@@ -1,6 +1,7 @@
 package pedido.interfazPedido.filtros;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Metodo que permite seleccionar el tamano de una bebida siempre y cuando no
@@ -45,7 +46,7 @@ public class SelectorBebida extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         botonVolver.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        botonVolver.setText("Volver");
+        botonVolver.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SELECTOR_TAMANO_VOLVER"));
         botonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVolverActionPerformed(evt);
@@ -53,7 +54,7 @@ public class SelectorBebida extends javax.swing.JDialog {
         });
 
         botonPequeno.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        botonPequeno.setText("Pequeño +1.50€");
+        botonPequeno.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SELECTOR_TAMANO_PEQUENO", "+1.50"));
         botonPequeno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonPequenoActionPerformed(evt);
@@ -62,10 +63,10 @@ public class SelectorBebida extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Selecciona tamaño");
+        jLabel1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SELECTOR_TAMANO_TITULO"));
 
         botonMediano.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        botonMediano.setText("Mediano  +2.00€");
+        botonMediano.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SELECTOR_TAMANO_MEDIANO", "+2.00"));
         botonMediano.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonMedianoActionPerformed(evt);
@@ -73,7 +74,7 @@ public class SelectorBebida extends javax.swing.JDialog {
         });
 
         botonGrande.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        botonGrande.setText("Grande   +2.50€");
+        botonGrande.setText(ClasesEstaticas.getProveedorMensaje().findMessage("SELECTOR_TAMANO_GRANDE", "+2.50"));
         botonGrande.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonGrandeActionPerformed(evt);

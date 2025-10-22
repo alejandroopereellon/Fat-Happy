@@ -51,12 +51,12 @@ public class FiltroHamburguesa extends javax.swing.JPanel {
         textoFiltro.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         textoFiltro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         textoFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficaPersonalizarProducto/filtrar.png"))); // NOI18N
-        textoFiltro.setText("FILTROS");
+        textoFiltro.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TITULO"));
 
         tipoProducto.add(todosLosProductos);
         todosLosProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         todosLosProductos.setSelected(true);
-        todosLosProductos.setText("Todas");
+        todosLosProductos.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TIPO_CARNE_TODAS"));
         todosLosProductos.setActionCommand("Todos");
         todosLosProductos.setContentAreaFilled(false);
         todosLosProductos.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +67,7 @@ public class FiltroHamburguesa extends javax.swing.JPanel {
 
         tipoProducto.add(soloVacuno);
         soloVacuno.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloVacuno.setText("Vacuno");
+        soloVacuno.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TIPO_CARNE_VACUNO"));
         soloVacuno.setActionCommand("vacuno");
         soloVacuno.setContentAreaFilled(false);
         soloVacuno.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,7 @@ public class FiltroHamburguesa extends javax.swing.JPanel {
 
         tipoProducto.add(soloPollo);
         soloPollo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloPollo.setText("Pollo");
+        soloPollo.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TIPO_CARNE_POLLO"));
         soloPollo.setActionCommand("pollo");
         soloPollo.setContentAreaFilled(false);
         soloPollo.addActionListener(new java.awt.event.ActionListener() {
@@ -89,15 +89,15 @@ public class FiltroHamburguesa extends javax.swing.JPanel {
 
         textoTipoCarne.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoTipoCarne.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoTipoCarne.setText("Tipo carne");
+        textoTipoCarne.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_TIPO_CARNE"));
 
         textoOpcionMenu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         textoOpcionMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoOpcionMenu.setText("Opcion menú");
+        textoOpcionMenu.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_OPCION_MENU"));
 
         opcionMenu.add(soloConMenu);
         soloConMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloConMenu.setText("Con menú");
+        soloConMenu.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_OPCION_MENU_CON"));
         soloConMenu.setActionCommand("true");
         soloConMenu.setContentAreaFilled(false);
         soloConMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ public class FiltroHamburguesa extends javax.swing.JPanel {
 
         opcionMenu.add(soloSinMenu);
         soloSinMenu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        soloSinMenu.setText("Sin menú");
+        soloSinMenu.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_OPCION_MENU_SIN"));
         soloSinMenu.setActionCommand("false");
         soloSinMenu.setContentAreaFilled(false);
         soloSinMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +120,7 @@ public class FiltroHamburguesa extends javax.swing.JPanel {
         opcionMenu.add(todosLosProductos1);
         todosLosProductos1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         todosLosProductos1.setSelected(true);
-        todosLosProductos1.setText("Todas");
+        todosLosProductos1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("FILTROS_OPCION_MENU_TODAS"));
         todosLosProductos1.setActionCommand("Todos");
         todosLosProductos1.setContentAreaFilled(false);
         todosLosProductos1.addActionListener(new java.awt.event.ActionListener() {

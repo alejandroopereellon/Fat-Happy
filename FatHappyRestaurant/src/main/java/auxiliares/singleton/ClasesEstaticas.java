@@ -9,6 +9,7 @@ import auxiliares.solicitarDatos.solicitudInicioSesion.verificarDatos.CifradoDat
 import caja.interfazCaja.panelPrincipalCaja.PanelCaja;
 import caja.modelo.Caja;
 import empleados.modelo.Empleado;
+import multilingual_support.getMessages.MessageProvider;
 import pedido.interfazPedido.PanelPedido;
 import pedido.modelo.Pedido;
 import pedido.util.PedidoBuilder;
@@ -53,7 +54,7 @@ public class ClasesEstaticas {
 
 	// Dato estatico que mantiene en memoria el check de actualizar constantemente
 	// el servidor
-	public static boolean reconexionAutomatica = true;
+	public static boolean reconexionAutomatica = ConfiguracionInicial.get().getReconexionServidor();
 
 	// Dato estatico que mantiene en memoria el hilo que mantiene la conexion al
 	// servidor
@@ -64,6 +65,9 @@ public class ClasesEstaticas {
 
 	// Dato estatico que mantiene en memoria la direccion ip del servidor
 	public static String direccionIPservidor = "79.116.12.169";
+
+	// Dato estatico que mantiene en memoria el idioma seleccionado
+	public static MessageProvider proveedorMensaje;
 
 	/**
 	 * Guarda el pedido actual en memoria.
@@ -274,4 +278,11 @@ public class ClasesEstaticas {
 		return direccionIPservidor;
 	}
 
+	public static MessageProvider getProveedorMensaje() {
+		return proveedorMensaje;
+	}
+	
+	public static void setProveedorMensaje(MessageProvider proveedorMensaje) {
+		ClasesEstaticas.proveedorMensaje = proveedorMensaje;
+	}
 }

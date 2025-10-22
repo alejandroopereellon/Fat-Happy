@@ -80,9 +80,10 @@ public class CasillaProductoMetodos {
 
 		interfaz.setBackground(ColoresInterfaz.PRIMARIO_DORADO);
 
-		new javax.swing.Timer(200, _ -> {
-			interfaz.setBackground(Color.white);
+		new javax.swing.Timer(200, ignored -> {
+		    interfaz.setBackground(Color.white);
 		}).start();
+
 
 		// Anadimos el producto al pedido
 		// 1. Comprobamos si el pedido se ha iniciado, en caso contrario se inicia

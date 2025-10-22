@@ -2,6 +2,8 @@ package auxiliares.solicitarDatos.tecladoPantalla;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
 import javax.swing.JLabel;
+import auxiliares.singleton.ClasesEstaticas;
+
 
 /**
  * Clase de dialogo modal que muestra un teclado para poder solicitar un texto
@@ -318,11 +320,11 @@ public class TecladoEnPantalla extends javax.swing.JDialog {
         textoIntroducido.setBackground(new java.awt.Color(255, 255, 255));
         textoIntroducido.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         textoIntroducido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        textoIntroducido.setText("Introduce un texto");
+        textoIntroducido.setText(ClasesEstaticas.getProveedorMensaje().findMessage("INTRODUCIR_TEXTO"));
         textoIntroducido.setToolTipText("Introduce un texto");
 
         botonContinuar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonContinuar.setText("Continuar");
+        botonContinuar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("GENERAL_CONTINUE"));
         botonContinuar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,7 +333,7 @@ public class TecladoEnPantalla extends javax.swing.JDialog {
         });
 
         letraEspacio.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        letraEspacio.setText("Espacio");
+        letraEspacio.setText(ClasesEstaticas.getProveedorMensaje().findMessage("TECLADO_ESPACIO"));
         letraEspacio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         letraEspacio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,7 +342,7 @@ public class TecladoEnPantalla extends javax.swing.JDialog {
         });
 
         letraBorrar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        letraBorrar.setText("Borrar ");
+        letraBorrar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ACTION_DELETE"));
         letraBorrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         letraBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -49,7 +49,8 @@ public class CajaBuilder {
 		// Solicitamos permisos de administrador
 		if (!new ActividadEmpleados().solicitarPermisos("Iniciar una nueva caja", 3)) {
 			logger.warn("No existen permisos suficientes para iniciar una nueva caja");
-			new DialogoMostrarMensajeMetodos().mostrarMensaje("No hay permisos suficientes para iniciar una nueva caja");
+			new DialogoMostrarMensajeMetodos()
+					.mostrarMensaje("No hay permisos suficientes para iniciar una nueva caja");
 			return false;
 		}
 		Boolean bandera = true;
@@ -183,7 +184,9 @@ public class CajaBuilder {
 	 */
 	private boolean anadirEmpleado() {
 		// Solicitamos un nuevo empleado
-		Empleado emp = new ActividadEmpleados().obtenerEmpleado();
+		Empleado emp = new ActividadEmpleados()
+				.obtenerEmpleado(ClasesEstaticas.getProveedorMensaje().findMessage("MOTIVO_SOLICITAR_EMPLEADO")
+						+ System.lineSeparator() + ClasesEstaticas.getProveedorMensaje().findMessage("CAJA_INICIAR"));
 		// Si el empleado no es nulo lo añadimos a singleton y en caja
 		if (emp != null) {
 			caja.setEmpleado(emp);

@@ -29,14 +29,16 @@ public class ComprobarPedidoFinalizado {
 		// 1. Comprobamos si el pedido es nulo
 		if (pedido == null) {
 			logger.error("No hay un pedido activo en este momento");
-			new DialogoMostrarMensajeMetodos().mostrarMensaje("ERROR: No hay un pedido iniciado");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje(
+					ClasesEstaticas.getProveedorMensaje().findMessage("COMPROBARPEDIDOFINALIZADO_PEDIDO_INICIADO"));
 			return false;
 		}
 
 		// 2. Comprobamos que el pedido no este vacio
 		if (pedido.getOrden().getListaMenus().size() == 0 && pedido.getOrden().getListaProductos().size() == 0) {
 			logger.error("El pedido esta vacio");
-			new DialogoMostrarMensajeMetodos().mostrarMensaje("ERROR: El pedido esta vacio");
+			new DialogoMostrarMensajeMetodos().mostrarMensaje(ClasesEstaticas.getProveedorMensaje()
+					.findMessage("COMPROBARPEDIDOFINALIZADO_PEDIDO_VACIO=ERROR: El pedido esta vacio"));
 			return false;
 		}
 

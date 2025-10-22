@@ -104,7 +104,9 @@
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="No hay usuario activo"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;PANELCAJA_NO_USUARIO_ACTIVO&quot;)" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="PuestoSesion">
@@ -122,7 +124,9 @@
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Cerrada"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;PANELCAJA_CAJA_CERRADA&quot;)" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="tiempoPedido">
@@ -139,7 +143,9 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Estado conexion:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;PANELCAJA_ESTADO_CONEXION&quot;)" type="code"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="estadoConexion">
@@ -150,7 +156,9 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="Color.ORANGE" type="code"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Estableciendo conexion"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="ClasesEstaticas.getProveedorMensaje().findMessage(&quot;PANELCAJA_ESTABLECIENDO_CONEXION&quot;)" type="code"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

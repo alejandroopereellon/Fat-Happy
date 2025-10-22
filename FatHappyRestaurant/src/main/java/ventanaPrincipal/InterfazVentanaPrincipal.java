@@ -1,5 +1,6 @@
 package ventanaPrincipal;
 
+import auxiliares.singleton.ClasesEstaticas;
 import auxiliares.utilidadesGraficas.coloresInterfaz.ColoresInterfaz;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -37,7 +38,7 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OkPos Fat&Happy");
-        setUndecorated(true);
+        setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -61,7 +62,7 @@ public class InterfazVentanaPrincipal extends javax.swing.JFrame {
         );
 
         botonAdministrador.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        botonAdministrador.setText("Menu administrador");
+        botonAdministrador.setText(ClasesEstaticas.getProveedorMensaje().findMessage("VENTANA_PRINCIPAL_MENU_ADMINISTRADOR"));
         botonAdministrador.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(93, 64, 55), 2, true));
         botonAdministrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

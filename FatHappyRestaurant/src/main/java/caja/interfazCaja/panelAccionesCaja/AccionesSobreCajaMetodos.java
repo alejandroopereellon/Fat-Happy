@@ -16,9 +16,11 @@ import caja.util.CajaBuilder;
 import caja.util.CalcularOperaciones;
 import caja.util.CerrarCaja;
 import empleados.util.ActividadEmpleados;
+import multilingual_support.languageSelection.LanguageSelectionJOptionPane;
 import socket.util.CerrarConexionSocket;
 import socket.util.ConectarAlServidor;
 import ventanaPrincipal.InterfazVentanaPrincipalMetodos;
+
 
 /**
  * Clase que contiene los metodos de la interfaz grafica de
@@ -41,7 +43,6 @@ public class AccionesSobreCajaMetodos {
 		interfaz.setVisible(true);
 		// Configuramos los botones segun la caja
 		habilitarDeshabilitarBotonesCaja();
-
 		// Establecemos el checkbox segun el estado del reintento de conexion
 		interfaz.getCheckReintentarConexion().setSelected(ClasesEstaticas.reconexionAutomatica);
 	}
@@ -52,7 +53,7 @@ public class AccionesSobreCajaMetodos {
 	 * 
 	 * Si la caja esta cerrada damos la opcion de iniciar la caja nueva
 	 */
-	public void habilitarDeshabilitarBotonesCaja() {
+	public void habilitarDeshabilitarBotonesCaja() {		
 		if (ClasesEstaticas.getCaja() == null) {
 			// El boton iniciar casa se activa
 			interfaz.getIniciarCaja().setEnabled(true);
@@ -167,12 +168,19 @@ public class AccionesSobreCajaMetodos {
 	protected void actualizarReconexionAutomatica() {
 		if (interfaz.getCheckReintentarConexion().isSelected()) {
 			ClasesEstaticas.setReconexionAutomatica(true);
+			ConfiguracionInicial.get().setReconexionServidor(true);
 			logger.info("Se ha establecido la reconexion automatica con el servidor");
 		} else {
 			ClasesEstaticas.setReconexionAutomatica(false);
+			ConfiguracionInicial.get().setReconexionServidor(false);
 			logger.info("Se ha deshabilitado la reconexion automatica con el servidor");
 		}
 
+		try {
+			ConfiguracionInicial.almacenarConfiguracionActual();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -282,6 +290,24 @@ public class AccionesSobreCajaMetodos {
 			logger.debug("No hay ningun pedido activo para cancelar");
 		}
 
+	}
+
+	void cambiarIdioma() {
+		// Seleccionamos el nuevo idioma
+		String idiomaNuevo = new LanguageSelectionJOptionPane().selectLanguage();
+
+		// Cambiamos en la configuracion el nuevo idioma
+		ConfiguracionInicial.get().setIdioma(idiomaNuevo);
+		try {
+			ConfiguracionInicial.almacenarConfiguracionActual();
+		} catch (Exception e) {
+			logger.error("Ha ocurrido un error al almacenar la configuracion actual en el sistema");
+			e.printStackTrace();
+		}
+
+		// Notificamos que el idioma se carga en el proximo inicio de la aplicacion
+		new DialogoMostrarMensajeMetodos()
+				.mostrarMensaje("The language changes on the next restart of the application.");
 	}
 
 }

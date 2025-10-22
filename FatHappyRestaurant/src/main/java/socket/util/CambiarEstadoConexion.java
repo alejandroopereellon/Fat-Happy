@@ -24,11 +24,11 @@ public class CambiarEstadoConexion {
 
 			if (ClasesEstaticas.getSocket() != null) {
 				label.setForeground(Color.green);
-				label.setText("Conectado");
+				label.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CAMBIARESTADOCONEXION_ESTADO_CONECTADO"));
 				logger.debug("Se ha establecido el estado de la conexion a conectado");
 			} else {
 				label.setForeground(Color.red);
-				label.setText("Desconectado");
+				label.setText(ClasesEstaticas.getProveedorMensaje().findMessage("CAMBIARESTADOCONEXION_ESTADO_DESCONECTADO"));
 				logger.debug("Se ha establecido el estado de la conexion a desconectado");
 			}
 		}

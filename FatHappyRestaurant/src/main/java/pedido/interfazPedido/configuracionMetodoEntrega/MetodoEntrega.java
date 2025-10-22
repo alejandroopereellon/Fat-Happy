@@ -1,6 +1,7 @@
 package pedido.interfazPedido.configuracionMetodoEntrega;
 
 import auxiliares.inicioAplicacion.ConfiguracionInicial;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Clase de interfaz grafica que solicita el metodo de entrega de un pedido,
@@ -42,7 +43,7 @@ public class MetodoEntrega extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         botonPedidoLlevar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonPedidoLlevar.setText("Llevar");
+        botonPedidoLlevar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ENTREGA_PEDIDO_LLEVAR"));
         botonPedidoLlevar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonPedidoLlevarActionPerformed(evt);
@@ -51,10 +52,10 @@ public class MetodoEntrega extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Selecciona el metodo de entrega del pedido");
+        jLabel1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ENTREGA_PEDIDO_TITULO"));
 
         botonPedidoTomar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonPedidoTomar.setText("Tomar");
+        botonPedidoTomar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("ENTREGA_PEDIDO_TOMAR"));
         botonPedidoTomar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonPedidoTomarActionPerformed(evt);

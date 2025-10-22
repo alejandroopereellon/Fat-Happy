@@ -1,16 +1,19 @@
 package auxiliares.inicioAplicacion;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.core.exc.StreamWriteException;
+import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import auxiliares.solicitarDatos.solicitarNumero.SolicitarNumeroMetodos;
 import auxiliares.solicitarDatos.solicitudInicioSesion.interfazInicioSesion.DireccionYUsuario.DireccionYUsuarioInterfazMetodos;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Clase que contiene todos los ajustes de configuracion inicial del programa
@@ -20,8 +23,9 @@ import java.io.IOException;
 public class ConfiguracionInicial {
 
 	private static final Logger logger = LogManager.getLogger(ConfiguracionInicial.class);
-	private static final String RUTA_CONFIG = System.getProperty("user.home") + File.separator + "fathappyrestaurant"
-			+ File.separator + "config.json";
+	private static final File RUTA_CONFIG = new File(
+			System.getProperty("user.home") + File.separator + "fathappyrestaurant" + File.separator + "config.json");
+	private static ObjectMapper mapper;
 
 	private static Configuracion configuracion;
 
@@ -35,16 +39,14 @@ public class ConfiguracionInicial {
 	 * caso de no existir va a ejecutar el metodo crearconfiguracionPorDefecto
 	 */
 	private static void cargarOCrearConfiguracion() {
-		ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-		File archivo = new File(RUTA_CONFIG);
+		mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
 		try {
-			if (!archivo.exists()) {
+			if (!RUTA_CONFIG.exists()) {
 				logger.info("No se encontró config.json, creando configuración por defecto");
-				crearConfiguracionPorDefecto(mapper, archivo);
+				crearConfiguracionPorDefecto(mapper);
 			}
-			configuracion = mapper.readValue(archivo, Configuracion.class);
-			logger.info("Configuración cargada correctamente desde {}", RUTA_CONFIG);
+			leerConfiguracion();
 		} catch (IOException e) {
 			logger.error("Error al leer/crear la configuración: ", e);
 		}
@@ -60,7 +62,7 @@ public class ConfiguracionInicial {
 	 *                configuracion
 	 * @throws IOException es el {@link IOException}
 	 */
-	private static void crearConfiguracionPorDefecto(ObjectMapper mapper, File archivo) throws IOException {
+	private static void crearConfiguracionPorDefecto(ObjectMapper mapper) throws IOException {
 		Configuracion porDefecto = new Configuracion();
 
 		// Solicitamos y almacenamos los datos de la base de datos
@@ -83,9 +85,28 @@ public class ConfiguracionInicial {
 		// Solicitamos el numero de caja
 		porDefecto.setNumeroCaja(new SolicitarNumeroMetodos("Introduce el numero de caja").solicitarNumero());
 
-		archivo.getParentFile().mkdirs();
-		mapper.writeValue(archivo, porDefecto);
+		// Solicitamos el idioma
+		porDefecto
+				.setIdioma(new multilingual_support.languageSelection.LanguageSelectionJOptionPane().selectLanguage());
+
+		almacenarConfiguracion(porDefecto);
 		logger.info("Archivo de configuración por defecto creado");
+	}
+
+	public static void almacenarConfiguracion(Configuracion porDefecto)
+			throws IOException, StreamWriteException, DatabindException {
+		RUTA_CONFIG.getParentFile().mkdirs();
+		mapper.writeValue(RUTA_CONFIG, porDefecto);
+	}
+
+	public static void almacenarConfiguracionActual() throws IOException, StreamWriteException, DatabindException {
+		RUTA_CONFIG.getParentFile().mkdirs();
+		mapper.writeValue(RUTA_CONFIG, configuracion);
+	}
+
+	private static void leerConfiguracion() throws IOException, StreamReadException, DatabindException {
+		configuracion = mapper.readValue(RUTA_CONFIG, Configuracion.class);
+		logger.info("Configuración cargada correctamente desde {}", RUTA_CONFIG);
 	}
 
 	/**

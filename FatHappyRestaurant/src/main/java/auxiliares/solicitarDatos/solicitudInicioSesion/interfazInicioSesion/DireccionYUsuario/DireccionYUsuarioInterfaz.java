@@ -3,6 +3,7 @@ package auxiliares.solicitarDatos.solicitudInicioSesion.interfazInicioSesion.Dir
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import auxiliares.singleton.ClasesEstaticas;
 
 /**
  * Metodo que muestra en interfaz grafica la peticion de datos de usuario para
@@ -50,7 +51,7 @@ public class DireccionYUsuarioInterfaz extends javax.swing.JDialog {
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         botonAceptar1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonAceptar1.setText("Aceptar");
+        botonAceptar1.setText(ClasesEstaticas.getProveedorMensaje().findMessage("GENERAL_ACCEPT"));
         botonAceptar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptar1ActionPerformed(evt);
@@ -78,7 +79,7 @@ public class DireccionYUsuarioInterfaz extends javax.swing.JDialog {
         titulo.setToolTipText("");
 
         botonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        botonCancelar.setText("Cancelar");
+        botonCancelar.setText(ClasesEstaticas.getProveedorMensaje().findMessage("GENERAL_CANCEL"));
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
