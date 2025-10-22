@@ -191,6 +191,5 @@ Resumen del hardening aplicado al servidor (Raspberry Pi):
 ## Créditos y licencia
 
 * Autor: **Alejandro Perellón López**.
-* Logo e imágenes: *propias* (o indicar fuente).
 * **Disclaimer**: Las marcas de terceros que puedan aparecer en ejemplos pertenecen a sus respectivos propietarios; se usan con fines ilustrativos.
-* Licencia: MIT (o la que prefieras).
+* Licencia: MIT
